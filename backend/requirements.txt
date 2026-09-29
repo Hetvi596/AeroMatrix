@@ -1,0 +1,10 @@
+fastapi>=0.115
+uvicorn[standard]>=0.30
+# Phase 7 (after real datasets are provided):
+# pandas
+# numpy
+# scikit-learn
+# xgboost
+# lightgbm
+# shap
+# xarray / cdsapi   (ERA5)
