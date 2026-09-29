@@ -1,0 +1,33 @@
+{
+  "name": "hackmatrix-landing-page",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:all": "concurrently \"npm run dev\" \"npm run dev:backend\" --names \"LANDING,TWIN\" --prefix-colors \"cyan,magenta\"",
+    "build": "vite build",
+    "build:backend": "npm --prefix backend run build",
+    "test:backend": "npm --prefix backend run test",
+    "lint": "oxlint",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "lucide-react": "^1.48.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "tailwindcss": "^4.3.3",
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@vitejs/plugin-react": "^6.1.1",
+    "concurrently": "^10.0.5",
+    "oxlint": "^1.81.0",
+    "sharp": "^0.35.5",
+    "vite": "^8.3.0"
+  }
+}
