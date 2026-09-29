@@ -1,0 +1,12 @@
+node_modules
+dist
+public/cesium
+.env
+.env.local
+__pycache__
+*.pyc
+.venv
+.pytest_cache
+# Raw datasets and trained model artefacts (can be large / licensed) — keep out of git
+/data/
+backend/models/
