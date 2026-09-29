@@ -6,6 +6,7 @@ import { cellAt, defaultParams, makeScenarioIndustry } from '../services/scenari
 import type { IndustryCategory, ScenarioParams } from '../types';
 import { cellAreaKm2 } from '../utils/geo';
 import { fmt } from '../utils/format';
+import { majorRoads } from '../services/traffic';
 
 const CATEGORIES: IndustryCategory[] = ['Manufacturing', 'Chemical', 'Power', 'Metal', 'Processing'];
 const pct = (v: number) => `${Math.round(v * 100)}%`;
@@ -36,7 +37,7 @@ export function WhatIfPanel() {
   const selectedCellId = useTwin((s) => s.selectedCellId);
   const toggleArea = useTwin((s) => s.toggleAreaCell);
 
-  const [closure, setClosure] = useState({ roadId: base.roads[0].id, divertTo: '', share: 0.7 });
+  const [closure, setClosure] = useState({ roadId: majorRoads(base)[0]?.id ?? '', divertTo: '', share: 0.7 });
   const [trees, setTrees] = useState(-500);
 
   const areaCells = base.cells.filter((c) => draft.targetCells.includes(c.id));
@@ -45,6 +46,7 @@ export function WhatIfPanel() {
   const treesToPts = (n: number) => ((n * TREE_CANOPY_M2) / (areaKm2 * 1e6)) * 100;
 
   const pendingCell = pending.location ? cellAt(base, pending.location) : undefined;
+  const roadOptions = majorRoads(base);
 
   const applyPreset = (p: Partial<ScenarioParams>) => update({ ...defaultParams(base), ...p });
 
@@ -155,7 +157,7 @@ export function WhatIfPanel() {
               onChange={(e) => setClosure({ ...closure, roadId: e.target.value })}
               className="mt-0.5 w-full rounded bg-ink-800 px-1.5 py-1 text-slate-200 ring-1 ring-ink-600"
             >
-              {base.roads.map((r) => (
+              {roadOptions.map((r) => (
                 <option key={r.id} value={r.id}>{r.name}</option>
               ))}
             </select>
@@ -168,7 +170,7 @@ export function WhatIfPanel() {
               className="mt-0.5 w-full rounded bg-ink-800 px-1.5 py-1 text-slate-200 ring-1 ring-ink-600"
             >
               <option value="">— none (suppress) —</option>
-              {base.roads.filter((r) => r.id !== closure.roadId).map((r) => (
+              {roadOptions.filter((r) => r.id !== closure.roadId).map((r) => (
                 <option key={r.id} value={r.id}>{r.name}</option>
               ))}
             </select>

@@ -49,9 +49,25 @@ export interface GridCell {
 export interface Road {
   id: string;
   name: string;
-  /** Baseline traffic volume index 0-100. */
+  /** Baseline traffic volume index 0-100 (DEMO proxy — from road class for OSM roads). */
   volume: number;
-  path: LonLat[];
+  /** One or more polylines (OSM roads are split into many ways). */
+  paths: LonLat[][];
+  roadClass?: string;
+  lengthKm?: number;
+}
+
+export type GeometrySource = 'demo' | 'osm';
+
+/** Static city geometry: roads, green / industrial areas and emission point sources. */
+export interface CityGeometry {
+  source: GeometrySource;
+  roads: Road[];
+  greenAreas: GreenArea[];
+  industrialAreas: GreenArea[];
+  industries: Industry[];
+  fetchedAt?: string;
+  attribution?: string;
 }
 
 export interface Industry {
@@ -120,8 +136,25 @@ export interface BaseState {
   roads: Road[];
   industries: Industry[];
   greenAreas: GreenArea[];
+  industrialAreas: GreenArea[];
+  geometrySource: GeometrySource;
   weather: Weather;
   status: DataStatus;
+  /** Optional PM2.5 calibration of the prototype model against observations. */
+  calibration?: ModelCalibration | null;
+}
+
+export interface ModelCalibration {
+  pollutant: 'pm25';
+  /** Multiplier on the regional-background term. */
+  backgroundScale: number;
+  /** Multiplier on local sources (traffic, industry, other). */
+  localScale: number;
+  stations: number;
+  rmseBefore: number;
+  rmseAfter: number;
+  window: string;
+  fittedAt: string;
 }
 
 export interface RoadClosure {
@@ -204,9 +237,71 @@ export type LayerId =
   | 'satellite'
   | 'risk'
   | 'labels'
-  | 'elevationTint';
+  | 'elevationTint'
+  | 'stations';
 
-export type DisplayMode = 'baseline' | 'scenario' | 'delta';
+export type DisplayMode = 'baseline' | 'scenario' | 'delta' | 'observed' | 'forecast';
+
+/** Station forecasts from the trained model (backend), gridded by IDW. Status MODEL_PREDICTION. */
+export interface ForecastLayer {
+  pollutant: Pollutant;
+  model: string;
+  horizonHours: number;
+  validAt: string;
+  field: ObservedField;
+  stations: { name: string; location: LonLat; value: number }[];
+}
+
+// ---------------------------------------------------------------------------
+// Observed data (uploaded CPCB / station files). Status is always OBSERVED.
+// ---------------------------------------------------------------------------
+
+export interface Station {
+  id: string;
+  name: string;
+  location: LonLat | null; // null until the user supplies coordinates
+}
+
+export interface ObservationRecord {
+  stationId: string;
+  time: string; // 'YYYY-MM-DDTHH:mm' local time (IST for CPCB)
+  values: Partial<Record<Pollutant, number>>;
+}
+
+export interface ObservationDataset {
+  fileNames: string[];
+  stations: Station[];
+  records: ObservationRecord[];
+  pollutants: Pollutant[];
+  start: string;
+  end: string;
+  loadedAt: string;
+}
+
+export type AggregationWindow = 'last24h' | 'period';
+
+export interface StationSummary {
+  station: Station;
+  cellId: string | null;
+  values: Partial<Record<Pollutant, number>>;
+  count: number;
+}
+
+export interface ObservedField {
+  pollutant: Pollutant;
+  /** Interpolated value per cell id (IDW). */
+  values: Record<string, number>;
+  /** Distance (km) from each cell centre to the nearest contributing station. */
+  nearestKm: Record<string, number>;
+  stationCount: number;
+}
+
+export interface WeatherObservation {
+  weather: Weather;
+  fileName: string;
+  period: string;
+  records: number;
+}
 
 export type InteractionMode = 'select' | 'add-industry' | 'select-area' | 'pick-candidate';
 
@@ -221,7 +316,8 @@ export type Section =
   | 'scenarios'
   | 'actions'
   | 'locations'
-  | 'analytics';
+  | 'analytics'
+  | 'data';
 
 export interface CandidateLocation {
   id: string; // A, B, C...

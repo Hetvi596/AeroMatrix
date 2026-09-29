@@ -14,12 +14,14 @@ import {
   Tags,
   Palette,
   ChevronRight,
+  RadioTower,
 } from 'lucide-react';
 import { useTwin } from '../store/useTwinStore';
 import type { LayerId } from '../types';
 
 const LAYERS: { id: LayerId; label: string; icon: typeof Layers; note?: string }[] = [
   { id: 'heatmap', label: 'Pollution heatmap', icon: Flame, note: 'demo' },
+  { id: 'stations', label: 'Monitoring stations', icon: RadioTower, note: 'observed' },
   { id: 'grid', label: 'Analysis grid', icon: Grid3x3 },
   { id: 'risk', label: 'Risk zones (3D columns)', icon: TriangleAlert, note: 'demo' },
   { id: 'roads', label: 'Roads', icon: Route },
@@ -55,7 +57,11 @@ export function LayerControl() {
               <input type="checkbox" checked={layers[id]} onChange={() => toggle(id)} className="accent-cyan-400" />
               <Icon size={13} className={layers[id] ? 'text-cyan-300' : 'text-slate-600'} />
               <span className={layers[id] ? 'text-slate-200' : 'text-slate-500'}>{label}</span>
-              {note && <span className="ml-auto text-[9px] uppercase tracking-wide text-fuchsia-300/70">{note}</span>}
+              {note && (
+                <span className={`ml-auto text-[9px] uppercase tracking-wide ${note === 'observed' ? 'text-emerald-300/80' : 'text-fuchsia-300/70'}`}>
+                  {note}
+                </span>
+              )}
             </label>
           ))}
           <div className="mt-1.5 px-1.5">

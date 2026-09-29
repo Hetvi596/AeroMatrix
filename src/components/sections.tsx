@@ -5,11 +5,12 @@ import { Block, Button, DataBadge, SectionHeader, Segmented, Stat, Disclaimer } 
 import { POLLUTANT_LABEL, POLLUTANT_UNIT, RISK_COLOR, RISK_LABEL, pollutionColor, rgbToCss } from '../utils/colors';
 import { fmt, fmtInt } from '../utils/format';
 import type { CellState, RiskLevel } from '../types';
+import { majorRoads, roadMidpoint, roadTrafficLevel, trafficLevelLabel } from '../services/traffic';
 
 function useStatus() {
   const r = useTwin((s) => s.activeResult);
   const m = useTwin((s) => s.displayMode);
-  return r && m !== 'baseline' ? ('MODELED_SCENARIO' as const) : ('DEMO' as const);
+  return r && (m === 'scenario' || m === 'delta') ? ('MODELED_SCENARIO' as const) : ('DEMO' as const);
 }
 
 function mean(xs: number[]) {
@@ -71,7 +72,8 @@ function HotspotList({ states, limit = 6 }: { states: CellState[]; limit?: numbe
 }
 
 export function WeatherBlock() {
-  const w = useTwin((s) => s.draft?.weather ?? s.base?.weather);
+  const w = useTwin((s) => s.base?.weather);
+  const wObs = useTwin((s) => s.weatherObs);
   if (!w) return null;
   const items = [
     { icon: Thermometer, label: 'Temp', v: `${fmt(w.temperature, 0)}°C` },
@@ -82,7 +84,7 @@ export function WeatherBlock() {
     { icon: Gauge, label: 'Pressure', v: `${fmt(w.pressure, 0)} hPa` },
   ];
   return (
-    <Block title="Meteorology" right={<DataBadge status="DEMO" />}>
+    <Block title="Meteorology (baseline)" right={<DataBadge status={wObs ? 'OBSERVED' : 'DEMO'} />}>
       <div className="grid grid-cols-3 gap-2">
         {items.map(({ icon: Icon, label, v, rot }) => (
           <div key={label} className="rounded-md bg-ink-800/70 px-2 py-1.5">
@@ -94,7 +96,11 @@ export function WeatherBlock() {
           </div>
         ))}
       </div>
-      <Disclaimer>Placeholder for ERA5 reanalysis. Editable in the What-If simulator.</Disclaimer>
+      <Disclaimer>
+        {wObs
+          ? `From ${wObs.fileName} · ${wObs.period}. Scenario weather is editable in the What-If simulator.`
+          : 'Demo placeholder — import ERA5 / station weather in the Data panel. Editable in the What-If simulator.'}
+      </Disclaimer>
     </Block>
   );
 }
@@ -288,31 +294,31 @@ export function TrafficSection() {
   const setSection = useTwin((s) => s.setSection);
   const status = useStatus();
   const byId = new Map(states.map((s) => [s.cellId, s]));
-  const rows = base.roads
-    .map((r) => {
-      const cells = base.cells.filter((c) => (c.trafficByRoad[r.id] ?? 0) > 20);
-      const level = cells.length ? mean(cells.map((c) => byId.get(c.id)?.trafficIntensity ?? 0)) : r.volume * 0.6;
-      return { r, level };
-    })
+  const isOsm = base.geometrySource === 'osm';
+  const rows = majorRoads(base, 30)
+    .map((r) => ({ r, level: roadTrafficLevel(r, base, byId) }))
     .sort((a, b) => b.level - a.level);
-  const lvl = (v: number) => (v < 40 ? ['LOW', '#22c55e'] : v < 60 ? ['MEDIUM', '#facc15'] : v < 80 ? ['HIGH', '#f97316'] : ['VERY HIGH', '#ef4444']);
   return (
     <>
       <SectionHeader title="Traffic" subtitle="Major corridors & modeled traffic intensity" right={<DataBadge status={status} />} />
       <Block>
         <div className="grid grid-cols-2 gap-3">
           <Stat label="Mean traffic index" value={fmt(mean(states.map((s) => s.trafficIntensity)), 0)} unit="/100" />
-          <Stat label="Corridors" value={base.roads.length} sub="demo digitised" />
+          <Stat
+            label={isOsm ? 'OSM roads' : 'Corridors'}
+            value={base.roads.length}
+            sub={isOsm ? `${fmt(base.roads.reduce((a, r) => a + (r.lengthKm ?? 0), 0), 0)} km · real geometry` : 'demo digitised'}
+          />
         </div>
       </Block>
-      <Block title="Corridors">
+      <Block title={isOsm ? 'Major named roads (top 30)' : 'Corridors'}>
         <div className="space-y-1">
           {rows.map(({ r, level }) => {
-            const [label, color] = lvl(level);
+            const { label, color } = trafficLevelLabel(level);
             return (
               <button
                 key={r.id}
-                onClick={() => flyTo(r.path[Math.floor(r.path.length / 2)], 12000)}
+                onClick={() => flyTo(roadMidpoint(r), 12000)}
                 className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-left text-[11.5px] hover:bg-ink-800"
               >
                 <span className="h-1.5 w-4 rounded" style={{ background: color }} />
@@ -328,7 +334,11 @@ export function TrafficSection() {
         <Button variant="primary" className="w-full" onClick={() => setSection('simulator')}>
           Modify traffic in What-If simulator <ArrowRight size={13} />
         </Button>
-        <Disclaimer>Corridor geometry is approximate. The Roads layer shows the real OSM-derived road network (Esri). Future: live traffic API / counts.</Disclaimer>
+        <Disclaimer>
+          {isOsm
+            ? 'Road geometry: © OpenStreetMap contributors. Traffic volumes are a DEMO proxy from road class and road density — replace with counts / a traffic API.'
+            : 'Corridor geometry is approximate demo data — load real OSM roads in the Data panel. Future: live traffic API / counts.'}
+        </Disclaimer>
       </Block>
     </>
   );

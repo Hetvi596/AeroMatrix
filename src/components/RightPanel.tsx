@@ -6,7 +6,8 @@ import { POLLUTANT_LABEL, POLLUTANT_UNIT, RISK_COLOR, RISK_LABEL } from '../util
 import { fmt, fmtInt } from '../utils/format';
 import { haversineKm } from '../utils/geo';
 import { SourceDonut } from '../analytics/SourceDonut';
-import type { Pollutant } from '../types';
+import type { CellState, Pollutant } from '../types';
+import { RadioTower } from 'lucide-react';
 import { POLLUTANTS } from '../services/pollutionModel';
 
 function ScenarioSummaryCard() {
@@ -89,7 +90,7 @@ function ZoneCard({ cellId }: { cellId: string }) {
   const cell = base.cells.find((c) => c.id === cellId);
   const b = baseline.find((s) => s.cellId === cellId);
   if (!cell || !b) return null;
-  const showScn = !!result && mode !== 'baseline';
+  const showScn = !!result && (mode === 'scenario' || mode === 'delta');
   const sc = showScn ? result!.scenario.find((s) => s.cellId === cellId)! : null;
   const cur = sc ?? b;
   const d = showScn ? result!.delta[cellId] : null;
@@ -141,6 +142,7 @@ function ZoneCard({ cellId }: { cellId: string }) {
           )}
         </div>
       </Block>
+      <ObservedBlock cellId={cellId} modeled={b} />
       <Block title="Source contribution" right={<span className="text-[9.5px] font-semibold tracking-wider text-fuchsia-300">DEMO SOURCE CONTRIBUTION</span>}>
         <SourceDonut value={contrib} size={104} />
         <div className="mt-2 grid grid-cols-2 gap-x-3 text-[10.5px] text-slate-500">
@@ -220,6 +222,41 @@ function ZoneCard({ cellId }: { cellId: string }) {
         </div>
       </Block>
     </>
+  );
+}
+
+function ObservedBlock({ cellId, modeled }: { cellId: string; modeled: CellState }) {
+  const summaries = useTwin((s) => s.stationSummaries);
+  const field = useTwin((s) => s.observedField);
+  const pollutant = useTwin((s) => s.pollutant);
+  const aggWindow = useTwin((s) => s.aggWindow);
+  if (!field && !summaries.length) return null;
+  const inCell = summaries.filter((s) => s.cellId === cellId);
+  const idw = field?.values[cellId];
+  const near = field?.nearestKm[cellId];
+  const digits = pollutant === 'co' ? 2 : 1;
+  return (
+    <Block title={`Observed · ${aggWindow === 'last24h' ? 'last 24 h' : 'whole period'}`} right={<DataBadge status="OBSERVED" />}>
+      {inCell.map((s) => (
+        <div key={s.station.id} className="flex items-center gap-2 text-[11.5px]">
+          <RadioTower size={12} className="text-emerald-400" />
+          <span className="truncate text-slate-200">{s.station.name}</span>
+          <span className="num ml-auto text-emerald-200">
+            {s.values[pollutant] !== undefined ? fmt(s.values[pollutant]!, digits) : '—'}
+          </span>
+        </div>
+      ))}
+      {idw !== undefined && (
+        <div className="mt-1 grid grid-cols-3 gap-2">
+          <Stat label={`Interpolated ${POLLUTANT_LABEL[pollutant]}`} value={fmt(idw, digits)} tone="text-emerald-200" />
+          <Stat label="Prototype model" value={fmt(modeled[pollutant], digits)} sub="demo baseline" />
+          <Stat label="Nearest station" value={`${fmt(near ?? NaN, 1)} km`} sub={near !== undefined && near > 8 ? 'low confidence' : undefined} />
+        </div>
+      )}
+      {idw === undefined && !inCell.length && (
+        <Disclaimer>No station with {POLLUTANT_LABEL[pollutant]} data (or coordinates) for this pollutant yet.</Disclaimer>
+      )}
+    </Block>
   );
 }
 

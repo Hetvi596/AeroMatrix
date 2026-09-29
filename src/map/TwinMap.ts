@@ -12,8 +12,10 @@ import {
   Cesium3DTileset,
   Color,
   ColorGeometryInstanceAttribute,
+  ClassificationType,
   ColorMaterialProperty,
   ConstantProperty,
+  Credit,
   CustomDataSource,
   DistanceDisplayCondition,
   EllipsoidTerrainProvider,
@@ -23,6 +25,8 @@ import {
   HeightReference,
   ImageryLayer,
   Ion,
+  JulianDate,
+  ShadowMode,
   LabelStyle,
   Material,
   Math as CMath,
@@ -56,12 +60,15 @@ import type {
   LonLat,
   Pollutant,
   ScenarioResult,
+  StationSummary,
 } from '../types';
 import { POLLUTANT_RANGE, deltaColor, pollutionColor, type RGB } from '../utils/colors';
 import { bboxRing, shrinkBBox } from '../utils/geo';
 import { dataProvider } from '../services/dataProvider';
+import { roadTrafficLevel, trafficLevelLabel } from '../services/traffic';
 import { createTerrariumTerrainProvider, sampleElevations } from './terrain';
 import { elevationRampCanvas, renderFieldCanvas } from './layers/heatmapCanvas';
+import { BuildingTileManager } from './buildingTiles';
 
 export interface MapClick {
   entityId?: string;
@@ -81,6 +88,8 @@ export interface CellRenderInput {
   mode: DisplayMode;
   result: ScenarioResult | null;
   closedRoads: string[];
+  /** Per-cell values (cell order) replacing the modeled field, e.g. OBSERVED IDW. */
+  overrideValues?: number[] | null;
 }
 
 export type IndustryDisplayState = 'active' | 'removed' | 'added' | 'pending';
@@ -132,12 +141,16 @@ export class TwinMap {
   private buildingPrimitive: Primitive | null = null;
   private osmTileset: Cesium3DTileset | null = null;
   private buildingsVisible = true;
+  private buildingTiles: BuildingTileManager | null = null;
+  private shadowsOn = false;
   private buildingSpecs: { position: LonLat; width: number; depth: number; height: number; rotation: number }[] = [];
   private buildingElev: number[] = [];
 
   // Entity layers
   private ds: Record<string, CustomDataSource> = {};
   private columnEntities = new Map<string, Entity>();
+  private roadEntities = new Map<string, { entities: Entity[]; style: string }>();
+  private osmCredit: Credit | null = null;
   private base: BaseState | null = null;
   private lastCells: CellRenderInput | null = null;
   private lastIndustries: { list: { industry: Industry; state: IndustryDisplayState }[]; selectedId: string | null } | null = null;
@@ -171,6 +184,8 @@ export class TwinMap {
         requestRenderMode: true,
         maximumRenderTimeChange: Infinity,
         msaaSamples: 4,
+        // Render at the device's real pixel density (sharp on high-DPI laptop screens).
+        useBrowserRecommendedResolution: false,
       });
     } catch (e) {
       const msg = e instanceof Error ? e.message : String(e);
@@ -185,15 +200,27 @@ export class TwinMap {
     scene.globe.depthTestAgainstTerrain = true;
     scene.globe.showGroundAtmosphere = true;
     scene.fog.enabled = true;
-    scene.fog.density = 1.2e-4;
-    scene.postProcessStages.fxaa.enabled = true;
+    scene.fog.density = 6e-5;
+    // MSAA handles anti-aliasing; FXAA would soften imagery and building edges.
+    scene.postProcessStages.fxaa.enabled = false;
+    // Finer terrain / imagery level-of-detail (default 2) → noticeably crisper satellite tiles.
+    scene.globe.maximumScreenSpaceError = 1.5;
+    scene.globe.tileCacheSize = 250;
     scene.verticalExaggeration = this.exaggeration;
-    scene.screenSpaceCameraController.minimumZoomDistance = 150;
+    // Fixed mid-morning sun (10:30 IST) so 3D buildings get consistent, readable shading.
+    v.clock.currentTime = JulianDate.fromIso8601('2026-03-15T05:00:00Z');
+    v.clock.shouldAnimate = false;
+    v.shadowMap.softShadows = true;
+    v.shadowMap.size = 2048;
+    v.shadowMap.darkness = 0.45;
+    v.terrainShadows = ShadowMode.RECEIVE_ONLY;
+    v.shadows = false;
+    scene.screenSpaceCameraController.minimumZoomDistance = 60;
     scene.screenSpaceCameraController.maximumZoomDistance = 2_500_000;
     (v.cesiumWidget.creditContainer as HTMLElement).classList.add('twin-credits');
 
     this.setupImagery();
-    for (const name of ['heatGrid', 'columns', 'grid', 'green', 'traffic', 'industries', 'area', 'affected', 'selection', 'markers']) {
+    for (const name of ['heatGrid', 'industrialAreas', 'green', 'columns', 'grid', 'traffic', 'industries', 'stations', 'area', 'affected', 'selection', 'markers']) {
       const d = new CustomDataSource(name);
       this.ds[name] = d;
       await v.dataSources.add(d);
@@ -241,9 +268,9 @@ export class TwinMap {
         credit: 'Imagery © Esri, Maxar, Earthstar Geographics',
       });
       this.satLayer = layers.addImageryProvider(sat);
-      this.satLayer.brightness = 0.78;
-      this.satLayer.saturation = 0.85;
-      this.satLayer.contrast = 1.08;
+      this.satLayer.brightness = 0.95;
+      this.satLayer.saturation = 1.0;
+      this.satLayer.contrast = 1.05;
       let satErrors = 0;
       sat.errorEvent.addEventListener(() => {
         satErrors++;
@@ -296,6 +323,7 @@ export class TwinMap {
     if (!v) return;
     v.terrainProvider = this.terrainOn && this.demProvider ? this.demProvider : new EllipsoidTerrainProvider();
     v.scene.verticalExaggeration = this.terrainOn ? this.exaggeration : 1;
+    this.buildingTiles?.reset(); // building bases depend on terrain height
     this.refreshHeights();
   }
 
@@ -313,13 +341,43 @@ export class TwinMap {
         this.cb.onStatus({ buildings: 'Cesium OSM Buildings (ion)' });
         return;
       } catch {
-        /* fall through to procedural */
+        /* fall through to OpenFreeMap buildings */
       }
     }
+    // Real OSM building footprints + heights, streamed around the camera.
+    const mgr = new BuildingTileManager(
+      v,
+      (pts) => this.heightsFor(pts),
+      () => this.hScale(),
+      () => this.kick(600),
+    );
+    mgr.setVisible(this.buildingsVisible);
+    mgr.setShadows(this.shadowsOn);
+    this.buildingTiles = mgr;
+    this.cb.onStatus({ buildings: 'OSM 3D buildings — zoom in to load (OpenFreeMap)' });
+    let fellBack = false;
+    mgr.onStats = ({ tiles, buildings, failed }) => {
+      if (failed && !fellBack) {
+        fellBack = true;
+        void this.useProceduralBuildings();
+        return;
+      }
+      this.cb.onStatus({
+        buildings: tiles
+          ? `OSM 3D buildings: ${buildings.toLocaleString()} in ${tiles} tile(s) (OpenFreeMap)`
+          : 'OSM 3D buildings — zoom in to load (OpenFreeMap)',
+      });
+    };
+  }
+
+  /** Fallback when the building tile service is unreachable. */
+  private async useProceduralBuildings() {
+    this.buildingTiles?.destroy();
+    this.buildingTiles = null;
     this.buildingSpecs = await dataProvider.getBuildings();
     this.buildingElev = await this.heightsFor(this.buildingSpecs.map((b) => b.position));
     this.buildProceduralBuildings();
-    this.cb.onStatus({ buildings: `Procedural demo massing (${this.buildingSpecs.length.toLocaleString()} blocks)` });
+    this.cb.onStatus({ buildings: `Building tiles unreachable — procedural demo massing (${this.buildingSpecs.length.toLocaleString()} blocks)` });
   }
 
   private buildProceduralBuildings() {
@@ -508,7 +566,7 @@ export class TwinMap {
   // ------------------------------------------------------------ base layers
   setBase(base: BaseState) {
     this.base = base;
-    const { grid, green, traffic, columns, heatGrid } = this.ds;
+    const { grid, green, columns, heatGrid } = this.ds;
     if (!grid) return;
     grid.entities.removeAll();
     columns.entities.removeAll();
@@ -525,38 +583,78 @@ export class TwinMap {
       const edge = i === 0 || i === n;
       const mat = Color.fromCssColorString(edge ? '#e2e8f0' : '#cbd5e1').withAlpha(edge ? 0.9 : 0.45);
       grid.entities.add({
-        polyline: { positions: Cartesian3.fromDegreesArray([lon, bbox.south, lon, bbox.north]), width: edge ? 2.5 : 1.2, clampToGround: true, material: mat },
+        polyline: { positions: Cartesian3.fromDegreesArray([lon, bbox.south, lon, bbox.north]), width: edge ? 2.5 : 1.2, clampToGround: true, classificationType: ClassificationType.TERRAIN, material: mat },
       });
       grid.entities.add({
-        polyline: { positions: Cartesian3.fromDegreesArray([bbox.west, lat, bbox.east, lat]), width: edge ? 2.5 : 1.2, clampToGround: true, material: mat },
+        polyline: { positions: Cartesian3.fromDegreesArray([bbox.west, lat, bbox.east, lat]), width: edge ? 2.5 : 1.2, clampToGround: true, classificationType: ClassificationType.TERRAIN, material: mat },
       });
     }
     grid.entities.resumeEvents();
 
-    // Green areas
+    // Green areas (OSM: fills only — hundreds of polygons; demo: fills + outlines)
+    const osm = base.geometrySource === 'osm';
     green.entities.removeAll();
+    green.entities.suspendEvents();
     for (const g of base.greenAreas) {
       green.entities.add({
         id: `green:${g.id}`,
         name: g.name,
         polygon: {
           hierarchy: new PolygonHierarchy(ringPositions(g.polygon)),
-          material: Color.fromCssColorString('#22c55e').withAlpha(0.38),
+          material: Color.fromCssColorString('#22c55e').withAlpha(osm ? 0.34 : 0.38),
+          classificationType: ClassificationType.TERRAIN,
         },
       });
-      green.entities.add({
-        polyline: {
-          positions: ringPositions([...g.polygon, g.polygon[0]]),
-          width: 2,
-          clampToGround: true,
-          material: Color.fromCssColorString('#4ade80').withAlpha(0.9),
+      if (!osm) {
+        green.entities.add({
+          polyline: {
+            positions: ringPositions([...g.polygon, g.polygon[0]]),
+            width: 2,
+            clampToGround: true, classificationType: ClassificationType.TERRAIN,
+            material: Color.fromCssColorString('#4ade80').withAlpha(0.9),
+          },
+        });
+      }
+    }
+    green.entities.resumeEvents();
+
+    // Industrial land-use zones (OSM)
+    const ind = this.ds.industrialAreas;
+    ind.entities.removeAll();
+    ind.entities.suspendEvents();
+    for (const a of base.industrialAreas) {
+      ind.entities.add({
+        id: `indarea:${a.id}`,
+        name: a.name,
+        polygon: {
+          hierarchy: new PolygonHierarchy(ringPositions(a.polygon)),
+          material: Color.fromCssColorString('#a78bfa').withAlpha(0.28),
+          classificationType: ClassificationType.TERRAIN,
         },
       });
     }
+    ind.entities.resumeEvents();
 
-    traffic.entities.removeAll();
+    // Attribution for OSM-derived geometry
+    const credits = this.viewer?.creditDisplay;
+    if (credits) {
+      if (osm && !this.osmCredit) {
+        this.osmCredit = new Credit('City geometry © OpenStreetMap contributors (ODbL)', true);
+        credits.addStaticCredit(this.osmCredit);
+      } else if (!osm && this.osmCredit) {
+        credits.removeStaticCredit(this.osmCredit);
+        this.osmCredit = null;
+      }
+    }
+
+    this.buildTrafficEntities(base);
     this.sampleCellHeights(); // seat extruded columns on the DEM
     this.kick();
+  }
+
+  /** Same geometry, new state object (e.g. imported weather) — no rebuild needed. */
+  updateBaseRef(base: BaseState) {
+    this.base = base;
   }
 
   // ------------------------------------------------------------ cell values
@@ -569,7 +667,7 @@ export class TwinMap {
     const isDelta = mode === 'delta' && !!result;
     const deltaVals = isDelta ? states.map((s) => result!.delta[s.cellId]?.[pollutant] ?? 0) : [];
     const deltaScale = isDelta ? Math.max(1, ...deltaVals.map(Math.abs)) : 1;
-    const values = isDelta ? deltaVals : states.map((s) => s[pollutant]);
+    const values = isDelta ? deltaVals : input.overrideValues ?? states.map((s) => s[pollutant]);
     const colorFn = isDelta ? (x: number) => deltaColor(x, deltaScale) : (x: number) => pollutionColor(pollutant, x);
 
     // 1) Smooth heatmap raster draped over terrain
@@ -639,7 +737,7 @@ export class TwinMap {
           polyline: {
             positions: ringPositions(bboxRing(shrinkBBox(c.bounds, 0.94))),
             width: 3,
-            clampToGround: true,
+            clampToGround: true, classificationType: ClassificationType.TERRAIN,
             material: new PolylineDashMaterialProperty({
               color: Color.fromCssColorString(d > 0 ? '#fb7185' : '#38bdf8'),
               dashLength: 18,
@@ -654,33 +752,52 @@ export class TwinMap {
     this.kick();
   }
 
+  /**
+   * Traffic polylines are created once per base (setBase → buildTrafficEntities);
+   * here only materials change, and only for roads whose style actually changed.
+   */
   private renderTraffic(input: CellRenderInput) {
-    const tr = this.ds.traffic;
-    if (!tr) return;
-    tr.entities.removeAll();
+    if (!this.ds.traffic || !this.roadEntities.size) return;
     const { base, states, closedRoads } = input;
     const stateById = new Map(states.map((s) => [s.cellId, s]));
-    tr.entities.suspendEvents();
+    this.ds.traffic.entities.suspendEvents();
     for (const road of base.roads) {
-      // Road traffic level = mean traffic intensity of cells the corridor feeds most.
-      const cells = base.cells.filter((c) => (c.trafficByRoad[road.id] ?? 0) > 20);
-      const level = cells.length
-        ? cells.reduce((s, c) => s + (stateById.get(c.id)?.trafficIntensity ?? 0), 0) / cells.length
-        : road.volume * 0.6;
       const closed = closedRoads.includes(road.id);
-      const col = closed ? '#64748b' : level < 40 ? '#22c55e' : level < 60 ? '#facc15' : level < 80 ? '#f97316' : '#ef4444';
-      tr.entities.add({
-        id: `road:${road.id}`,
-        name: road.name,
-        polyline: {
-          positions: Cartesian3.fromDegreesArray(road.path.flat()),
-          width: 3 + road.volume / 22,
-          clampToGround: true,
-          material: closed
-            ? new PolylineDashMaterialProperty({ color: Color.fromCssColorString(col), dashLength: 12 })
-            : Color.fromCssColorString(col).withAlpha(0.92),
-        },
-      });
+      const { color } = trafficLevelLabel(roadTrafficLevel(road, base, stateById));
+      const style = closed ? 'closed' : color;
+      const entry = this.roadEntities.get(road.id);
+      if (!entry || entry.style === style) continue;
+      entry.style = style;
+      const material = closed
+        ? new PolylineDashMaterialProperty({ color: Color.fromCssColorString('#64748b'), dashLength: 12 })
+        : new ColorMaterialProperty(Color.fromCssColorString(color).withAlpha(0.92));
+      for (const e of entry.entities) e.polyline!.material = material;
+    }
+    this.ds.traffic.entities.resumeEvents();
+  }
+
+  private buildTrafficEntities(base: BaseState) {
+    const tr = this.ds.traffic;
+    tr.entities.removeAll();
+    this.roadEntities.clear();
+    tr.entities.suspendEvents();
+    const osm = base.geometrySource === 'osm';
+    for (const road of base.roads) {
+      const width = osm ? (road.roadClass === 'secondary' ? 2 : road.roadClass === 'primary' ? 3.2 : 4.5) : 3 + road.volume / 22;
+      if (this.roadEntities.has(road.id)) continue; // defensive: ids must be unique
+      const entities = road.paths.map((path, k) =>
+        tr.entities.add({
+          id: `road:${road.id}:${k}`,
+          name: road.name,
+          polyline: {
+            positions: Cartesian3.fromDegreesArray(path.flat()),
+            width,
+            clampToGround: true, classificationType: ClassificationType.TERRAIN,
+            material: new ColorMaterialProperty(Color.fromCssColorString('#94a3b8').withAlpha(0.8)),
+          },
+        }),
+      );
+      this.roadEntities.set(road.id, { entities, style: '' });
     }
     tr.entities.resumeEvents();
   }
@@ -748,6 +865,48 @@ export class TwinMap {
     this.kick();
   }
 
+  // --------------------------------------------------- monitoring stations
+  setStations(summaries: StationSummary[], pollutant: Pollutant) {
+    const ds = this.ds.stations;
+    if (!ds) return;
+    ds.entities.removeAll();
+    ds.entities.suspendEvents();
+    for (const s of summaries) {
+      if (!s.station.location) continue;
+      const v = s.values[pollutant];
+      const color = v !== undefined ? rgb(pollutionColor(pollutant, v)) : Color.GRAY;
+      const [lon, lat] = s.station.location;
+      ds.entities.add({
+        id: `station:${s.station.id}`,
+        name: s.station.name,
+        position: Cartesian3.fromDegrees(lon, lat),
+        point: {
+          pixelSize: 15,
+          color,
+          outlineColor: Color.fromCssColorString('#10b981'),
+          outlineWidth: 3,
+          heightReference: HeightReference.CLAMP_TO_GROUND,
+          disableDepthTestDistance: Number.POSITIVE_INFINITY,
+        },
+        label: {
+          text: `${s.station.name}${v !== undefined ? ` · ${v.toFixed(pollutant === 'co' ? 2 : 0)}` : ''}`,
+          font: '600 11px Inter, sans-serif',
+          fillColor: Color.fromCssColorString('#a7f3d0'),
+          outlineColor: Color.BLACK,
+          outlineWidth: 3,
+          style: LabelStyle.FILL_AND_OUTLINE,
+          pixelOffset: new Cartesian2(0, -18),
+          verticalOrigin: VerticalOrigin.BOTTOM,
+          heightReference: HeightReference.CLAMP_TO_GROUND,
+          disableDepthTestDistance: Number.POSITIVE_INFINITY,
+          distanceDisplayCondition: new DistanceDisplayCondition(0, 60000),
+        },
+      });
+    }
+    ds.entities.resumeEvents();
+    this.kick();
+  }
+
   // -------------------------------------------------------------- selection
   setSelectedCell(cell: GridCell | null) {
     const ds = this.ds.selection;
@@ -758,7 +917,7 @@ export class TwinMap {
         polyline: {
           positions: ringPositions(bboxRing(cell.bounds)),
           width: 4,
-          clampToGround: true,
+          clampToGround: true, classificationType: ClassificationType.TERRAIN,
           material: Color.fromCssColorString('#22d3ee'),
         },
       });
@@ -790,13 +949,14 @@ export class TwinMap {
         polygon: {
           hierarchy: new PolygonHierarchy(ringPositions(bboxRing(c.bounds).slice(0, 4))),
           material: Color.fromCssColorString('#22d3ee').withAlpha(0.18),
+          classificationType: ClassificationType.TERRAIN,
         },
       });
       ds.entities.add({
         polyline: {
           positions: ringPositions(bboxRing(shrinkBBox(c.bounds, 0.97))),
           width: 2,
-          clampToGround: true,
+          clampToGround: true, classificationType: ClassificationType.TERRAIN,
           material: Color.fromCssColorString('#67e8f9').withAlpha(0.9),
         },
       });
@@ -853,7 +1013,9 @@ export class TwinMap {
       columns: l.risk,
       traffic: l.traffic,
       industries: l.industries,
+      industrialAreas: l.industries,
       green: l.green,
+      stations: l.stations,
     };
     for (const [k, on] of Object.entries(vis)) if (this.ds[k]) this.ds[k].show = on;
     this.buildingsVisible = l.buildings;
@@ -884,6 +1046,7 @@ export class TwinMap {
     this.exaggeration = v;
     if (this.viewer && this.terrainOn) {
       this.viewer.scene.verticalExaggeration = v;
+      this.buildingTiles?.reset();
       if (this.layers?.elevationTint) {
         this.layers = { ...this.layers, elevationTint: false };
         this.setLayers({ ...this.layers, elevationTint: true });

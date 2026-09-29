@@ -7,6 +7,7 @@ import { RightPanel } from './components/RightPanel';
 import { BottomPanel } from './components/BottomPanel';
 import { CesiumMap } from './map/CesiumMap';
 import { useTwin } from './store/useTwinStore';
+import { refreshForecastLayer } from './analytics/forecastLayer';
 
 export function App() {
   const init = useTwin((s) => s.init);
@@ -19,7 +20,8 @@ export function App() {
   const section = useTwin((s) => s.section);
 
   useEffect(() => {
-    init(10);
+    // If the backend is running with a trained model, pick up its forecast layer quietly.
+    init(10).then(() => refreshForecastLayer().catch(() => undefined));
   }, [init]);
 
   return (

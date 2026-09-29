@@ -7,8 +7,13 @@ export function MapLegend() {
   const mode = useTwin((s) => s.displayMode);
   const result = useTwin((s) => s.activeResult);
   const layers = useTwin((s) => s.layers);
+  const field = useTwin((s) => s.observedField);
+  const aggWindow = useTwin((s) => s.aggWindow);
   const isDelta = mode === 'delta' && result;
-  const showScenario = mode !== 'baseline' && result;
+  const showScenario = (mode === 'scenario' || mode === 'delta') && result;
+  const isObserved = mode === 'observed' && field;
+  const forecast = useTwin((s) => s.forecastLayer);
+  const isForecast = mode === 'forecast' && forecast;
 
   const [lo, hi] = POLLUTANT_RANGE[pollutant];
   const stops = Array.from({ length: 12 }, (_, i) => i / 11);
@@ -30,7 +35,7 @@ export function MapLegend() {
           {isDelta ? 'Δ ' : ''}
           {POLLUTANT_LABEL[pollutant]} <span className="font-normal text-slate-500">{POLLUTANT_UNIT[pollutant]}</span>
         </span>
-        <DataBadge status={showScenario ? 'MODELED_SCENARIO' : 'DEMO'} />
+        <DataBadge status={isForecast ? 'MODEL_PREDICTION' : isObserved ? 'OBSERVED' : showScenario ? 'MODELED_SCENARIO' : 'DEMO'} />
       </div>
       <div className="h-2 rounded-full" style={{ background: `linear-gradient(90deg, ${gradient})` }} />
       <div className="mt-1 flex justify-between font-mono text-[10px] text-slate-500">
@@ -38,6 +43,16 @@ export function MapLegend() {
           <span key={t}>{t}</span>
         ))}
       </div>
+      {isObserved && (
+        <div className="mt-1 text-[10px] text-emerald-300/80">
+          IDW interpolation of {field!.stationCount} station mean(s) · {aggWindow === 'last24h' ? 'last 24 h' : 'whole period'}
+        </div>
+      )}
+      {isForecast && (
+        <div className="mt-1 text-[10px] text-sky-300/80">
+          {forecast!.model} forecast valid {forecast!.validAt.slice(0, 16)} · IDW of {forecast!.stations.length} station forecast(s)
+        </div>
+      )}
       {!isDelta && pollutant === 'pm25' && (
         <div className="mt-1.5 grid grid-cols-4 gap-1 text-center text-[9.5px] text-slate-400">
           <span className="rounded bg-green-500/15 py-0.5">LOW ≤30</span>

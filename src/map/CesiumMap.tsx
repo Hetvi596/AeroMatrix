@@ -38,6 +38,14 @@ function handleClick(e: MapClick) {
     if (cell) s.toggleAreaCell(cell.id);
     return;
   }
+  if (e.entityId?.startsWith('station:')) {
+    const sid = e.entityId.slice('station:'.length);
+    const summary = s.stationSummaries.find((x) => x.station.id === sid);
+    if (summary?.cellId) {
+      s.selectCell(summary.cellId);
+      return;
+    }
+  }
   if (e.entityId?.startsWith('industry:')) {
     s.selectIndustry(e.entityId.split(':')[1]);
     return;
