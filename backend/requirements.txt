@@ -1,10 +1,11 @@
 fastapi>=0.115
 uvicorn[standard]>=0.30
-# Phase 7 (after real datasets are provided):
-# pandas
-# numpy
-# scikit-learn
-# xgboost
-# lightgbm
-# shap
-# xarray / cdsapi   (ERA5)
+pandas>=2.2
+numpy>=1.26
+scikit-learn>=1.5
+joblib>=1.4
+# Optional — used automatically when installed:
+# xgboost          (extra candidate model)
+# lightgbm         (extra candidate model)
+# shap             (source-group attribution)
+# xarray netCDF4   (ERA5 NetCDF input)

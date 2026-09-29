@@ -41,7 +41,7 @@ export function ActionsPanel() {
       </Block>
       <Block title="Action results">
         <div className="space-y-2">
-          {ranked.map(({ action, result }, i) => {
+          {ranked.map(({ action, implementation, result }, i) => {
             const isActive = active?.params.name === result.params.name;
             return (
               <div key={action.id} className={`rounded-md p-2.5 ring-1 ring-inset ${isActive ? 'bg-amber-500/10 ring-amber-400/30' : 'bg-ink-800/60 ring-ink-700'}`}>
@@ -53,7 +53,7 @@ export function ActionsPanel() {
                     <DeltaText value={result.summary.meanDelta} digits={2} />
                   </span>
                 </div>
-                <div className="mt-1 text-[11px] text-slate-400">{action.implementation}</div>
+                <div className="mt-1 text-[11px] text-slate-400">{implementation}</div>
                 <div className="mt-1.5 grid grid-cols-3 gap-1 text-[10.5px] text-slate-500">
                   <span>
                     Δ% <DeltaText value={result.summary.meanDeltaPct} unit="%" />

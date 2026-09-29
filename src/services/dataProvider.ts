@@ -9,7 +9,7 @@
 //   - Industry registry (MPCB/CPCB consent lists) → locations, categories, emissions
 //   - DEM (SRTM / Copernicus) and land-cover (ESA WorldCover / Sentinel-2 NDVI)
 
-import type { BaseState, DataStatus, Pollutant, TimePoint } from '../types';
+import type { BaseState, CityGeometry, DataStatus, Pollutant, TimePoint } from '../types';
 import {
   getDemoBaseState,
   getDemoBuildings,
@@ -22,7 +22,8 @@ export interface DataProvider {
   readonly id: string;
   readonly label: string;
   readonly status: DataStatus;
-  getBaseState(gridSize: number): Promise<BaseState>;
+  /** Grid + environment for the given city geometry (demo or real OSM). */
+  getBaseState(gridSize: number, geometry?: CityGeometry): Promise<BaseState>;
   getTimeSeries(key: string, pollutant: Pollutant, reference: number, range: TimeRange): Promise<TimePoint[]>;
   getBuildings(): Promise<DemoBuilding[]>;
 }
@@ -32,8 +33,8 @@ export class DemoDataProvider implements DataProvider {
   readonly label = 'Demo / simulated data (deterministic)';
   readonly status: DataStatus = 'DEMO';
 
-  async getBaseState(gridSize: number) {
-    return getDemoBaseState(gridSize);
+  async getBaseState(gridSize: number, geometry?: CityGeometry) {
+    return getDemoBaseState(gridSize, geometry);
   }
   async getTimeSeries(key: string, pollutant: Pollutant, reference: number, range: TimeRange) {
     return getDemoTimeSeries(key, pollutant, reference, range);

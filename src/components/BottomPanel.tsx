@@ -16,6 +16,7 @@ import {
 } from 'recharts';
 import { useTwin } from '../store/useTwinStore';
 import { dataProvider, type TimeRange } from '../services/dataProvider';
+import { observedSeries } from '../services/observations';
 import type { TimePoint } from '../types';
 import { DataBadge, Segmented } from './ui';
 import { POLLUTANT_LABEL, POLLUTANT_UNIT } from '../utils/colors';
@@ -30,7 +31,15 @@ function TimeSeriesChart() {
   const result = useTwin((s) => s.activeResult);
   const mode = useTwin((s) => s.displayMode);
   const [range, setRange] = useState<TimeRange>('24h');
-  const [series, setSeries] = useState<TimePoint[]>([]);
+  const [demoSeries, setSeries] = useState<TimePoint[]>([]);
+  const ds = useTwin((s) => s.observations);
+  const summaries = useTwin((s) => s.stationSummaries);
+  const base = useTwin((s) => s.base);
+  const observed = useMemo(
+    () => (ds && base ? observedSeries(ds, summaries, pollutant, base, cellId, range === '24h' ? 1 : range === '7d' ? 7 : 30) : null),
+    [ds, summaries, pollutant, base, cellId, range],
+  );
+  const series = observed?.points ?? demoSeries;
 
   const ref = useMemo(() => {
     if (cellId) return baseline.find((s) => s.cellId === cellId)?.[pollutant] ?? 0;
@@ -38,7 +47,7 @@ function TimeSeriesChart() {
   }, [cellId, baseline, pollutant]);
 
   const scnRef = useMemo(() => {
-    if (!result || mode === 'baseline') return null;
+    if (!result || (mode !== 'scenario' && mode !== 'delta')) return null;
     const xs = result.scenario;
     if (cellId) return xs.find((s) => s.cellId === cellId)?.[pollutant] ?? null;
     return xs.reduce((a, s) => a + s[pollutant], 0) / Math.max(1, xs.length);
@@ -65,8 +74,9 @@ function TimeSeriesChart() {
       <div className="flex items-center gap-2 px-1 pb-1">
         <span className="text-[11.5px] font-medium text-slate-200">
           {POLLUTANT_LABEL[pollutant]} · {cellId ? `Zone ${cellId}` : 'City mean'}
+          {observed && <span className="font-normal text-slate-500"> · {observed.label}</span>}
         </span>
-        <DataBadge status="DEMO" />
+        <DataBadge status={observed ? 'OBSERVED' : 'DEMO'} />
         <span className="text-[10px] text-slate-500">Past → Present → Forecast</span>
         <div className="ml-auto">
           <Segmented<TimeRange>
@@ -93,7 +103,7 @@ function TimeSeriesChart() {
             <CartesianGrid {...gridProps} />
             <XAxis dataKey="t" {...axisProps} minTickGap={18} />
             <YAxis {...axisProps} />
-            <Tooltip {...tooltipStyle} formatter={(v) => [`${v} ${POLLUTANT_UNIT[pollutant]}`, 'Demo series']} />
+            <Tooltip {...tooltipStyle} formatter={(v) => [`${v} ${POLLUTANT_UNIT[pollutant]}`, observed ? 'Observed' : 'Demo series']} />
             {firstForecast && (
               <ReferenceArea
                 x1={firstForecast}

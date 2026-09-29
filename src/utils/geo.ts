@@ -71,6 +71,81 @@ export function shrinkBBox(b: BBox, factor: number): BBox {
   return { west: cx - hw, east: cx + hw, south: cy - hh, north: cy + hh };
 }
 
+/** Bounding box of one or more coordinate lists. */
+export function bboxOf(parts: LonLat[][]): BBox {
+  let west = Infinity, south = Infinity, east = -Infinity, north = -Infinity;
+  for (const part of parts)
+    for (const [x, y] of part) {
+      if (x < west) west = x;
+      if (x > east) east = x;
+      if (y < south) south = y;
+      if (y > north) north = y;
+    }
+  return { west, south, east, north };
+}
+
+/** Approximate distance (km) from a point to a bbox (0 if inside). */
+export function distanceToBBoxKm(p: LonLat, b: BBox): number {
+  const cx = Math.max(b.west, Math.min(b.east, p[0]));
+  const cy = Math.max(b.south, Math.min(b.north, p[1]));
+  const [dx, dy] = offsetKm(p, [cx, cy]);
+  return Math.hypot(dx, dy);
+}
+
+export function pathLengthKm(path: LonLat[]): number {
+  let len = 0;
+  for (let i = 1; i < path.length; i++) len += haversineKm(path[i - 1], path[i]);
+  return len;
+}
+
+/** Polygon area in km² (equirectangular, fine at city scale). */
+export function polygonAreaKm2(poly: LonLat[]): number {
+  if (poly.length < 3) return 0;
+  const o = poly[0];
+  let a = 0;
+  for (let i = 0; i < poly.length; i++) {
+    const [x1, y1] = offsetKm(o, poly[i]);
+    const [x2, y2] = offsetKm(o, poly[(i + 1) % poly.length]);
+    a += x1 * y2 - x2 * y1;
+  }
+  return Math.abs(a) / 2;
+}
+
+/** Douglas–Peucker simplification with tolerance in metres. */
+export function simplifyPath(path: LonLat[], toleranceM: number): LonLat[] {
+  if (path.length <= 2) return path;
+  const tolKm = toleranceM / 1000;
+  const keep = new Uint8Array(path.length);
+  keep[0] = keep[path.length - 1] = 1;
+  const stack: [number, number][] = [[0, path.length - 1]];
+  while (stack.length) {
+    const [s, e] = stack.pop()!;
+    let maxD = 0;
+    let idx = -1;
+    for (let i = s + 1; i < e; i++) {
+      const d = distanceToPathKm(path[i], [path[s], path[e]]);
+      if (d > maxD) {
+        maxD = d;
+        idx = i;
+      }
+    }
+    if (idx >= 0 && maxD > tolKm) {
+      keep[idx] = 1;
+      stack.push([s, idx], [idx, e]);
+    }
+  }
+  return path.filter((_, i) => keep[i]);
+}
+
+export function polygonCentroid(poly: LonLat[]): LonLat {
+  let x = 0, y = 0;
+  for (const p of poly) {
+    x += p[0];
+    y += p[1];
+  }
+  return [x / poly.length, y / poly.length];
+}
+
 export function cellAreaKm2(b: BBox): number {
   const w = haversineKm([b.west, (b.south + b.north) / 2], [b.east, (b.south + b.north) / 2]);
   const h = haversineKm([b.west, b.south], [b.west, b.north]);

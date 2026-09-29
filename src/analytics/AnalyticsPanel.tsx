@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
 import { ArrowDown, CircleDashed, CircleCheck, CircleDot } from 'lucide-react';
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { useDisplayedStates, useTwin } from '../store/useTwinStore';
 import { Block, DataBadge, Disclaimer, SectionHeader } from '../components/ui';
 import { SourceDonut } from './SourceDonut';
 import { meanContribution } from '../services/pollutionModel';
-import { FUTURE_MODEL_FEATURES, predictionService, type ForecastResult } from '../services/predictionService';
+import { FUTURE_MODEL_FEATURES } from '../services/predictionService';
+import { ModelStatus } from './ModelStatus';
 import { SOURCE_COLORS, SOURCE_LABELS } from '../utils/colors';
 import { axisProps, gridProps, tooltipStyle } from './chartTheme';
 
@@ -35,13 +35,17 @@ export function AnalyticsPanel() {
   const states = useDisplayedStates();
   const result = useTwin((s) => s.activeResult);
   const mode = useTwin((s) => s.displayMode);
-  const [forecast, setForecast] = useState<ForecastResult | null>(null);
   const contrib = meanContribution(states);
-  const isScn = !!result && mode !== 'baseline';
-
-  useEffect(() => {
-    predictionService.forecast('city', 'pm25', 48).then(setForecast);
-  }, []);
+  const isScn = !!result && (mode === 'scenario' || mode === 'delta');
+  const hasObs = useTwin((s) => !!s.observations);
+  const hasWeather = useTwin((s) => !!s.weatherObs);
+  const sources = SOURCES.map((s) =>
+    s.name.startsWith('CPCB') && hasObs
+      ? { ...s, state: 'connected' as const, note: 'OBSERVED — uploaded CSV' }
+      : s.name.startsWith('ERA5') && hasWeather
+        ? { ...s, state: 'connected' as const, note: 'OBSERVED — uploaded CSV' }
+        : s,
+  );
 
   const top = [...states].sort((a, b) => b.pm25 - a.pm25).slice(0, 10).map((s) => ({
     name: s.cellId,
@@ -79,35 +83,7 @@ export function AnalyticsPanel() {
         </div>
         <Disclaimer>From the prototype rule model. Final attribution will use a trained model + SHAP on real data.</Disclaimer>
       </Block>
-      <Block title="PM2.5 forecast" right={<DataBadge status="MODEL_PREDICTION" className="opacity-50" />}>
-        <div className="rounded-md border border-dashed border-sky-400/30 bg-sky-500/5 px-3 py-3 text-[11.5px] text-slate-300">
-          <div className="font-semibold text-sky-300">No forecast shown — model not trained</div>
-          <div className="mt-1 text-slate-400">{forecast?.reason ?? 'Checking prediction service…'}</div>
-        </div>
-      </Block>
-      <Block title="Validation (hold-out test period)">
-        <table className="w-full text-[11px]">
-          <thead className="text-slate-500">
-            <tr>
-              <th className="text-left font-medium">Model</th>
-              <th className="text-right font-medium">RMSE</th>
-              <th className="text-right font-medium">MAE</th>
-              <th className="text-right font-medium">R²</th>
-            </tr>
-          </thead>
-          <tbody className="text-slate-500">
-            {['Persistence baseline', 'Random Forest', 'XGBoost (lags)', 'LightGBM'].map((m) => (
-              <tr key={m} className="border-t border-ink-800">
-                <td className="py-1 text-slate-400">{m}</td>
-                <td className="text-right">—</td>
-                <td className="text-right">—</td>
-                <td className="text-right">—</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <Disclaimer>Populated after training on real data. Final model is chosen by validation performance, not assumption.</Disclaimer>
-      </Block>
+      <ModelStatus />
       <Block title="Future ML pipeline">
         <div className="space-y-0.5">
           {PIPELINE.map((p, i) => (
@@ -130,7 +106,7 @@ export function AnalyticsPanel() {
       </Block>
       <Block title="Data sources">
         <div className="space-y-1">
-          {SOURCES.map((s) => (
+          {sources.map((s) => (
             <div key={s.name} className="flex items-center gap-2 text-[11px]">
               {s.state === 'connected' ? (
                 <CircleCheck size={12} className="text-emerald-400" />

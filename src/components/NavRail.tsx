@@ -10,6 +10,7 @@ import {
   ListChecks,
   MapPinned,
   BarChart3,
+  Database,
 } from 'lucide-react';
 import { useTwin } from '../store/useTwinStore';
 import type { Section } from '../types';
@@ -26,6 +27,7 @@ export const NAV: { id: Section; label: string; icon: typeof Wind }[] = [
   { id: 'actions', label: 'Actions', icon: ListChecks },
   { id: 'locations', label: 'Sites', icon: MapPinned },
   { id: 'analytics', label: 'Analytics', icon: BarChart3 },
+  { id: 'data', label: 'Data', icon: Database },
 ];
 
 export function NavRail() {

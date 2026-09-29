@@ -7,10 +7,18 @@
 // src/services/dataProvider.ts) when datasets are available.
 // ============================================================================
 
-import type { BaseState, DataStatus, GridCell, LonLat, Pollutant, TimePoint, Weather } from '../../types';
-import { cellAreaKm2, distanceToPathKm, haversineKm, pointInPolygon } from '../../utils/geo';
+import type { BaseState, BBox, CityGeometry, DataStatus, GreenArea, GridCell, LonLat, Pollutant, Road, TimePoint, Weather } from '../../types';
+import {
+  bboxContains,
+  bboxOf,
+  cellAreaKm2,
+  distanceToBBoxKm,
+  distanceToPathKm,
+  haversineKm,
+  pointInPolygon,
+} from '../../utils/geo';
 import { hashSeed, mulberry32 } from '../../utils/prng';
-import { DEMO_GREEN_AREAS, DEMO_INDUSTRIES, DEMO_ROADS, PUNE, URBAN_CENTRES } from '../geojson/puneDemoGeometry';
+import { DEMO_GEOMETRY, DEMO_GREEN_AREAS, PUNE, URBAN_CENTRES } from '../geojson/puneDemoGeometry';
 
 export const DEMO_STATUS: DataStatus = 'DEMO';
 
@@ -45,7 +53,18 @@ function urbanness(p: LonLat): number {
   return u;
 }
 
-function greenFraction(bounds: GridCell['bounds']): number {
+type IndexedPolygon = { polygon: LonLat[]; bbox: BBox };
+
+function indexPolygons(areas: GreenArea[]): IndexedPolygon[] {
+  return areas.map((a) => ({ polygon: a.polygon, bbox: bboxOf([a.polygon]) }));
+}
+
+/** Fraction of a cell covered by the given polygons (7×7 point sampling). */
+function coverFraction(bounds: GridCell['bounds'], polys: IndexedPolygon[]): number {
+  const local = polys.filter(
+    (p) => p.bbox.east >= bounds.west && p.bbox.west <= bounds.east && p.bbox.north >= bounds.south && p.bbox.south <= bounds.north,
+  );
+  if (!local.length) return 0;
   const n = 7;
   let hits = 0;
   for (let i = 0; i < n; i++) {
@@ -54,10 +73,60 @@ function greenFraction(bounds: GridCell['bounds']): number {
         bounds.west + ((i + 0.5) / n) * (bounds.east - bounds.west),
         bounds.south + ((j + 0.5) / n) * (bounds.north - bounds.south),
       ];
-      if (DEMO_GREEN_AREAS.some((g) => pointInPolygon(p, g.polygon))) hits++;
+      if (local.some((g) => bboxContains(g.bbox, p) && pointInPolygon(p, g.polygon))) hits++;
     }
   }
   return hits / (n * n);
+}
+
+/**
+ * Traffic from real road networks: class-weighted road length per km² in a
+ * slightly expanded cell, saturated to 0-90. Roads are sampled every ~100 m.
+ * Returns per-cell, per-road contributions.
+ */
+function roadDensityTraffic(cells: { id: string; bounds: BBox }[], roads: Road[]): Map<string, Record<string, number>> {
+  const STEP_KM = 0.1;
+  const D0 = 2.2; // weighted km / km² at which traffic reaches ~63 % of max
+  const perCell = new Map<string, Record<string, number>>(cells.map((c) => [c.id, {}]));
+  const expanded = cells.map((c) => {
+    const dx = (c.bounds.east - c.bounds.west) * 0.15;
+    const dy = (c.bounds.north - c.bounds.south) * 0.15;
+    return { id: c.id, b: { west: c.bounds.west - dx, east: c.bounds.east + dx, south: c.bounds.south - dy, north: c.bounds.north + dy } };
+  });
+  for (const road of roads) {
+    const w = road.volume / 100;
+    for (const path of road.paths) {
+      for (let i = 1; i < path.length; i++) {
+        const a = path[i - 1];
+        const b = path[i];
+        const segKm = haversineKm(a, b);
+        const n = Math.max(1, Math.round(segKm / STEP_KM));
+        for (let k = 0; k < n; k++) {
+          const t = (k + 0.5) / n;
+          const p: LonLat = [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
+          // Expanded bounds overlap neighbours, so a sample can count for up to 4 cells.
+          for (const e of expanded) {
+            if (!bboxContains(e.b, p)) continue;
+            const rec = perCell.get(e.id)!;
+            rec[road.id] = (rec[road.id] ?? 0) + (w * segKm) / n;
+          }
+        }
+      }
+    }
+  }
+  // Convert weighted length → traffic index, apportioned to roads.
+  for (const c of cells) {
+    const rec = perCell.get(c.id)!;
+    const ex = expanded.find((e) => e.id === c.id)!.b;
+    const area = cellAreaKm2(ex);
+    const total = Object.values(rec).reduce((s, v) => s + v, 0);
+    const traffic = 90 * (1 - Math.exp(-total / area / D0));
+    for (const k of Object.keys(rec)) {
+      rec[k] = total > 0 ? (traffic * rec[k]) / total : 0;
+      if (rec[k] < 0.3) delete rec[k];
+    }
+  }
+  return perCell;
 }
 
 export function cellIdFor(index: number, total: number): string {
@@ -65,36 +134,53 @@ export function cellIdFor(index: number, total: number): string {
   return `A-${String(index + 1).padStart(Math.max(2, digits), '0')}`;
 }
 
-export function buildGrid(gridSize: number): GridCell[] {
+function cellBounds(gridSize: number, row: number, col: number): BBox {
   const { bbox } = PUNE;
   const dLon = (bbox.east - bbox.west) / gridSize;
   const dLat = (bbox.north - bbox.south) / gridSize;
+  return {
+    west: bbox.west + col * dLon,
+    east: bbox.west + (col + 1) * dLon,
+    north: bbox.north - row * dLat,
+    south: bbox.north - (row + 1) * dLat,
+  };
+}
+
+export function buildGrid(gridSize: number, geo: CityGeometry = DEMO_GEOMETRY): GridCell[] {
   const total = gridSize * gridSize;
   const cells: GridCell[] = [];
+  const greenIdx = indexPolygons(geo.greenAreas);
+  const industrialIdx = indexPolygons(geo.industrialAreas);
+  const skeleton = Array.from({ length: total }, (_, index) => ({
+    id: cellIdFor(index, total),
+    bounds: cellBounds(gridSize, Math.floor(index / gridSize), index % gridSize),
+  }));
+  const osmTraffic = geo.source === 'osm' ? roadDensityTraffic(skeleton, geo.roads) : null;
+  const roadBoxes = geo.roads.map((r) => bboxOf(r.paths));
 
   for (let row = 0; row < gridSize; row++) {
     for (let col = 0; col < gridSize; col++) {
       const index = row * gridSize + col;
-      const id = cellIdFor(index, total);
+      const { id, bounds } = skeleton[index];
       const rng = mulberry32(hashSeed(`cell-${gridSize}-${index}`));
-      const bounds = {
-        west: bbox.west + col * dLon,
-        east: bbox.west + (col + 1) * dLon,
-        north: bbox.north - row * dLat,
-        south: bbox.north - (row + 1) * dLat,
-      };
       const center: LonLat = [(bounds.west + bounds.east) / 2, (bounds.south + bounds.north) / 2];
 
-      // Traffic — decays with distance from each demo road corridor.
-      const trafficByRoad: Record<string, number> = {};
+      // Traffic — OSM: road-length density; demo: decay with distance from each corridor.
+      let trafficByRoad: Record<string, number> = {};
       let corridorSum = 0;
-      for (const road of DEMO_ROADS) {
-        const d = distanceToPathKm(center, road.path);
-        const v = road.volume * 0.72 * Math.exp(-d / 0.85);
-        if (v > 0.5) {
-          trafficByRoad[road.id] = v;
-          corridorSum += v;
-        }
+      if (osmTraffic) {
+        trafficByRoad = osmTraffic.get(id)!;
+        corridorSum = Object.values(trafficByRoad).reduce((s, v) => s + v, 0);
+      } else {
+        geo.roads.forEach((road, ri) => {
+          if (distanceToBBoxKm(center, roadBoxes[ri]) > 5) return;
+          const d = Math.min(...road.paths.map((p) => distanceToPathKm(center, p)));
+          const v = road.volume * 0.72 * Math.exp(-d / 0.85);
+          if (v > 0.5) {
+            trafficByRoad[road.id] = v;
+            corridorSum += v;
+          }
+        });
       }
       const u = urbanness(center);
       const localTraffic = 6 + 24 * u + rng() * 4;
@@ -104,14 +190,16 @@ export function buildGrid(gridSize: number): GridCell[] {
         for (const key of Object.keys(trafficByRoad)) trafficByRoad[key] *= k;
       }
 
-      const gf = greenFraction(bounds);
+      const gf = coverFraction(bounds, greenIdx);
+      const indFrac = industrialIdx.length ? coverFraction(bounds, industrialIdx) : 0;
       const greenCover = clamp(gf * 85 + (1 - u) * 22 + rng() * 6 + 4, 3, 92);
       const buildingDensity = clamp(0.08 + 0.8 * u - gf * 0.55 + (rng() - 0.5) * 0.08, 0.04, 0.95);
       const avgBuildingHeight = clamp(7 + 32 * u + (rng() - 0.5) * 8, 5, 60);
       const area = cellAreaKm2(bounds);
       const population = Math.round(area * (1500 + 24000 * u) * (1 - gf * 0.85));
 
-      const nearIndustry = DEMO_INDUSTRIES.some((ind) => haversineKm(center, ind.location) < 1.4);
+      const nearIndustry =
+        geo.source === 'osm' ? indFrac >= 0.12 : geo.industries.some((ind) => haversineKm(center, ind.location) < 1.4);
       const landUse: GridCell['landUse'] = nearIndustry
         ? 'Industrial'
         : gf > 0.3
@@ -142,14 +230,16 @@ export function buildGrid(gridSize: number): GridCell[] {
   return cells;
 }
 
-export function getDemoBaseState(gridSize = 10): BaseState {
+export function getDemoBaseState(gridSize = 10, geo: CityGeometry = DEMO_GEOMETRY): BaseState {
   return {
     city: PUNE,
     gridSize,
-    cells: buildGrid(gridSize),
-    roads: DEMO_ROADS,
-    industries: DEMO_INDUSTRIES,
-    greenAreas: DEMO_GREEN_AREAS,
+    cells: buildGrid(gridSize, geo),
+    roads: geo.roads,
+    industries: geo.industries,
+    greenAreas: geo.greenAreas,
+    industrialAreas: geo.industrialAreas,
+    geometrySource: geo.source,
     weather: { ...DEMO_WEATHER },
     status: DEMO_STATUS,
   };
