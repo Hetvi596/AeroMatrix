@@ -59,7 +59,7 @@ import type {
 } from '../types';
 import { POLLUTANT_RANGE, deltaColor, pollutionColor, type RGB } from '../utils/colors';
 import { bboxRing, shrinkBBox } from '../utils/geo';
-import { dataProvider } from '../services/dataProvider';
+import { getDemoBuildings } from './demoBuildings';
 import { createTerrariumTerrainProvider, sampleElevations } from './terrain';
 import { elevationRampCanvas, renderFieldCanvas } from './layers/heatmapCanvas';
 
@@ -81,6 +81,8 @@ export interface CellRenderInput {
   mode: DisplayMode;
   result: ScenarioResult | null;
   closedRoads: string[];
+  /** Per-cell values that replace the modeled field (observed / forecast view); gaps fall back to the model. */
+  overrideValues?: (number | undefined)[] | null;
 }
 
 export type IndustryDisplayState = 'active' | 'removed' | 'added' | 'pending';
@@ -316,7 +318,7 @@ export class TwinMap {
         /* fall through to procedural */
       }
     }
-    this.buildingSpecs = await dataProvider.getBuildings();
+    this.buildingSpecs = getDemoBuildings();
     this.buildingElev = await this.heightsFor(this.buildingSpecs.map((b) => b.position));
     this.buildProceduralBuildings();
     this.cb.onStatus({ buildings: `Procedural demo massing (${this.buildingSpecs.length.toLocaleString()} blocks)` });
@@ -569,7 +571,8 @@ export class TwinMap {
     const isDelta = mode === 'delta' && !!result;
     const deltaVals = isDelta ? states.map((s) => result!.delta[s.cellId]?.[pollutant] ?? 0) : [];
     const deltaScale = isDelta ? Math.max(1, ...deltaVals.map(Math.abs)) : 1;
-    const values = isDelta ? deltaVals : states.map((s) => s[pollutant]);
+    const override = !isDelta ? input.overrideValues : null;
+    const values = isDelta ? deltaVals : states.map((s, i) => override?.[i] ?? s[pollutant]);
     const colorFn = isDelta ? (x: number) => deltaColor(x, deltaScale) : (x: number) => pollutionColor(pollutant, x);
 
     // 1) Smooth heatmap raster draped over terrain
@@ -669,17 +672,20 @@ export class TwinMap {
         : road.volume * 0.6;
       const closed = closedRoads.includes(road.id);
       const col = closed ? '#64748b' : level < 40 ? '#22c55e' : level < 60 ? '#facc15' : level < 80 ? '#f97316' : '#ef4444';
-      tr.entities.add({
-        id: `road:${road.id}`,
-        name: road.name,
-        polyline: {
-          positions: Cartesian3.fromDegreesArray(road.path.flat()),
-          width: 3 + road.volume / 22,
-          clampToGround: true,
-          material: closed
-            ? new PolylineDashMaterialProperty({ color: Color.fromCssColorString(col), dashLength: 12 })
-            : Color.fromCssColorString(col).withAlpha(0.92),
-        },
+      road.paths.forEach((part, k) => {
+        if (part.length < 2) return;
+        tr.entities.add({
+          id: k === 0 ? `road:${road.id}` : `road:${road.id}:${k}`,
+          name: road.name,
+          polyline: {
+            positions: Cartesian3.fromDegreesArray(part.flat()),
+            width: 3 + road.volume / 22,
+            clampToGround: true,
+            material: closed
+              ? new PolylineDashMaterialProperty({ color: Color.fromCssColorString(col), dashLength: 12 })
+              : Color.fromCssColorString(col).withAlpha(0.92),
+          },
+        });
       });
     }
     tr.entities.resumeEvents();

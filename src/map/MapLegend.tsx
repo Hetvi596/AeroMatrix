@@ -1,5 +1,5 @@
 import { useTwin } from '../store/useTwinStore';
-import { POLLUTANT_LABEL, POLLUTANT_RANGE, POLLUTANT_UNIT, deltaColor, pollutionColor, rgbToCss } from '../utils/colors';
+import { POLLUTANT_LABEL, POLLUTANT_RANGE, POLLUTANT_UNIT, RISK_COLOR, TRAFFIC_COLORS, deltaColor, pollutionColor, rgbToCss } from '../utils/colors';
 import { DataBadge } from '../components/ui';
 
 export function MapLegend() {
@@ -7,8 +7,13 @@ export function MapLegend() {
   const mode = useTwin((s) => s.displayMode);
   const result = useTwin((s) => s.activeResult);
   const layers = useTwin((s) => s.layers);
+  const field = useTwin((s) => s.observedField);
+  const aggWindow = useTwin((s) => s.aggWindow);
   const isDelta = mode === 'delta' && result;
-  const showScenario = mode !== 'baseline' && result;
+  const showScenario = (mode === 'scenario' || mode === 'delta') && result;
+  const isObserved = mode === 'observed' && field;
+  const forecast = useTwin((s) => s.forecastLayer);
+  const isForecast = mode === 'forecast' && forecast;
 
   const [lo, hi] = POLLUTANT_RANGE[pollutant];
   const stops = Array.from({ length: 12 }, (_, i) => i / 11);
@@ -24,42 +29,66 @@ export function MapLegend() {
   }
 
   return (
-    <div className="absolute bottom-3 left-3 z-10 w-64 rounded-lg bg-ink-900/92 p-3 text-[11px] shadow-xl ring-1 ring-ink-700 backdrop-blur">
+    <div
+      className="map-legend float-surface absolute z-10 w-52 rounded-xl px-3 py-2.5 text-[11.5px] md:w-60"
+      aria-label="Map legend"
+    >
       <div className="mb-1.5 flex items-center justify-between gap-2">
-        <span className="font-semibold text-slate-200">
+        <span className="font-semibold text-sand-100">
           {isDelta ? 'Δ ' : ''}
-          {POLLUTANT_LABEL[pollutant]} <span className="font-normal text-slate-500">{POLLUTANT_UNIT[pollutant]}</span>
+          {POLLUTANT_LABEL[pollutant]} <span className="font-normal text-sand-500">{POLLUTANT_UNIT[pollutant]}</span>
         </span>
-        <DataBadge status={showScenario ? 'MODELED_SCENARIO' : 'DEMO'} />
+        <DataBadge status={isForecast ? 'MODEL_PREDICTION' : isObserved ? 'OBSERVED' : showScenario ? 'MODELED_SCENARIO' : 'DEMO'} />
       </div>
       <div className="h-2 rounded-full" style={{ background: `linear-gradient(90deg, ${gradient})` }} />
-      <div className="mt-1 flex justify-between font-mono text-[10px] text-slate-500">
+      <div className="num mt-1 flex justify-between text-[10.5px] text-sand-400">
         {ticks.map((t) => (
           <span key={t}>{t}</span>
         ))}
       </div>
-      {!isDelta && pollutant === 'pm25' && (
-        <div className="mt-1.5 grid grid-cols-4 gap-1 text-center text-[9.5px] text-slate-400">
-          <span className="rounded bg-green-500/15 py-0.5">LOW ≤30</span>
-          <span className="rounded bg-yellow-500/15 py-0.5">MOD ≤60</span>
-          <span className="rounded bg-orange-500/15 py-0.5">HIGH ≤90</span>
-          <span className="rounded bg-red-500/15 py-0.5">V.HIGH</span>
+      {isObserved && (
+        <div className="mt-1 text-[10.5px] text-emerald-300/90">
+          IDW interpolation of {field!.stationCount} station mean(s) · {aggWindow === 'last24h' ? 'last 24 h' : 'whole period'}
         </div>
       )}
-      {isDelta && <div className="mt-1 text-[10px] text-slate-500">Blue = modeled decrease · Red = modeled increase</div>}
+      {isForecast && (
+        <div className="mt-1 text-[10.5px] text-sky-300/90">
+          {forecast!.model} forecast valid {forecast!.validAt.slice(0, 16)} · IDW of {forecast!.stations.length} station forecast(s)
+        </div>
+      )}
+      {!isDelta && pollutant === 'pm25' && (
+        <div className="mt-2 hidden grid-cols-4 gap-1 text-[10.5px] text-sand-400 md:grid">
+          {(
+            [
+              ['LOW', 'Low', '≤30'],
+              ['MODERATE', 'Mod.', '≤60'],
+              ['HIGH', 'High', '≤90'],
+              ['VERY_HIGH', 'V. high', '>90'],
+            ] as const
+          ).map(([k, l, r]) => (
+            <span key={k} className="flex flex-col gap-0.5">
+              <span className="h-1 rounded-full" style={{ background: RISK_COLOR[k] }} />
+              <span>
+                {l} <span className="num text-sand-500">{r}</span>
+              </span>
+            </span>
+          ))}
+        </div>
+      )}
+      {isDelta && <div className="mt-1 text-[10.5px] text-sand-400">Blue is a modeled decrease, red an increase.</div>}
       {showScenario && (
-        <div className="mt-1.5 flex items-center gap-1.5 text-[10px] text-slate-400">
-          <span className="inline-block h-0 w-4 border-t-2 border-dashed border-rose-400" /> affected zones (|Δ PM2.5| ≥ 0.5)
+        <div className="mt-1.5 flex items-center gap-1.5 text-[10.5px] text-sand-400">
+          <span className="inline-block h-0 w-4 border-t-2 border-dashed border-[#fb7185]" /> Affected zones (|Δ PM2.5| ≥ 0.5)
         </div>
       )}
       {layers.traffic && (
-        <div className="mt-1.5 flex items-center gap-2 text-[10px] text-slate-400">
-          Traffic:
+        <div className="mt-1.5 hidden items-center gap-2 text-[10.5px] text-sand-400 md:flex">
+          Traffic
           {[
-            ['#22c55e', 'Low'],
-            ['#facc15', 'Med'],
-            ['#f97316', 'High'],
-            ['#ef4444', 'V.High'],
+            [TRAFFIC_COLORS[0], 'Low'],
+            [TRAFFIC_COLORS[1], 'Med'],
+            [TRAFFIC_COLORS[2], 'High'],
+            [TRAFFIC_COLORS[3], 'V. high'],
           ].map(([c, l]) => (
             <span key={l} className="flex items-center gap-0.5">
               <span className="inline-block h-1 w-3 rounded" style={{ background: c }} />

@@ -67,22 +67,22 @@ export function ScenariosPanel() {
         <Disclaimer>Scenarios are stored locally in this browser (parameters only; results are recomputed deterministically).</Disclaimer>
       </Block>
 
-      <Block title={`Saved (${saved.length})`} right={<span className="text-[10px] text-slate-500">☑ = compare (max 4)</span>}>
+      <Block title={`Saved (${saved.length})`} right={<span className="text-[10px] text-sand-500">☑ = compare (max 4)</span>}>
         {saved.length === 0 ? (
           <Empty>No saved scenarios yet. Run one in the What-If simulator and click Save, or generate the example set.</Empty>
         ) : (
           <div className="space-y-1">
             {saved.map((s) => (
               <div key={s.id} className={`flex items-center gap-2 rounded-md px-2 py-1.5 text-[11.5px] ${active?.id === s.id ? 'bg-amber-500/10 ring-1 ring-amber-400/30' : 'hover:bg-ink-800'}`}>
-                <input type="checkbox" checked={compareIds.includes(s.id)} onChange={() => toggleCompare(s.id)} className="accent-cyan-400" />
-                <span className="truncate text-slate-200">{s.params.name}</span>
+                <input type="checkbox" checked={compareIds.includes(s.id)} onChange={() => toggleCompare(s.id)} className="accent-accent-400" />
+                <span className="truncate text-sand-200">{s.params.name}</span>
                 <span className="ml-auto text-[11px]">
                   <DeltaText value={s.summary.meanDelta} />
                 </span>
-                <button title="Show on map" onClick={() => loadSaved(s.id)} className="text-slate-500 hover:text-cyan-300">
+                <button title="Show on map" onClick={() => loadSaved(s.id)} className="text-sand-500 hover:text-accent-300">
                   <Eye size={13} />
                 </button>
-                <button title="Delete" onClick={() => deleteSaved(s.id)} className="text-slate-500 hover:text-rose-300">
+                <button title="Delete" onClick={() => deleteSaved(s.id)} className="text-sand-500 hover:text-rose-300">
                   <Trash2 size={13} />
                 </button>
               </div>
@@ -96,7 +96,7 @@ export function ScenariosPanel() {
           <Block title="Comparison">
             <div className="overflow-x-auto">
               <table className="w-full text-[11px]">
-                <thead className="text-slate-500">
+                <thead className="text-sand-500">
                   <tr>
                     <th className="py-1 text-left font-medium">Metric</th>
                     {compared.map((s) => (
@@ -117,9 +117,9 @@ export function ScenariosPanel() {
                     ['Pop. worse', (s: (typeof compared)[number]) => fmtInt(s.summary.exposedPopulation / 1000) + 'k'],
                   ].map(([label, f]) => (
                     <tr key={label as string} className="border-t border-ink-800">
-                      <td className="py-1 text-slate-400">{label as string}</td>
+                      <td className="py-1 text-sand-400">{label as string}</td>
                       {compared.map((s) => (
-                        <td key={s.id} className="px-1 text-right text-slate-200">
+                        <td key={s.id} className="px-1 text-right text-sand-200">
                           {(f as (s: (typeof compared)[number]) => ReactNode)(s)}
                         </td>
                       ))}
@@ -134,11 +134,11 @@ export function ScenariosPanel() {
               <ResponsiveContainer>
                 <BarChart data={chartData} margin={{ top: 4, right: 4, left: -22, bottom: 0 }}>
                   <CartesianGrid {...gridProps} />
-                  <XAxis dataKey="name" {...axisProps} tick={{ fill: '#64748b', fontSize: 9 }} interval={0} />
+                  <XAxis dataKey="name" {...axisProps} tick={{ fill: '#9c8580', fontSize: 9.5 }} interval={0} />
                   <YAxis {...axisProps} />
                   <Tooltip {...tooltipStyle} />
-                  <Bar dataKey="Baseline" fill="#475569" radius={[2, 2, 0, 0]} />
-                  <Bar dataKey="Scenario" fill="#f59e0b" radius={[2, 2, 0, 0]} />
+                  <Bar dataKey="Baseline" fill="#9c8580" radius={[2, 2, 0, 0]} />
+                  <Bar dataKey="Scenario" fill="#c84a62" radius={[2, 2, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -148,7 +148,7 @@ export function ScenariosPanel() {
               <ResponsiveContainer>
                 <BarChart data={srcData} margin={{ top: 4, right: 4, left: -22, bottom: 0 }}>
                   <CartesianGrid {...gridProps} />
-                  <XAxis dataKey="name" {...axisProps} tick={{ fill: '#64748b', fontSize: 9 }} interval={0} />
+                  <XAxis dataKey="name" {...axisProps} tick={{ fill: '#9c8580', fontSize: 9.5 }} interval={0} />
                   <YAxis {...axisProps} />
                   <Tooltip {...tooltipStyle} />
                   <Legend wrapperStyle={{ fontSize: 10 }} />

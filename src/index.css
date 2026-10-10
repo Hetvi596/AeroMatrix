@@ -1,15 +1,147 @@
 @import "tailwindcss";
 
+/* ==========================================================================
+   AeroMatrix design system — Cherry Cola + Vanilla Cream.
+
+   Two ramps carry every surface and every line of text, in both themes:
+     ink   = surfaces    (950 = base, 600 = most raised)
+     sand  = foreground  (50 = strongest text, 900 = faintest)
+     accent = Cherry Cola (500 = primary action)
+
+   Dark Cherry Cola is the default (header, floating map controls). Wrapping a
+   subtree in .theme-cream re-points the same ramps at Vanilla Cream, so a
+   component written once reads correctly on either surface.
+   ========================================================================== */
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
-  --color-ink-950: #05080f;
-  --color-ink-900: #0a101c;
-  --color-ink-850: #0e1524;
-  --color-ink-800: #131c2e;
-  --color-ink-700: #1c2740;
-  --color-ink-600: #2a3754;
-  --color-accent: #22d3ee;
+  --font-sans: "Schibsted Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Schibsted Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* Cherry Cola surfaces */
+  --color-ink-950: #1c0a10;
+  --color-ink-900: #251017;
+  --color-ink-850: #2d141d;
+  --color-ink-800: #371924;
+  --color-ink-700: #4a2130;
+  --color-ink-600: #612b3d;
+
+  /* Vanilla Cream foreground */
+  --color-sand-50: #fbf5e9;
+  --color-sand-100: #f4ead7;
+  --color-sand-200: #e8d9bf;
+  --color-sand-300: #d6c2a6;
+  --color-sand-400: #b8a08a;
+  --color-sand-500: #998371;
+  --color-sand-600: #78665b;
+  --color-sand-700: #594a44;
+  --color-sand-800: #3b2f2c;
+  --color-sand-900: #261d1c;
+
+  /* Cherry Cola accent */
+  --color-accent-50: #fbeaec;
+  --color-accent-100: #f5cdd3;
+  --color-accent-200: #eba3af;
+  --color-accent-300: #dd7487;
+  --color-accent-400: #c84a62;
+  --color-accent-500: #a3263f;
+  --color-accent-600: #861d33;
+  --color-accent-700: #6b1729;
+  --color-accent-800: #4f111f;
+  --color-accent-900: #340b14;
+
+  /* Muted rose — dividers, quiet accents, chart secondaries */
+  --color-blush-200: #ecd2d2;
+  --color-blush-300: #d9adb1;
+  --color-blush-400: #c08a91;
+  --color-blush-500: #9f6a72;
+
+  /* "Cleaner" green — modeled improvement / low severity */
+  --color-emerald-200: #a6e6d2;
+  --color-emerald-300: #63ccac;
+  --color-emerald-400: #2fae8b;
+  --color-emerald-500: #10846e;
+  --color-emerald-600: #0c6a58;
+
+  --color-wine: #4f111f;
+  --color-cream: #fbf5e9;
+
+  --ease-out-soft: cubic-bezier(0.22, 0.8, 0.24, 1);
+  --animate-rise: rise 0.28s var(--ease-out-soft) both;
+  --animate-slide-in: slide-in 0.3s var(--ease-out-soft) both;
+  --animate-sheet-up: sheet-up 0.3s var(--ease-out-soft) both;
+  --animate-fade: fade 0.24s ease both;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes slide-in {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes sheet-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(163, 38, 63, 0.45); }
+  100% { box-shadow: 0 0 0 10px rgba(163, 38, 63, 0); }
+}
+
+/* Vanilla Cream theme: same ramps, re-pointed. ------------------------------ */
+.theme-cream {
+  --color-ink-950: #fbf6ec;
+  --color-ink-900: #f7efe1;
+  --color-ink-850: #f2e8d7;
+  --color-ink-800: #ede1cc;
+  --color-ink-700: #e3d3b9;
+  --color-ink-600: #d5c1a2;
+
+  --color-sand-50: #2a0f17;
+  --color-sand-100: #34161e;
+  --color-sand-200: #45252f;
+  --color-sand-300: #593941;
+  --color-sand-400: #6c5152;
+  --color-sand-500: #836768;
+  --color-sand-600: #a08985;
+  --color-sand-700: #bca99f;
+  --color-sand-800: #d6c7b7;
+  --color-sand-900: #e8dccb;
+
+  --color-accent-100: #5a1323;
+  --color-accent-200: #6b1729;
+  --color-accent-300: #861d33;
+  --color-accent-400: #a3263f;
+
+  --color-emerald-200: #0b5e4e;
+  --color-emerald-300: #0c6a58;
+  --color-emerald-400: #10846e;
+
+  /* Light tints written for dark surfaces, darkened for cream legibility */
+  --color-rose-300: #a3263f;
+  --color-amber-200: #7c5410;
+  --color-amber-300: #8d6014;
+  --color-violet-300: #66468a;
+  --color-sky-200: #1f5a78;
+  --color-sky-300: #286b8d;
+  --color-fuchsia-300: #853a76;
+  --color-orange-300: #a2521b;
+  --color-pink-300: #94375e;
+
+  background: var(--color-ink-950);
+  color: var(--color-sand-100);
+  color-scheme: light;
+}
+.theme-cream .hairline {
+  border-color: rgba(42, 15, 23, 0.1);
+}
+.theme-cream select {
+  color-scheme: light;
 }
 
 html,
@@ -17,23 +149,237 @@ body,
 #root {
   height: 100%;
   margin: 0;
-  background: #05080f;
-  color: #e2e8f0;
+  background: var(--color-ink-950);
+  color: var(--color-sand-100);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   overflow: hidden;
 }
 
+::selection {
+  background: rgba(163, 38, 63, 0.4);
+  color: #fff;
+}
+
 * {
   scrollbar-width: thin;
-  scrollbar-color: #2a3754 transparent;
+  scrollbar-color: color-mix(in srgb, var(--color-sand-500) 45%, transparent) transparent;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent-400);
+  outline-offset: 2px;
 }
 
 .num {
   font-variant-numeric: tabular-nums;
 }
 
-/* Cesium chrome */
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+/* Kept for the hidden secondary screens; quiet sentence-case label. */
+.eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-accent-400);
+}
+
+/* Surfaces ---------------------------------------------------------------- */
+.hairline {
+  border-color: rgba(251, 245, 233, 0.09);
+}
+/* Floating control on the map: solid Cherry Cola, fine border, short shadow. */
+.float-surface {
+  background: color-mix(in srgb, var(--color-ink-900) 94%, transparent);
+  border: 1px solid rgba(251, 245, 233, 0.1);
+  box-shadow: 0 10px 28px -14px rgba(10, 2, 5, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+/* Cream working sheet (section panel, details drawer). */
+.sheet-surface {
+  border: 1px solid rgba(42, 15, 23, 0.1);
+  box-shadow: 0 18px 44px -24px rgba(10, 2, 5, 0.65);
+}
+/* Legacy class used by hidden screens' popovers. */
+.glass {
+  background: var(--color-ink-900);
+  border: 1px solid rgba(251, 245, 233, 0.1);
+  box-shadow: 0 12px 32px -16px rgba(10, 2, 5, 0.7);
+}
+.pulse-ring {
+  animation: pulse-ring 1.6s ease-out infinite;
+}
+
+/* Map stage insets: floating map controls step aside for open sheets. ------- */
+.map-stage {
+  --left-inset: 0px;
+  --right-inset: 0px;
+}
+@media (min-width: 768px) {
+  .map-stage[data-left="1"] { --left-inset: 344px; }
+  .map-stage[data-right="1"] { --right-inset: 356px; }
+}
+@media (min-width: 1280px) {
+  .map-stage[data-left="1"] { --left-inset: 392px; }
+  .map-stage[data-right="1"] { --right-inset: 404px; }
+}
+.inset-left {
+  left: calc(var(--left-inset) + 12px);
+  transition: left 0.3s var(--ease-out-soft);
+}
+.inset-right {
+  right: calc(var(--right-inset) + 12px);
+  transition: right 0.3s var(--ease-out-soft);
+}
+
+/* Orbital navigation ------------------------------------------------------- */
+.orbit-ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(var(--orbit-r) * 2);
+  height: calc(var(--orbit-r) * 2);
+  margin: calc(var(--orbit-r) * -1) 0 0 calc(var(--orbit-r) * -1);
+  border-radius: 9999px;
+  border: 1px dashed rgba(251, 245, 233, 0.22);
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.35) rotate(-40deg);
+  transition: opacity 0.2s ease, transform 0.32s var(--ease-out-soft);
+}
+.orbit-ring::after {
+  content: "";
+  position: absolute;
+  inset: calc(var(--orbit-r) - 44px);
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(28, 10, 16, 0.55), transparent 70%);
+}
+.orbit[data-open="true"] .orbit-ring {
+  opacity: 1;
+  transform: none;
+}
+.orbit-item {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  margin: -22px 0 0 -22px;
+  opacity: 0;
+  transform: translate(0, 0) scale(0.4);
+  transition:
+    transform 0.3s var(--ease-out-soft),
+    opacity 0.18s ease;
+  transition-delay: calc(var(--i) * 18ms);
+}
+.orbit[data-open="true"] .orbit-item {
+  opacity: 1;
+  transform: translate(var(--x), var(--y)) scale(1);
+}
+.orbit[data-open="false"] .orbit-item {
+  transition-delay: 0ms;
+  transition-duration: 0.16s;
+}
+.orbit-tip {
+  position: absolute;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: var(--tip-from);
+  transition: opacity 0.14s ease, transform 0.14s ease;
+}
+.orbit-item:hover .orbit-tip,
+.orbit-item:focus-visible .orbit-tip {
+  opacity: 1;
+  transform: none;
+}
+.orbit-launcher-mark {
+  transition: transform 0.4s var(--ease-out-soft), opacity 0.2s ease;
+}
+.orbit[data-open="true"] .orbit-launcher-mark {
+  transform: rotate(90deg) scale(0.6);
+  opacity: 0;
+}
+.orbit-launcher-close {
+  transition: transform 0.3s var(--ease-out-soft), opacity 0.2s ease;
+  transform: rotate(-90deg) scale(0.6);
+  opacity: 0;
+}
+.orbit[data-open="true"] .orbit-launcher-close {
+  transform: none;
+  opacity: 1;
+}
+
+/* Range sliders ------------------------------------------------------------ */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 20px;
+  background: transparent;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 3px;
+  border-radius: 9999px;
+  background: linear-gradient(
+    90deg,
+    var(--color-accent-500) var(--fill, 50%),
+    color-mix(in srgb, var(--color-sand-100) 16%, transparent) var(--fill, 50%)
+  );
+}
+input[type="range"]::-moz-range-track {
+  height: 3px;
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--color-sand-100) 16%, transparent);
+}
+input[type="range"]::-moz-range-progress {
+  height: 3px;
+  border-radius: 9999px;
+  background: var(--color-accent-500);
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  margin-top: -6px;
+  border-radius: 9999px;
+  background: #fbf5e9;
+  border: 3px solid var(--color-accent-500);
+  box-shadow: 0 1px 3px rgba(42, 15, 23, 0.35);
+  transition: box-shadow 0.15s ease;
+}
+input[type="range"]:hover::-webkit-slider-thumb,
+input[type="range"]:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 5px rgba(163, 38, 63, 0.18);
+}
+input[type="range"]::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  background: #fbf5e9;
+  border: 3px solid var(--color-accent-500);
+}
+input[type="range"]:focus-visible {
+  outline: none;
+}
+input[type="range"]:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+input[type="checkbox"] {
+  accent-color: var(--color-accent-500);
+}
+
+select {
+  color-scheme: dark;
+}
+
+/* Cesium chrome ------------------------------------------------------------ */
 .cesium-viewer,
 .cesium-widget,
 .cesium-widget canvas {
@@ -56,11 +402,54 @@ body,
   display: none !important;
 }
 
-input[type="range"] {
-  accent-color: #22d3ee;
-}
-
 .panel-scroll {
   overflow-y: auto;
   overscroll-behavior: contain;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
+  }
+}
+
+/* Mobile: sheets rise from the bottom; floating controls lift above them. */
+.map-stage {
+  --sheet-bottom: 0px;
+}
+@media (max-width: 767px) {
+  .map-stage[data-sheet="1"] { --sheet-bottom: 46dvh; }
+}
+.orbit-dock {
+  left: 28px;
+  bottom: calc(var(--sheet-bottom) + 16px);
+  transition: bottom 0.3s var(--ease-out-soft);
+}
+@media (min-width: 768px) {
+  .orbit-dock { left: 28px; bottom: 28px; }
+}
+.inset-bottom {
+  bottom: calc(var(--sheet-bottom) + 12px);
+  transition: bottom 0.3s var(--ease-out-soft);
+}
+@media (max-width: 767px) {
+  .map-stage[data-sheet="2"] { --sheet-bottom: 60dvh; }
+}
+
+/* Legend: under the search on phones; bottom-left beside the launcher on larger screens. */
+.map-legend {
+  left: 12px;
+  top: 56px;
+}
+@media (min-width: 768px) {
+  .map-legend {
+    top: auto;
+    bottom: 28px;
+    left: max(calc(var(--left-inset) + 12px), 268px);
+    transition: left 0.3s var(--ease-out-soft);
+  }
 }

@@ -131,8 +131,9 @@ export function runScenario(base: BaseState, params: ScenarioParams): ScenarioRe
       engine: MODEL_ID,
       engineVersion: MODEL_VERSION,
       createdAt: new Date().toISOString(),
-      disclaimer:
-        'Prototype modeled estimate from an uncalibrated rule-based model on DEMO inputs. Not an observation or validated prediction.',
+      disclaimer: base.calibration
+        ? `Prototype modeled estimate from a rule-based model. Calibrated to ${base.calibration.stations} station(s) of observed PM2.5 (${base.calibration.window}); other inputs remain DEMO. Not a validated prediction.`
+        : 'Prototype modeled estimate from an uncalibrated rule-based model on DEMO inputs. Not an observation or validated prediction.',
     },
   };
 }

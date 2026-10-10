@@ -77,3 +77,62 @@ export class HttpPredictionService implements PredictionService {
 }
 
 export const predictionService: PredictionService = new NotTrainedPredictionService();
+
+// ---------------------------------------------------------------------------
+// Backend client (backend/api). Used to detect a model trained on real data.
+// ---------------------------------------------------------------------------
+
+export const API_URL = ((import.meta.env.VITE_API_URL as string | undefined) ?? 'http://localhost:8000').replace(/\/$/, '');
+
+export interface BackendHealth {
+  model_loaded: boolean;
+  model: null | {
+    chosen_model: string;
+    horizon_hours: number;
+    data_period: [string, string];
+    trained_at: string;
+    stations: string[];
+    target: string;
+    station_locations?: Record<string, [number, number]>;
+  };
+}
+
+type Metric = { rmse: number; mae: number; r2: number; n: number };
+export interface BackendMetrics {
+  chosen_model: string;
+  results: Record<string, { val: Metric; test: Metric }>;
+  split: { val_start: string; test_start: string };
+  shap_group_importance: Record<string, number> | null;
+}
+
+export interface StationForecast {
+  station: string;
+  issued_at: string;
+  valid_at: string;
+  value: number;
+}
+
+async function getJson<T>(path: string, timeoutMs = 2000): Promise<T> {
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), timeoutMs);
+  try {
+    const r = await fetch(`${API_URL}${path}`, { signal: ctrl.signal });
+    if (!r.ok) throw new Error(`${path}: HTTP ${r.status}`);
+    return (await r.json()) as T;
+  } finally {
+    clearTimeout(t);
+  }
+}
+
+export const backendClient = {
+  /** Resolves null when the backend is not running. */
+  async health(): Promise<BackendHealth | null> {
+    try {
+      return await getJson<BackendHealth>('/health');
+    } catch {
+      return null;
+    }
+  },
+  metrics: () => getJson<BackendMetrics>('/model/metrics'),
+  forecast: (station: string) => getJson<StationForecast>(`/forecast?station=${encodeURIComponent(station)}`),
+};

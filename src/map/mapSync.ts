@@ -1,7 +1,7 @@
 // Subscribes the imperative TwinMap to the zustand store. Only the slices that
 // changed are pushed to Cesium — the viewer itself is never recreated.
 
-import { useTwin } from '../store/useTwinStore';
+import { isScenarioMode, useTwin } from '../store/useTwinStore';
 import type { Industry } from '../types';
 import type { IndustryDisplayState, TwinMap } from './TwinMap';
 
@@ -9,7 +9,7 @@ type S = ReturnType<typeof useTwin.getState>;
 
 function industriesFor(s: S): { industry: Industry; state: IndustryDisplayState }[] {
   if (!s.base) return [];
-  const r = s.displayMode !== 'baseline' ? s.activeResult : null;
+  const r = isScenarioMode(s.displayMode) ? s.activeResult : null;
   const removed = new Set(r?.params.removedIndustryIds ?? []);
   const overrides = r?.params.industryIntensityOverrides ?? {};
   const list: { industry: Industry; state: IndustryDisplayState }[] = s.base.industries.map((i) => ({
@@ -37,8 +37,14 @@ export function bindMapToStore(map: TwinMap): () => void {
     if (changed('layers')) map.setLayers(s.layers);
     if (changed('terrainExaggeration')) map.setExaggeration(s.terrainExaggeration);
 
-    if (s.base && changed('base', 'baseline', 'activeResult', 'displayMode', 'pollutant')) {
-      const showScenario = s.displayMode !== 'baseline' && s.activeResult;
+    if (s.base && changed('base', 'baseline', 'activeResult', 'displayMode', 'pollutant', 'observedField', 'forecastLayer')) {
+      const showScenario = isScenarioMode(s.displayMode) && s.activeResult;
+      const observed =
+        s.displayMode === 'observed' && s.observedField
+          ? s.observedField
+          : s.displayMode === 'forecast' && s.forecastLayer && s.forecastLayer.pollutant === s.pollutant
+            ? s.forecastLayer.field
+            : null;
       map.renderCells({
         base: s.base,
         states: showScenario ? s.activeResult!.scenario : s.baseline,
@@ -46,6 +52,7 @@ export function bindMapToStore(map: TwinMap): () => void {
         mode: showScenario ? s.displayMode : 'baseline',
         result: showScenario ? s.activeResult : null,
         closedRoads: showScenario ? s.activeResult!.params.roadClosures.map((c) => c.roadId) : [],
+        overrideValues: observed ? s.base.cells.map((c) => observed.values[c.id]) : null,
       });
     }
 

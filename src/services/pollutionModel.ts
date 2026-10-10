@@ -142,11 +142,14 @@ export function computeCellStates(base: BaseState, params: ScenarioParams): Cell
     const dryness = Math.exp(-0.1 * w.rainfall);
     const otherPM = (COEF.dustBase + COEF.dustPerDensity * density) * dryness;
 
+    const cal = base.calibration;
+    const ls = cal ? cal.localScale : 1;
+    const bs = cal ? cal.backgroundScale : 1;
     const contributionAbs: SourceContribution = {
-      traffic: trafficPM * localMod,
-      industry: industryPM * localMod,
-      other: otherPM * localMod,
-      background: COEF.regionalBackground * bgFactor,
+      traffic: trafficPM * localMod * ls,
+      industry: industryPM * localMod * ls,
+      other: otherPM * localMod * ls,
+      background: COEF.regionalBackground * bgFactor * bs,
     };
     const pm25 = contributionAbs.traffic + contributionAbs.industry + contributionAbs.other + contributionAbs.background;
 

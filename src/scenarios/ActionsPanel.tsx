@@ -1,93 +1,158 @@
-import { useMemo } from 'react';
-import { Eye, Save } from 'lucide-react';
-import { Bar, BarChart, Cell, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { useMemo, useState } from 'react';
+import { Check, Eye, Play, Save } from 'lucide-react';
 import { useTwin } from '../store/useTwinStore';
-import { Block, Button, DataBadge, DeltaText, Disclaimer, SectionHeader } from '../components/ui';
+import { Button, DeltaText, SectionHeader } from '../components/ui';
 import { evaluateActions } from './actions';
-import { axisProps, tooltipStyle } from '../analytics/chartTheme';
+import { explainAction } from './actionInsights';
+import { fmt } from '../utils/format';
+import type { BaseState, ScenarioResult } from '../types';
+
+// Results are cached per base state so ids stay stable when the screen is revisited —
+// that keeps the Applied / Previewing / Saved states truthful.
+const evaluated = new WeakMap<BaseState, ReturnType<typeof evaluateActions>>();
+function actionsFor(base: BaseState) {
+  let rows = evaluated.get(base);
+  if (!rows) {
+    rows = evaluateActions(base);
+    evaluated.set(base, rows);
+  }
+  return rows;
+}
 
 export function ActionsPanel() {
   const base = useTwin((s) => s.base)!;
+  const baseline = useTwin((s) => s.baseline);
+  const active = useTwin((s) => s.activeResult);
+  const draftName = useTwin((s) => s.draft?.name);
+  const saved = useTwin((s) => s.saved);
   const applyResult = useTwin((s) => s.applyResult);
   const saveActive = useTwin((s) => s.saveActive);
-  const active = useTwin((s) => s.activeResult);
-  const rows = useMemo(() => evaluateActions(base), [base]);
-  const ranked = [...rows].sort((a, b) => a.result.summary.meanDelta - b.result.summary.meanDelta);
-  const chart = ranked.map((r) => ({ name: r.action.name, delta: +r.result.summary.meanDelta.toFixed(2), core: r.action.core }));
+  const updateDraft = useTwin((s) => s.updateDraft);
+  const setDisplayMode = useTwin((s) => s.setDisplayMode);
+  const setRightOpen = useTwin((s) => s.setRightOpen);
+  const selectCell = useTwin((s) => s.selectCell);
+  const selectIndustry = useTwin((s) => s.selectIndustry);
+  const selectCandidate = useTwin((s) => s.selectCandidate);
+  const flyTo = useTwin((s) => s.requestFlyTo);
+  const [notice, setNotice] = useState('');
+
+  const ranked = useMemo(
+    () =>
+      actionsFor(base)
+        .map((row) => ({ ...row, insight: explainAction(row.action.id, base, baseline, row.result.params) }))
+        .sort((a, b) => a.result.summary.meanDelta - b.result.summary.meanDelta),
+    [base, baseline],
+  );
+
+  // Show the scenario summary rather than an unrelated selection.
+  const showSummary = () => {
+    selectCell(null);
+    selectIndustry(null);
+    selectCandidate(null);
+    setRightOpen(true);
+  };
+
+  /** Preview: put the modeled change on the map without touching the What-If draft. */
+  const preview = (result: ScenarioResult, focus: (typeof ranked)[number]['insight']['focus']) => {
+    applyResult(result);
+    setDisplayMode('delta');
+    showSummary();
+    if (focus) flyTo(focus.lonlat, focus.range, -45);
+    setNotice(`Previewing ${result.params.name.replace(/^Action: /, '')} as a modeled change on the map.`);
+  };
+
+  /** Apply: make it the active scenario and load its parameters into What-If to build on. */
+  const apply = (result: ScenarioResult) => {
+    updateDraft({ ...result.params });
+    applyResult(result);
+    showSummary();
+    setNotice(`Applied ${result.params.name.replace(/^Action: /, '')}. The map shows the modeled scenario; adjust it further in What-If.`);
+  };
+
+  const save = (result: ScenarioResult) => {
+    applyResult(result);
+    saveActive();
+    setNotice(`Saved ${result.params.name.replace(/^Action: /, '')}.`);
+  };
 
   return (
     <>
-      <SectionHeader title="Pollution-reduction actions" subtitle="Each action evaluated against the same baseline" right={<DataBadge status="MODELED_SCENARIO" />} />
-      <Block title="Modeled Δ mean PM2.5 (µg/m³)">
-        <div className="h-48">
-          <ResponsiveContainer>
-            <BarChart data={chart} layout="vertical" margin={{ top: 0, right: 12, left: 0, bottom: 0 }}>
-              <CartesianGrid stroke="#1c2740" strokeDasharray="3 3" horizontal={false} />
-              <XAxis
-                type="number"
-                {...axisProps}
-                domain={[(min: number) => Math.floor(Math.min(0, min)), (max: number) => Math.ceil(Math.max(0, max))]}
-              />
-              <YAxis type="category" dataKey="name" width={118} {...axisProps} tick={{ fill: '#94a3b8', fontSize: 10 }} />
-              <Tooltip {...tooltipStyle} formatter={(v) => [`${v} µg/m³`, 'Δ mean PM2.5']} />
-              <Bar dataKey="delta" radius={[0, 3, 3, 0]}>
-                {chart.map((c) => (
-                  <Cell key={c.name} fill={c.delta < 0 ? (c.core ? '#38bdf8' : '#0ea5e9aa') : '#fb7185'} />
-                ))}
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-      </Block>
-      <Block title="Action results">
-        <div className="space-y-2">
-          {ranked.map(({ action, result }, i) => {
-            const isActive = active?.params.name === result.params.name;
-            return (
-              <div key={action.id} className={`rounded-md p-2.5 ring-1 ring-inset ${isActive ? 'bg-amber-500/10 ring-amber-400/30' : 'bg-ink-800/60 ring-ink-700'}`}>
-                <div className="flex items-center gap-2">
-                  <span className="grid h-5 w-5 place-items-center rounded bg-ink-700 text-[10px] font-semibold text-slate-300">{i + 1}</span>
-                  <span className="text-[12px] font-semibold text-slate-100">{action.name}</span>
-                  {action.core && <span className="rounded bg-cyan-500/15 px-1 text-[9px] font-semibold tracking-wide text-cyan-300">ENR01 CORE</span>}
-                  <span className="ml-auto text-[12px]">
-                    <DeltaText value={result.summary.meanDelta} digits={2} />
-                  </span>
+      <SectionHeader title="Actions" subtitle="Ranked by modeled change in mean PM2.5" />
+      <p className="sr-only" role="status" aria-live="polite">
+        {notice}
+      </p>
+      <ol className="space-y-3 px-4 pb-5">
+        {ranked.map(({ action, implementation, result, insight }, i) => {
+          const isActive = active?.id === result.id;
+          const applied = isActive && draftName === result.params.name;
+          const previewing = isActive && !applied;
+          const isSaved = saved.some((s) => s.id === result.id || s.params.name === result.params.name);
+          const s = result.summary;
+          const reduces = s.meanDelta < -0.005;
+          return (
+            <li
+              key={action.id}
+              className={`rounded-xl p-4 ring-1 ring-inset transition-colors duration-150 ${
+                isActive ? 'bg-accent-500/[0.06] ring-accent-400/45' : 'bg-ink-950 ring-sand-100/12'
+              }`}
+            >
+              <div className="flex items-start gap-3">
+                <span className="num grid h-6 w-6 shrink-0 place-items-center rounded-full bg-sand-100/[0.08] text-[12px] font-semibold text-sand-200">{i + 1}</span>
+                <div className="min-w-0 flex-1">
+                  <h3 className="text-[14.5px] font-semibold leading-snug text-sand-50">{action.name}</h3>
+                  <p className="mt-0.5 text-[12.5px] leading-snug text-sand-300">{implementation}</p>
                 </div>
-                <div className="mt-1 text-[11px] text-slate-400">{action.implementation}</div>
-                <div className="mt-1.5 grid grid-cols-3 gap-1 text-[10.5px] text-slate-500">
-                  <span>
-                    Δ% <DeltaText value={result.summary.meanDeltaPct} unit="%" />
+                {(applied || previewing) && (
+                  <span className={`shrink-0 rounded-md px-2 py-0.5 text-[11px] font-semibold ${applied ? 'bg-accent-500 text-white' : 'bg-sand-100/[0.08] text-sand-200'}`}>
+                    {applied ? 'Applied' : 'Previewing'}
                   </span>
-                  <span>Affected <span className="num text-slate-300">{result.summary.affectedCount}</span></span>
-                  <span>
-                    High-risk <span className="num text-slate-300">{result.summary.highRiskBaseline}→{result.summary.highRiskScenario}</span>
-                  </span>
-                </div>
-                <div className="mt-2 flex gap-1.5">
-                  <Button className="flex-1 !py-1 text-[11px]" onClick={() => applyResult(result)}>
-                    <Eye size={12} /> Show on map
-                  </Button>
-                  <Button
-                    className="flex-1 !py-1 text-[11px]"
-                    onClick={() => {
-                      applyResult(result);
-                      saveActive();
-                    }}
-                  >
-                    <Save size={12} /> Save
-                  </Button>
-                </div>
+                )}
               </div>
-            );
-          })}
-        </div>
-      </Block>
-      <Block>
-        <Disclaimer>
-          Ranking is by modeled mean PM2.5 change from an uncalibrated prototype model on demo inputs. Magnitudes are illustrative and
-          must be re-estimated once real data and a validated model are available.
-        </Disclaimer>
-      </Block>
+
+              <dl className="mt-3 grid grid-cols-[76px_1fr] gap-x-3 gap-y-1.5 text-[12.5px]">
+                <dt className="text-sand-400">Target</dt>
+                <dd className="text-sand-100">{insight.target}</dd>
+                {insight.reason && (
+                  <>
+                    <dt className="text-sand-400">Why</dt>
+                    <dd className="text-sand-100">{insight.reason}</dd>
+                  </>
+                )}
+                <dt className="text-sand-400">Effect</dt>
+                <dd className="text-sand-100">
+                  {reduces ? (
+                    <>
+                      Mean PM2.5 <DeltaText value={s.meanDelta} digits={2} unit=" µg/m³" /> (<DeltaText value={s.meanDeltaPct} unit="%" />)
+                      {s.highRiskScenario !== s.highRiskBaseline && (
+                        <span className="block text-sand-300">
+                          High-risk zones {s.highRiskBaseline} → {s.highRiskScenario}
+                        </span>
+                      )}
+                    </>
+                  ) : (
+                    <span className="text-sand-300">No modeled reduction ({fmt(s.meanDelta, 2)} µg/m³)</span>
+                  )}
+                </dd>
+              </dl>
+
+              <div className="mt-3.5 flex flex-wrap gap-2">
+                <Button variant={applied ? 'default' : 'primary'} className="flex-1" onClick={() => apply(result)}>
+                  {applied ? <Check size={14} aria-hidden="true" /> : <Play size={14} aria-hidden="true" />} {applied ? 'Applied' : 'Apply'}
+                </Button>
+                <Button className="flex-1" onClick={() => preview(result, insight.focus)}>
+                  <Eye size={14} aria-hidden="true" /> Show on map
+                </Button>
+                <Button variant="ghost" disabled={isSaved} onClick={() => save(result)} title={isSaved ? 'Already saved' : 'Save as a scenario'}>
+                  {isSaved ? <Check size={14} aria-hidden="true" /> : <Save size={14} aria-hidden="true" />} {isSaved ? 'Saved' : 'Save'}
+                </Button>
+              </div>
+            </li>
+          );
+        })}
+      </ol>
+      <p className="px-5 pb-6 text-[11.5px] leading-relaxed text-sand-500">
+        Effects come from the uncalibrated prototype model on demo inputs and are relative, not forecasts.
+      </p>
     </>
   );
 }

@@ -2,7 +2,7 @@ import type { Pollutant, RiskLevel } from '../types';
 
 export type RGB = [number, number, number];
 
-/** Pollution ramp stops (value fraction 0..1 → colour). */
+/** Pollution ramp stops (value fraction 0..1 → colour) — the original Sep 29 map colours. */
 const POLLUTION_STOPS: [number, RGB][] = [
   [0.0, [34, 197, 94]], // green
   [0.25, [163, 230, 53]], // lime
@@ -12,6 +12,7 @@ const POLLUTION_STOPS: [number, RGB][] = [
   [1.0, [168, 35, 110]], // magenta
 ];
 
+// Scenario change: blue = modeled decrease, red = modeled increase.
 const DELTA_NEG: RGB = [56, 189, 248];
 const DELTA_ZERO: RGB = [30, 41, 59];
 const DELTA_POS: RGB = [244, 63, 94];
@@ -103,11 +104,14 @@ export function rgbToCss([r, g, b]: RGB, a = 1): string {
 }
 
 export const SOURCE_COLORS = {
-  traffic: '#f59e0b',
-  industry: '#a78bfa',
-  background: '#64748b',
-  other: '#2dd4bf',
+  traffic: '#a3263f', // cherry cola
+  industry: '#d19a2a', // amber
+  background: '#a8948c', // warm taupe
+  other: '#2fae8b', // teal-green
 } as const;
+
+/** Traffic level colours (low → very high) — the same colours the map draws roads with. */
+export const TRAFFIC_COLORS = ['#22c55e', '#facc15', '#f97316', '#ef4444'] as const;
 
 export const SOURCE_LABELS = {
   traffic: 'Traffic',

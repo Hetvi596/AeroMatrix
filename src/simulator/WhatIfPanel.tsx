@@ -1,23 +1,27 @@
 import { useState } from 'react';
-import { Play, RotateCcw, MousePointerClick, Plus, Trash2, Factory, TreePine, Car, CloudSun, Building2, ShieldCheck, Route, MapPin, Zap } from 'lucide-react';
+import { Play, RotateCcw, MousePointerClick, Plus, Trash2, Factory, TreePine, Car, CloudSun, Building2, ShieldCheck, Route, MapPin } from 'lucide-react';
 import { useTwin } from '../store/useTwinStore';
-import { Block, Button, DataBadge, Disclaimer, SectionHeader, Slider, Toggle } from '../components/ui';
+import { Block, Button, DeltaText, Disclaimer, SectionHeader, Slider, Toggle } from '../components/ui';
 import { cellAt, defaultParams, makeScenarioIndustry } from '../services/scenarioService';
 import type { IndustryCategory, ScenarioParams } from '../types';
 import { cellAreaKm2 } from '../utils/geo';
 import { fmt } from '../utils/format';
+import { majorRoads } from '../services/traffic';
 
 const CATEGORIES: IndustryCategory[] = ['Manufacturing', 'Chemical', 'Power', 'Metal', 'Processing'];
 const pct = (v: number) => `${Math.round(v * 100)}%`;
 const signedPct = (v: number) => `${v >= 1 ? '+' : ''}${Math.round((v - 1) * 100)}%`;
 const TREE_CANOPY_M2 = 40; // assumed mature canopy per tree (illustrative)
+const FIELD = 'rounded-lg bg-ink-950 text-sand-100 ring-1 ring-inset ring-sand-100/15 outline-none focus-visible:ring-2 focus-visible:ring-accent-400';
+/** Parameters compared without the display name (runDraft may assign one). */
+const paramsKey = (p: ScenarioParams) => JSON.stringify({ ...p, name: '' });
 
 function GroupTitle({ icon: Icon, children }: { icon: typeof Car; children: string }) {
   return (
-    <div className="mb-1 flex items-center gap-1.5 text-[10.5px] font-semibold uppercase tracking-[0.12em] text-slate-400">
-      <Icon size={12} className="text-cyan-400" />
+    <h3 className="mb-1.5 flex items-center gap-2 text-[13px] font-semibold text-sand-200">
+      <Icon size={15} className="text-accent-400" aria-hidden="true" />
       {children}
-    </div>
+    </h3>
   );
 }
 
@@ -35,8 +39,16 @@ export function WhatIfPanel() {
   const setPending = useTwin((s) => s.setPendingIndustry);
   const selectedCellId = useTwin((s) => s.selectedCellId);
   const toggleArea = useTwin((s) => s.toggleAreaCell);
+  const result = useTwin((s) => s.activeResult);
+  const saved = useTwin((s) => s.saved);
+  const setRightOpen = useTwin((s) => s.setRightOpen);
+  const setSection = useTwin((s) => s.setSection);
+  const runAndShow = () => {
+    if (run()) setRightOpen(true);
+  };
+  const upToDate = !!result && paramsKey(result.params) === paramsKey(draft);
 
-  const [closure, setClosure] = useState({ roadId: base.roads[0].id, divertTo: '', share: 0.7 });
+  const [closure, setClosure] = useState({ roadId: majorRoads(base)[0]?.id ?? '', divertTo: '', share: 0.7 });
   const [trees, setTrees] = useState(-500);
 
   const areaCells = base.cells.filter((c) => draft.targetCells.includes(c.id));
@@ -45,29 +57,27 @@ export function WhatIfPanel() {
   const treesToPts = (n: number) => ((n * TREE_CANOPY_M2) / (areaKm2 * 1e6)) * 100;
 
   const pendingCell = pending.location ? cellAt(base, pending.location) : undefined;
+  const roadOptions = majorRoads(base);
 
   const applyPreset = (p: Partial<ScenarioParams>) => update({ ...defaultParams(base), ...p });
 
   return (
     <div className="flex min-h-full flex-col">
-      <SectionHeader
-        title="What-If Simulator"
-        subtitle="Change urban & environmental parameters, then run the modeled scenario"
-        right={<DataBadge status="MODELED_SCENARIO" />}
-      />
+      <SectionHeader title="What-If" />
 
-      <Block title="Scenario">
+      <Block title="Name and presets">
         <input
           value={draft.name === 'Baseline' ? '' : draft.name}
           placeholder="Scenario name (optional)"
           onChange={(e) => update({ name: e.target.value })}
-          className="w-full rounded-md bg-ink-800 px-2 py-1.5 text-[12px] text-slate-200 ring-1 ring-inset ring-ink-600 outline-none placeholder:text-slate-600 focus:ring-cyan-500"
+          aria-label="Scenario name"
+          className={`w-full px-2.5 py-1.5 text-[12.5px] placeholder:text-sand-500 ${FIELD}`}
         />
-        <div className="mt-2 flex flex-wrap gap-1">
-          <Button className="!py-1 text-[11px]" onClick={() => applyPreset({ name: 'Traffic +30%', trafficMultiplier: 1.3 })}>Traffic +30%</Button>
-          <Button className="!py-1 text-[11px]" onClick={() => applyPreset({ name: 'Traffic restriction −20%', trafficMultiplier: 0.8 })}>Restriction −20%</Button>
+        <div className="mt-2 flex flex-wrap gap-1.5">
+          <Button className="!min-h-7 !py-1 text-[12px]" onClick={() => applyPreset({ name: 'Traffic +30%', trafficMultiplier: 1.3 })}>Traffic +30%</Button>
+          <Button className="!min-h-7 !py-1 text-[12px]" onClick={() => applyPreset({ name: 'Traffic restriction −20%', trafficMultiplier: 0.8 })}>Restriction −20%</Button>
           <Button
-            className="!py-1 text-[11px]"
+            className="!min-h-7 !py-1 text-[12px]"
             onClick={() =>
               applyPreset({
                 name: 'Monsoon day',
@@ -78,7 +88,7 @@ export function WhatIfPanel() {
             Monsoon day
           </Button>
           <Button
-            className="!py-1 text-[11px]"
+            className="!min-h-7 !py-1 text-[12px]"
             onClick={() =>
               applyPreset({
                 name: 'Winter inversion',
@@ -94,18 +104,18 @@ export function WhatIfPanel() {
       {/* Area */}
       <Block>
         <GroupTitle icon={MapPin}>Scenario area</GroupTitle>
-        <div className="flex items-center justify-between text-[11.5px]">
-          <span className="text-slate-300">{hasArea ? `${areaCells.length} zone(s) selected` : 'Whole analysis area'}</span>
-          <span className="text-slate-500">{fmt(areaKm2, 0)} km²</span>
+        <div className="flex items-center justify-between text-[12.5px]">
+          <span className="text-sand-200">{hasArea ? `${areaCells.length} zone${areaCells.length === 1 ? '' : 's'} selected` : 'Whole analysis area'}</span>
+          <span className="text-sand-500">{fmt(areaKm2, 0)} km²</span>
         </div>
         {hasArea && (
           <div className="mt-1 flex flex-wrap gap-1">
             {areaCells.slice(0, 18).map((c) => (
-              <button key={c.id} onClick={() => toggleArea(c.id)} className="rounded bg-cyan-500/15 px-1.5 py-0.5 font-mono text-[10px] text-cyan-200 hover:bg-rose-500/20" title="Remove">
+              <button key={c.id} onClick={() => toggleArea(c.id)} className="cursor-pointer rounded-md bg-accent-500/12 px-1.5 py-0.5 text-[11.5px] font-semibold text-accent-300 hover:bg-accent-500/20" title={`Remove ${c.id}`}>
                 {c.id}
               </button>
             ))}
-            {areaCells.length > 18 && <span className="text-[10px] text-slate-500">+{areaCells.length - 18}</span>}
+            {areaCells.length > 18 && <span className="text-[11.5px] text-sand-500">+{areaCells.length - 18}</span>}
           </div>
         )}
         <div className="mt-2 flex gap-1.5">
@@ -125,7 +135,7 @@ export function WhatIfPanel() {
             </Button>
           )}
         </div>
-        <Disclaimer>Area-level traffic, green-cover and building changes apply to these zones (green/buildings apply city-wide if none selected).</Disclaimer>
+        <Disclaimer>Area traffic, green cover and building changes apply here. With no area, green and buildings apply city-wide.</Disclaimer>
       </Block>
 
       {/* Traffic */}
@@ -147,28 +157,28 @@ export function WhatIfPanel() {
       {/* Roads */}
       <Block>
         <GroupTitle icon={Route}>Road closure & diversion</GroupTitle>
-        <div className="grid grid-cols-2 gap-1.5 text-[11px]">
-          <label className="text-slate-500">
+        <div className="grid grid-cols-2 gap-2 text-[12px]">
+          <label className="text-sand-400">
             Close
             <select
               value={closure.roadId}
               onChange={(e) => setClosure({ ...closure, roadId: e.target.value })}
-              className="mt-0.5 w-full rounded bg-ink-800 px-1.5 py-1 text-slate-200 ring-1 ring-ink-600"
+              className={`mt-1 w-full px-2 py-1.5 text-[12.5px] ${FIELD}`}
             >
-              {base.roads.map((r) => (
+              {roadOptions.map((r) => (
                 <option key={r.id} value={r.id}>{r.name}</option>
               ))}
             </select>
           </label>
-          <label className="text-slate-500">
+          <label className="text-sand-400">
             Divert to
             <select
               value={closure.divertTo}
               onChange={(e) => setClosure({ ...closure, divertTo: e.target.value })}
-              className="mt-0.5 w-full rounded bg-ink-800 px-1.5 py-1 text-slate-200 ring-1 ring-ink-600"
+              className={`mt-1 w-full px-2 py-1.5 text-[12.5px] ${FIELD}`}
             >
-              <option value="">— none (suppress) —</option>
-              {base.roads.filter((r) => r.id !== closure.roadId).map((r) => (
+              <option value="">None (suppress traffic)</option>
+              {roadOptions.filter((r) => r.id !== closure.roadId).map((r) => (
                 <option key={r.id} value={r.id}>{r.name}</option>
               ))}
             </select>
@@ -191,12 +201,12 @@ export function WhatIfPanel() {
           <Plus size={13} /> Add closure
         </Button>
         {draft.roadClosures.map((c) => (
-          <div key={c.roadId} className="mt-1 flex items-center gap-1.5 rounded bg-ink-800/70 px-2 py-1 text-[11px] text-slate-300">
+          <div key={c.roadId} className="mt-1.5 flex items-center gap-1.5 rounded-lg bg-sand-100/[0.05] px-2.5 py-1.5 text-[12px] text-sand-200">
             <span className="truncate">
               ✕ {base.roads.find((r) => r.id === c.roadId)?.name}
-              {c.divertToRoadId && <span className="text-slate-500"> → {base.roads.find((r) => r.id === c.divertToRoadId)?.name} ({pct(c.diversionShare)})</span>}
+              {c.divertToRoadId && <span className="text-sand-500"> → {base.roads.find((r) => r.id === c.divertToRoadId)?.name} ({pct(c.diversionShare)})</span>}
             </span>
-            <button className="ml-auto text-slate-500 hover:text-rose-300" onClick={() => update({ roadClosures: draft.roadClosures.filter((x) => x.roadId !== c.roadId) })}>
+            <button aria-label="Remove closure" className="ml-auto cursor-pointer text-sand-500 hover:text-accent-300" onClick={() => update({ roadClosures: draft.roadClosures.filter((x) => x.roadId !== c.roadId) })}>
               <Trash2 size={12} />
             </button>
           </div>
@@ -206,12 +216,13 @@ export function WhatIfPanel() {
       {/* Industry */}
       <Block>
         <GroupTitle icon={Factory}>Industry</GroupTitle>
-        <div className="rounded-md bg-ink-800/60 p-2">
+        <div className="rounded-xl bg-sand-100/[0.04] p-3 ring-1 ring-inset ring-sand-100/10">
           <div className="flex items-center gap-1.5">
             <select
               value={pending.category}
               onChange={(e) => setPending({ category: e.target.value as IndustryCategory })}
-              className="flex-1 rounded bg-ink-800 px-1.5 py-1 text-[11.5px] text-slate-200 ring-1 ring-ink-600"
+              aria-label="Industry category"
+              className={`min-w-0 flex-1 px-2 py-1.5 text-[12.5px] ${FIELD}`}
             >
               {CATEGORIES.map((c) => (
                 <option key={c}>{c}</option>
@@ -225,10 +236,10 @@ export function WhatIfPanel() {
             </Button>
           </div>
           <Slider label="Emission intensity" value={pending.intensity} min={5} max={100} step={1} onChange={(v) => setPending({ intensity: v })} />
-          <div className="text-[10.5px] text-slate-500">
+          <div className="text-[11.5px] text-sand-400">
             {pending.location
               ? `Site: ${pending.location[1].toFixed(4)}°N ${pending.location[0].toFixed(4)}°E${pendingCell ? ` · zone ${pendingCell.id} (${pendingCell.landUse}, green ${fmt(pendingCell.greenCover, 0)}%)` : ' · outside analysis area'}`
-              : 'No site chosen — click "Place on map".'}
+              : 'No site chosen yet. Use Place on map.'}
           </div>
           <Button
             variant="primary"
@@ -245,28 +256,28 @@ export function WhatIfPanel() {
           </Button>
         </div>
         {draft.addedIndustries.map((i) => (
-          <div key={i.id} className="mt-1 flex items-center gap-1.5 rounded bg-pink-500/10 px-2 py-1 text-[11px] text-slate-300">
-            <Factory size={11} className="text-pink-300" />
+          <div key={i.id} className="mt-1.5 flex items-center gap-1.5 rounded-lg bg-accent-500/[0.07] px-2.5 py-1.5 text-[12px] text-sand-200">
+            <Factory size={13} className="text-accent-400" aria-hidden="true" />
             <span className="truncate">{i.name} · {i.emissionIntensity}</span>
-            <button className="ml-auto text-slate-500 hover:text-rose-300" onClick={() => update({ addedIndustries: draft.addedIndustries.filter((x) => x.id !== i.id) })}>
+            <button aria-label="Remove added industry" className="ml-auto cursor-pointer text-sand-500 hover:text-accent-300" onClick={() => update({ addedIndustries: draft.addedIndustries.filter((x) => x.id !== i.id) })}>
               <Trash2 size={12} />
             </button>
           </div>
         ))}
         {(draft.removedIndustryIds.length > 0 || Object.keys(draft.industryIntensityOverrides).length > 0) && (
-          <div className="mt-1.5 text-[11px] text-slate-400">
+          <div className="mt-1.5 text-[12px] text-sand-300">
             {draft.removedIndustryIds.length > 0 && <div>Removed: {draft.removedIndustryIds.join(', ')}</div>}
             {Object.entries(draft.industryIntensityOverrides).map(([id, v]) => (
               <div key={id}>
                 {id} intensity → {v}
               </div>
             ))}
-            <button className="text-[10.5px] text-cyan-400 hover:underline" onClick={() => update({ removedIndustryIds: [], industryIntensityOverrides: {} })}>
-              reset source edits
+            <button className="cursor-pointer text-[12px] font-medium text-accent-300 hover:underline" onClick={() => update({ removedIndustryIds: [], industryIntensityOverrides: {} })}>
+              Reset source edits
             </button>
           </div>
         )}
-        <Disclaimer>Tip: click an existing industry on the map to change its intensity or remove it.</Disclaimer>
+        <Disclaimer>Click an existing industry on the map to change its intensity or remove it.</Disclaimer>
       </Block>
 
       {/* Pollution control */}
@@ -289,20 +300,21 @@ export function WhatIfPanel() {
           onChange={(v) => update({ greenCoverDelta: v })}
         />
         <div className="flex items-end gap-1.5">
-          <label className="flex-1 text-[11px] text-slate-500">
-            Trees (− removed / + planted)
+          <label className="flex-1 text-[12px] text-sand-400">
+            Trees (negative removes, positive plants)
             <input
               type="number"
               value={trees}
               step={100}
               onChange={(e) => setTrees(Number(e.target.value))}
-              className="mt-0.5 w-full rounded bg-ink-800 px-2 py-1 text-[12px] text-slate-200 ring-1 ring-ink-600 outline-none"
+              inputMode="numeric"
+              className={`num mt-1 w-full px-2.5 py-1.5 text-[12.5px] ${FIELD}`}
             />
           </label>
           <Button onClick={() => update({ greenCoverDelta: Math.max(-40, Math.min(40, Math.round(treesToPts(trees) * 10) / 10)) })}>Apply</Button>
         </div>
-        <div className="text-[10.5px] text-slate-500">
-          ≈ {fmt(treesToPts(trees), 2)} pts over {fmt(areaKm2, 1)} km² (assumes {TREE_CANOPY_M2} m² canopy/tree). Select a small area for a local development.
+        <div className="mt-1 text-[11.5px] text-sand-500">
+          About {fmt(treesToPts(trees), 2)} pts over {fmt(areaKm2, 1)} km², at {TREE_CANOPY_M2} m² canopy per tree.
         </div>
         <Toggle checked={draft.greenBuffer} onChange={(v) => update({ greenBuffer: v })} label="Green buffer around added industries" />
       </Block>
@@ -331,29 +343,43 @@ export function WhatIfPanel() {
         <Slider label="Humidity" value={draft.weather.humidity} min={10} max={100} step={1} format={(v) => `${v}%`} onChange={(v) => updateWeather({ humidity: v })} />
         <Slider label="Rainfall" value={draft.weather.rainfall} min={0} max={60} step={1} format={(v) => `${v} mm`} onChange={(v) => updateWeather({ rainfall: v })} />
         <Slider label="Pressure" value={draft.weather.pressure} min={990} max={1030} step={1} format={(v) => `${v} hPa`} onChange={(v) => updateWeather({ pressure: v })} />
-        <button className="text-[10.5px] text-cyan-400 hover:underline" onClick={() => update({ weather: { ...base.weather } })}>
-          reset to baseline weather
+        <button className="cursor-pointer text-[12px] font-medium text-accent-300 hover:underline" onClick={() => update({ weather: { ...base.weather } })}>
+          Reset to baseline weather
         </button>
       </Block>
 
-      <div className="sticky bottom-0 mt-auto border-t border-ink-700 bg-ink-900/95 px-4 py-3 backdrop-blur">
+      <div className="sticky bottom-0 mt-auto border-t hairline bg-ink-950/95 px-4 py-3 backdrop-blur">
         {errors.length > 0 && (
-          <div className="mb-2 rounded bg-rose-500/10 px-2 py-1.5 text-[11px] text-rose-300">
+          <div role="alert" className="mb-2 rounded-lg bg-accent-500/10 px-2.5 py-1.5 text-[12px] text-accent-300">
             {errors.map((e) => (
               <div key={e}>• {e}</div>
             ))}
           </div>
         )}
-        <div className="flex gap-1.5">
-          <Button onClick={reset} title="Reset all parameters to baseline">
-            <RotateCcw size={13} /> Reset
-          </Button>
-          <Button variant="primary" className="flex-1 !py-2" onClick={() => run()}>
-            <Play size={14} /> RUN SCENARIO
-          </Button>
+        <div className="mb-2 flex items-center justify-between gap-2 text-[12px]" role="status" aria-live="polite">
+          {upToDate && result ? (
+            <span className="text-sand-300">
+              Mean PM2.5 <span className="num font-semibold text-sand-50">{fmt(result.summary.meanBaseline)}</span>
+              {' → '}
+              <span className="num font-semibold text-sand-50">{fmt(result.summary.meanScenario)}</span> µg/m³ (
+              <DeltaText value={result.summary.meanDeltaPct} unit="%" />)
+            </span>
+          ) : (
+            <span className="text-sand-400">{result ? 'Changes not run yet' : 'Not run yet'}</span>
+          )}
+          {saved.length > 0 && (
+            <button type="button" className="shrink-0 cursor-pointer font-medium text-accent-300 hover:underline" onClick={() => setSection('scenarios')}>
+              Saved ({saved.length})
+            </button>
+          )}
         </div>
-        <div className="mt-1.5 flex items-center gap-1 text-[10px] text-slate-500">
-          <Zap size={10} /> Prototype modeled estimate — uncalibrated rule-based model on demo data.
+        <div className="flex gap-2">
+          <Button onClick={reset} title="Reset all parameters to baseline">
+            <RotateCcw size={14} aria-hidden="true" /> Reset
+          </Button>
+          <Button variant="primary" className="flex-1 !min-h-9" onClick={runAndShow}>
+            <Play size={14} aria-hidden="true" /> {upToDate ? 'Run again' : 'Run scenario'}
+          </Button>
         </div>
       </div>
     </div>

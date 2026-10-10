@@ -26,7 +26,7 @@ const LAYERS: { id: LayerId; label: string; icon: typeof Layers; note?: string }
   { id: 'traffic', label: 'Traffic corridors', icon: Car, note: 'demo' },
   { id: 'industries', label: 'Industries', icon: Factory, note: 'demo' },
   { id: 'green', label: 'Green cover', icon: Trees, note: 'approx.' },
-  { id: 'buildings', label: 'Buildings', icon: Building2 },
+  { id: 'buildings', label: '3D buildings', icon: Building2 },
   { id: 'terrain', label: 'Terrain (DEM)', icon: Mountain },
   { id: 'elevationTint', label: 'Elevation tint', icon: Palette },
   { id: 'satellite', label: 'Satellite imagery', icon: Satellite },
@@ -34,7 +34,7 @@ const LAYERS: { id: LayerId; label: string; icon: typeof Layers; note?: string }
 ];
 
 export function LayerControl() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const layers = useTwin((s) => s.layers);
   const toggle = useTwin((s) => s.toggleLayer);
   const exag = useTwin((s) => s.terrainExaggeration);
@@ -42,33 +42,42 @@ export function LayerControl() {
   const status = useTwin((s) => s.mapStatus);
 
   return (
-    <div className="absolute right-3 top-3 z-10 w-56 rounded-lg bg-ink-900/92 text-[12px] shadow-xl ring-1 ring-ink-700 backdrop-blur">
-      <button onClick={() => setOpen(!open)} className="flex w-full items-center gap-2 px-3 py-2 text-slate-200">
-        <Layers size={14} className="text-cyan-300" />
+    <div className={`float-surface inset-right absolute top-3 z-20 flex max-h-[calc(100%-24px)] flex-col ${open ? 'w-60' : 'w-auto'} rounded-xl text-[12.5px]`}>
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        aria-expanded={open}
+        className="flex h-9 w-full shrink-0 cursor-pointer items-center gap-2 px-3 text-sand-100 hover:text-white"
+      >
+        <Layers size={15} className="text-accent-300" aria-hidden="true" />
         <span className="font-semibold">Layers</span>
-        <ChevronRight size={14} className={`ml-auto text-slate-500 transition-transform ${open ? 'rotate-90' : ''}`} />
+        <ChevronRight size={14} className={`ml-auto text-sand-500 transition-transform duration-200 ${open ? 'rotate-90' : ''}`} aria-hidden="true" />
       </button>
       {open && (
-        <div className="border-t border-ink-700 px-2 pb-2 pt-1">
+        <div className="panel-scroll min-h-0 border-t border-sand-100/10 px-2 pb-2 pt-1 animate-fade">
           {LAYERS.map(({ id, label, icon: Icon, note }) => (
-            <label key={id} className="flex cursor-pointer items-center gap-2 rounded px-1.5 py-[3px] hover:bg-ink-800">
-              <input type="checkbox" checked={layers[id]} onChange={() => toggle(id)} className="accent-cyan-400" />
-              <Icon size={13} className={layers[id] ? 'text-cyan-300' : 'text-slate-600'} />
-              <span className={layers[id] ? 'text-slate-200' : 'text-slate-500'}>{label}</span>
-              {note && <span className="ml-auto text-[9px] uppercase tracking-wide text-fuchsia-300/70">{note}</span>}
+            <label key={id} className="flex cursor-pointer items-center gap-2 rounded-md px-1.5 py-[5px] hover:bg-sand-100/[0.06]">
+              <input type="checkbox" checked={layers[id]} onChange={() => toggle(id)} className="accent-accent-400" />
+              <Icon size={13} className={layers[id] ? 'text-accent-300' : 'text-sand-600'} />
+              <span className={layers[id] ? 'text-sand-200' : 'text-sand-500'}>{label}</span>
+              {note && (
+                <span className={`ml-auto text-[10.5px] ${note === 'observed' ? 'text-emerald-300/90' : 'text-sand-500'}`}>
+                  {note}
+                </span>
+              )}
             </label>
           ))}
           <div className="mt-1.5 px-1.5">
-            <div className="flex justify-between text-[11px] text-slate-400">
+            <div className="flex justify-between text-[11px] text-sand-400">
               <span>Terrain exaggeration</span>
-              <span className="font-mono text-cyan-300">×{exag.toFixed(1)}</span>
+              <span className="num font-semibold text-accent-300">×{exag.toFixed(1)}</span>
             </div>
-            <input type="range" min={1} max={4} step={0.5} value={exag} onChange={(e) => setExag(Number(e.target.value))} className="w-full" />
+            <input type="range" min={1} max={4} step={0.5} value={exag} onChange={(e) => setExag(Number(e.target.value))} className="w-full disabled:opacity-30" />
           </div>
-          <div className="mt-1 space-y-0.5 border-t border-ink-700 px-1.5 pt-1.5 text-[10px] leading-snug text-slate-500">
-            <div><span className="text-slate-400">Terrain:</span> {status.terrain}</div>
-            <div><span className="text-slate-400">Imagery:</span> {status.imagery}</div>
-            <div><span className="text-slate-400">Buildings:</span> {status.buildings}</div>
+          <div className="mt-1 space-y-0.5 border-t border-sand-100/10 px-1.5 pt-1.5 text-[10.5px] leading-snug text-sand-500">
+            <div><span className="text-sand-400">Terrain:</span> {status.terrain}</div>
+            <div><span className="text-sand-400">Imagery:</span> {status.imagery}</div>
+            <div><span className="text-sand-400">Buildings:</span> {status.buildings}</div>
           </div>
         </div>
       )}
