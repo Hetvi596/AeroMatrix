@@ -25,6 +25,8 @@ const LAYERS: { id: LayerId; label: string; icon: typeof Layers; note?: string }
   { id: 'roads', label: 'Roads', icon: Route },
   { id: 'traffic', label: 'Traffic corridors', icon: Car, note: 'demo' },
   { id: 'industries', label: 'Industries', icon: Factory, note: 'demo' },
+  { id: 'midcAreas', label: 'MIDC industrial areas', icon: Factory, note: 'MIDC' },
+  { id: 'industrySites', label: 'Mapped industry sites', icon: Factory, note: 'OSM, partial' },
   { id: 'green', label: 'Green cover', icon: Trees, note: 'approx.' },
   { id: 'buildings', label: '3D buildings', icon: Building2 },
   { id: 'terrain', label: 'Terrain (DEM)', icon: Mountain },

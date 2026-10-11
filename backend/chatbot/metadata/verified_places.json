@@ -1,0 +1,115 @@
+{
+ "source": "OpenStreetMap Nominatim search, accessed 10 Oct 2026. Mirrors src/data/geojson/verifiedPlaces.ts in the AeroMatrix app.",
+ "note": "Reference points for the named area or landmark; monitoring files carry no station coordinates. Mhada Colony has no matching place and is deliberately absent.",
+ "places": {
+  "alandi": {
+   "name": "Alandi",
+   "latitude": 18.67724,
+   "longitude": 73.89811,
+   "precision": "area centre",
+   "osm": "node/3237435456"
+  },
+  "nigdi": {
+   "name": "Nigdi",
+   "latitude": 18.66077,
+   "longitude": 73.77783,
+   "precision": "area centre",
+   "osm": "node/681316519"
+  },
+  "karve-road": {
+   "name": "Karve Road, Erandwane",
+   "latitude": 18.50793,
+   "longitude": 73.83007,
+   "precision": "point on the road",
+   "osm": "way/1043506203"
+  },
+  "sppu": {
+   "name": "Savitribai Phule Pune University",
+   "latitude": 18.55284,
+   "longitude": 73.82664,
+   "precision": "campus",
+   "osm": "way/995138926"
+  },
+  "bhumkar-nagar": {
+   "name": "Bhumkar Nagar",
+   "latitude": 18.60303,
+   "longitude": 73.74941,
+   "precision": "bus stop",
+   "osm": "node/10726443000"
+  },
+  "dhankawadi": {
+   "name": "Dhankawadi",
+   "latitude": 18.46542,
+   "longitude": 73.85015,
+   "precision": "bus stop",
+   "osm": "node/13781681733"
+  },
+  "katraj-dairy": {
+   "name": "Katraj Dairy",
+   "latitude": 18.45382,
+   "longitude": 73.85696,
+   "precision": "landmark",
+   "osm": "way/1232397249"
+  },
+  "pashan": {
+   "name": "Pashan",
+   "latitude": 18.53867,
+   "longitude": 73.79525,
+   "precision": "area centre",
+   "osm": "node/761969935"
+  },
+  "bhosari": {
+   "name": "Bhosari",
+   "latitude": 18.62101,
+   "longitude": 73.85013,
+   "precision": "area centre",
+   "osm": "node/1226551292"
+  },
+  "hadapsar": {
+   "name": "Hadapsar",
+   "latitude": 18.50077,
+   "longitude": 73.93791,
+   "precision": "bus stop",
+   "osm": "node/2280623602"
+  },
+  "shivajinagar": {
+   "name": "Shivajinagar",
+   "latitude": 18.52946,
+   "longitude": 73.84782,
+   "precision": "area centre",
+   "osm": "node/1229128806"
+  },
+  "kothrud": {
+   "name": "Kothrud",
+   "latitude": 18.50726,
+   "longitude": 73.80567,
+   "precision": "area centre",
+   "osm": "relation/19586503"
+  },
+  "swargate": {
+   "name": "Swargate",
+   "latitude": 18.50068,
+   "longitude": 73.85863,
+   "precision": "area centre",
+   "osm": "node/245646553"
+  }
+ },
+ "regions": {
+  "Karve Road": "karve-road",
+  "Alandi": "alandi",
+  "Bhosari": "bhosari",
+  "Hadapsar": "hadapsar",
+  "Transport Nagar-Nigdi": "nigdi",
+  "Revenue Colony-Shivajinagar": "shivajinagar",
+  "Katraj Dairy": "katraj-dairy",
+  "Savitribai Phule Pune University": "sppu",
+  "Bhumkar Nagar": "bhumkar-nagar",
+  "Panchawati Pashan": "pashan",
+  "Dhankawadi": "dhankawadi",
+  "Kothrud": "kothrud",
+  "Swargate": "swargate",
+  "Shivajinagar": "shivajinagar",
+  "Pashan": "pashan",
+  "Nigdi": "nigdi"
+ }
+}

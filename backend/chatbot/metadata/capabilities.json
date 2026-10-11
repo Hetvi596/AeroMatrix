@@ -1,0 +1,79 @@
+{
+  "identity": "AeroSage — Your AI Environmental Copilot",
+  "llm": {
+    "configured": false,
+    "available": false,
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "ml_backend": {
+    "status": "ok",
+    "model_loaded": true,
+    "model_count": 12,
+    "supported_pollutants": [
+      "pm25",
+      "pm10",
+      "no2",
+      "no",
+      "nox",
+      "so2",
+      "co",
+      "o3",
+      "nh3",
+      "benzene",
+      "toluene",
+      "xylene"
+    ],
+    "station_count": 12,
+    "units": {
+      "pm25": "ug/m3",
+      "pm10": "ug/m3",
+      "no2": "ug/m3",
+      "no": "ug/m3",
+      "nox": "ppb",
+      "so2": "ug/m3",
+      "co": "mg/m3",
+      "o3": "ug/m3",
+      "nh3": "ug/m3",
+      "benzene": "ug/m3",
+      "toluene": "ug/m3",
+      "xylene": "ug/m3",
+      "spm": "ug/m3",
+      "pb": "ug/m3",
+      "temperature": "degC",
+      "humidity": "%",
+      "wind_speed": "m/s",
+      "wind_direction": "degree",
+      "rainfall": "mm",
+      "pressure": "hPa",
+      "solar_radiation": "W/m2"
+    },
+    "training_on_startup": false,
+    "bundled_data_is_historical": true,
+    "spatial_estimation_available": false
+  },
+  "knowledge": {
+    "available": true,
+    "chunks": 24,
+    "method": "SQLite FTS5 BM25",
+    "integrity": "Only manifest-hash-matching documents are indexed"
+  },
+  "languages": [
+    "en",
+    "hi",
+    "hinglish"
+  ],
+  "language_note": "Generative language support depends on configured model; deterministic API cards preserve English technical labels and source reasons.",
+  "streaming": "SSE progress and buffered answer chunks; not provider token streaming",
+  "memory": "SQLite, token-isolated sessions, bounded history and expiring retention",
+  "simulation": "Optional read-only scenario adapter; current frontend simulator is not automatically connected",
+  "web_browsing": false,
+  "suggested_questions": [
+    "What is AeroMatrix?",
+    "Which Pune locations have monitoring stations?",
+    "Show historical PM2.5 in Hadapsar.",
+    "How reliable are the models?",
+    "Explain machine learning."
+  ],
+  "welcome": "Hi, I’m AeroSage. Ask about AeroMatrix, pollution, or a general question."
+}

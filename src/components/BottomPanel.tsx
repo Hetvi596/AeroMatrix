@@ -1,38 +1,34 @@
 import { useEffect, useMemo, useState } from 'react';
 import { ChevronUp } from 'lucide-react';
 import {
-  Area,
   Bar,
   BarChart,
   CartesianGrid,
   ComposedChart,
   Legend,
   Line,
-  ReferenceArea,
-  ReferenceLine,
   ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
 } from 'recharts';
 import { useTwin } from '../store/useTwinStore';
-import { dataProvider, type TimeRange } from '../services/dataProvider';
 import { observedSeries } from '../services/observations';
-import type { TimePoint } from '../types';
 import { DataBadge, Segmented } from './ui';
+import { RegionScenarioBlock } from './RegionScenarioPanels';
 import { POLLUTANT_LABEL, POLLUTANT_UNIT } from '../utils/colors';
 import { SERIES, axisProps, gridProps, tooltipStyle } from '../analytics/chartTheme';
 
 type Tab = 'timeseries' | 'beforeafter';
 
+/**
+ * Time series: imported station observations when present; otherwise the region's
+ * measured value and trained-model +24 h forecast with the scenario (no synthetic series).
+ */
 function TimeSeriesChart() {
   const pollutant = useTwin((s) => s.pollutant);
   const cellId = useTwin((s) => s.selectedCellId);
-  const baseline = useTwin((s) => s.baseline);
-  const result = useTwin((s) => s.activeResult);
-  const mode = useTwin((s) => s.displayMode);
-  const [range, setRange] = useState<TimeRange>('24h');
-  const [demoSeries, setSeries] = useState<TimePoint[]>([]);
+  const [range, setRange] = useState<'24h' | '7d' | '30d'>('24h');
   const ds = useTwin((s) => s.observations);
   const summaries = useTwin((s) => s.stationSummaries);
   const base = useTwin((s) => s.base);
@@ -40,47 +36,24 @@ function TimeSeriesChart() {
     () => (ds && base ? observedSeries(ds, summaries, pollutant, base, cellId, range === '24h' ? 1 : range === '7d' ? 7 : 30) : null),
     [ds, summaries, pollutant, base, cellId, range],
   );
-  const series = observed?.points ?? demoSeries;
 
-  const ref = useMemo(() => {
-    if (cellId) return baseline.find((s) => s.cellId === cellId)?.[pollutant] ?? 0;
-    return baseline.reduce((a, s) => a + s[pollutant], 0) / Math.max(1, baseline.length);
-  }, [cellId, baseline, pollutant]);
-
-  const scnRef = useMemo(() => {
-    if (!result || (mode !== 'scenario' && mode !== 'delta')) return null;
-    const xs = result.scenario;
-    if (cellId) return xs.find((s) => s.cellId === cellId)?.[pollutant] ?? null;
-    return xs.reduce((a, s) => a + s[pollutant], 0) / Math.max(1, xs.length);
-  }, [result, mode, cellId, pollutant]);
-
-  useEffect(() => {
-    let alive = true;
-    dataProvider.getTimeSeries(cellId ?? 'city', pollutant, ref, range).then((s) => alive && setSeries(s));
-    return () => {
-      alive = false;
-    };
-  }, [cellId, pollutant, ref, range]);
-
-  const data = [
-    ...series.map((p) => ({ t: p.t, demo: +p.value.toFixed(2) })),
-    // Forecast window placeholder (no values — model not trained)
-    ...Array.from({ length: range === '24h' ? 6 : range === '7d' ? 2 : 5 }, (_, i) => ({ t: `+${i + 1}${range === '24h' ? 'h' : 'd'}`, demo: null as number | null })),
-  ];
-  const firstForecast = data[series.length]?.t;
-  const lastForecast = data[data.length - 1]?.t;
-
+  if (!observed) {
+    return (
+      <div className="panel-scroll h-full px-1">
+        <RegionScenarioBlock compact />
+      </div>
+    );
+  }
+  const data = observed.points.map((p) => ({ t: p.t, observed: +p.value.toFixed(2) }));
   return (
     <div className="flex h-full flex-col">
       <div className="flex items-center gap-2 px-1 pb-1">
-        <span className="text-[11.5px] font-medium text-sand-200">
-          {POLLUTANT_LABEL[pollutant]} · {cellId ? `Zone ${cellId}` : 'City mean'}
-          {observed && <span className="font-normal text-sand-500"> · {observed.label}</span>}
+        <span className="text-[12px] font-medium text-sand-200">
+          {POLLUTANT_LABEL[pollutant]}, {cellId ? `zone ${cellId}` : 'city'} <span className="font-normal text-sand-500">{observed.label}</span>
         </span>
-        <DataBadge status={observed ? 'OBSERVED' : 'DEMO'} />
-        <span className="text-[11px] text-sand-500">Past, present, forecast</span>
+        <DataBadge status="OBSERVED" />
         <div className="ml-auto">
-          <Segmented<TimeRange>
+          <Segmented<'24h' | '7d' | '30d'>
             size="xs"
             value={range}
             onChange={setRange}
@@ -95,38 +68,11 @@ function TimeSeriesChart() {
       <div className="min-h-0 flex-1">
         <ResponsiveContainer>
           <ComposedChart data={data} margin={{ top: 6, right: 12, left: -18, bottom: 0 }}>
-            <defs>
-              <linearGradient id="tsFill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor={SERIES.demo} stopOpacity={0.35} />
-                <stop offset="100%" stopColor={SERIES.demo} stopOpacity={0} />
-              </linearGradient>
-            </defs>
             <CartesianGrid {...gridProps} />
             <XAxis dataKey="t" {...axisProps} minTickGap={18} />
             <YAxis {...axisProps} />
-            <Tooltip {...tooltipStyle} formatter={(v) => [`${v} ${POLLUTANT_UNIT[pollutant]}`, observed ? 'Observed' : 'Demo series']} />
-            {firstForecast && (
-              <ReferenceArea
-                x1={firstForecast}
-                x2={lastForecast}
-                fill="#fbf5e9"
-                fillOpacity={0.04}
-                stroke="#998371"
-                strokeOpacity={0.3}
-                strokeDasharray="4 4"
-                label={{ value: 'Forecast: model not trained', fill: '#b8a08a', fontSize: 10.5, position: 'insideTop' }}
-              />
-            )}
-            {scnRef !== null && (
-              <ReferenceLine
-                y={scnRef}
-                stroke={SERIES.scenario}
-                strokeDasharray="5 3"
-                label={{ value: `Modeled scenario level ${scnRef.toFixed(1)}`, fill: '#dd7487', fontSize: 10.5, position: 'insideTopLeft' }}
-              />
-            )}
-            <Area type="monotone" dataKey="demo" stroke="none" fill="url(#tsFill)" connectNulls={false} isAnimationActive={false} />
-            <Line type="monotone" dataKey="demo" stroke={observed ? SERIES.observed : SERIES.demo} strokeWidth={1.8} dot={false} connectNulls={false} isAnimationActive={false} />
+            <Tooltip {...tooltipStyle} formatter={(v) => [`${v} ${POLLUTANT_UNIT[pollutant]}`, 'Observed']} />
+            <Line type="monotone" dataKey="observed" stroke={SERIES.observed} strokeWidth={1.8} dot={false} connectNulls={false} isAnimationActive={false} />
           </ComposedChart>
         </ResponsiveContainer>
       </div>
@@ -189,12 +135,13 @@ export function BottomPanel() {
   const open = useTwin((s) => s.bottomOpen);
   const setOpen = useTwin((s) => s.setBottomOpen);
   const [tab, setTab] = useState<Tab>('timeseries');
+  const hasResult = !!result;
   useEffect(() => {
-    if (result) {
+    if (hasResult) {
       setTab('beforeafter');
       setOpen(true);
     }
-  }, [result, setOpen]);
+  }, [hasResult, setOpen]);
   return (
     <div className="flex h-full flex-col">
       <div className="flex h-10 shrink-0 items-center gap-3 px-4">
@@ -207,7 +154,7 @@ export function BottomPanel() {
             setOpen(true);
           }}
           options={[
-            { value: 'timeseries', label: 'Time series' },
+            { value: 'timeseries', label: 'Forecast' },
             { value: 'beforeafter', label: 'Before vs after' },
           ]}
         />

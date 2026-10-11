@@ -1,0 +1,144 @@
+{
+  "name": "pm25_site_5996",
+  "version": "task2-20261011-v1",
+  "pollutant": "pm25",
+  "unit": "ug/m3",
+  "horizon_hours": 1,
+  "excluded_station": "site_5996",
+  "training_stations": [
+    "site_5409",
+    "site_5407",
+    "site_5766",
+    "site_6012"
+  ],
+  "unique_training_targets": 1868,
+  "training_feature_rows_with_augmentation": 3578,
+  "selection_targets": 1462,
+  "calibration_targets": 1080,
+  "train_label_end": "2024-07-31 02:30:00+00:00",
+  "selection_start": "2024-10-07 07:30:00+00:00",
+  "selection_label_end": "2024-11-27 06:30:00+00:00",
+  "calibration_start": "2024-12-05 04:30:00+00:00",
+  "calibration_label_end": "2024-12-31 06:30:00+00:00",
+  "test_start": "2025-02-01T00:00:00Z",
+  "algorithm": "extra_trees_no_weather",
+  "validation_candidates": {
+    "extra_trees_no_weather": {
+      "n": 1462,
+      "mae": 36.94233848482658,
+      "rmse": 47.56451506209449,
+      "bias": -35.68640529356631,
+      "r2": -1.5013249417010255
+    },
+    "hist_gradient_boosting_no_weather": {
+      "n": 1462,
+      "mae": 38.43570264667524,
+      "rmse": 49.24822152673161,
+      "bias": -36.693303910201564,
+      "r2": -1.6815448825597752
+    },
+    "extra_trees_delayed_weather": {
+      "n": 1462,
+      "mae": 43.38588140365816,
+      "rmse": 52.59774077848295,
+      "bias": -43.36720236019793,
+      "r2": -2.0587089071866687
+    },
+    "hist_gradient_boosting_delayed_weather": {
+      "n": 1462,
+      "mae": 49.78468713328551,
+      "rmse": 58.14668426594101,
+      "bias": -49.77710824417529,
+      "r2": -2.7381254882957293
+    }
+  },
+  "features": [
+    "latitude",
+    "longitude",
+    "hour_sin",
+    "hour_cos",
+    "dow",
+    "month_sin",
+    "month_cos",
+    "idw",
+    "neighbor_mean",
+    "neighbor_std",
+    "neighbor_min",
+    "neighbor_max",
+    "neighbor_count",
+    "nearest_km",
+    "mean_distance_km",
+    "max_donor_age"
+  ],
+  "calibration_radius": 78.18023457710747,
+  "nominal_coverage": 0.9,
+  "feature_bounds": {
+    "latitude": [
+      18.45445,
+      18.52974978
+    ],
+    "longitude": [
+      73.84968215,
+      73.927532
+    ],
+    "hour_sin": [
+      -1.0,
+      1.0
+    ],
+    "hour_cos": [
+      -1.0,
+      1.0
+    ],
+    "dow": [
+      0.0,
+      6.0
+    ],
+    "month_sin": [
+      -0.4999999999999997,
+      1.2246467991473532e-16
+    ],
+    "month_cos": [
+      -1.0,
+      -0.8660254037844388
+    ],
+    "idw": [
+      4.452448363398902,
+      390.3081245374706
+    ],
+    "neighbor_mean": [
+      4.37,
+      381.36
+    ],
+    "neighbor_std": [
+      0.0,
+      367.945
+    ],
+    "neighbor_min": [
+      0.98,
+      46.35
+    ],
+    "neighbor_max": [
+      5.1,
+      740.71
+    ],
+    "neighbor_count": [
+      2.0,
+      2.0
+    ],
+    "nearest_km": [
+      8.386228648237582,
+      8.777345620560881
+    ],
+    "mean_distance_km": [
+      8.581787134399232,
+      9.068344119822035
+    ],
+    "max_donor_age": [
+      0.0,
+      2.0
+    ]
+  },
+  "target_station_history_used": false,
+  "weather_delay_days": 120,
+  "publication_caveat": "Final reanalysis delayed 120 days; exact as-of weather vintages unavailable. Pollution publication delays unknown. Historical evaluation is not a verified operational backtest."
+}

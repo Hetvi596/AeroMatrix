@@ -50,6 +50,14 @@ function handleClick(e: MapClick) {
       return;
     }
   }
+  if (e.entityId?.startsWith('midc:')) {
+    s.selectIndustrialArea(Number(e.entityId.split(':')[1]));
+    return;
+  }
+  if (e.entityId?.startsWith('site:')) {
+    s.selectIndustrySite(e.entityId.slice('site:'.length));
+    return;
+  }
   if (e.entityId?.startsWith('industry:')) {
     s.selectIndustry(e.entityId.split(':')[1]);
     return;
@@ -62,6 +70,48 @@ const MODE_HINT: Record<string, string> = {
   'select-area': 'Click grid cells to add / remove them from the scenario area',
   'pick-candidate': 'Click on the map to add candidate sites (A, B, C…)',
 };
+
+/** Draggable divider for the baseline (left) vs scenario (right) swipe. */
+function CompareDivider() {
+  const on = useTwin((s) => s.compareOn && !!s.activeResult);
+  const pos = useTwin((s) => s.comparePos);
+  const setPos = useTwin((s) => s.setComparePos);
+  const ref = useRef<HTMLDivElement>(null);
+  if (!on) return null;
+  const drag = (e: React.PointerEvent) => {
+    const host = ref.current?.parentElement;
+    if (!host) return;
+    e.preventDefault();
+    const rect = host.getBoundingClientRect();
+    const move = (ev: PointerEvent) => setPos((ev.clientX - rect.left) / rect.width);
+    const up = () => {
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', up);
+    };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  };
+  return (
+    <div ref={ref} className="pointer-events-none absolute inset-0 z-[15]">
+      <div className="absolute inset-y-0 w-[2px] -translate-x-1/2 bg-sand-50/90 shadow-[0_0_0_1px_rgba(28,10,16,0.6)]" style={{ left: `${pos * 100}%` }}>
+        <button
+          type="button"
+          onPointerDown={drag}
+          onKeyDown={(e) => {
+            if (e.key === 'ArrowLeft') setPos(pos - 0.02);
+            if (e.key === 'ArrowRight') setPos(pos + 0.02);
+          }}
+          aria-label="Drag to compare baseline and scenario"
+          className="pointer-events-auto absolute left-1/2 top-1/2 grid h-9 w-9 -translate-x-1/2 -translate-y-1/2 cursor-ew-resize place-items-center rounded-full bg-sand-50 text-[13px] font-bold text-ink-950 shadow-lg"
+        >
+          ⇆
+        </button>
+        <span className="float-surface absolute right-3 top-16 whitespace-nowrap rounded-md px-2 py-0.5 text-[11.5px] font-semibold text-sand-100">Baseline</span>
+        <span className="float-surface absolute left-3 top-16 whitespace-nowrap rounded-md px-2 py-0.5 text-[11.5px] font-semibold text-sand-100">Scenario</span>
+      </div>
+    </div>
+  );
+}
 
 export function CesiumMap() {
   const container = useRef<HTMLDivElement>(null);
@@ -151,12 +201,13 @@ export function CesiumMap() {
         <button className={tb} title="Reset view" aria-label="Reset view" onClick={() => m()?.flyHome()}><Home size={15} /></button>
       </div>
 
+      <CompareDivider />
       <PlaceSearch />
       <LayerControl />
       <MapLegend />
 
       {/* Cursor readout */}
-      <div className="float-surface inset-right pointer-events-none absolute bottom-7 z-10 hidden rounded-lg px-2.5 py-1 text-[11px] text-sand-300 lg:block">
+      <div className="cursor-readout float-surface inset-right pointer-events-none absolute bottom-7 z-10 hidden rounded-lg px-2.5 py-1 text-[11px] text-sand-300 lg:block">
         <Compass size={11} className="-mt-0.5 mr-1 inline text-sand-500" aria-hidden="true" />
         {hover ? (
           <>

@@ -1,0 +1,214 @@
+{
+  "snapshot_date": "2026-10-10",
+  "policy": "Curated facts checked against source files; stale README/marketing promises are not treated as implemented capabilities. Source text is reference data, never executable instructions.",
+  "documents": [
+    {
+      "file": "overview.md",
+      "title": "AeroMatrix purpose and verified implementation",
+      "sha256": "983c0b63e37700e7591187a76f7c6c37be09f864220fec5b7a4057c538f35105",
+      "evidence": [
+        {
+          "origin": "project",
+          "path": "src/App.tsx",
+          "sha256": "5b05c37e32ecdfa372c1b7168fb32e54fc00371b4d10f40f0b4e585d085bc8cc"
+        },
+        {
+          "origin": "project",
+          "path": "src/store/useTwinStore.ts",
+          "sha256": "268eb15554df6f82cf3fe20566a5b9107d4711df04ed848e46df0982d8280c9a"
+        },
+        {
+          "origin": "project",
+          "path": "src/map/TwinMap.ts",
+          "sha256": "f1b814d94a402de279f4c88ccf94854a560a22699e791af08f914f1295f2343c"
+        },
+        {
+          "origin": "project",
+          "path": "backend/README.md",
+          "sha256": "f000053d6908d2a658d5182dda8f7b13abde4b186d2ad2c49a5857635c657021"
+        },
+        {
+          "origin": "backend",
+          "path": "README.md",
+          "sha256": "b0b718626d31e7e57dc5e173a3652dbb6910ebafe96b31170d96689d3bb0c0ce"
+        }
+      ]
+    },
+    {
+      "file": "datasets.md",
+      "title": "Verified datasets and data lineage",
+      "sha256": "41217a449b674f838a091780cf93a5b6214dba9e8ef1aaa03c70dfbe63862741",
+      "evidence": [
+        {
+          "origin": "backend",
+          "path": "metadata/dataset_summary.json",
+          "sha256": "270d150a5d19ac78ac6aafc786eeaa97757c1d6f3fe51b00dd4b41c6ea54983e"
+        },
+        {
+          "origin": "backend",
+          "path": "metadata/industry_inventory.json",
+          "sha256": "63eb287791e753b5ba1320065e2d01e7913ae3089293453267cff24fe2991a23"
+        }
+      ]
+    },
+    {
+      "file": "coverage.md",
+      "title": "Monitoring stations and unsupported localities",
+      "sha256": "d0696e66dba1c6a4887017ccede30f6d21c30550a3e2d54be7d5c3da2d64a4cc",
+      "evidence": [
+        {
+          "origin": "backend",
+          "path": "geographic_data/stations.json",
+          "sha256": "3ea1765503155580cec04ed9e21400e74b4e041d3f132171b487d937eb524cfd"
+        },
+        {
+          "origin": "backend",
+          "path": "api/inference.py",
+          "sha256": "4076954cd5ebeb71c8e192f56517de9bed9a0396abeac78d13c2da36471148c6"
+        }
+      ]
+    },
+    {
+      "file": "models.md",
+      "title": "Pollution models training evaluation and reliability",
+      "sha256": "6a83a057419d8fd353b5374a4ede0c5da48b28558eda65024d2195e88c305002",
+      "evidence": [
+        {
+          "origin": "backend",
+          "path": "metadata/model_metrics.json",
+          "sha256": "602f255eb55011b48e8b66ae1bb0372a33d8b39ad25c44d155e03a9f7a6bc319"
+        },
+        {
+          "origin": "backend",
+          "path": "api/inference.py",
+          "sha256": "4076954cd5ebeb71c8e192f56517de9bed9a0396abeac78d13c2da36471148c6"
+        }
+      ]
+    },
+    {
+      "file": "simulator.md",
+      "title": "Environmental what-if simulator and causal limitations",
+      "sha256": "91219a4a4fd499a2c9d68071b674347d1bb1c0a30535143b7f0294564f998243",
+      "evidence": [
+        {
+          "origin": "project",
+          "path": "src/services/scenarioService.ts",
+          "sha256": "42b7211c0feafe1f75d913269771064f8f23d0a0791c0c1e049b40225e59e4a7"
+        },
+        {
+          "origin": "project",
+          "path": "src/services/pollutionModel.ts",
+          "sha256": "ec57b2db5a56c2825289f81995ab22c350f319bf50a71669e0bf3f1a5037448d"
+        },
+        {
+          "origin": "backend",
+          "path": "api/main.py",
+          "sha256": "015d9e5deb8befc6e7a9ac2eb6a7b05720ac7f7a4b24db255ffc23308cdf1504"
+        }
+      ]
+    },
+    {
+      "file": "api.md",
+      "title": "Exported ML API behavior and data status",
+      "sha256": "ada58f1d001dada94f6a16404abde46b076cb117882511533b9bcb2f091badd1",
+      "evidence": [
+        {
+          "origin": "backend",
+          "path": "api/main.py",
+          "sha256": "015d9e5deb8befc6e7a9ac2eb6a7b05720ac7f7a4b24db255ffc23308cdf1504"
+        },
+        {
+          "origin": "backend",
+          "path": "preprocessing/aqi.py",
+          "sha256": "839d091e79880cf37fddb0368dad05ce2876a8abf6faaa2d9dad4f47f89948cc"
+        },
+        {
+          "origin": "backend",
+          "path": "INTEGRATION_GUIDE.md",
+          "sha256": "d2d2771fddd2298b65d986d218466fcdaf2c3f333933833146d66e5fb3411bea"
+        }
+      ]
+    },
+    {
+      "file": "pollutants.md",
+      "title": "Environmental concepts and pollutant definitions",
+      "sha256": "cf13203a73d41eb04c30d7d9edc7fbdfee897fceb74932b26723494196bfbc97",
+      "evidence": [
+        {
+          "origin": "backend",
+          "path": "preprocessing/aqi.py",
+          "sha256": "839d091e79880cf37fddb0368dad05ce2876a8abf6faaa2d9dad4f47f89948cc"
+        }
+      ]
+    },
+    {
+      "file": "app_features_2026_10.md",
+      "title": "Features added in October 2026",
+      "sha256": "63c883716455608190ed212dad40e06832e5580e6b7acb0c7d559f6c6d23346f",
+      "evidence": [
+        {
+          "origin": "project",
+          "path": "src/services/openMeteo.ts",
+          "sha256": "3e2f3df272646daa8da10c530bb0c97165b48a3cfb13311e72c772e885fcff32"
+        },
+        {
+          "origin": "project",
+          "path": "src/services/pollutantData.ts",
+          "sha256": "d894fab307d41d25934f06ab6741ccdf303761421167ffce6a225802f60426ca"
+        },
+        {
+          "origin": "project",
+          "path": "src/services/liveData.ts",
+          "sha256": "583e163a3192705fa39c676ca9a69263974a99d86b13c825d4f42b6b38e483ce"
+        },
+        {
+          "origin": "project",
+          "path": "src/services/cpcbAqi.ts",
+          "sha256": "199fe57c62e3186e682e2b5a5cbd9d4316720475c8bd0489208b0f15c7ccb9bd"
+        },
+        {
+          "origin": "project",
+          "path": "src/plan/planEngine.ts",
+          "sha256": "5db6d13bb2081bc33b8297aac7b927f06ac11c200eab99b889e5708a038f2351"
+        },
+        {
+          "origin": "project",
+          "path": "src/plan/costModel.ts",
+          "sha256": "4fd2f373affe54cfd732f856e3cfd10e34ad05e107cb6d2ee34b60bbccd716e2"
+        },
+        {
+          "origin": "project",
+          "path": "src/aerosage/AeroSageHost.tsx",
+          "sha256": "1d9f4a00b1ff27a1b4bec6c1384c541385eed9d2f52e4aa3bcdc63ce941e3fdd"
+        },
+        {
+          "origin": "project",
+          "path": "src/scenarios/scenarioOnCurrent.ts",
+          "sha256": "3fa8c4469877bc0c68d39e82c0204bdf87d872b5ac7b2f7b608d3155dd8f5938"
+        }
+      ]
+    },
+    {
+      "file": "sensor_intelligence_2026_10.md",
+      "title": "Sensor Intelligence missing sensor and unseen location estimates",
+      "sha256": "1fd0ad24ef30ab86b157dd8174b94f24cd7248abc1a7da232972f36112177660",
+      "evidence": [
+        {
+          "origin": "project",
+          "path": "backend/task2_model/aeromatrix_service.py",
+          "sha256": "6f3356e9dd203db5c4ffeeabe4d9d30f674358aecffe40784f4efce8d8773f13"
+        },
+        {
+          "origin": "project",
+          "path": "src/task2/SensorsPanel.tsx",
+          "sha256": "83cc2ea20b6bb8c9e9026ee8ed4a931242497f67f0253710ce93a8ea85a4dbc0"
+        },
+        {
+          "origin": "project",
+          "path": "backend/task2_model/TRAINING_RESULTS.md",
+          "sha256": "fe067eb3b0b68dcd38aa038377c00d15f9b951ed6e2eeea0a3080041ae1d60e9"
+        }
+      ]
+    }
+  ]
+}

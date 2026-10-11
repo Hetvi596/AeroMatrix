@@ -5,7 +5,7 @@
 export type LonLat = [number, number];
 
 /** Provenance of every value shown in the UI. Never mix silently. */
-export type DataStatus = 'OBSERVED' | 'MODEL_PREDICTION' | 'MODELED_SCENARIO' | 'DEMO';
+export type DataStatus = 'OBSERVED' | 'MODEL_DATA' | 'MODEL_PREDICTION' | 'MODELED_SCENARIO' | 'DEMO';
 
 export type Pollutant = 'pm25' | 'pm10' | 'no2' | 'so2' | 'co' | 'o3';
 
@@ -241,9 +241,11 @@ export type LayerId =
   | 'stations'
   | 'shadows'
   | 'photoreal'
-  | 'places';
+  | 'places'
+  | 'midcAreas'
+  | 'industrySites';
 
-export type DisplayMode = 'baseline' | 'scenario' | 'delta' | 'observed' | 'forecast';
+export type DisplayMode = 'baseline' | 'scenario' | 'delta' | 'observed' | 'forecast' | 'current';
 
 /** Station forecasts from the trained model (backend), gridded by IDW. Status MODEL_PREDICTION. */
 export interface ForecastLayer {
@@ -319,6 +321,7 @@ export type Section =
   | 'scenarios'
   | 'actions'
   | 'locations'
+  | 'sensors'
   | 'analytics'
   | 'data';
 

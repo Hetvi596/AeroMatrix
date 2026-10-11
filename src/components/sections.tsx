@@ -2,11 +2,15 @@ import { useEffect, useMemo, useRef, type KeyboardEvent } from 'react';
 import { ArrowRight, Plus } from 'lucide-react';
 import { useDisplayedStates, useTwin } from '../store/useTwinStore';
 import { Block, Button, DataBadge, SectionHeader, Segmented, Stat, Disclaimer, TABLE } from './ui';
-import { POLLUTANT_LABEL, POLLUTANT_UNIT, RISK_COLOR, pollutionColor, rgbToCss } from '../utils/colors';
+import { StationTable } from './StationPanels';
+import { DistrictInventory, IndustrialAreasTable } from './IndustryPanels';
+import { POLLUTANT_LABEL, POLLUTANT_UNIT, pollutionColor, rgbToCss } from '../utils/colors';
 import { fmt, fmtInt } from '../utils/format';
 import { zonePlaceNames } from '../utils/zones';
-import type { CellState, Pollutant } from '../types';
+import type { Pollutant } from '../types';
 import { majorRoads, roadMidpoint, roadTrafficLevel, trafficLevelLabel } from '../services/traffic';
+import { useZoneValues } from '../services/liveData';
+import { fmtIst } from '../services/pollutantData';
 
 function useStatus() {
   const r = useTwin((s) => s.activeResult);
@@ -70,14 +74,25 @@ function ValueCell({ p, v }: { p: Pollutant; v: number }) {
   );
 }
 
-/** Top hotspots: Zone, Zone type, value — rows select the zone on the map. */
-function HotspotTable({ states, pollutant, limit }: { states: CellState[]; pollutant: Pollutant; limit: number }) {
+/**
+ * Top hotspots: Zone, Zone type, value — rows select the zone on the map. Ranked from
+ * one source and one time only: model data when it covers every zone, otherwise the
+ * prototype model.
+ */
+function HotspotTable({ values, pollutant, limit }: { values: Map<string, number>; pollutant: Pollutant; limit: number }) {
   const base = useTwin((s) => s.base)!;
   const selected = useTwin((s) => s.selectedCellId);
   const selectZone = useSelectZone();
   const places = zonePlaceNames(base.cells);
   const byId = useMemo(() => new Map(base.cells.map((c) => [c.id, c])), [base]);
-  const top = useMemo(() => [...states].sort((a, b) => b[pollutant] - a[pollutant]).slice(0, limit), [states, pollutant, limit]);
+  const top = useMemo(
+    () =>
+      [...values.entries()]
+        .map(([cellId, v]) => ({ cellId, v }))
+        .sort((a, b) => b.v - a.v || a.cellId.localeCompare(b.cellId))
+        .slice(0, limit),
+    [values, limit],
+  );
   return (
     <table className={TABLE.table}>
       <thead>
@@ -108,7 +123,7 @@ function HotspotTable({ states, pollutant, limit }: { states: CellState[]; pollu
               </td>
               <td className={`${TABLE.td} text-sand-300`}>{byId.get(s.cellId)?.landUse}</td>
               <td className={`${TABLE.td} pr-5 text-right`}>
-                <ValueCell p={pollutant} v={s[pollutant]} />
+                <ValueCell p={pollutant} v={s.v} />
               </td>
             </tr>
           );
@@ -118,20 +133,45 @@ function HotspotTable({ states, pollutant, limit }: { states: CellState[]; pollu
   );
 }
 
+function SourceTag({ zv }: { zv: ReturnType<typeof useZoneValues> }) {
+  return zv.source === 'model_data' ? (
+    <span className="inline-flex items-center gap-1.5" title="Open-Meteo CAMS model at each zone centre; neighbouring zones can share a value">
+      <DataBadge status="MODEL_DATA" />
+      <span className="num text-[11px] text-sand-500">{fmtIst(zv.time)}</span>
+    </span>
+  ) : (
+    <span title="Current data isn't loaded; showing the prototype What-If baseline">
+      <DataBadge status="DEMO" />
+    </span>
+  );
+}
+
+function HotspotHeader({ title, zv }: { title: string; zv: ReturnType<typeof useZoneValues> }) {
+  return (
+    <div className="flex items-baseline justify-between gap-2 px-5 pb-1 pt-4">
+      <h3 className="text-[13px] font-semibold text-sand-200">{title}</h3>
+      <SourceTag zv={zv} />
+    </div>
+  );
+}
+
 export function OverviewSection() {
   const states = useDisplayedStates();
-  const pm = mean(states.map((s) => s.pm25));
-  const above = states.filter((s) => s.pm25 > 60).length;
+  const zv = useZoneValues(states, 'pm25');
+  const vals = [...zv.values.values()];
+  const pm = mean(vals);
+  const above = vals.filter((v) => v > 60).length;
   return (
     <>
       <SectionHeader title="Overview" />
-      <div className="grid grid-cols-2 gap-4 px-5 pb-4">
-        <Stat label="City mean PM2.5" value={fmt(pm, 0)} unit="µg/m³" />
-        <Stat label="Zones above 60 µg/m³" value={above} sub={`of ${states.length}`} />
-      </div>
+      <StationTable pollutant="pm25" />
       <div className="border-t hairline pb-2">
-        <h3 className="px-5 pb-1 pt-4 text-[13px] font-semibold text-sand-200">Top hotspots</h3>
-        <HotspotTable states={states} pollutant="pm25" limit={8} />
+        <HotspotHeader title="Top hotspots" zv={zv} />
+        <div className="grid grid-cols-2 gap-4 px-5 pb-3 pt-1">
+          <Stat label="Mean PM2.5 across zones" value={fmt(pm, 0)} unit="µg/m³" />
+          <Stat label="Zones above 60 µg/m³" value={above} sub={`of ${vals.length}`} />
+        </div>
+        <HotspotTable values={zv.values} pollutant="pm25" limit={8} />
       </div>
     </>
   );
@@ -140,6 +180,7 @@ export function OverviewSection() {
 export function AirQualitySection() {
   const states = useDisplayedStates();
   const pollutant = useTwin((s) => s.pollutant);
+  const zv = useZoneValues(states, pollutant);
   const setPollutant = useTwin((s) => s.setPollutant);
   return (
     <>
@@ -165,9 +206,12 @@ export function AirQualitySection() {
           })}
         </div>
       </div>
+      <div className="border-t hairline">
+        <StationTable pollutant={pollutant} />
+      </div>
       <div className="border-t hairline pb-2">
-        <h3 className="px-5 pb-1 pt-4 text-[13px] font-semibold text-sand-200">Hotspots</h3>
-        <HotspotTable states={states} pollutant={pollutant} limit={10} />
+        <HotspotHeader title="Hotspots" zv={zv} />
+        <HotspotTable values={zv.values} pollutant={pollutant} limit={10} />
       </div>
     </>
   );
@@ -175,6 +219,7 @@ export function AirQualitySection() {
 
 export function ZonesSection() {
   const states = useDisplayedStates();
+  const zv = useZoneValues(states, 'pm25');
   const base = useTwin((s) => s.base)!;
   const gridSize = useTwin((s) => s.gridSize);
   const setGridSize = useTwin((s) => s.setGridSize);
@@ -199,13 +244,18 @@ export function ZonesSection() {
         />
       </div>
       <div className="border-t hairline pb-2">
-        <h3 className="px-5 pb-1 pt-4 text-[13px] font-semibold text-sand-200">All zones</h3>
+        <div className="flex items-baseline justify-between gap-2 px-5 pb-1 pt-4">
+          <h3 className="text-[13px] font-semibold text-sand-200">All zones</h3>
+          <SourceTag zv={zv} />
+        </div>
         <table className={TABLE.table}>
           <thead>
             <tr>
               <th className={`${TABLE.th} pl-5 text-left`}>Zone</th>
               <th className={`${TABLE.th} text-left`}>Type</th>
-              <th className={`${TABLE.th} text-right`}>PM2.5</th>
+              <th className={`${TABLE.th} text-right`} title={zv.source === 'model_data' ? `Open-Meteo CAMS model data, ${fmtIst(zv.time)} IST` : 'Prototype model, demo inputs'}>
+                PM2.5
+              </th>
               <th className={`${TABLE.th} text-right`} title="Traffic intensity index, 0–100">Traffic</th>
               <th className={`${TABLE.th} pr-5 text-right`}>Green</th>
             </tr>
@@ -232,8 +282,8 @@ export function ZonesSection() {
                   <td className={`${TABLE.td} text-sand-300`}>{c?.landUse}</td>
                   <td className={`${TABLE.td} text-right`}>
                     <span className="inline-flex items-center justify-end gap-1.5">
-                      <span className="h-2 w-2 rounded-full" style={{ background: RISK_COLOR[s.risk] }} aria-hidden="true" />
-                      <span className="num font-semibold text-sand-50">{fmt(s.pm25, 0)}</span>
+                      <span className="h-2 w-2 rounded-full" style={{ background: rgbToCss(pollutionColor('pm25', zv.values.get(s.cellId) ?? s.pm25)) }} aria-hidden="true" />
+                      <span className="num font-semibold text-sand-50">{fmt(zv.values.get(s.cellId) ?? NaN, 0)}</span>
                     </span>
                   </td>
                   <td className={`${TABLE.td} num text-right text-sand-300`}>{fmt(s.trafficIntensity, 0)}</td>
@@ -316,15 +366,28 @@ export function IndustriesSection() {
   const sorted = useMemo(() => [...base.industries].sort((a, b) => b.emissionIntensity - a.emissionIntensity), [base]);
   const illustrative = base.industries.some((i) => i.status === 'DEMO');
   const body = useRevealSelected(selectedId);
+  const layers = useTwin((s) => s.layers);
+  const toggleLayer = useTwin((s) => s.toggleLayer);
+  // Show the industrial geography on the map while this screen is open (once per visit).
+  useEffect(() => {
+    if (!layers.midcAreas) toggleLayer('midcAreas');
+    if (!layers.industrySites) toggleLayer('industrySites');
+    // Runs on entry only, so turning a layer off while here is respected.
+  }, []);
   return (
     <>
       <SectionHeader title="Industries" />
-      {illustrative && (
-        <p className="-mt-1 px-5 pb-3 text-[12px] leading-snug text-sand-400" title="Industry names and emissions come from the prototype dataset.">
-          Illustrative sources from the prototype dataset, not a verified registry.
-        </p>
-      )}
+      <IndustrialAreasTable />
       <div className="border-t hairline pb-2">
+        <div className="flex items-baseline justify-between gap-2 px-5 pb-1 pt-4">
+          <h3 className="text-[13px] font-semibold text-sand-200">Modeled sources</h3>
+          <DataBadge status="DEMO" />
+        </div>
+        {illustrative && (
+          <p className="px-5 pb-2 text-[12px] text-sand-400" title="Names and intensities come from the prototype dataset, not a verified registry.">
+            Illustrative sources used by What-If.
+          </p>
+        )}
         <table className={TABLE.table}>
           <thead>
             <tr>
@@ -372,6 +435,7 @@ export function IndustriesSection() {
           </tbody>
         </table>
       </div>
+      <DistrictInventory />
       <div className="px-5 pb-5 pt-2">
         <Button
           className="w-full"

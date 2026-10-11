@@ -1,0 +1,45 @@
+{
+  "source_elements": 551,
+  "usable_geometries": 551,
+  "rejected_ids": [],
+  "polygons": 0,
+  "point_or_center_features": 551,
+  "source": "OpenStreetMap Overpass downloaded recovery tile_1; ODbL, OpenStreetMap contributors",
+  "recovery_report": {
+    "retrieved_utc": "2026-10-10T05:45:25.632493+00:00",
+    "source_collection": "https://data.opencity.in/dataset/pune-hourly-air-quality-reports",
+    "pollution_count": 22,
+    "pollution_expected": 22,
+    "pollution_failures": [],
+    "historical_aqi_files": 10,
+    "geojson_count": 4,
+    "geojson_failures": [],
+    "geojson_features": 190,
+    "industry_sites_count": 551,
+    "industry_osm_failed_tiles": 3,
+    "industry_osm_failures": [
+      {
+        "tile": 2,
+        "bounding_box": "18.25000,73.92500,18.66500,74.50000",
+        "error": "HTTP Error 500: Internal Server Error"
+      },
+      {
+        "tile": 3,
+        "bounding_box": "18.66500,73.35000,19.08000,73.92500",
+        "error": "HTTP Error 500: Internal Server Error"
+      },
+      {
+        "tile": 4,
+        "bounding_box": "18.66500,73.92500,19.08000,74.50000",
+        "error": "HTTP Error 500: Internal Server Error"
+      }
+    ],
+    "midc_rows": 0,
+    "midc_errors": [
+      "{'code': 500, 'message': 'Error performing query operation', 'details': []}"
+    ]
+  },
+  "used_in_trained_forecasts": false,
+  "reason": "Station coordinates are absent; no defensible station-to-industry features can be joined. Three of four OSM tiles failed. The 2026 snapshot cannot establish historical factory presence/emissions in 2024-2025.",
+  "district_emissions_use": "Pune district 2021 aggregate only; not allocated to stations or factories."
+}

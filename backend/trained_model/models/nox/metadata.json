@@ -1,0 +1,383 @@
+{
+  "pipeline_version": "1.0.0",
+  "version": "20261010T052846107296Z",
+  "fingerprint": "b692d75898796231238cac80ec108fa9d2fd6f5e69cb66294389b6a6e5377548",
+  "target": "nox",
+  "unit": "ppb",
+  "horizon_hours": 24,
+  "chosen_model": "random_forest",
+  "features": [
+    "lag_0",
+    "lag_1",
+    "lag_3",
+    "lag_6",
+    "lag_12",
+    "lag_24",
+    "lag_48",
+    "lag_72",
+    "lag_168",
+    "rolling_6",
+    "rolling_24",
+    "rolling_72",
+    "hour_sin",
+    "hour_cos",
+    "month_sin",
+    "month_cos",
+    "dow",
+    "temperature",
+    "humidity",
+    "wind_speed",
+    "rainfall",
+    "pressure",
+    "solar_radiation",
+    "wind_sin",
+    "wind_cos"
+  ],
+  "trained_at": "2026-10-10T05:28:46.107296+00:00",
+  "data_period": [
+    "2024-01-01 05:00:00+05:30",
+    "2026-01-01 05:00:00+05:30"
+  ],
+  "stations": [
+    "site_292",
+    "site_5404",
+    "site_5405",
+    "site_5406",
+    "site_5407",
+    "site_5408",
+    "site_5409",
+    "site_5766",
+    "site_5767",
+    "site_5988",
+    "site_5996",
+    "site_6012"
+  ],
+  "station_locations": {},
+  "split": {
+    "val_start": "2025-03-14 11:00:00+05:30",
+    "test_start": "2025-08-07 08:00:00+05:30",
+    "train_label_end": "2025-03-14 10:00:00+05:30",
+    "validation_label_end": "2025-08-07 07:00:00+05:30"
+  },
+  "results": {
+    "persistence": {
+      "val": {
+        "mae": 5.150125724910355,
+        "rmse": 10.697167844228915,
+        "r2": 0.5796732395877758,
+        "n": 22589
+      },
+      "test": {
+        "mae": 8.732163877298017,
+        "rmse": 18.423832312813193,
+        "r2": 0.5985599328605974,
+        "n": 22048
+      }
+    },
+    "seasonal_average": {
+      "val": {
+        "mae": 13.687564831306533,
+        "rmse": 19.76983638074303,
+        "r2": -0.43567312352492604,
+        "n": 22589
+      },
+      "test": {
+        "mae": 18.38550543837425,
+        "rmse": 28.384009570508773,
+        "r2": 0.04718571112469927,
+        "n": 22048
+      }
+    },
+    "hist_gradient_boosting": {
+      "val": {
+        "mae": 4.898050985467104,
+        "rmse": 9.771239238487674,
+        "r2": 0.6492895443941551,
+        "n": 22589
+      },
+      "test": {
+        "mae": 8.466725749690719,
+        "rmse": 17.209564904004825,
+        "r2": 0.6497319268208483,
+        "n": 22048
+      }
+    },
+    "random_forest": {
+      "val": {
+        "mae": 4.953131081008363,
+        "rmse": 9.757823950850703,
+        "r2": 0.6502518894505878,
+        "n": 22589
+      },
+      "test": {
+        "mae": 8.639333320952208,
+        "rmse": 17.01064852298473,
+        "r2": 0.6577822633461698,
+        "n": 22048
+      }
+    }
+  },
+  "record_counts": {
+    "source_hourly_rows": 162713,
+    "valid_target_rows": 130218,
+    "eligible_forecast_pairs": 114606,
+    "train": 69615,
+    "validation": 22589,
+    "test": 22048,
+    "purged": 354
+  },
+  "training_label_end": "2025-03-14 10:00:00+05:30",
+  "test_period": [
+    "2025-08-08 08:00:00+05:30",
+    "2026-01-01 04:00:00+05:30"
+  ],
+  "test_stations": [
+    "site_5404",
+    "site_5406",
+    "site_5407",
+    "site_5408",
+    "site_5409",
+    "site_5766",
+    "site_5767",
+    "site_5988",
+    "site_5996",
+    "site_6012"
+  ],
+  "shap_group_importance": null,
+  "station_holdout_forecasting": {
+    "status": "EVALUATED",
+    "task": "Forecasting at an unseen station WITH its own observed history; not spatial estimation at an unmonitored location",
+    "folds": [
+      {
+        "held_out_station": "site_5404",
+        "model": "hist_gradient_boosting",
+        "training_rows": 61026,
+        "validation_rows": 20152,
+        "test": {
+          "mae": 8.146259860948456,
+          "rmse": 13.352374895135055,
+          "r2": 0.3843107909181256,
+          "n": 2588
+        },
+        "persistence_test": {
+          "mae": 8.761100592478103,
+          "rmse": 15.016235269462426,
+          "r2": 0.22130634677041128,
+          "n": 2588
+        },
+        "test_period": [
+          "2025-08-11 18:00:00+05:30",
+          "2026-01-01 04:00:00+05:30"
+        ]
+      },
+      {
+        "held_out_station": "site_5406",
+        "model": "hist_gradient_boosting",
+        "training_rows": 65907,
+        "validation_rows": 19545,
+        "test": {
+          "mae": 4.631010848967823,
+          "rmse": 6.471218130825573,
+          "r2": 0.21559649783197654,
+          "n": 1001
+        },
+        "persistence_test": {
+          "mae": 5.383567266067266,
+          "rmse": 7.873249858249106,
+          "r2": -0.161115743524477,
+          "n": 1001
+        },
+        "test_period": [
+          "2025-08-08 08:00:00+05:30",
+          "2025-09-20 00:00:00+05:30"
+        ]
+      },
+      {
+        "held_out_station": "site_5407",
+        "model": "hist_gradient_boosting",
+        "training_rows": 67184,
+        "validation_rows": 21804,
+        "test": {
+          "mae": 8.68803500159251,
+          "rmse": 12.153985102003102,
+          "r2": 0.3796665938860305,
+          "n": 1862
+        },
+        "persistence_test": {
+          "mae": 7.773210705334766,
+          "rmse": 12.851676453476669,
+          "r2": 0.3064027908878334,
+          "n": 1862
+        },
+        "test_period": [
+          "2025-10-03 09:00:00+05:30",
+          "2026-01-01 04:00:00+05:30"
+        ]
+      },
+      {
+        "held_out_station": "site_5408",
+        "model": "hist_gradient_boosting",
+        "training_rows": 62696,
+        "validation_rows": 20063,
+        "test": {
+          "mae": 8.573062946480462,
+          "rmse": 14.13566240609934,
+          "r2": 0.48527191213121945,
+          "n": 2164
+        },
+        "persistence_test": {
+          "mae": 9.310983133086875,
+          "rmse": 16.251888595967195,
+          "r2": 0.31961737933099554,
+          "n": 2164
+        },
+        "test_period": [
+          "2025-08-08 08:00:00+05:30",
+          "2025-12-29 21:00:00+05:30"
+        ]
+      },
+      {
+        "held_out_station": "site_5409",
+        "model": "hist_gradient_boosting",
+        "training_rows": 60615,
+        "validation_rows": 20743,
+        "test": {
+          "mae": 25.924431966300507,
+          "rmse": 45.07698727875491,
+          "r2": 0.4290482082951418,
+          "n": 2400
+        },
+        "persistence_test": {
+          "mae": 25.737913888888887,
+          "rmse": 43.91045911872002,
+          "r2": 0.4582166781494015,
+          "n": 2400
+        },
+        "test_period": [
+          "2025-08-08 08:00:00+05:30",
+          "2026-01-01 04:00:00+05:30"
+        ]
+      },
+      {
+        "held_out_station": "site_5766",
+        "model": "hist_gradient_boosting",
+        "training_rows": 63295,
+        "validation_rows": 20248,
+        "test": {
+          "mae": 5.329087035082899,
+          "rmse": 7.480812140238912,
+          "r2": 0.5949764738167093,
+          "n": 2263
+        },
+        "persistence_test": {
+          "mae": 4.9914935925762265,
+          "rmse": 7.668877557190828,
+          "r2": 0.5743561523535314,
+          "n": 2263
+        },
+        "test_period": [
+          "2025-08-08 08:00:00+05:30",
+          "2026-01-01 04:00:00+05:30"
+        ]
+      },
+      {
+        "held_out_station": "site_5767",
+        "model": "hist_gradient_boosting",
+        "training_rows": 60733,
+        "validation_rows": 19820,
+        "test": {
+          "mae": 10.701336256877946,
+          "rmse": 17.713717524582357,
+          "r2": 0.690058706055417,
+          "n": 2097
+        },
+        "persistence_test": {
+          "mae": 9.979744078842792,
+          "rmse": 18.161036803870918,
+          "r2": 0.6742073447783765,
+          "n": 2097
+        },
+        "test_period": [
+          "2025-08-08 08:00:00+05:30",
+          "2026-01-01 04:00:00+05:30"
+        ]
+      },
+      {
+        "held_out_station": "site_5988",
+        "model": "hist_gradient_boosting",
+        "training_rows": 63313,
+        "validation_rows": 19760,
+        "test": {
+          "mae": 5.5900269713692685,
+          "rmse": 8.370656727840466,
+          "r2": 0.5519560108925801,
+          "n": 3306
+        },
+        "persistence_test": {
+          "mae": 5.894423018753781,
+          "rmse": 9.398344222348783,
+          "r2": 0.43518751849995885,
+          "n": 3306
+        },
+        "test_period": [
+          "2025-08-08 08:00:00+05:30",
+          "2026-01-01 04:00:00+05:30"
+        ]
+      },
+      {
+        "held_out_station": "site_5996",
+        "model": "hist_gradient_boosting",
+        "training_rows": 66626,
+        "validation_rows": 20435,
+        "test": {
+          "mae": 4.267440671403049,
+          "rmse": 6.855841065510207,
+          "r2": 0.44394623021595536,
+          "n": 3361
+        },
+        "persistence_test": {
+          "mae": 4.10269017157592,
+          "rmse": 7.4055364535404316,
+          "r2": 0.35120371351214696,
+          "n": 3361
+        },
+        "test_period": [
+          "2025-08-08 08:00:00+05:30",
+          "2026-01-01 04:00:00+05:30"
+        ]
+      },
+      {
+        "held_out_station": "site_6012",
+        "model": "hist_gradient_boosting",
+        "training_rows": 69056,
+        "validation_rows": 22171,
+        "test": {
+          "mae": 3.4983550437100313,
+          "rmse": 5.550724337483756,
+          "r2": 0.8309843841643799,
+          "n": 1006
+        },
+        "persistence_test": {
+          "mae": 2.5556792577866134,
+          "rmse": 5.517814640788052,
+          "r2": 0.8329825967555059,
+          "n": 1006
+        },
+        "test_period": [
+          "2025-08-22 12:00:00+05:30",
+          "2025-12-26 11:00:00+05:30"
+        ]
+      }
+    ]
+  },
+  "interval": {
+    "method": "absolute validation residual 90th percentile; not guaranteed under temporal shift",
+    "radius": 11.023059152820132,
+    "test_coverage": 0.7917271407837445
+  },
+  "limitations": [
+    "Station forecasts require observed history; not causal intervention estimates.",
+    "No claim of accuracy at unmonitored locations.",
+    "Model is not refitted after evaluation; stored metrics describe the saved estimator."
+  ]
+}

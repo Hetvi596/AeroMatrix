@@ -1,0 +1,214 @@
+{
+  "pipeline_version": "1.0.0",
+  "version": "20261010T053012055896Z",
+  "fingerprint": "b692d75898796231238cac80ec108fa9d2fd6f5e69cb66294389b6a6e5377548",
+  "target": "so2",
+  "unit": "ug/m3",
+  "horizon_hours": 24,
+  "chosen_model": "persistence",
+  "features": [
+    "lag_0",
+    "lag_1",
+    "lag_3",
+    "lag_6",
+    "lag_12",
+    "lag_24",
+    "lag_48",
+    "lag_72",
+    "lag_168",
+    "rolling_6",
+    "rolling_24",
+    "rolling_72",
+    "hour_sin",
+    "hour_cos",
+    "month_sin",
+    "month_cos",
+    "dow",
+    "temperature",
+    "humidity",
+    "wind_speed",
+    "rainfall",
+    "pressure",
+    "solar_radiation",
+    "wind_sin",
+    "wind_cos"
+  ],
+  "trained_at": "2026-10-10T05:30:12.055896+00:00",
+  "data_period": [
+    "2024-01-01 05:00:00+05:30",
+    "2026-01-01 05:00:00+05:30"
+  ],
+  "stations": [
+    "site_292",
+    "site_5409",
+    "site_5766",
+    "site_5767"
+  ],
+  "station_locations": {},
+  "split": {
+    "val_start": "2025-03-03 14:00:00+05:30",
+    "test_start": "2025-07-24 17:00:00+05:30",
+    "train_label_end": "2025-03-03 13:00:00+05:30",
+    "validation_label_end": "2025-07-24 16:00:00+05:30"
+  },
+  "results": {
+    "persistence": {
+      "val": {
+        "mae": 2.4186024436766718,
+        "rmse": 5.54515032834949,
+        "r2": 0.7236722842237011,
+        "n": 9262
+      },
+      "test": {
+        "mae": 2.654645254806225,
+        "rmse": 8.476823872481248,
+        "r2": -0.10057134389323985,
+        "n": 6554
+      }
+    },
+    "seasonal_average": {
+      "val": {
+        "mae": 14.193059874219664,
+        "rmse": 21.259528222167344,
+        "r2": -3.0616738211321604,
+        "n": 9262
+      },
+      "test": {
+        "mae": 13.712565837050281,
+        "rmse": 22.690563054948356,
+        "r2": -6.885739511038011,
+        "n": 6554
+      }
+    },
+    "hist_gradient_boosting": {
+      "val": {
+        "mae": 3.8472199327922043,
+        "rmse": 7.966833300603111,
+        "r2": 0.4296134732378518,
+        "n": 9262
+      },
+      "test": {
+        "mae": 2.7464801399137033,
+        "rmse": 7.191048078768141,
+        "r2": 0.2079797853823696,
+        "n": 6554
+      }
+    },
+    "random_forest": {
+      "val": {
+        "mae": 2.970743981073421,
+        "rmse": 5.610413709428305,
+        "r2": 0.7171295556881747,
+        "n": 9262
+      },
+      "test": {
+        "mae": 2.798495632372352,
+        "rmse": 7.202092092119955,
+        "r2": 0.20554514758981612,
+        "n": 6554
+      }
+    }
+  },
+  "record_counts": {
+    "source_hourly_rows": 162713,
+    "valid_target_rows": 52554,
+    "eligible_forecast_pairs": 44596,
+    "train": 28631,
+    "validation": 9262,
+    "test": 6554,
+    "purged": 149
+  },
+  "training_label_end": "2025-03-03 13:00:00+05:30",
+  "test_period": [
+    "2025-07-25 17:00:00+05:30",
+    "2026-01-01 04:00:00+05:30"
+  ],
+  "test_stations": [
+    "site_5409",
+    "site_5766",
+    "site_5767"
+  ],
+  "shap_group_importance": null,
+  "station_holdout_forecasting": {
+    "status": "EVALUATED",
+    "task": "Forecasting at an unseen station WITH its own observed history; not spatial estimation at an unmonitored location",
+    "folds": [
+      {
+        "held_out_station": "site_5409",
+        "model": "persistence",
+        "training_rows": 20872,
+        "validation_rows": 6376,
+        "test": {
+          "mae": 3.703196740670761,
+          "rmse": 5.693987844577903,
+          "r2": 0.43767056583917685,
+          "n": 2117
+        },
+        "persistence_test": {
+          "mae": 3.703196740670761,
+          "rmse": 5.693987844577903,
+          "r2": 0.43767056583917685,
+          "n": 2117
+        },
+        "test_period": [
+          "2025-07-25 17:00:00+05:30",
+          "2026-01-01 04:00:00+05:30"
+        ]
+      },
+      {
+        "held_out_station": "site_5766",
+        "model": "persistence",
+        "training_rows": 23607,
+        "validation_rows": 7252,
+        "test": {
+          "mae": 3.7511236292624317,
+          "rmse": 13.440619271834914,
+          "r2": -0.47703622802249024,
+          "n": 2219
+        },
+        "persistence_test": {
+          "mae": 3.7511236292624317,
+          "rmse": 13.440619271834914,
+          "r2": -0.47703622802249024,
+          "n": 2219
+        },
+        "test_period": [
+          "2025-07-25 17:00:00+05:30",
+          "2026-01-01 04:00:00+05:30"
+        ]
+      },
+      {
+        "held_out_station": "site_5767",
+        "model": "persistence",
+        "training_rows": 20298,
+        "validation_rows": 6425,
+        "test": {
+          "mae": 0.5568684250075143,
+          "rmse": 0.8081459270344227,
+          "r2": 0.10308603271515349,
+          "n": 2218
+        },
+        "persistence_test": {
+          "mae": 0.5568684250075143,
+          "rmse": 0.8081459270344227,
+          "r2": 0.10308603271515349,
+          "n": 2218
+        },
+        "test_period": [
+          "2025-07-25 17:00:00+05:30",
+          "2026-01-01 04:00:00+05:30"
+        ]
+      }
+    ]
+  },
+  "interval": {
+    "method": "absolute validation residual 90th percentile; not guaranteed under temporal shift",
+    "radius": 5.590000000000003,
+    "test_coverage": 0.8909063167531278
+  },
+  "limitations": [
+    "Station forecasts require observed history; not causal intervention estimates.",
+    "No claim of accuracy at unmonitored locations.",
+    "Model is not refitted after evaluation; stored metrics describe the saved estimator."
+  ]
+}

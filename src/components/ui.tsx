@@ -12,6 +12,11 @@ export const STATUS_STYLE: Record<DataStatus, { label: string; dot: string; titl
     dot: 'bg-emerald-400',
     title: 'Measured data from an imported source (e.g. CPCB, ERA5).',
   },
+  MODEL_DATA: {
+    label: 'Model data',
+    dot: 'bg-violet-300',
+    title: 'Air-quality model data from Open-Meteo (CAMS global model) for the place’s coordinates. Not a station measurement.',
+  },
   MODEL_PREDICTION: {
     label: 'Model prediction',
     dot: 'bg-sky-300',

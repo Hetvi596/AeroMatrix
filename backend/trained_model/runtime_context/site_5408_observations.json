@@ -1,0 +1,182 @@
+{
+  "status": "MEASURED",
+  "region": {
+    "station": "site_5408",
+    "station_name": "Transport Nagar-Nigdi, Pune - IITM",
+    "name": "Transport Nagar-Nigdi",
+    "aliases": [
+      "Nigdi",
+      "Transport Nagar",
+      "Transport Nagar-Nigdi"
+    ],
+    "longitude": null,
+    "latitude": null,
+    "source_files": "22_Transport_Nagar_Nigdi_15_minute_AQI_Data_for_2024-25.csv"
+  },
+  "pollutants": {
+    "pm25": {
+      "status": "MEASURED",
+      "value": 52.41,
+      "unit": "ug/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "pm10": {
+      "status": "MEASURED",
+      "value": 140.405,
+      "unit": "ug/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "no2": {
+      "status": "MEASURED",
+      "value": 33.09,
+      "unit": "ug/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "no": {
+      "status": "MEASURED",
+      "value": 5.0825,
+      "unit": "ug/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "nox": {
+      "status": "MEASURED",
+      "value": 21.73,
+      "unit": "ppb",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "co": {
+      "status": "MEASURED",
+      "value": 2.1425,
+      "unit": "mg/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "o3": {
+      "status": "MEASURED",
+      "value": 60.9725,
+      "unit": "ug/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "benzene": {
+      "status": "MEASURED",
+      "value": 5.4425,
+      "unit": "ug/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "toluene": {
+      "status": "MEASURED",
+      "value": 10.77,
+      "unit": "ug/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "xylene": {
+      "status": "MEASURED",
+      "value": 4.1025,
+      "unit": "ug/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    }
+  },
+  "aqi": {
+    "status": "UNAVAILABLE",
+    "value": null,
+    "category": null,
+    "dominant_pollutant": null,
+    "reason": "Requires at least three eligible pollutants including PM2.5 or PM10",
+    "subindices": {},
+    "coverage_hours": {
+      "pm25": 10,
+      "pm10": 10,
+      "no2": 10,
+      "so2": 0,
+      "co": 9,
+      "o3": 10,
+      "nh3": 0
+    },
+    "excluded": {
+      "pm25": "Fewer than 16 valid hourly observations in 24h",
+      "pm10": "Fewer than 16 valid hourly observations in 24h",
+      "no2": "Fewer than 16 valid hourly observations in 24h",
+      "so2": "Fewer than 16 valid hourly observations in 24h",
+      "co": "Fewer than 16 valid hourly observations in 24h",
+      "o3": "Fewer than 16 valid hourly observations in 24h",
+      "nh3": "Fewer than 16 valid hourly observations in 24h"
+    },
+    "period_end": "2026-01-01T00:30:00+00:00",
+    "method": "CPCB National AQI; measured hourly data; conservative eight-hour completeness",
+    "timestamp_semantics": "completed_hour_end"
+  },
+  "historical": true,
+  "snapshot_end": "2026-01-01T05:00:00+05:30",
+  "source_files": "22_Transport_Nagar_Nigdi_15_minute_AQI_Data_for_2024-25.csv",
+  "notice": "time and snapshot_end label hour starts; window.end and snapshot_window_end are completed-hour availability. Latest values can have different timestamps; AQI uses one coherent window.",
+  "snapshot_window_end": "2026-01-01T06:00:00+05:30"
+}

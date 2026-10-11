@@ -27,6 +27,9 @@ export function ModelStatus() {
   const mode = useTwin((s) => s.displayMode);
   const setMode = useTwin((s) => s.setDisplayMode);
   const setPollutant = useTwin((s) => s.setPollutant);
+  const modelService = useTwin((s) => s.modelService);
+  const setSection = useTwin((s) => s.setSection);
+  const setLeftOpen = useTwin((s) => s.setLeftOpen);
 
   const load = async () => {
     setState({ kind: 'loading' });
@@ -52,12 +55,34 @@ export function ModelStatus() {
     </button>
   );
 
+  if (modelService.status === 'online' && modelService.health) {
+    // The trained station backend (backend/trained_model) replaces the old grid-forecast API.
+    const h = modelService.health;
+    return (
+      <Block title="Trained forecast models" right={<DataBadge status="MODEL_PREDICTION" />}>
+        <p className="text-[12.5px] leading-snug text-sand-300">
+          {h.model_count} trained models cover {h.supported_pollutants.length} pollutants at {h.station_count} monitoring stations, with +24 h
+          forecasts. Station coordinates aren't in the source data, so forecasts aren't drawn on the zone grid.
+        </p>
+        <Button
+          className="mt-2"
+          onClick={() => {
+            setSection('air');
+            setLeftOpen(true);
+          }}
+        >
+          Open monitoring stations
+        </Button>
+      </Block>
+    );
+  }
+
   if (state.kind !== 'ready') {
     const msg =
       state.kind === 'loading'
         ? 'Checking prediction service…'
         : state.kind === 'offline'
-          ? `Backend not running at ${API_URL}. Start it with: uvicorn backend.api.main:app --port 8000`
+          ? `Model service not running at ${API_URL}. Start it with RUN_AEROMATRIX.bat.`
           : 'Backend is running but no model is trained yet — run python -m backend.ml.train on real CPCB data.';
     return (
       <>

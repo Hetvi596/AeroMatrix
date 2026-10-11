@@ -1,0 +1,183 @@
+{
+  "status": "MEASURED",
+  "region": {
+    "station": "site_6012",
+    "station_name": "Dhankawadi, Pune - IITM",
+    "name": "Dhankawadi",
+    "aliases": [
+      "Dhankawadi"
+    ],
+    "longitude": null,
+    "latitude": null,
+    "source_files": "14_Dhankawadi_IITM_15_minute_AQI_Data_for_2025.csv"
+  },
+  "pollutants": {
+    "pm25": {
+      "status": "MEASURED",
+      "value": 125.71,
+      "unit": "ug/m3",
+      "time": "2025-12-31T14:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2025-12-31T14:00:00+05:30",
+        "end": "2025-12-31T15:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "pm10": {
+      "status": "MEASURED",
+      "value": 172.775,
+      "unit": "ug/m3",
+      "time": "2025-12-31T14:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2025-12-31T14:00:00+05:30",
+        "end": "2025-12-31T15:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "no2": {
+      "status": "MEASURED",
+      "value": 7.922499999999999,
+      "unit": "ug/m3",
+      "time": "2025-12-31T14:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2025-12-31T14:00:00+05:30",
+        "end": "2025-12-31T15:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "no": {
+      "status": "MEASURED",
+      "value": 7.08,
+      "unit": "ug/m3",
+      "time": "2025-12-31T14:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2025-12-31T14:00:00+05:30",
+        "end": "2025-12-31T15:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "nox": {
+      "status": "MEASURED",
+      "value": 15.005,
+      "unit": "ppb",
+      "time": "2025-12-31T14:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2025-12-31T14:00:00+05:30",
+        "end": "2025-12-31T15:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "co": {
+      "status": "MEASURED",
+      "value": 0.0,
+      "unit": "mg/m3",
+      "time": "2025-12-31T14:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2025-12-31T14:00:00+05:30",
+        "end": "2025-12-31T15:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "o3": {
+      "status": "MEASURED",
+      "value": 1.185,
+      "unit": "ug/m3",
+      "time": "2025-12-31T14:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2025-12-31T14:00:00+05:30",
+        "end": "2025-12-31T15:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "benzene": {
+      "status": "MEASURED",
+      "value": 3.0,
+      "unit": "ug/m3",
+      "time": "2025-12-31T14:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2025-12-31T14:00:00+05:30",
+        "end": "2025-12-31T15:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "toluene": {
+      "status": "MEASURED",
+      "value": 7.5925,
+      "unit": "ug/m3",
+      "time": "2025-12-31T14:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2025-12-31T14:00:00+05:30",
+        "end": "2025-12-31T15:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    }
+  },
+  "aqi": {
+    "status": "AVAILABLE",
+    "value": 193,
+    "category": "Moderate",
+    "dominant_pollutant": "pm25",
+    "reason": null,
+    "subindices": {
+      "pm25": {
+        "value": 193,
+        "bounded": false,
+        "concentration": 87.82021739130437,
+        "averaging_hours": 24
+      },
+      "pm10": {
+        "value": 134,
+        "bounded": false,
+        "concentration": 150.79847826086953,
+        "averaging_hours": 24
+      },
+      "no2": {
+        "value": 10,
+        "bounded": false,
+        "concentration": 7.954021739130434,
+        "averaging_hours": 24
+      }
+    },
+    "coverage_hours": {
+      "pm25": 23,
+      "pm10": 23,
+      "no2": 23,
+      "so2": 0,
+      "co": 23,
+      "o3": 23,
+      "nh3": 0
+    },
+    "excluded": {
+      "so2": "Fewer than 16 valid hourly observations in 24h",
+      "co": "Incomplete trailing 8h average",
+      "o3": "Incomplete trailing 8h average",
+      "nh3": "Fewer than 16 valid hourly observations in 24h"
+    },
+    "period_end": "2025-12-31T10:30:00+00:00",
+    "method": "CPCB National AQI; measured hourly data; conservative eight-hour completeness",
+    "timestamp_semantics": "completed_hour_end"
+  },
+  "historical": true,
+  "snapshot_end": "2025-12-31T15:00:00+05:30",
+  "source_files": "14_Dhankawadi_IITM_15_minute_AQI_Data_for_2025.csv",
+  "notice": "time and snapshot_end label hour starts; window.end and snapshot_window_end are completed-hour availability. Latest values can have different timestamps; AQI uses one coherent window.",
+  "snapshot_window_end": "2025-12-31T16:00:00+05:30"
+}

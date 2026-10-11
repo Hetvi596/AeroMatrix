@@ -36,6 +36,7 @@ import {
   ScreenSpaceEventHandler,
   ScreenSpaceEventType,
   SingleTileImageryProvider,
+  SplitDirection,
   Transforms,
   UrlTemplateImageryProvider,
   VerticalOrigin,
@@ -87,6 +88,20 @@ export interface CellRenderInput {
 
 export type IndustryDisplayState = 'active' | 'removed' | 'added' | 'pending';
 
+/** MIDC industrial estate outline for the map (verified boundary, no emissions). */
+export interface IndustrialAreaShape {
+  code: number;
+  name: string;
+  polygons: LonLat[][][];
+  centroid: LonLat;
+}
+/** Mapped industry site (OSM point) for the map. */
+export interface IndustrySitePoint {
+  id: string;
+  name: string | null;
+  location: LonLat;
+}
+
 const ION_TOKEN = (import.meta.env.VITE_CESIUM_ION_TOKEN as string | undefined)?.trim();
 
 const ESRI = (svc: string) => `https://server.arcgisonline.com/ArcGIS/rest/services/${svc}/MapServer/tile/{z}/{y}/{x}`;
@@ -120,6 +135,10 @@ export class TwinMap {
   private roadsLayer: ImageryLayer | null = null;
   private labelsLayer: ImageryLayer | null = null;
   private heatLayer: ImageryLayer | null = null;
+  /** Baseline heat layer shown on the left half during the baseline-vs-scenario swipe. */
+  private compareLayer: ImageryLayer | null = null;
+  private compareOn = false;
+  private compareVersion = 0;
   private heatVersion = 0;
 
   // Terrain
@@ -195,7 +214,7 @@ export class TwinMap {
     (v.cesiumWidget.creditContainer as HTMLElement).classList.add('twin-credits');
 
     this.setupImagery();
-    for (const name of ['heatGrid', 'columns', 'grid', 'green', 'traffic', 'industries', 'area', 'affected', 'selection', 'markers']) {
+    for (const name of ['heatGrid', 'columns', 'grid', 'green', 'midc', 'traffic', 'industries', 'sites', 'area', 'affected', 'selection', 'markers']) {
       const d = new CustomDataSource(name);
       this.ds[name] = d;
       await v.dataSources.add(d);
@@ -269,6 +288,7 @@ export class TwinMap {
     const layers = this.viewer?.imageryLayers;
     if (!layers) return;
     if (this.darkLayer) layers.lowerToBottom(this.darkLayer);
+    if (this.compareLayer) layers.raiseToTop(this.compareLayer);
     if (this.heatLayer) layers.raiseToTop(this.heatLayer);
     if (this.roadsLayer) layers.raiseToTop(this.roadsLayer);
     if (this.labelsLayer) layers.raiseToTop(this.labelsLayer);
@@ -587,6 +607,7 @@ export class TwinMap {
         const layer = new ImageryLayer(provider, {});
         layer.show = this.layers?.heatmap ?? true;
         this.viewer.imageryLayers.add(layer);
+        if (this.compareOn) layer.splitDirection = SplitDirection.RIGHT;
         if (this.heatLayer) this.viewer.imageryLayers.remove(this.heatLayer, true);
         this.heatLayer = layer;
         this.orderImagery();
@@ -846,6 +867,164 @@ export class TwinMap {
   }
 
   // ----------------------------------------------------------------- layers
+  // ------------------------------------------------- baseline vs scenario swipe
+  /**
+   * Swipe comparison: the current heat layer (scenario) shows right of the divider and a
+   * baseline heat layer, on the same colour scale, shows left of it.
+   */
+  setCompare(on: boolean, position: number, baseline: { base: BaseState; states: CellState[]; pollutant: Pollutant } | null) {
+    const v = this.viewer;
+    if (!v) return;
+    v.scene.splitPosition = position;
+    const version = ++this.compareVersion;
+    if (!on || !baseline) {
+      this.compareOn = false;
+      if (this.compareLayer) v.imageryLayers.remove(this.compareLayer, true);
+      this.compareLayer = null;
+      if (this.heatLayer) this.heatLayer.splitDirection = SplitDirection.NONE;
+      this.kick();
+      return;
+    }
+    this.compareOn = true;
+    if (this.heatLayer) this.heatLayer.splitDirection = SplitDirection.RIGHT;
+    const { base, states, pollutant } = baseline;
+    const canvas = renderFieldCanvas(states.map((s) => s[pollutant]), base.gridSize, (x: number) => pollutionColor(pollutant, x), 0.58);
+    const { bbox } = base.city;
+    SingleTileImageryProvider.fromUrl(canvas.toDataURL('image/png'), {
+      rectangle: Rectangle.fromDegrees(bbox.west, bbox.south, bbox.east, bbox.north),
+    })
+      .then((provider) => {
+        if (version !== this.compareVersion || !this.viewer) return;
+        const layer = new ImageryLayer(provider, {});
+        layer.splitDirection = SplitDirection.LEFT;
+        layer.show = this.layers?.heatmap ?? true;
+        this.viewer.imageryLayers.add(layer);
+        if (this.compareLayer) this.viewer.imageryLayers.remove(this.compareLayer, true);
+        this.compareLayer = layer;
+        this.orderImagery();
+        this.kick();
+      })
+      .catch(() => undefined);
+  }
+
+  setSplitPosition(position: number) {
+    if (!this.viewer) return;
+    this.viewer.scene.splitPosition = position;
+    this.kick();
+  }
+
+  // ------------------------------------------------- industrial geography
+  private midcEdges = new Map<number, Entity[]>();
+  private siteEntities = new Map<string, Entity>();
+  private industrialSelection: { area: number | null; site: string | null } = { area: null, site: null };
+
+  /** MIDC estate outlines + OSM industry points. Built once; selection restyles in place. */
+  setIndustrialGeography(areas: IndustrialAreaShape[], sites: IndustrySitePoint[]) {
+    const { midc, sites: siteDs } = this.ds;
+    if (!midc || !siteDs) return;
+    midc.entities.removeAll();
+    siteDs.entities.removeAll();
+    this.midcEdges.clear();
+    this.siteEntities.clear();
+    midc.entities.suspendEvents();
+    for (const a of areas) {
+      const edges: Entity[] = [];
+      a.polygons.forEach((poly, i) => {
+        const outer = poly[0];
+        midc.entities.add({
+          id: `midc:${a.code}:${i}`,
+          name: a.name,
+          polygon: {
+            hierarchy: new PolygonHierarchy(ringPositions(outer), poly.slice(1).map((h) => new PolygonHierarchy(ringPositions(h)))),
+            material: Color.fromCssColorString('#f59e0b').withAlpha(0.16),
+          },
+        });
+        edges.push(
+          midc.entities.add({
+            id: `midc:${a.code}:edge:${i}`,
+            polyline: {
+              positions: ringPositions(outer),
+              width: 2,
+              clampToGround: true,
+              material: Color.fromCssColorString('#fbbf24').withAlpha(0.9),
+            },
+          }),
+        );
+      });
+      this.midcEdges.set(a.code, edges);
+      midc.entities.add({
+        id: `midc:${a.code}:label`,
+        position: Cartesian3.fromDegrees(a.centroid[0], a.centroid[1]),
+        label: {
+          text: a.name,
+          font: '600 11px Inter, sans-serif',
+          fillColor: Color.fromCssColorString('#fde68a'),
+          outlineColor: Color.BLACK,
+          outlineWidth: 3,
+          style: LabelStyle.FILL_AND_OUTLINE,
+          heightReference: HeightReference.CLAMP_TO_GROUND,
+          disableDepthTestDistance: Number.POSITIVE_INFINITY,
+          distanceDisplayCondition: new DistanceDisplayCondition(0, 60000),
+        },
+      });
+    }
+    midc.entities.resumeEvents();
+    siteDs.entities.suspendEvents();
+    for (const s of sites) {
+      this.siteEntities.set(
+        s.id,
+        siteDs.entities.add({
+          id: `site:${s.id}`,
+          name: s.name ?? 'Mapped industry site',
+          position: Cartesian3.fromDegrees(s.location[0], s.location[1]),
+          point: {
+            pixelSize: 5,
+            color: Color.fromCssColorString('#fde68a'),
+            outlineColor: Color.fromCssColorString('#78350f'),
+            outlineWidth: 1,
+            heightReference: HeightReference.CLAMP_TO_GROUND,
+            disableDepthTestDistance: Number.POSITIVE_INFINITY,
+            distanceDisplayCondition: new DistanceDisplayCondition(0, 45000),
+          },
+        }),
+      );
+    }
+    siteDs.entities.resumeEvents();
+    const sel = this.industrialSelection;
+    this.industrialSelection = { area: null, site: null };
+    this.setIndustrialSelection(sel.area, sel.site);
+    this.kick();
+  }
+
+  setIndustrialSelection(area: number | null, site: string | null) {
+    const prev = this.industrialSelection;
+    const style = (code: number | null, on: boolean) => {
+      if (code === null) return;
+      for (const e of this.midcEdges.get(code) ?? []) {
+        if (!e.polyline) continue;
+        e.polyline.width = new ConstantProperty(on ? 4 : 2);
+        e.polyline.material = new ColorMaterialProperty(Color.fromCssColorString(on ? '#22d3ee' : '#fbbf24').withAlpha(on ? 1 : 0.9));
+      }
+    };
+    const dot = (id: string | null, on: boolean) => {
+      const e = id ? this.siteEntities.get(id) : undefined;
+      if (!e?.point) return;
+      e.point.pixelSize = new ConstantProperty(on ? 11 : 5);
+      e.point.outlineColor = new ConstantProperty(on ? Color.CYAN : Color.fromCssColorString('#78350f'));
+      e.point.outlineWidth = new ConstantProperty(on ? 3 : 1);
+    };
+    if (prev.area !== area) {
+      style(prev.area, false);
+      style(area, true);
+    }
+    if (prev.site !== site) {
+      dot(prev.site, false);
+      dot(site, true);
+    }
+    this.industrialSelection = { area, site };
+    this.kick();
+  }
+
   setLayers(l: Record<LayerId, boolean>) {
     const prev = this.layers;
     this.layers = l;
@@ -854,12 +1033,15 @@ export class TwinMap {
     if (this.roadsLayer) this.roadsLayer.show = l.roads;
     if (this.labelsLayer) this.labelsLayer.show = l.labels;
     if (this.heatLayer) this.heatLayer.show = l.heatmap;
+    if (this.compareLayer) this.compareLayer.show = l.heatmap;
     const vis: Record<string, boolean> = {
       grid: l.grid,
       columns: l.risk,
       traffic: l.traffic,
       industries: l.industries,
       green: l.green,
+      midc: !!l.midcAreas,
+      sites: !!l.industrySites,
     };
     for (const [k, on] of Object.entries(vis)) if (this.ds[k]) this.ds[k].show = on;
     this.buildingsVisible = l.buildings;

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState, type CSSProperties, type KeyboardEvent } from 'react';
-import { ChevronDown, Factory, Grid3x3, LayoutDashboard, ListChecks, MapPinned, SlidersHorizontal, Wind, X, type LucideIcon } from 'lucide-react';
+import { ChevronDown, Factory, Grid3x3, LayoutDashboard, ListChecks, MapPinned, RadioTower, SlidersHorizontal, Wind, X, type LucideIcon } from 'lucide-react';
 import { useTwin } from '../store/useTwinStore';
 import type { Section } from '../types';
 import { LogoMark } from './Brand';
@@ -20,6 +20,7 @@ export const ORBIT_ITEMS: NavItem[] = [
   { id: 'actions', label: 'Actions', icon: ListChecks },
   { id: 'simulator', label: 'What-If', icon: SlidersHorizontal },
   { id: 'locations', label: 'Sites', icon: MapPinned },
+  { id: 'sensors', label: 'Sensors', icon: RadioTower },
 ];
 
 /** Display names for every section, including the ones hidden from the launcher. */
@@ -34,6 +35,7 @@ export const SECTION_LABEL: Record<Section, string> = {
   scenarios: 'Saved scenarios',
   actions: 'Actions',
   locations: 'Sites',
+  sensors: 'Sensors',
   analytics: 'Analytics',
   data: 'Data',
 };
@@ -48,6 +50,29 @@ function placement(i: number, n: number) {
   const deg = ARC_FROM + ((ARC_TO - ARC_FROM) * i) / Math.max(1, n - 1);
   const rad = (deg * Math.PI) / 180;
   return { deg, x: Math.round(RADIUS * Math.cos(rad)), y: Math.round(RADIUS * Math.sin(rad)) };
+}
+
+/** Launcher centre's distance from the left viewport edge (orbit-dock left + half the 56 px launcher). */
+const DOCK_CENTRE_X = 28 + 28;
+
+/**
+ * Label position for an orbit item: pushed outward along the item's direction from the
+ * launcher, so it sits in empty space beyond the ring instead of over neighbouring icons.
+ * Items near the left screen edge align their label to the left so it can't be clipped.
+ */
+function tipPlacement(deg: number, x: number): CSSProperties {
+  const rad = (deg * Math.PI) / 180;
+  const ux = Math.cos(rad);
+  const uy = Math.sin(rad);
+  const nearLeftEdge = DOCK_CENTRE_X + x < 96;
+  const tx = ux < -0.35 ? (nearLeftEdge ? -20 : -100) : ux > 0.35 || nearLeftEdge ? 0 : -50;
+  const ty = uy < -0.35 ? -100 : uy > 0.35 ? 0 : -50;
+  return {
+    left: `calc(50% + ${Math.round(ux * 28)}px)`,
+    top: `calc(50% + ${Math.round(uy * 28)}px)`,
+    translate: `${tx}% ${ty}%`,
+    '--tip-from': `translate(${Math.round(-ux * 5)}px, ${Math.round(-uy * 5)}px)`,
+  } as CSSProperties;
 }
 
 export function OrbitNav() {
@@ -123,8 +148,7 @@ export function OrbitNav() {
           {ORBIT_ITEMS.map((item, i) => {
             const { deg, x, y } = placement(i, ORBIT_ITEMS.length);
             const active = item.id === section;
-            // Labels open away from the corner: to the right on the upper arc, above on the lower arc.
-            const tipRight = deg < -45;
+            const tip = tipPlacement(deg, x);
             const Icon = item.icon;
             return (
               <button
@@ -148,10 +172,8 @@ export function OrbitNav() {
               >
                 <Icon size={18} strokeWidth={active ? 2.2 : 1.8} aria-hidden="true" />
                 <span
-                  className={`orbit-tip float-surface rounded-md px-2 py-1 text-[12px] font-semibold text-sand-50 ${
-                    tipRight ? 'left-[calc(100%+8px)] top-1/2 -translate-y-1/2' : 'bottom-[calc(100%+8px)] left-1/2 -translate-x-1/2'
-                  }`}
-                  style={{ '--tip-from': tipRight ? 'translateX(-4px)' : 'translateY(4px)' } as CSSProperties}
+                  className="orbit-tip float-surface rounded-md px-2 py-1 text-[12px] font-semibold text-sand-50"
+                  style={tip}
                 >
                   {item.label}
                 </span>

@@ -1,0 +1,15 @@
+C:\Users\HP\Documents\Codex\2026-10-10\c-users-hp-desktop-aeromatrix-main\outputs\AeroMatrix_Task2_Model\audit.py:30: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  report['coverage'].append({'station':s,'pollutant':poll,'n':len(z),'start':str(t.min()),'end':str(t.max()),'expected_hourly_bins':hours,'missing_hourly_bins':hours-len(z),'non_hourly_gaps':int((t.diff().dropna()!=pd.Timedelta(hours=1)).sum()),'min':float(z.value.min()),'max':float(z.value.max())})
+{
+  "rows": 1820868,
+  "start": "2020-11-13 14:00:00",
+  "end": "2025-09-01 23:00:00",
+  "exact_duplicate_rows": 0,
+  "duplicate_key_rows": 0,
+  "valid_unique_targets": {
+    "pm10": 186955,
+    "pm25": 185369
+  },
+  "target_invalid_excluded": 0,
+  "conflicting_target_keys_excluded": 0
+}

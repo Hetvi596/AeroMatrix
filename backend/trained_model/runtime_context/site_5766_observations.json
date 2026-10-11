@@ -1,0 +1,219 @@
+{
+  "status": "MEASURED",
+  "region": {
+    "station": "site_5766",
+    "station_name": "Katraj Dairy, Pune - MPCB",
+    "name": "Katraj Dairy",
+    "aliases": [
+      "Katraj Dairy"
+    ],
+    "longitude": null,
+    "latitude": null,
+    "source_files": "17_Katraj_Dairy_MPCB_15_minute_AQI_Data_for_2024-25.csv"
+  },
+  "pollutants": {
+    "pm25": {
+      "status": "MEASURED",
+      "value": 44.715,
+      "unit": "ug/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "pm10": {
+      "status": "MEASURED",
+      "value": 87.675,
+      "unit": "ug/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "no2": {
+      "status": "MEASURED",
+      "value": 36.145,
+      "unit": "ug/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "no": {
+      "status": "MEASURED",
+      "value": 8.4025,
+      "unit": "ug/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "nox": {
+      "status": "MEASURED",
+      "value": 24.02,
+      "unit": "ppb",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "so2": {
+      "status": "MEASURED",
+      "value": 2.3625,
+      "unit": "ug/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "co": {
+      "status": "MEASURED",
+      "value": 1.3925,
+      "unit": "mg/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "o3": {
+      "status": "MEASURED",
+      "value": 22.7925,
+      "unit": "ug/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "nh3": {
+      "status": "MEASURED",
+      "value": 21.6175,
+      "unit": "ug/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "benzene": {
+      "status": "MEASURED",
+      "value": 0.88,
+      "unit": "ug/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "toluene": {
+      "status": "MEASURED",
+      "value": 2.5775,
+      "unit": "ug/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    }
+  },
+  "aqi": {
+    "status": "AVAILABLE",
+    "value": 104,
+    "category": "Moderate",
+    "dominant_pollutant": "pm10",
+    "reason": null,
+    "subindices": {
+      "pm25": {
+        "value": 88,
+        "bounded": false,
+        "concentration": 52.94626811594202,
+        "averaging_hours": 24
+      },
+      "pm10": {
+        "value": 104,
+        "bounded": false,
+        "concentration": 105.77894927536232,
+        "averaging_hours": 24
+      },
+      "no2": {
+        "value": 44,
+        "bounded": false,
+        "concentration": 35.350181159420295,
+        "averaging_hours": 24
+      },
+      "so2": {
+        "value": 3,
+        "bounded": false,
+        "concentration": 2.3605681818181816,
+        "averaging_hours": 24
+      },
+      "nh3": {
+        "value": 6,
+        "bounded": false,
+        "concentration": 21.715978260869566,
+        "averaging_hours": 24
+      }
+    },
+    "coverage_hours": {
+      "pm25": 23,
+      "pm10": 23,
+      "no2": 23,
+      "so2": 22,
+      "co": 23,
+      "o3": 20,
+      "nh3": 23
+    },
+    "excluded": {
+      "co": "Incomplete trailing 8h average",
+      "o3": "Incomplete trailing 8h average"
+    },
+    "period_end": "2026-01-01T00:30:00+00:00",
+    "method": "CPCB National AQI; measured hourly data; conservative eight-hour completeness",
+    "timestamp_semantics": "completed_hour_end"
+  },
+  "historical": true,
+  "snapshot_end": "2026-01-01T05:00:00+05:30",
+  "source_files": "17_Katraj_Dairy_MPCB_15_minute_AQI_Data_for_2024-25.csv",
+  "notice": "time and snapshot_end label hour starts; window.end and snapshot_window_end are completed-hour availability. Latest values can have different timestamps; AQI uses one coherent window.",
+  "snapshot_window_end": "2026-01-01T06:00:00+05:30"
+}

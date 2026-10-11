@@ -6,6 +6,7 @@ import { ActionsPanel } from '../scenarios/ActionsPanel';
 import { LocationsPanel } from '../scenarios/LocationsPanel';
 import { AnalyticsPanel } from '../analytics/AnalyticsPanel';
 import { DataPanel } from './DataPanel';
+import { SensorsPanel } from '../task2/SensorsPanel';
 
 export function LeftPanel() {
   const section = useTwin((s) => s.section);
@@ -30,6 +31,8 @@ export function LeftPanel() {
       return <ActionsPanel />;
     case 'locations':
       return <LocationsPanel />;
+    case 'sensors':
+      return <SensorsPanel />;
     case 'analytics':
       return <AnalyticsPanel />;
     case 'data':

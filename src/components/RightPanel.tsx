@@ -2,14 +2,21 @@ import { Crosshair, Eye, Factory, MapPin, Play, RadioTower, Save, SlidersHorizon
 import { useState, type ReactNode } from 'react';
 import { useTwin } from '../store/useTwinStore';
 import { Button, DataBadge, DeltaText, DrawerHeader, MetricRow, SeverityChip, Slider } from './ui';
-import { POLLUTANT_LABEL, POLLUTANT_UNIT, RISK_COLOR, RISK_LABEL, SOURCE_COLORS, SOURCE_LABELS } from '../utils/colors';
+import { POLLUTANT_LABEL, POLLUTANT_UNIT, RISK_COLOR, RISK_LABEL, SOURCE_COLORS, SOURCE_LABELS, riskFromPm25 } from '../utils/colors';
+import { LIVE_POLLUTANTS } from '../services/openMeteo';
+import { zonePointId, zoneRecord } from '../services/liveData';
+import { CurrentConditions, ForecastPanel } from './LivePanels';
+import { scenarioOnCurrent } from '../scenarios/scenarioOnCurrent';
 import { fmt, fmtInt } from '../utils/format';
-import { haversineKm } from '../utils/geo';
+import { cellAreaKm2, haversineKm } from '../utils/geo';
 import { zonePlaceNames } from '../utils/zones';
 import { SourceDonut } from '../analytics/SourceDonut';
 import { POLLUTANTS } from '../services/pollutionModel';
 import { scoreBreakdown } from '../scenarios/locationComparison';
 import { useSiteAssessment } from '../scenarios/useSiteAssessment';
+import { StationCard } from './StationPanels';
+import { IndustrialAreaCard, IndustrySiteCard } from './IndustryPanels';
+import { areasInCell, nearestArea, sitesInCell } from '../services/industryData';
 import type { CellState, Pollutant, SourceContribution } from '../types';
 
 function Section({ title, right, children }: { title: string; right?: ReactNode; children: ReactNode }) {
@@ -28,11 +35,15 @@ function useCloseDrawer() {
   const selectCell = useTwin((s) => s.selectCell);
   const selectIndustry = useTwin((s) => s.selectIndustry);
   const selectCandidate = useTwin((s) => s.selectCandidate);
+  const selectStation = useTwin((s) => s.selectStation);
   const setRightOpen = useTwin((s) => s.setRightOpen);
   return () => {
     selectCell(null);
     selectIndustry(null);
     selectCandidate(null);
+    selectStation(null);
+    useTwin.getState().selectIndustrialArea(null);
+    useTwin.getState().selectIndustrySite(null);
     setRightOpen(false);
   };
 }
@@ -210,6 +221,7 @@ function ContributionChart({ value, windInfluence }: { value: SourceContribution
 
 function ZoneCard({ cellId }: { cellId: string }) {
   const base = useTwin((s) => s.base)!;
+  const live = useTwin((s) => s.live);
   const baseline = useTwin((s) => s.baseline);
   const result = useTwin((s) => s.activeResult);
   const mode = useTwin((s) => s.displayMode);
@@ -228,6 +240,11 @@ function ZoneCard({ cellId }: { cellId: string }) {
   const sc = showScn ? result!.scenario.find((s) => s.cellId === cellId)! : null;
   const cur = sc ?? b;
   const d = showScn ? result!.delta[cellId] : null;
+  const records = LIVE_POLLUTANTS.map((p) => zoneRecord({ base, live }, cellId, p));
+  const point = live.zoneCells === base.cells ? (live.points[zonePointId(cellId)] ?? null) : null;
+  const curPm = records.find((r) => r.pollutant === 'pm25');
+  const showCurrent = mode === 'current' && curPm?.value != null;
+  const engineRatio = (p: Pollutant) => (result ? scenarioOnCurrent(b[p], result.scenario.find((s) => s.cellId === cellId)?.[p]) : null);
   const place = zonePlaceNames(base.cells).get(cell.id);
   const nearby = base.industries
     .map((i) => ({ i, d: haversineKm(i.location, cell.center) }))
@@ -246,13 +263,17 @@ function ZoneCard({ cellId }: { cellId: string }) {
       <div className="px-5 pb-4">
         <div className="flex items-end justify-between gap-3">
           <div>
-            <div className="text-[12px] text-sand-400">PM2.5{showScn ? ', scenario' : ''}</div>
+            <div className="text-[12px] text-sand-400">PM2.5{showScn ? ', scenario (prototype model)' : showCurrent ? ', current model data' : ', prototype model'}</div>
             <div className="num text-[34px] font-semibold leading-none tracking-[-0.02em] text-sand-50">
-              {fmt(cur.pm25, 0)}
+              {fmt(showCurrent ? curPm!.value! : cur.pm25, 0)}
               <span className="ml-1.5 text-[12px] font-medium tracking-normal text-sand-500">µg/m³</span>
             </div>
           </div>
-          <SeverityChip color={RISK_COLOR[cur.risk]} label={RISK_LABEL[cur.risk]} />
+          {showCurrent ? (
+            <SeverityChip color={RISK_COLOR[riskFromPm25(curPm!.value!)]} label={RISK_LABEL[riskFromPm25(curPm!.value!)]} />
+          ) : (
+            <SeverityChip color={RISK_COLOR[cur.risk]} label={RISK_LABEL[cur.risk]} />
+          )}
         </div>
         {d && (
           <div className="mt-2 text-[12px] text-sand-400">
@@ -262,13 +283,33 @@ function ZoneCard({ cellId }: { cellId: string }) {
         )}
       </div>
 
+      <CurrentConditions
+        title="Current air quality, zone centre"
+        records={records}
+        point={point}
+        extraColumn={
+          result
+            ? {
+                label: 'With scenario',
+                render: (r) => {
+                  const k = engineRatio(r.pollutant);
+                  if (r.value == null || k == null) return <span className="text-sand-500">—</span>;
+                  return <span className="num font-medium text-amber-200">{fmt(r.value * k, r.pollutant === 'co' ? 2 : 1)}</span>;
+                },
+              }
+            : undefined
+        }
+        footer={result ? <p className="mt-1.5 text-[11.5px] text-sand-500">With scenario: current value × the modelled change for “{result.params.name}”. Hypothetical.</p> : null}
+      />
+      <ForecastPanel point={point} />
+
       <ObservedSection cellId={cellId} modeled={b} />
 
       <Section title="Source contribution" right={<span className="text-[11.5px] text-sand-500" title="Illustrative split from the prototype model, not a validated source apportionment.">Prototype model</span>}>
         <ContributionChart value={cur.contributionAbs} windInfluence={cur.windInfluence} />
       </Section>
 
-      <Section title="Pollutants">
+      <Section title="Pollutants, prototype model" right={<span className="text-[11.5px] text-sand-500" title="Rule-based dispersion model on demo inputs: the What-If baseline">What-If baseline</span>}>
         <table className="w-full text-[12.5px]">
           <thead className="text-[11.5px] text-sand-500">
             <tr>
@@ -300,26 +341,20 @@ function ZoneCard({ cellId }: { cellId: string }) {
         </table>
       </Section>
 
-      <Section title="Urban and environmental factors">
-        <div className="grid grid-cols-2 gap-x-5">
-          <Factor label="Traffic intensity" v={cur.trafficIntensity} b={b.trafficIntensity} unit="/100" show={showScn} />
-          <Factor label="Industrial influence" v={cur.industrialInfluence} b={b.industrialInfluence} unit="/100" show={showScn} />
-          <Factor label="Green cover" v={cur.greenCover} b={b.greenCover} unit="%" show={showScn} invert />
-          <Factor label="Building density" v={cur.buildingDensity * 100} b={b.buildingDensity * 100} unit="%" show={showScn} />
-          <Factor label="Temperature" v={cur.temperature} b={b.temperature} unit="°C" show={showScn} />
-          <Factor label="Dispersion" v={cur.windInfluence} b={b.windInfluence} unit="×" show={showScn} digits={2} />
-          <div className="py-[5px]">
-            <div className="text-[11.5px] text-sand-400">Population</div>
-            <div className="num text-[13.5px] font-medium text-sand-50" title="Demo estimate">
-              {fmtInt(cell.population)}
-            </div>
-          </div>
-          <div className="py-[5px]">
-            <div className="text-[11.5px] text-sand-400">Avg building height</div>
-            <div className="num text-[13.5px] font-medium text-sand-50">{fmt(cell.avgBuildingHeight, 0)} m</div>
-          </div>
+      <Section title="Environmental factors" right={showScn ? <span className="text-[11.5px] text-sand-500">with scenario</span> : undefined}>
+        <div className="grid grid-cols-2 gap-2">
+          <Factor label="Traffic intensity" v={cur.trafficIntensity} b={b.trafficIntensity} unit="/100" show={showScn} bar={cur.trafficIntensity} source="Derived" hint="Index from the road network and its traffic class" />
+          <Factor label="Industrial influence" v={cur.industrialInfluence} b={b.industrialInfluence} unit="/100" show={showScn} bar={cur.industrialInfluence} source="Modelled" hint="Index of nearby industrial sources' influence in the prototype engine" />
+          <Factor label="Green cover" v={cur.greenCover} b={b.greenCover} unit="%" show={showScn} invert bar={cur.greenCover} source="Derived" hint="From mapped green areas in the zone" />
+          <Factor label="Building density" v={cur.buildingDensity * 100} b={b.buildingDensity * 100} unit="%" show={showScn} bar={cur.buildingDensity * 100} source="Demo" hint="Prototype estimate, not surveyed" />
+          <Factor label="Dispersion" v={cur.windInfluence} b={b.windInfluence} unit="×" show={showScn} digits={2} source="Modelled" hint="Weather multiplier: above 1 means pollution disperses poorly" />
+          <Factor label="Temperature" v={cur.temperature} b={b.temperature} unit="°C" show={showScn} source="Modelled" hint="Baseline weather adjusted for the zone's built-up area" />
+          <Factor label="Population density" v={cell.population / Math.max(0.01, cellAreaKm2(cell.bounds))} b={cell.population / Math.max(0.01, cellAreaKm2(cell.bounds))} unit="/km²" show={false} source="Demo" hint={`About ${fmtInt(cell.population)} people in the zone; prototype estimate`} />
+          <Factor label="Building height" v={cell.avgBuildingHeight} b={cell.avgBuildingHeight} unit="m avg" show={false} source="Demo" hint="Prototype estimate, not surveyed" />
         </div>
       </Section>
+
+      <ZoneIndustry cellId={cell.id} />
 
       {nearby.length > 0 && (
         <Section title="Nearby industries" right={<span className="text-[11.5px] text-sand-500">within 4 km</span>}>
@@ -365,8 +400,53 @@ function ZoneCard({ cellId }: { cellId: string }) {
           <SlidersHorizontal size={14} aria-hidden="true" /> Model a What-If for this zone
         </Button>
       </section>
-      <SourceFooter status={showScn ? 'MODELED_SCENARIO' : 'DEMO'} />
+      <SourceFooter status={showScn ? 'MODELED_SCENARIO' : showCurrent ? 'MODEL_DATA' : 'DEMO'} />
     </>
+  );
+}
+
+/** Verified industrial geography around a zone: MIDC estates and mapped OSM sites. */
+function ZoneIndustry({ cellId }: { cellId: string }) {
+  const base = useTwin((s) => s.base)!;
+  const industry = useTwin((s) => s.industry);
+  const selectArea = useTwin((s) => s.selectIndustrialArea);
+  const cell = base.cells.find((c) => c.id === cellId);
+  if (!industry || !cell) return null;
+  const areas = areasInCell(cell, industry.areas);
+  const sites = sitesInCell(cell, industry.sites);
+  const nearest = areas.length ? null : nearestArea(cell.center, industry.areas);
+  const kinds = Object.entries(
+    sites.reduce<Record<string, number>>((acc, s) => ((acc[s.kind ?? 'other'] = (acc[s.kind ?? 'other'] ?? 0) + 1), acc), {}),
+  ).sort((a, b) => b[1] - a[1]);
+  return (
+    <Section title="Industrial geography" right={<span className="text-[11.5px] text-sand-500">MIDC, OSM</span>}>
+      {areas.length > 0 ? (
+        <MetricRow label="MIDC estate">
+          {areas.map((a, i) => (
+            <span key={a.code}>
+              {i > 0 && ', '}
+              <button type="button" className="cursor-pointer text-accent-300 hover:underline" onClick={() => selectArea(a.code)}>
+                {a.name}
+              </button>
+            </span>
+          ))}
+        </MetricRow>
+      ) : (
+        nearest && (
+          <MetricRow label="Nearest MIDC estate">
+            <button type="button" className="cursor-pointer text-accent-300 hover:underline" onClick={() => selectArea(nearest.area.code)}>
+              {nearest.area.name}
+            </button>
+            , {fmt(nearest.distanceKm, 1)} km
+          </MetricRow>
+        )
+      )}
+      <MetricRow label="Mapped industry sites in zone">{sites.length}</MetricRow>
+      {kinds.length > 0 && (
+        <p className="text-[11.5px] text-sand-400">{kinds.slice(0, 4).map(([k, n]) => `${k.replace(/_/g, ' ')} ${n}`).join(', ')}</p>
+      )}
+      <p className="mt-1.5 text-[11.5px] text-sand-500">Mapped locations only, not emissions.</p>
+    </Section>
   );
 }
 
@@ -403,20 +483,36 @@ function ObservedSection({ cellId, modeled }: { cellId: string; modeled: CellSta
   );
 }
 
-function Factor({ label, v, b, unit, show, invert, digits = 0 }: { label: string; v: number; b: number; unit: string; show: boolean; invert?: boolean; digits?: number }) {
+/** Where a factor's value comes from; shown so a proxy is never read as a measurement. */
+type FactorSource = 'Derived' | 'Modelled' | 'Demo';
+const SOURCE_TONE: Record<FactorSource, string> = {
+  Derived: 'bg-sky-400/10 text-sky-300',
+  Modelled: 'bg-amber-300/12 text-amber-200',
+  Demo: 'bg-sand-100/[0.07] text-sand-400',
+};
+
+function Factor({ label, v, b, unit, show, invert, digits = 0, bar, source, hint }: { label: string; v: number; b: number; unit: string; show: boolean; invert?: boolean; digits?: number; bar?: number; source: FactorSource; hint: string }) {
   const d = v - b;
   return (
-    <div className="py-[5px]">
-      <div className="text-[11.5px] text-sand-400">{label}</div>
-      <div className="num text-[13.5px] font-medium text-sand-50">
-        {fmt(v, digits)}
+    <div className="rounded-lg bg-sand-100/[0.035] px-2.5 py-2 ring-1 ring-inset ring-sand-100/[0.07]" title={hint}>
+      <div className="flex items-start justify-between gap-1.5">
+        <span className="text-[11.5px] leading-tight text-sand-400">{label}</span>
+        <span className={`shrink-0 rounded px-1 text-[9.5px] font-semibold leading-[15px] ${SOURCE_TONE[source]}`}>{source}</span>
+      </div>
+      <div className="num mt-0.5 text-[14px] font-semibold text-sand-50">
+        {v >= 1000 ? Math.round(v).toLocaleString('en-IN') : fmt(v, digits)}
         <span className="ml-0.5 text-[11px] font-normal text-sand-500">{unit}</span>
         {show && Math.abs(d) > 0.05 && (
-          <span className="ml-1.5 text-[11.5px]">
+          <span className="ml-1.5 text-[11.5px] font-normal">
             <DeltaText value={d} digits={digits} invert={invert} />
           </span>
         )}
       </div>
+      {bar != null && (
+        <div className="mt-1 h-1 overflow-hidden rounded-full bg-sand-100/10" aria-hidden="true">
+          <div className="h-full rounded-full bg-accent-400/80" style={{ width: `${Math.max(0, Math.min(100, bar))}%` }} />
+        </div>
+      )}
     </div>
   );
 }
@@ -445,8 +541,8 @@ function IndustryCard({ id }: { id: string }) {
         kicker={`Industry, ${ind.category}`}
         title={ind.name}
         subtitle={
-          <span className="num">
-            {ind.id}, {ind.location[1].toFixed(4)}°N {ind.location[0].toFixed(4)}°E
+          <span className="num" title={ind.id}>
+            {ind.location[1].toFixed(3)}°N {ind.location[0].toFixed(3)}°E{ind.status === 'DEMO' ? ', illustrative source' : ''}
           </span>
         }
         onClose={close}
@@ -489,7 +585,6 @@ function IndustryCard({ id }: { id: string }) {
               <Play size={14} aria-hidden="true" /> Run scenario
             </Button>
           </div>
-          <p className="mt-2 text-[11.5px] text-sand-500">Runs with every other What-If change in the current draft.</p>
         </Section>
       )}
       <section className="border-t hairline px-5 py-4">
@@ -508,6 +603,7 @@ function CandidateCard({ id }: { id: string }) {
   const applyResult = useTwin((s) => s.applyResult);
   const active = useTwin((s) => s.activeResult);
   const flyTo = useTwin((s) => s.requestFlyTo);
+  const removeCandidate = useTwin((s) => s.removeCandidate);
   const close = useCloseDrawer();
   const r = rows.find((x) => x.candidate.id === id);
   if (!r) return null;
@@ -522,7 +618,12 @@ function CandidateCard({ id }: { id: string }) {
         onClose={close}
       />
       {r.outOfArea ? (
-        <p className="px-5 pb-5 text-[12.5px] text-sand-400">This point is outside the modeled grid, so it can't be assessed. Pick a site inside the analysis area.</p>
+        <div className="px-5 pb-5">
+          <p className="text-[12.5px] text-sand-400">Outside the analysis area, so it can’t be assessed.</p>
+          <Button variant="danger" className="mt-3 w-full" onClick={() => removeCandidate(r.candidate.id)}>
+            <Trash2 size={14} aria-hidden="true" /> Remove site {r.candidate.id}
+          </Button>
+        </div>
       ) : (
         <>
           <div className="flex items-end justify-between gap-3 px-5 pb-4">
@@ -550,7 +651,7 @@ function CandidateCard({ id }: { id: string }) {
                 </li>
               ))}
             </ul>
-            {valid.length < 2 && <p className="mt-2 text-[11.5px] text-sand-500">Scores are relative; add another site to compare.</p>}
+            {valid.length < 2 && <p className="mt-2 text-[11.5px] text-sand-500">Add another site to compare.</p>}
           </Section>
           <Section title="Modeled impact">
             <MetricRow label="Δ mean PM2.5">
@@ -575,8 +676,11 @@ function CandidateCard({ id }: { id: string }) {
             <Button variant={showing ? 'primary' : 'default'} disabled={!r.result} onClick={() => r.result && applyResult(r.result)}>
               <Eye size={14} aria-hidden="true" /> {showing ? 'On the map' : 'Show impact'}
             </Button>
+            <Button variant="danger" className="col-span-2" onClick={() => removeCandidate(r.candidate.id)}>
+              <Trash2 size={14} aria-hidden="true" /> Remove site {r.candidate.id}
+            </Button>
           </section>
-          <SourceFooter status="MODELED_SCENARIO" note="Demo scoring rules; to be replaced by a trained suitability model." />
+          <SourceFooter status="MODELED_SCENARIO" />
         </>
       )}
     </>
@@ -588,6 +692,12 @@ export function RightPanel() {
   const cellId = useTwin((s) => s.selectedCellId);
   const industryId = useTwin((s) => s.selectedIndustryId);
   const candidateId = useTwin((s) => s.selectedCandidateId);
+  const stationId = useTwin((s) => s.selectedStationId);
+  const areaCode = useTwin((s) => s.selectedIndustrialArea);
+  const siteId = useTwin((s) => s.selectedIndustrySite);
+  if (stationId) return <StationCard key={stationId} id={stationId} />;
+  if (areaCode !== null) return <IndustrialAreaCard key={areaCode} code={areaCode} />;
+  if (siteId) return <IndustrySiteCard key={siteId} id={siteId} />;
   if (industryId) return <IndustryCard key={industryId} id={industryId} />;
   if (cellId) return <ZoneCard key={cellId} cellId={cellId} />;
   if (candidateId) return <CandidateCard key={candidateId} id={candidateId} />;

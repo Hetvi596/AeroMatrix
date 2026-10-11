@@ -10,3 +10,9 @@ __pycache__
 # Raw datasets and trained model artefacts (can be large / licensed) — keep out of git
 /data/
 backend/models/
+
+# Task 2 package scratch output (pytest basetemp, temp files)
+backend/task2_model/runtime/
+
+# Packaged archives (not part of the project)
+*.zip

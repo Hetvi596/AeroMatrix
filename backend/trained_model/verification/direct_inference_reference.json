@@ -1,0 +1,621 @@
+{
+  "site_292": {
+    "pm25": {
+      "value": 103.74068930341096,
+      "issued_at": "2025-05-24T02:00:00+05:30",
+      "model_sha256": "b27f5aa0161bc5ada8cc0cbad31f91580dec20567d56aabcf02beda5c46b89da"
+    },
+    "pm10": {
+      "value": 100.97420147467211,
+      "issued_at": "2025-03-13T15:00:00+05:30",
+      "model_sha256": "b098f2a8018a724ecfbf8d1ea3aaef80dbfdc110222b67645837e587950d8297"
+    },
+    "no2": {
+      "value": 9.077777440544708,
+      "issued_at": "2025-05-24T02:00:00+05:30",
+      "model_sha256": "2ac6bd66201cbb4e12e361120fc187783f459c525812246c839fb8de3868ed77"
+    },
+    "no": {
+      "value": 5.7415824111780065,
+      "issued_at": "2025-05-24T02:00:00+05:30",
+      "model_sha256": "7397898cc32e58c64616b0816fa09d8b2dc4bf7d90ecf8bfc61f5afe490d63f9"
+    },
+    "nox": {
+      "value": 14.594373716697953,
+      "issued_at": "2025-05-24T02:00:00+05:30",
+      "model_sha256": "4e280eb41854293773ad69b9cf1bd14676c1520b04d53a28df963b7a52497cbe"
+    },
+    "so2": {
+      "value": 33.33,
+      "issued_at": "2025-05-24T02:00:00+05:30",
+      "model_sha256": "d3fad5ca1b5214f028c6e6928582a2b228338b16ba605ded18b04484a3c139de"
+    },
+    "co": {
+      "value": 1.6079770986213167,
+      "issued_at": "2025-05-24T02:00:00+05:30",
+      "model_sha256": "37d4d3b7e9a665540e0af50d5ec644cdcca5ca47bf23a1ec21049c061ad849df"
+    },
+    "o3": {
+      "value": 63.49375807710149,
+      "issued_at": "2025-05-24T02:00:00+05:30",
+      "model_sha256": "898daaaee9fcf28753a7a2dc4f6ef85492b57035308ddc1cf1137be2be300f15"
+    },
+    "benzene": {
+      "value": 8.689192440806007,
+      "issued_at": "2025-05-24T02:00:00+05:30",
+      "model_sha256": "b2ee156d6356450921428c3db4c8f9c0c4e9fb123319f96fd583bae2da69e60e"
+    }
+  },
+  "site_5404": {
+    "pm25": {
+      "value": 92.6321206056393,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "b27f5aa0161bc5ada8cc0cbad31f91580dec20567d56aabcf02beda5c46b89da"
+    },
+    "pm10": {
+      "value": 226.1857833547243,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "b098f2a8018a724ecfbf8d1ea3aaef80dbfdc110222b67645837e587950d8297"
+    },
+    "no2": {
+      "value": 52.1622701725323,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "2ac6bd66201cbb4e12e361120fc187783f459c525812246c839fb8de3868ed77"
+    },
+    "no": {
+      "value": 25.46645074612271,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "7397898cc32e58c64616b0816fa09d8b2dc4bf7d90ecf8bfc61f5afe490d63f9"
+    },
+    "nox": {
+      "value": 51.451401608374866,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "4e280eb41854293773ad69b9cf1bd14676c1520b04d53a28df963b7a52497cbe"
+    },
+    "co": {
+      "value": 2.487479228008147,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "37d4d3b7e9a665540e0af50d5ec644cdcca5ca47bf23a1ec21049c061ad849df"
+    },
+    "o3": {
+      "value": 15.337308686091065,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "898daaaee9fcf28753a7a2dc4f6ef85492b57035308ddc1cf1137be2be300f15"
+    },
+    "benzene": {
+      "value": 1.2509590240454478,
+      "issued_at": "2025-09-06T17:00:00+05:30",
+      "model_sha256": "b2ee156d6356450921428c3db4c8f9c0c4e9fb123319f96fd583bae2da69e60e"
+    },
+    "toluene": {
+      "value": 4.223192592165758,
+      "issued_at": "2025-09-06T17:00:00+05:30",
+      "model_sha256": "e202a0a848aa62c4e7ccce9c2af6bcbfb0a9cb2b55bb3822df629c00c28020db"
+    },
+    "xylene": {
+      "value": 0.8648747300902622,
+      "issued_at": "2025-09-06T17:00:00+05:30",
+      "model_sha256": "318bd92fd90062462f630c09472a80bba0ab5e8cb34bde90a2a89d7cca9ff966"
+    }
+  },
+  "site_5405": {
+    "pm25": {
+      "value": 102.11429022583482,
+      "issued_at": "2025-01-28T16:00:00+05:30",
+      "model_sha256": "b27f5aa0161bc5ada8cc0cbad31f91580dec20567d56aabcf02beda5c46b89da"
+    },
+    "pm10": {
+      "value": 237.806189025821,
+      "issued_at": "2025-01-28T16:00:00+05:30",
+      "model_sha256": "b098f2a8018a724ecfbf8d1ea3aaef80dbfdc110222b67645837e587950d8297"
+    },
+    "no2": {
+      "value": 36.57339951527538,
+      "issued_at": "2025-01-28T16:00:00+05:30",
+      "model_sha256": "2ac6bd66201cbb4e12e361120fc187783f459c525812246c839fb8de3868ed77"
+    },
+    "no": {
+      "value": 9.11557172436676,
+      "issued_at": "2025-01-28T16:00:00+05:30",
+      "model_sha256": "7397898cc32e58c64616b0816fa09d8b2dc4bf7d90ecf8bfc61f5afe490d63f9"
+    },
+    "nox": {
+      "value": 24.35505047961669,
+      "issued_at": "2025-01-28T16:00:00+05:30",
+      "model_sha256": "4e280eb41854293773ad69b9cf1bd14676c1520b04d53a28df963b7a52497cbe"
+    },
+    "co": {
+      "value": 1.020898103671615,
+      "issued_at": "2025-01-28T16:00:00+05:30",
+      "model_sha256": "37d4d3b7e9a665540e0af50d5ec644cdcca5ca47bf23a1ec21049c061ad849df"
+    },
+    "o3": {
+      "value": 81.73291762023078,
+      "issued_at": "2025-01-28T16:00:00+05:30",
+      "model_sha256": "898daaaee9fcf28753a7a2dc4f6ef85492b57035308ddc1cf1137be2be300f15"
+    },
+    "benzene": {
+      "value": 3.981118216551369,
+      "issued_at": "2025-01-28T16:00:00+05:30",
+      "model_sha256": "b2ee156d6356450921428c3db4c8f9c0c4e9fb123319f96fd583bae2da69e60e"
+    },
+    "toluene": {
+      "value": 10.03151204111332,
+      "issued_at": "2025-01-28T16:00:00+05:30",
+      "model_sha256": "e202a0a848aa62c4e7ccce9c2af6bcbfb0a9cb2b55bb3822df629c00c28020db"
+    },
+    "xylene": {
+      "value": 2.1964280366943294,
+      "issued_at": "2025-01-28T16:00:00+05:30",
+      "model_sha256": "318bd92fd90062462f630c09472a80bba0ab5e8cb34bde90a2a89d7cca9ff966"
+    }
+  },
+  "site_5406": {
+    "pm25": {
+      "value": 29.56952168147377,
+      "issued_at": "2025-09-18T16:00:00+05:30",
+      "model_sha256": "b27f5aa0161bc5ada8cc0cbad31f91580dec20567d56aabcf02beda5c46b89da"
+    },
+    "pm10": {
+      "value": 27.979999741245024,
+      "issued_at": "2025-09-20T00:00:00+05:30",
+      "model_sha256": "b098f2a8018a724ecfbf8d1ea3aaef80dbfdc110222b67645837e587950d8297"
+    },
+    "no2": {
+      "value": 29.62252010097912,
+      "issued_at": "2025-09-20T00:00:00+05:30",
+      "model_sha256": "2ac6bd66201cbb4e12e361120fc187783f459c525812246c839fb8de3868ed77"
+    },
+    "no": {
+      "value": 20.741090247859,
+      "issued_at": "2025-09-20T00:00:00+05:30",
+      "model_sha256": "7397898cc32e58c64616b0816fa09d8b2dc4bf7d90ecf8bfc61f5afe490d63f9"
+    },
+    "nox": {
+      "value": 29.227717811534042,
+      "issued_at": "2025-09-20T00:00:00+05:30",
+      "model_sha256": "4e280eb41854293773ad69b9cf1bd14676c1520b04d53a28df963b7a52497cbe"
+    },
+    "co": {
+      "value": 0.6185621511692335,
+      "issued_at": "2025-09-20T00:00:00+05:30",
+      "model_sha256": "37d4d3b7e9a665540e0af50d5ec644cdcca5ca47bf23a1ec21049c061ad849df"
+    },
+    "o3": {
+      "value": 97.85575193749649,
+      "issued_at": "2025-12-12T17:00:00+05:30",
+      "model_sha256": "898daaaee9fcf28753a7a2dc4f6ef85492b57035308ddc1cf1137be2be300f15"
+    },
+    "benzene": {
+      "value": 4.769971634173463,
+      "issued_at": "2025-09-20T00:00:00+05:30",
+      "model_sha256": "b2ee156d6356450921428c3db4c8f9c0c4e9fb123319f96fd583bae2da69e60e"
+    },
+    "toluene": {
+      "value": 3.4705319481229013,
+      "issued_at": "2025-09-20T00:00:00+05:30",
+      "model_sha256": "e202a0a848aa62c4e7ccce9c2af6bcbfb0a9cb2b55bb3822df629c00c28020db"
+    },
+    "xylene": {
+      "value": 1.8730494396978774,
+      "issued_at": "2025-09-20T00:00:00+05:30",
+      "model_sha256": "318bd92fd90062462f630c09472a80bba0ab5e8cb34bde90a2a89d7cca9ff966"
+    }
+  },
+  "site_5407": {
+    "pm25": {
+      "value": 96.68304484723336,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "b27f5aa0161bc5ada8cc0cbad31f91580dec20567d56aabcf02beda5c46b89da"
+    },
+    "pm10": {
+      "value": 204.89296568925255,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "b098f2a8018a724ecfbf8d1ea3aaef80dbfdc110222b67645837e587950d8297"
+    },
+    "no2": {
+      "value": 36.12250712185175,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "2ac6bd66201cbb4e12e361120fc187783f459c525812246c839fb8de3868ed77"
+    },
+    "no": {
+      "value": 18.93191762354625,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "7397898cc32e58c64616b0816fa09d8b2dc4bf7d90ecf8bfc61f5afe490d63f9"
+    },
+    "nox": {
+      "value": 37.46804760085974,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "4e280eb41854293773ad69b9cf1bd14676c1520b04d53a28df963b7a52497cbe"
+    },
+    "co": {
+      "value": 1.923764864421214,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "37d4d3b7e9a665540e0af50d5ec644cdcca5ca47bf23a1ec21049c061ad849df"
+    },
+    "o3": {
+      "value": 13.407395992291399,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "898daaaee9fcf28753a7a2dc4f6ef85492b57035308ddc1cf1137be2be300f15"
+    },
+    "benzene": {
+      "value": 10.237161964175634,
+      "issued_at": "2026-01-01T02:00:00+05:30",
+      "model_sha256": "b2ee156d6356450921428c3db4c8f9c0c4e9fb123319f96fd583bae2da69e60e"
+    },
+    "toluene": {
+      "value": 18.21692784914842,
+      "issued_at": "2026-01-01T02:00:00+05:30",
+      "model_sha256": "e202a0a848aa62c4e7ccce9c2af6bcbfb0a9cb2b55bb3822df629c00c28020db"
+    },
+    "xylene": {
+      "value": 3.198347426872095,
+      "issued_at": "2026-01-01T02:00:00+05:30",
+      "model_sha256": "318bd92fd90062462f630c09472a80bba0ab5e8cb34bde90a2a89d7cca9ff966"
+    }
+  },
+  "site_5408": {
+    "pm25": {
+      "value": 39.24272218230362,
+      "issued_at": "2025-12-29T21:00:00+05:30",
+      "model_sha256": "b27f5aa0161bc5ada8cc0cbad31f91580dec20567d56aabcf02beda5c46b89da"
+    },
+    "pm10": {
+      "value": 133.51102204616285,
+      "issued_at": "2025-12-29T21:00:00+05:30",
+      "model_sha256": "b098f2a8018a724ecfbf8d1ea3aaef80dbfdc110222b67645837e587950d8297"
+    },
+    "no2": {
+      "value": 46.47492328613585,
+      "issued_at": "2025-12-29T21:00:00+05:30",
+      "model_sha256": "2ac6bd66201cbb4e12e361120fc187783f459c525812246c839fb8de3868ed77"
+    },
+    "no": {
+      "value": 6.588347880415289,
+      "issued_at": "2025-12-29T21:00:00+05:30",
+      "model_sha256": "7397898cc32e58c64616b0816fa09d8b2dc4bf7d90ecf8bfc61f5afe490d63f9"
+    },
+    "nox": {
+      "value": 28.89548252930762,
+      "issued_at": "2025-12-29T21:00:00+05:30",
+      "model_sha256": "4e280eb41854293773ad69b9cf1bd14676c1520b04d53a28df963b7a52497cbe"
+    },
+    "co": {
+      "value": 1.2013261741073862,
+      "issued_at": "2025-12-29T21:00:00+05:30",
+      "model_sha256": "37d4d3b7e9a665540e0af50d5ec644cdcca5ca47bf23a1ec21049c061ad849df"
+    },
+    "o3": {
+      "value": 72.01943009311381,
+      "issued_at": "2025-12-29T21:00:00+05:30",
+      "model_sha256": "898daaaee9fcf28753a7a2dc4f6ef85492b57035308ddc1cf1137be2be300f15"
+    },
+    "benzene": {
+      "value": 5.593395963149662,
+      "issued_at": "2025-12-29T21:00:00+05:30",
+      "model_sha256": "b2ee156d6356450921428c3db4c8f9c0c4e9fb123319f96fd583bae2da69e60e"
+    },
+    "toluene": {
+      "value": 8.16803769733284,
+      "issued_at": "2025-12-29T21:00:00+05:30",
+      "model_sha256": "e202a0a848aa62c4e7ccce9c2af6bcbfb0a9cb2b55bb3822df629c00c28020db"
+    },
+    "xylene": {
+      "value": 2.0223059615298076,
+      "issued_at": "2025-12-29T21:00:00+05:30",
+      "model_sha256": "318bd92fd90062462f630c09472a80bba0ab5e8cb34bde90a2a89d7cca9ff966"
+    }
+  },
+  "site_5409": {
+    "pm25": {
+      "value": 95.61114818126252,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "b27f5aa0161bc5ada8cc0cbad31f91580dec20567d56aabcf02beda5c46b89da"
+    },
+    "pm10": {
+      "value": 114.83457596165347,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "b098f2a8018a724ecfbf8d1ea3aaef80dbfdc110222b67645837e587950d8297"
+    },
+    "no2": {
+      "value": 68.4456480170322,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "2ac6bd66201cbb4e12e361120fc187783f459c525812246c839fb8de3868ed77"
+    },
+    "no": {
+      "value": 32.15089367841027,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "7397898cc32e58c64616b0816fa09d8b2dc4bf7d90ecf8bfc61f5afe490d63f9"
+    },
+    "nox": {
+      "value": 99.49966058435987,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "4e280eb41854293773ad69b9cf1bd14676c1520b04d53a28df963b7a52497cbe"
+    },
+    "so2": {
+      "value": 7.975,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "d3fad5ca1b5214f028c6e6928582a2b228338b16ba605ded18b04484a3c139de"
+    },
+    "co": {
+      "value": 2.2318115158083556,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "37d4d3b7e9a665540e0af50d5ec644cdcca5ca47bf23a1ec21049c061ad849df"
+    },
+    "o3": {
+      "value": 16.23624670867232,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "898daaaee9fcf28753a7a2dc4f6ef85492b57035308ddc1cf1137be2be300f15"
+    },
+    "benzene": {
+      "value": 11.183194524854281,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "b2ee156d6356450921428c3db4c8f9c0c4e9fb123319f96fd583bae2da69e60e"
+    },
+    "toluene": {
+      "value": 21.906109455521378,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "e202a0a848aa62c4e7ccce9c2af6bcbfb0a9cb2b55bb3822df629c00c28020db"
+    },
+    "xylene": {
+      "value": 6.333630737419473,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "318bd92fd90062462f630c09472a80bba0ab5e8cb34bde90a2a89d7cca9ff966"
+    }
+  },
+  "site_5766": {
+    "pm25": {
+      "value": 50.24320314941313,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "b27f5aa0161bc5ada8cc0cbad31f91580dec20567d56aabcf02beda5c46b89da"
+    },
+    "pm10": {
+      "value": 99.86944596540478,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "b098f2a8018a724ecfbf8d1ea3aaef80dbfdc110222b67645837e587950d8297"
+    },
+    "no2": {
+      "value": 37.925458956437666,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "2ac6bd66201cbb4e12e361120fc187783f459c525812246c839fb8de3868ed77"
+    },
+    "no": {
+      "value": 14.323207684673779,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "7397898cc32e58c64616b0816fa09d8b2dc4bf7d90ecf8bfc61f5afe490d63f9"
+    },
+    "nox": {
+      "value": 26.59263129557332,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "4e280eb41854293773ad69b9cf1bd14676c1520b04d53a28df963b7a52497cbe"
+    },
+    "so2": {
+      "value": 2.3625,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "d3fad5ca1b5214f028c6e6928582a2b228338b16ba605ded18b04484a3c139de"
+    },
+    "co": {
+      "value": 1.5282874482354551,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "37d4d3b7e9a665540e0af50d5ec644cdcca5ca47bf23a1ec21049c061ad849df"
+    },
+    "o3": {
+      "value": 16.459987745889364,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "898daaaee9fcf28753a7a2dc4f6ef85492b57035308ddc1cf1137be2be300f15"
+    },
+    "nh3": {
+      "value": 21.973109422231868,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "a3bbdb31f63b9644d60cba31f2052a5b69d634d368ad0707cd3dac88e771a79d"
+    },
+    "benzene": {
+      "value": 0.962152071855218,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "b2ee156d6356450921428c3db4c8f9c0c4e9fb123319f96fd583bae2da69e60e"
+    },
+    "toluene": {
+      "value": 4.399974311902724,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "e202a0a848aa62c4e7ccce9c2af6bcbfb0a9cb2b55bb3822df629c00c28020db"
+    }
+  },
+  "site_5767": {
+    "pm25": {
+      "value": 37.59712525456205,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "b27f5aa0161bc5ada8cc0cbad31f91580dec20567d56aabcf02beda5c46b89da"
+    },
+    "pm10": {
+      "value": 82.9050779306861,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "b098f2a8018a724ecfbf8d1ea3aaef80dbfdc110222b67645837e587950d8297"
+    },
+    "no2": {
+      "value": 29.17684541400748,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "2ac6bd66201cbb4e12e361120fc187783f459c525812246c839fb8de3868ed77"
+    },
+    "no": {
+      "value": 40.58394349184796,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "7397898cc32e58c64616b0816fa09d8b2dc4bf7d90ecf8bfc61f5afe490d63f9"
+    },
+    "nox": {
+      "value": 41.18833655042878,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "4e280eb41854293773ad69b9cf1bd14676c1520b04d53a28df963b7a52497cbe"
+    },
+    "so2": {
+      "value": 0.8400000000000001,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "d3fad5ca1b5214f028c6e6928582a2b228338b16ba605ded18b04484a3c139de"
+    },
+    "co": {
+      "value": 1.4685922169337033,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "37d4d3b7e9a665540e0af50d5ec644cdcca5ca47bf23a1ec21049c061ad849df"
+    },
+    "o3": {
+      "value": 7.878439843019347,
+      "issued_at": "2025-12-09T05:00:00+05:30",
+      "model_sha256": "898daaaee9fcf28753a7a2dc4f6ef85492b57035308ddc1cf1137be2be300f15"
+    },
+    "nh3": {
+      "value": 9.754295308836063,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "a3bbdb31f63b9644d60cba31f2052a5b69d634d368ad0707cd3dac88e771a79d"
+    },
+    "benzene": {
+      "value": 9.402131591628017,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "b2ee156d6356450921428c3db4c8f9c0c4e9fb123319f96fd583bae2da69e60e"
+    },
+    "toluene": {
+      "value": 35.13465820152923,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "e202a0a848aa62c4e7ccce9c2af6bcbfb0a9cb2b55bb3822df629c00c28020db"
+    }
+  },
+  "site_5988": {
+    "pm25": {
+      "value": 98.48334219149805,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "b27f5aa0161bc5ada8cc0cbad31f91580dec20567d56aabcf02beda5c46b89da"
+    },
+    "pm10": {
+      "value": 218.06341032246132,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "b098f2a8018a724ecfbf8d1ea3aaef80dbfdc110222b67645837e587950d8297"
+    },
+    "no2": {
+      "value": 35.071605166668796,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "2ac6bd66201cbb4e12e361120fc187783f459c525812246c839fb8de3868ed77"
+    },
+    "no": {
+      "value": 5.592704787318132,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "7397898cc32e58c64616b0816fa09d8b2dc4bf7d90ecf8bfc61f5afe490d63f9"
+    },
+    "nox": {
+      "value": 20.76232112489356,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "4e280eb41854293773ad69b9cf1bd14676c1520b04d53a28df963b7a52497cbe"
+    },
+    "co": {
+      "value": 1.718874843245376,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "37d4d3b7e9a665540e0af50d5ec644cdcca5ca47bf23a1ec21049c061ad849df"
+    },
+    "o3": {
+      "value": 46.26715450010721,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "898daaaee9fcf28753a7a2dc4f6ef85492b57035308ddc1cf1137be2be300f15"
+    },
+    "benzene": {
+      "value": 9.813764738982005,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "b2ee156d6356450921428c3db4c8f9c0c4e9fb123319f96fd583bae2da69e60e"
+    },
+    "toluene": {
+      "value": 11.90283485524328,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "e202a0a848aa62c4e7ccce9c2af6bcbfb0a9cb2b55bb3822df629c00c28020db"
+    }
+  },
+  "site_5996": {
+    "pm25": {
+      "value": 77.54458319682402,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "b27f5aa0161bc5ada8cc0cbad31f91580dec20567d56aabcf02beda5c46b89da"
+    },
+    "pm10": {
+      "value": 109.78317013705157,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "b098f2a8018a724ecfbf8d1ea3aaef80dbfdc110222b67645837e587950d8297"
+    },
+    "no2": {
+      "value": 23.18146074873909,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "2ac6bd66201cbb4e12e361120fc187783f459c525812246c839fb8de3868ed77"
+    },
+    "no": {
+      "value": 3.730914641522883,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "7397898cc32e58c64616b0816fa09d8b2dc4bf7d90ecf8bfc61f5afe490d63f9"
+    },
+    "nox": {
+      "value": 27.445571841981284,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "4e280eb41854293773ad69b9cf1bd14676c1520b04d53a28df963b7a52497cbe"
+    },
+    "co": {
+      "value": 0.7277981821329814,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "37d4d3b7e9a665540e0af50d5ec644cdcca5ca47bf23a1ec21049c061ad849df"
+    },
+    "o3": {
+      "value": 10.749603171245639,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "898daaaee9fcf28753a7a2dc4f6ef85492b57035308ddc1cf1137be2be300f15"
+    },
+    "benzene": {
+      "value": 3.1171481300683763,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "b2ee156d6356450921428c3db4c8f9c0c4e9fb123319f96fd583bae2da69e60e"
+    },
+    "toluene": {
+      "value": 12.809263754799174,
+      "issued_at": "2026-01-01T04:00:00+05:30",
+      "model_sha256": "e202a0a848aa62c4e7ccce9c2af6bcbfb0a9cb2b55bb3822df629c00c28020db"
+    }
+  },
+  "site_6012": {
+    "pm25": {
+      "value": 117.37430375794824,
+      "issued_at": "2025-12-31T14:00:00+05:30",
+      "model_sha256": "b27f5aa0161bc5ada8cc0cbad31f91580dec20567d56aabcf02beda5c46b89da"
+    },
+    "pm10": {
+      "value": 156.48760065754232,
+      "issued_at": "2025-12-31T14:00:00+05:30",
+      "model_sha256": "b098f2a8018a724ecfbf8d1ea3aaef80dbfdc110222b67645837e587950d8297"
+    },
+    "no2": {
+      "value": 8.955318312472219,
+      "issued_at": "2025-12-31T14:00:00+05:30",
+      "model_sha256": "2ac6bd66201cbb4e12e361120fc187783f459c525812246c839fb8de3868ed77"
+    },
+    "no": {
+      "value": 7.590090096310045,
+      "issued_at": "2025-12-31T14:00:00+05:30",
+      "model_sha256": "7397898cc32e58c64616b0816fa09d8b2dc4bf7d90ecf8bfc61f5afe490d63f9"
+    },
+    "nox": {
+      "value": 15.575365358150899,
+      "issued_at": "2025-12-31T14:00:00+05:30",
+      "model_sha256": "4e280eb41854293773ad69b9cf1bd14676c1520b04d53a28df963b7a52497cbe"
+    },
+    "co": {
+      "value": 0.644024392094205,
+      "issued_at": "2025-12-31T14:00:00+05:30",
+      "model_sha256": "37d4d3b7e9a665540e0af50d5ec644cdcca5ca47bf23a1ec21049c061ad849df"
+    },
+    "o3": {
+      "value": 7.253311883976391,
+      "issued_at": "2025-12-31T14:00:00+05:30",
+      "model_sha256": "898daaaee9fcf28753a7a2dc4f6ef85492b57035308ddc1cf1137be2be300f15"
+    },
+    "benzene": {
+      "value": 11.87245789515865,
+      "issued_at": "2025-12-31T14:00:00+05:30",
+      "model_sha256": "b2ee156d6356450921428c3db4c8f9c0c4e9fb123319f96fd583bae2da69e60e"
+    },
+    "toluene": {
+      "value": 7.954131762616454,
+      "issued_at": "2025-12-31T14:00:00+05:30",
+      "model_sha256": "e202a0a848aa62c4e7ccce9c2af6bcbfb0a9cb2b55bb3822df629c00c28020db"
+    }
+  }
+}

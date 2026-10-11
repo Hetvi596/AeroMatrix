@@ -1,0 +1,2096 @@
+[
+  {
+    "file": "01_Alandi_IITM_AQI_Data_2017-2023.csv",
+    "sha256": "df9b8d5a034f58a69b225e8b7dcbee15627f0848138685d0bfb507af59aa2379",
+    "bytes": 105994,
+    "status": "excluded",
+    "kind": "legacy_aqi_table",
+    "csv_records": 1325,
+    "reason": "Year/month/hour AQI table, not identified pollutant concentrations. Preserved; never used as concentration labels."
+  },
+  {
+    "file": "02_Bhosari_IITM_AQI_Data_2017-2023.csv",
+    "sha256": "d7603bd882bb63b6ac810ddb679f3a178e2257bbbe2c26f853fcb7defb8da486",
+    "bytes": 101772,
+    "status": "excluded",
+    "kind": "legacy_aqi_table",
+    "csv_records": 1325,
+    "reason": "Year/month/hour AQI table, not identified pollutant concentrations. Preserved; never used as concentration labels."
+  },
+  {
+    "file": "03_Hadapsar_IITM_AQI_Data_2017-2023.csv",
+    "sha256": "d894cf235c2599077d98c08afd5c8db40330aaf73da6d2e1453e39a8509c9c7d",
+    "bytes": 93649,
+    "status": "excluded",
+    "kind": "legacy_aqi_table",
+    "csv_records": 1325,
+    "reason": "Year/month/hour AQI table, not identified pollutant concentrations. Preserved; never used as concentration labels."
+  },
+  {
+    "file": "04_Karve_Road_MPCB_AQI_Data_2017-2023.csv",
+    "sha256": "76ba60a60f0dd0a1cd80b8d7d47095579ab542ad1bf3fccbaaf88184a2233d7f",
+    "bytes": 221666,
+    "status": "excluded",
+    "kind": "legacy_aqi_table",
+    "csv_records": 2455,
+    "reason": "Year/month/hour AQI table, not identified pollutant concentrations. Preserved; never used as concentration labels."
+  },
+  {
+    "file": "05_Katraj_Dairy_MPCB_AQI_Data_2023.csv",
+    "sha256": "d47760fa5c9cc2a8a328364a7c1a4914b4e09ea71d8deba2a002dcdbf7de1220",
+    "bytes": 27570,
+    "status": "excluded",
+    "kind": "legacy_aqi_table",
+    "csv_records": 281,
+    "reason": "Year/month/hour AQI table, not identified pollutant concentrations. Preserved; never used as concentration labels."
+  },
+  {
+    "file": "06_Mhada_Colony_IITM_AQI_Data_2017-2023.csv",
+    "sha256": "072d5d1a767d3e89c9bc5bd01b157b37f33585a57fc164ca1ffefda2c3ff38ef",
+    "bytes": 145157,
+    "status": "excluded",
+    "kind": "legacy_aqi_table",
+    "csv_records": 1325,
+    "reason": "Year/month/hour AQI table, not identified pollutant concentrations. Preserved; never used as concentration labels."
+  },
+  {
+    "file": "07_MIT-Kothrud_IITM_AQI_Data_2017-2023.csv",
+    "sha256": "5fd0710d3081569a576086fed27e1b01015752f3e4d280f53fe18a5b1d2729b0",
+    "bytes": 101861,
+    "status": "excluded",
+    "kind": "legacy_aqi_table",
+    "csv_records": 1325,
+    "reason": "Year/month/hour AQI table, not identified pollutant concentrations. Preserved; never used as concentration labels."
+  },
+  {
+    "file": "08_Revenue_Colony-Shivajinagar_IITM_AQI_Data_2017-2023.csv",
+    "sha256": "aa8d2c4472089288515d1d76351a4ae144ca2c0be5b4633fc7403aed92763166",
+    "bytes": 136965,
+    "status": "excluded",
+    "kind": "legacy_aqi_table",
+    "csv_records": 1325,
+    "reason": "Year/month/hour AQI table, not identified pollutant concentrations. Preserved; never used as concentration labels."
+  },
+  {
+    "file": "09_Savitribai_Phule_University_MPCB_AQI_Data_2023.csv",
+    "sha256": "8ac9486376f05e1facea5a494fe01c1d9e36577d1c02b87b9385dfd3a0e6ddce",
+    "bytes": 25482,
+    "status": "excluded",
+    "kind": "legacy_aqi_table",
+    "csv_records": 281,
+    "reason": "Year/month/hour AQI table, not identified pollutant concentrations. Preserved; never used as concentration labels."
+  },
+  {
+    "file": "10_Transport_Nagar-Nigdi_IITM_AQI_Data_2017-2023.csv",
+    "sha256": "1ccd767e4810f83870d6d67f60084faa025f36466efff2bf69ca08b7d28fab46",
+    "bytes": 108982,
+    "status": "excluded",
+    "kind": "legacy_aqi_table",
+    "csv_records": 1325,
+    "reason": "Year/month/hour AQI table, not identified pollutant concentrations. Preserved; never used as concentration labels."
+  },
+  {
+    "file": "11_Alandi_IITM_15_minute_AQI_Data_for_2024-25.csv",
+    "sha256": "d01c3c285f92cc4d40e41161f1085b61f8b75b4585ddfaff24433c2d241d460e",
+    "bytes": 3833770,
+    "status": "read",
+    "rows": 24885,
+    "invalid_timestamps": 1,
+    "exact_duplicate_rows": 0,
+    "start": "2024-01-01 05:30:00+05:30",
+    "end": "2025-01-28 16:30:00+05:30",
+    "median_interval_hours": 0.25,
+    "gaps_over_one_hour": 38,
+    "stations": [
+      "site_5405"
+    ],
+    "columns": [
+      "Station ID",
+      "State",
+      "City",
+      "Station Name",
+      "Timestamp",
+      "PM2.5 (\u00b5g/m\u00b3)",
+      "PM10 (\u00b5g/m\u00b3)",
+      "NO (\u00b5g/m\u00b3)",
+      "NO2 (\u00b5g/m\u00b3)",
+      "NOx (ppb)",
+      "NH3 (\u00b5g/m\u00b3)",
+      "SO2 (\u00b5g/m\u00b3)",
+      "CO (mg/m\u00b3)",
+      "Ozone (\u00b5g/m\u00b3)",
+      "Benzene (\u00b5g/m\u00b3)",
+      "Toluene (\u00b5g/m\u00b3)",
+      "Xylene (\u00b5g/m\u00b3)",
+      "O Xylene (\u00b5g/m\u00b3)",
+      "Eth-Benzene (\u00b5g/m\u00b3)",
+      "MP-Xylene (\u00b5g/m\u00b3)",
+      "AT (\u00b0C)",
+      "RH (%)",
+      "WS (m/s)",
+      "WD (deg)",
+      "RF (mm)",
+      "TOT-RF (mm)",
+      "SR (W/mt2)",
+      "BP (mmHg)",
+      "VWS (m/s)"
+    ],
+    "units": {
+      "PM2.5 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "PM10 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NO (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NO2 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NOx (ppb)": {
+        "source": "ppb",
+        "canonical": "ppb",
+        "verified": true
+      },
+      "NH3 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "SO2 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "CO (mg/m\u00b3)": {
+        "source": "mg/m\u00b3",
+        "canonical": "mg/m3",
+        "verified": true
+      },
+      "Ozone (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Benzene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Toluene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Xylene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "AT (\u00b0C)": {
+        "source": "\u00b0C",
+        "canonical": "degC",
+        "verified": true
+      },
+      "RH (%)": {
+        "source": "%",
+        "canonical": "%",
+        "verified": true
+      },
+      "WS (m/s)": {
+        "source": "m/s",
+        "canonical": "m/s",
+        "verified": true
+      },
+      "WD (deg)": {
+        "source": "deg",
+        "canonical": "degree",
+        "verified": true
+      },
+      "RF (mm)": {
+        "source": "mm",
+        "canonical": "mm",
+        "verified": true
+      },
+      "SR (W/mt2)": {
+        "source": "W/mt2",
+        "canonical": "W/m2",
+        "verified": true
+      },
+      "BP (mmHg)": {
+        "source": "mmHg",
+        "canonical": "hPa",
+        "verified": true
+      }
+    },
+    "minimum_samples_per_hour": 3,
+    "hours_excluded_for_incomplete_sampling": {
+      "pm25": 298,
+      "pm10": 173,
+      "no": 361,
+      "no2": 362,
+      "nox": 361,
+      "nh3": 6344,
+      "so2": 6344,
+      "co": 132,
+      "o3": 125,
+      "benzene": 185,
+      "toluene": 1526,
+      "xylene": 1505,
+      "temperature": 6344,
+      "humidity": 6344,
+      "wind_speed": 6344,
+      "wind_direction": 6344,
+      "rainfall": 6344,
+      "solar_radiation": 6344,
+      "pressure": 6344
+    },
+    "audit_file": "audit/011.csv.gz"
+  },
+  {
+    "file": "12_Bhosari_IITM_15_minute_AQI_Data_for_2024-25.csv",
+    "sha256": "520e5fc73db3f06a9daf894a0be78aa95a0dbc1b9c3005f3fcbfa9ed78ba9570",
+    "bytes": 5533047,
+    "status": "read",
+    "rows": 37600,
+    "invalid_timestamps": 1,
+    "exact_duplicate_rows": 0,
+    "start": "2024-01-01 05:30:00+05:30",
+    "end": "2025-12-12 18:00:00+05:30",
+    "median_interval_hours": 0.25,
+    "gaps_over_one_hour": 55,
+    "stations": [
+      "site_5406"
+    ],
+    "columns": [
+      "Station ID",
+      "State",
+      "City",
+      "Station Name",
+      "Timestamp",
+      "PM2.5 (\u00b5g/m\u00b3)",
+      "PM10 (\u00b5g/m\u00b3)",
+      "NO (\u00b5g/m\u00b3)",
+      "NO2 (\u00b5g/m\u00b3)",
+      "NOx (ppb)",
+      "NH3 (\u00b5g/m\u00b3)",
+      "SO2 (\u00b5g/m\u00b3)",
+      "CO (mg/m\u00b3)",
+      "Ozone (\u00b5g/m\u00b3)",
+      "Benzene (\u00b5g/m\u00b3)",
+      "Toluene (\u00b5g/m\u00b3)",
+      "Xylene (\u00b5g/m\u00b3)",
+      "O Xylene (\u00b5g/m\u00b3)",
+      "Eth-Benzene (\u00b5g/m\u00b3)",
+      "MP-Xylene (\u00b5g/m\u00b3)",
+      "AT (\u00b0C)",
+      "RH (%)",
+      "WS (m/s)",
+      "WD (deg)",
+      "RF (mm)",
+      "TOT-RF (mm)",
+      "SR (W/mt2)",
+      "BP (mmHg)",
+      "VWS (m/s)"
+    ],
+    "units": {
+      "PM2.5 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "PM10 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NO (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NO2 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NOx (ppb)": {
+        "source": "ppb",
+        "canonical": "ppb",
+        "verified": true
+      },
+      "NH3 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "SO2 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "CO (mg/m\u00b3)": {
+        "source": "mg/m\u00b3",
+        "canonical": "mg/m3",
+        "verified": true
+      },
+      "Ozone (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Benzene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Toluene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Xylene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "AT (\u00b0C)": {
+        "source": "\u00b0C",
+        "canonical": "degC",
+        "verified": true
+      },
+      "RH (%)": {
+        "source": "%",
+        "canonical": "%",
+        "verified": true
+      },
+      "WS (m/s)": {
+        "source": "m/s",
+        "canonical": "m/s",
+        "verified": true
+      },
+      "WD (deg)": {
+        "source": "deg",
+        "canonical": "degree",
+        "verified": true
+      },
+      "RF (mm)": {
+        "source": "mm",
+        "canonical": "mm",
+        "verified": true
+      },
+      "SR (W/mt2)": {
+        "source": "W/mt2",
+        "canonical": "W/m2",
+        "verified": true
+      },
+      "BP (mmHg)": {
+        "source": "mmHg",
+        "canonical": "hPa",
+        "verified": true
+      }
+    },
+    "minimum_samples_per_hour": 3,
+    "hours_excluded_for_incomplete_sampling": {
+      "pm25": 447,
+      "pm10": 351,
+      "no": 922,
+      "no2": 931,
+      "nox": 755,
+      "nh3": 9561,
+      "so2": 9561,
+      "co": 751,
+      "o3": 353,
+      "benzene": 3166,
+      "toluene": 5714,
+      "xylene": 5714,
+      "temperature": 9561,
+      "humidity": 9561,
+      "wind_speed": 9561,
+      "wind_direction": 9561,
+      "rainfall": 9561,
+      "solar_radiation": 9561,
+      "pressure": 9561
+    },
+    "audit_file": "audit/012.csv.gz"
+  },
+  {
+    "file": "13_Bhumkar_Nagar_IITM_15_minute_AQI_Data_for_2024-25.csv",
+    "sha256": "82ce36fdbe9586d3a652366989c88120bcf4c1c85e5a8a95f2bc9a5b9b0719e9",
+    "bytes": 11151401,
+    "status": "read",
+    "rows": 70177,
+    "invalid_timestamps": 1,
+    "exact_duplicate_rows": 0,
+    "start": "2024-01-01 05:30:00+05:30",
+    "end": "2026-01-01 05:15:00+05:30",
+    "median_interval_hours": 0.25,
+    "gaps_over_one_hour": 0,
+    "stations": [
+      "site_5988"
+    ],
+    "columns": [
+      "Station ID",
+      "State",
+      "City",
+      "Station Name",
+      "Timestamp",
+      "PM2.5 (\u00b5g/m\u00b3)",
+      "PM10 (\u00b5g/m\u00b3)",
+      "NO (\u00b5g/m\u00b3)",
+      "NO2 (\u00b5g/m\u00b3)",
+      "NOx (ppb)",
+      "NH3 (\u00b5g/m\u00b3)",
+      "SO2 (\u00b5g/m\u00b3)",
+      "CO (mg/m\u00b3)",
+      "Ozone (\u00b5g/m\u00b3)",
+      "Benzene (\u00b5g/m\u00b3)",
+      "Toluene (\u00b5g/m\u00b3)",
+      "Xylene (\u00b5g/m\u00b3)",
+      "O Xylene (\u00b5g/m\u00b3)",
+      "Eth-Benzene (\u00b5g/m\u00b3)",
+      "MP-Xylene (\u00b5g/m\u00b3)",
+      "AT (\u00b0C)",
+      "RH (%)",
+      "WS (m/s)",
+      "WD (deg)",
+      "RF (mm)",
+      "TOT-RF (mm)",
+      "SR (W/mt2)",
+      "BP (mmHg)",
+      "VWS (m/s)"
+    ],
+    "units": {
+      "PM2.5 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "PM10 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NO (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NO2 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NOx (ppb)": {
+        "source": "ppb",
+        "canonical": "ppb",
+        "verified": true
+      },
+      "NH3 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "SO2 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "CO (mg/m\u00b3)": {
+        "source": "mg/m\u00b3",
+        "canonical": "mg/m3",
+        "verified": true
+      },
+      "Ozone (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Benzene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Toluene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Xylene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "AT (\u00b0C)": {
+        "source": "\u00b0C",
+        "canonical": "degC",
+        "verified": true
+      },
+      "RH (%)": {
+        "source": "%",
+        "canonical": "%",
+        "verified": true
+      },
+      "WS (m/s)": {
+        "source": "m/s",
+        "canonical": "m/s",
+        "verified": true
+      },
+      "WD (deg)": {
+        "source": "deg",
+        "canonical": "degree",
+        "verified": true
+      },
+      "RF (mm)": {
+        "source": "mm",
+        "canonical": "mm",
+        "verified": true
+      },
+      "SR (W/mt2)": {
+        "source": "W/mt2",
+        "canonical": "W/m2",
+        "verified": true
+      },
+      "BP (mmHg)": {
+        "source": "mmHg",
+        "canonical": "hPa",
+        "verified": true
+      }
+    },
+    "minimum_samples_per_hour": 3,
+    "hours_excluded_for_incomplete_sampling": {
+      "pm25": 5113,
+      "pm10": 4902,
+      "no": 4429,
+      "no2": 4424,
+      "nox": 4422,
+      "nh3": 17545,
+      "so2": 17545,
+      "co": 4440,
+      "o3": 4973,
+      "benzene": 7160,
+      "toluene": 7158,
+      "xylene": 17545,
+      "temperature": 5748,
+      "humidity": 5747,
+      "wind_speed": 17099,
+      "wind_direction": 16716,
+      "rainfall": 5748,
+      "solar_radiation": 7236,
+      "pressure": 17545
+    },
+    "audit_file": "audit/013.csv.gz"
+  },
+  {
+    "file": "14_Dhankawadi_IITM_15_minute_AQI_Data_for_2025.csv",
+    "sha256": "0defe2f353e1191c47f7548c41ea0769bed7c95c7570cce917374eb89ca94c93",
+    "bytes": 2596505,
+    "status": "read",
+    "rows": 17686,
+    "invalid_timestamps": 0,
+    "exact_duplicate_rows": 0,
+    "start": "2025-01-15 16:45:00+05:30",
+    "end": "2025-12-31 15:00:00+05:30",
+    "median_interval_hours": 0.25,
+    "gaps_over_one_hour": 77,
+    "stations": [
+      "site_6012"
+    ],
+    "columns": [
+      "Station ID",
+      "State",
+      "City",
+      "Station Name",
+      "Timestamp",
+      "PM2.5 (\u00b5g/m\u00b3)",
+      "PM10 (\u00b5g/m\u00b3)",
+      "NO (\u00b5g/m\u00b3)",
+      "NO2 (\u00b5g/m\u00b3)",
+      "NOx (ppb)",
+      "NH3 (\u00b5g/m\u00b3)",
+      "SO2 (\u00b5g/m\u00b3)",
+      "CO (mg/m\u00b3)",
+      "Ozone (\u00b5g/m\u00b3)",
+      "Benzene (\u00b5g/m\u00b3)",
+      "Toluene (\u00b5g/m\u00b3)",
+      "Xylene (\u00b5g/m\u00b3)",
+      "O Xylene (\u00b5g/m\u00b3)",
+      "Eth-Benzene (\u00b5g/m\u00b3)",
+      "MP-Xylene (\u00b5g/m\u00b3)",
+      "AT (\u00b0C)",
+      "RH (%)",
+      "WS (m/s)",
+      "WD (deg)",
+      "RF (mm)",
+      "TOT-RF (mm)",
+      "SR (W/mt2)",
+      "BP (mmHg)",
+      "VWS (m/s)"
+    ],
+    "units": {
+      "PM2.5 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "PM10 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NO (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NO2 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NOx (ppb)": {
+        "source": "ppb",
+        "canonical": "ppb",
+        "verified": true
+      },
+      "NH3 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "SO2 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "CO (mg/m\u00b3)": {
+        "source": "mg/m\u00b3",
+        "canonical": "mg/m3",
+        "verified": true
+      },
+      "Ozone (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Benzene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Toluene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Xylene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "AT (\u00b0C)": {
+        "source": "\u00b0C",
+        "canonical": "degC",
+        "verified": true
+      },
+      "RH (%)": {
+        "source": "%",
+        "canonical": "%",
+        "verified": true
+      },
+      "WS (m/s)": {
+        "source": "m/s",
+        "canonical": "m/s",
+        "verified": true
+      },
+      "WD (deg)": {
+        "source": "deg",
+        "canonical": "degree",
+        "verified": true
+      },
+      "RF (mm)": {
+        "source": "mm",
+        "canonical": "mm",
+        "verified": true
+      },
+      "SR (W/mt2)": {
+        "source": "W/mt2",
+        "canonical": "W/m2",
+        "verified": true
+      },
+      "BP (mmHg)": {
+        "source": "mmHg",
+        "canonical": "hPa",
+        "verified": true
+      }
+    },
+    "minimum_samples_per_hour": 3,
+    "hours_excluded_for_incomplete_sampling": {
+      "pm25": 357,
+      "pm10": 428,
+      "no": 1459,
+      "no2": 1428,
+      "nox": 1423,
+      "nh3": 4510,
+      "so2": 4510,
+      "co": 483,
+      "o3": 1234,
+      "benzene": 2600,
+      "toluene": 595,
+      "xylene": 4510,
+      "temperature": 4510,
+      "humidity": 4510,
+      "wind_speed": 4510,
+      "wind_direction": 4510,
+      "rainfall": 4510,
+      "solar_radiation": 4510,
+      "pressure": 4510
+    },
+    "audit_file": "audit/014.csv.gz"
+  },
+  {
+    "file": "15_Hadapsar_IITM_15_minute_AQI_Data_for_2024-25.csv",
+    "sha256": "386590d5a7c333d0a9579213f1d1a1f0f5924205d82ca6d40c3f4eff27f038a3",
+    "bytes": 4356470,
+    "status": "read",
+    "rows": 29797,
+    "invalid_timestamps": 1,
+    "exact_duplicate_rows": 0,
+    "start": "2024-05-20 15:30:00+05:30",
+    "end": "2026-01-01 05:00:00+05:30",
+    "median_interval_hours": 0.25,
+    "gaps_over_one_hour": 57,
+    "stations": [
+      "site_5407"
+    ],
+    "columns": [
+      "Station ID",
+      "State",
+      "City",
+      "Station Name",
+      "Timestamp",
+      "PM2.5 (\u00b5g/m\u00b3)",
+      "PM10 (\u00b5g/m\u00b3)",
+      "NO (\u00b5g/m\u00b3)",
+      "NO2 (\u00b5g/m\u00b3)",
+      "NOx (ppb)",
+      "NH3 (\u00b5g/m\u00b3)",
+      "SO2 (\u00b5g/m\u00b3)",
+      "CO (mg/m\u00b3)",
+      "Ozone (\u00b5g/m\u00b3)",
+      "Benzene (\u00b5g/m\u00b3)",
+      "Toluene (\u00b5g/m\u00b3)",
+      "Xylene (\u00b5g/m\u00b3)",
+      "O Xylene (\u00b5g/m\u00b3)",
+      "Eth-Benzene (\u00b5g/m\u00b3)",
+      "MP-Xylene (\u00b5g/m\u00b3)",
+      "AT (\u00b0C)",
+      "RH (%)",
+      "WS (m/s)",
+      "WD (deg)",
+      "RF (mm)",
+      "TOT-RF (mm)",
+      "SR (W/mt2)",
+      "BP (mmHg)",
+      "VWS (m/s)"
+    ],
+    "units": {
+      "PM2.5 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "PM10 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NO (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NO2 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NOx (ppb)": {
+        "source": "ppb",
+        "canonical": "ppb",
+        "verified": true
+      },
+      "NH3 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "SO2 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "CO (mg/m\u00b3)": {
+        "source": "mg/m\u00b3",
+        "canonical": "mg/m3",
+        "verified": true
+      },
+      "Ozone (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Benzene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Toluene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Xylene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "AT (\u00b0C)": {
+        "source": "\u00b0C",
+        "canonical": "degC",
+        "verified": true
+      },
+      "RH (%)": {
+        "source": "%",
+        "canonical": "%",
+        "verified": true
+      },
+      "WS (m/s)": {
+        "source": "m/s",
+        "canonical": "m/s",
+        "verified": true
+      },
+      "WD (deg)": {
+        "source": "deg",
+        "canonical": "degree",
+        "verified": true
+      },
+      "RF (mm)": {
+        "source": "mm",
+        "canonical": "mm",
+        "verified": true
+      },
+      "SR (W/mt2)": {
+        "source": "W/mt2",
+        "canonical": "W/m2",
+        "verified": true
+      },
+      "BP (mmHg)": {
+        "source": "mmHg",
+        "canonical": "hPa",
+        "verified": true
+      }
+    },
+    "minimum_samples_per_hour": 3,
+    "hours_excluded_for_incomplete_sampling": {
+      "pm25": 778,
+      "pm10": 884,
+      "no": 1995,
+      "no2": 1990,
+      "nox": 1690,
+      "nh3": 7620,
+      "so2": 7620,
+      "co": 2432,
+      "o3": 613,
+      "benzene": 3565,
+      "toluene": 3560,
+      "xylene": 3560,
+      "temperature": 7620,
+      "humidity": 7620,
+      "wind_speed": 7620,
+      "wind_direction": 7620,
+      "rainfall": 7620,
+      "solar_radiation": 7620,
+      "pressure": 7620
+    },
+    "audit_file": "audit/015.csv.gz"
+  },
+  {
+    "file": "16_Karve_Road_MPCB_15_minute_AQI_Data_for_2024-25.csv",
+    "sha256": "b8e538746f52a09ad6cf0bdbc9f92a6494494daf711399e9080bd7c018d6c98e",
+    "bytes": 10104589,
+    "status": "read",
+    "rows": 70177,
+    "invalid_timestamps": 1,
+    "exact_duplicate_rows": 0,
+    "start": "2024-01-01 05:30:00+05:30",
+    "end": "2026-01-01 05:15:00+05:30",
+    "median_interval_hours": 0.25,
+    "gaps_over_one_hour": 0,
+    "stations": [
+      "site_292"
+    ],
+    "columns": [
+      "Station ID",
+      "State",
+      "City",
+      "Station Name",
+      "Timestamp",
+      "PM2.5 (\u00b5g/m\u00b3)",
+      "PM10 (\u00b5g/m\u00b3)",
+      "NO (\u00b5g/m\u00b3)",
+      "NO2 (\u00b5g/m\u00b3)",
+      "NOx (ppb)",
+      "NH3 (\u00b5g/m\u00b3)",
+      "SO2 (\u00b5g/m\u00b3)",
+      "CO (mg/m\u00b3)",
+      "Ozone (\u00b5g/m\u00b3)",
+      "Benzene (\u00b5g/m\u00b3)",
+      "Toluene (\u00b5g/m\u00b3)",
+      "Xylene (\u00b5g/m\u00b3)",
+      "O Xylene (\u00b5g/m\u00b3)",
+      "Eth-Benzene (\u00b5g/m\u00b3)",
+      "MP-Xylene (\u00b5g/m\u00b3)",
+      "AT (\u00b0C)",
+      "RH (%)",
+      "WS (m/s)",
+      "WD (deg)",
+      "RF (mm)",
+      "TOT-RF (mm)",
+      "SR (W/mt2)",
+      "BP (mmHg)",
+      "VWS (m/s)"
+    ],
+    "units": {
+      "PM2.5 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "PM10 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NO (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NO2 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NOx (ppb)": {
+        "source": "ppb",
+        "canonical": "ppb",
+        "verified": true
+      },
+      "NH3 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "SO2 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "CO (mg/m\u00b3)": {
+        "source": "mg/m\u00b3",
+        "canonical": "mg/m3",
+        "verified": true
+      },
+      "Ozone (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Benzene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Toluene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Xylene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "AT (\u00b0C)": {
+        "source": "\u00b0C",
+        "canonical": "degC",
+        "verified": true
+      },
+      "RH (%)": {
+        "source": "%",
+        "canonical": "%",
+        "verified": true
+      },
+      "WS (m/s)": {
+        "source": "m/s",
+        "canonical": "m/s",
+        "verified": true
+      },
+      "WD (deg)": {
+        "source": "deg",
+        "canonical": "degree",
+        "verified": true
+      },
+      "RF (mm)": {
+        "source": "mm",
+        "canonical": "mm",
+        "verified": true
+      },
+      "SR (W/mt2)": {
+        "source": "W/mt2",
+        "canonical": "W/m2",
+        "verified": true
+      },
+      "BP (mmHg)": {
+        "source": "mmHg",
+        "canonical": "hPa",
+        "verified": true
+      }
+    },
+    "minimum_samples_per_hour": 3,
+    "hours_excluded_for_incomplete_sampling": {
+      "pm25": 6915,
+      "pm10": 8567,
+      "no": 6867,
+      "no2": 6876,
+      "nox": 6408,
+      "nh3": 17545,
+      "so2": 6955,
+      "co": 6198,
+      "o3": 7173,
+      "benzene": 6259,
+      "toluene": 17545,
+      "xylene": 17545,
+      "temperature": 17545,
+      "humidity": 11172,
+      "wind_speed": 6912,
+      "wind_direction": 9701,
+      "rainfall": 17545,
+      "solar_radiation": 17545,
+      "pressure": 16668
+    },
+    "audit_file": "audit/016.csv.gz"
+  },
+  {
+    "file": "17_Katraj_Dairy_MPCB_15_minute_AQI_Data_for_2024-25.csv",
+    "sha256": "5c630d31699d5365a7621c3f3d9a11bdc160aa11080c45a2d2e532704779cfda",
+    "bytes": 12392945,
+    "status": "read",
+    "rows": 70177,
+    "invalid_timestamps": 1,
+    "exact_duplicate_rows": 0,
+    "start": "2024-01-01 05:30:00+05:30",
+    "end": "2026-01-01 05:15:00+05:30",
+    "median_interval_hours": 0.25,
+    "gaps_over_one_hour": 0,
+    "stations": [
+      "site_5766"
+    ],
+    "columns": [
+      "Station ID",
+      "State",
+      "City",
+      "Station Name",
+      "Timestamp",
+      "PM2.5 (\u00b5g/m\u00b3)",
+      "PM10 (\u00b5g/m\u00b3)",
+      "NO (\u00b5g/m\u00b3)",
+      "NO2 (\u00b5g/m\u00b3)",
+      "NOx (ppb)",
+      "NH3 (\u00b5g/m\u00b3)",
+      "SO2 (\u00b5g/m\u00b3)",
+      "CO (mg/m\u00b3)",
+      "Ozone (\u00b5g/m\u00b3)",
+      "Benzene (\u00b5g/m\u00b3)",
+      "Toluene (\u00b5g/m\u00b3)",
+      "Xylene (\u00b5g/m\u00b3)",
+      "O Xylene (\u00b5g/m\u00b3)",
+      "Eth-Benzene (\u00b5g/m\u00b3)",
+      "MP-Xylene (\u00b5g/m\u00b3)",
+      "AT (\u00b0C)",
+      "RH (%)",
+      "WS (m/s)",
+      "WD (deg)",
+      "RF (mm)",
+      "TOT-RF (mm)",
+      "SR (W/mt2)",
+      "BP (mmHg)",
+      "VWS (m/s)"
+    ],
+    "units": {
+      "PM2.5 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "PM10 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NO (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NO2 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NOx (ppb)": {
+        "source": "ppb",
+        "canonical": "ppb",
+        "verified": true
+      },
+      "NH3 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "SO2 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "CO (mg/m\u00b3)": {
+        "source": "mg/m\u00b3",
+        "canonical": "mg/m3",
+        "verified": true
+      },
+      "Ozone (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Benzene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Toluene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Xylene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "AT (\u00b0C)": {
+        "source": "\u00b0C",
+        "canonical": "degC",
+        "verified": true
+      },
+      "RH (%)": {
+        "source": "%",
+        "canonical": "%",
+        "verified": true
+      },
+      "WS (m/s)": {
+        "source": "m/s",
+        "canonical": "m/s",
+        "verified": true
+      },
+      "WD (deg)": {
+        "source": "deg",
+        "canonical": "degree",
+        "verified": true
+      },
+      "RF (mm)": {
+        "source": "mm",
+        "canonical": "mm",
+        "verified": true
+      },
+      "SR (W/mt2)": {
+        "source": "W/mt2",
+        "canonical": "W/m2",
+        "verified": true
+      },
+      "BP (mmHg)": {
+        "source": "mmHg",
+        "canonical": "hPa",
+        "verified": true
+      }
+    },
+    "minimum_samples_per_hour": 3,
+    "hours_excluded_for_incomplete_sampling": {
+      "pm25": 4291,
+      "pm10": 4419,
+      "no": 5397,
+      "no2": 4268,
+      "nox": 4155,
+      "nh3": 4203,
+      "so2": 5013,
+      "co": 4097,
+      "o3": 5737,
+      "benzene": 4890,
+      "toluene": 4890,
+      "xylene": 17545,
+      "temperature": 3848,
+      "humidity": 3846,
+      "wind_speed": 3988,
+      "wind_direction": 3973,
+      "rainfall": 3805,
+      "solar_radiation": 3846,
+      "pressure": 17545
+    },
+    "audit_file": "audit/017.csv.gz"
+  },
+  {
+    "file": "18_Mhada_Colony_IITM_15_minute_AQI_Data_for_2024-25.csv",
+    "sha256": "815e6e45597666e3ffae11f6bf3249430c449ca14ba1b8417a83708af4821e33",
+    "bytes": 9888920,
+    "status": "read",
+    "rows": 63729,
+    "invalid_timestamps": 1,
+    "exact_duplicate_rows": 0,
+    "start": "2024-01-01 05:30:00+05:30",
+    "end": "2026-01-01 05:00:00+05:30",
+    "median_interval_hours": 0.25,
+    "gaps_over_one_hour": 76,
+    "stations": [
+      "site_5404"
+    ],
+    "columns": [
+      "Station ID",
+      "State",
+      "City",
+      "Station Name",
+      "Timestamp",
+      "PM2.5 (\u00b5g/m\u00b3)",
+      "PM10 (\u00b5g/m\u00b3)",
+      "NO (\u00b5g/m\u00b3)",
+      "NO2 (\u00b5g/m\u00b3)",
+      "NOx (ppb)",
+      "NH3 (\u00b5g/m\u00b3)",
+      "SO2 (\u00b5g/m\u00b3)",
+      "CO (mg/m\u00b3)",
+      "Ozone (\u00b5g/m\u00b3)",
+      "Benzene (\u00b5g/m\u00b3)",
+      "Toluene (\u00b5g/m\u00b3)",
+      "Xylene (\u00b5g/m\u00b3)",
+      "O Xylene (\u00b5g/m\u00b3)",
+      "Eth-Benzene (\u00b5g/m\u00b3)",
+      "MP-Xylene (\u00b5g/m\u00b3)",
+      "AT (\u00b0C)",
+      "RH (%)",
+      "WS (m/s)",
+      "WD (deg)",
+      "RF (mm)",
+      "TOT-RF (mm)",
+      "SR (W/mt2)",
+      "BP (mmHg)",
+      "VWS (m/s)"
+    ],
+    "units": {
+      "PM2.5 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "PM10 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NO (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NO2 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NOx (ppb)": {
+        "source": "ppb",
+        "canonical": "ppb",
+        "verified": true
+      },
+      "NH3 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "SO2 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "CO (mg/m\u00b3)": {
+        "source": "mg/m\u00b3",
+        "canonical": "mg/m3",
+        "verified": true
+      },
+      "Ozone (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Benzene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Toluene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Xylene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "AT (\u00b0C)": {
+        "source": "\u00b0C",
+        "canonical": "degC",
+        "verified": true
+      },
+      "RH (%)": {
+        "source": "%",
+        "canonical": "%",
+        "verified": true
+      },
+      "WS (m/s)": {
+        "source": "m/s",
+        "canonical": "m/s",
+        "verified": true
+      },
+      "WD (deg)": {
+        "source": "deg",
+        "canonical": "degree",
+        "verified": true
+      },
+      "RF (mm)": {
+        "source": "mm",
+        "canonical": "mm",
+        "verified": true
+      },
+      "SR (W/mt2)": {
+        "source": "W/mt2",
+        "canonical": "W/m2",
+        "verified": true
+      },
+      "BP (mmHg)": {
+        "source": "mmHg",
+        "canonical": "hPa",
+        "verified": true
+      }
+    },
+    "minimum_samples_per_hour": 3,
+    "hours_excluded_for_incomplete_sampling": {
+      "pm25": 516,
+      "pm10": 535,
+      "no": 1128,
+      "no2": 1345,
+      "nox": 1111,
+      "nh3": 16192,
+      "so2": 16192,
+      "co": 298,
+      "o3": 1178,
+      "benzene": 5347,
+      "toluene": 8380,
+      "xylene": 8362,
+      "temperature": 16192,
+      "humidity": 16192,
+      "wind_speed": 16192,
+      "wind_direction": 16192,
+      "rainfall": 16192,
+      "solar_radiation": 16192,
+      "pressure": 16192
+    },
+    "audit_file": "audit/018.csv.gz"
+  },
+  {
+    "file": "19_Panchawati_Pashan_IITM_15_minute_AQI_Data_for_2024-25.csv",
+    "sha256": "dd4612b799bd009d18a67728b24658c947b4a4e9bfff1aaf3a1b937688ee3989",
+    "bytes": 11280260,
+    "status": "read",
+    "rows": 70177,
+    "invalid_timestamps": 1,
+    "exact_duplicate_rows": 0,
+    "start": "2024-01-01 05:30:00+05:30",
+    "end": "2026-01-01 05:15:00+05:30",
+    "median_interval_hours": 0.25,
+    "gaps_over_one_hour": 0,
+    "stations": [
+      "site_5996"
+    ],
+    "columns": [
+      "Station ID",
+      "State",
+      "City",
+      "Station Name",
+      "Timestamp",
+      "PM2.5 (\u00b5g/m\u00b3)",
+      "PM10 (\u00b5g/m\u00b3)",
+      "NO (\u00b5g/m\u00b3)",
+      "NO2 (\u00b5g/m\u00b3)",
+      "NOx (ppb)",
+      "NH3 (\u00b5g/m\u00b3)",
+      "SO2 (\u00b5g/m\u00b3)",
+      "CO (mg/m\u00b3)",
+      "Ozone (\u00b5g/m\u00b3)",
+      "Benzene (\u00b5g/m\u00b3)",
+      "Toluene (\u00b5g/m\u00b3)",
+      "Xylene (\u00b5g/m\u00b3)",
+      "O Xylene (\u00b5g/m\u00b3)",
+      "Eth-Benzene (\u00b5g/m\u00b3)",
+      "MP-Xylene (\u00b5g/m\u00b3)",
+      "AT (\u00b0C)",
+      "RH (%)",
+      "WS (m/s)",
+      "WD (deg)",
+      "RF (mm)",
+      "TOT-RF (mm)",
+      "SR (W/mt2)",
+      "BP (mmHg)",
+      "VWS (m/s)"
+    ],
+    "units": {
+      "PM2.5 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "PM10 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NO (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NO2 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NOx (ppb)": {
+        "source": "ppb",
+        "canonical": "ppb",
+        "verified": true
+      },
+      "NH3 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "SO2 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "CO (mg/m\u00b3)": {
+        "source": "mg/m\u00b3",
+        "canonical": "mg/m3",
+        "verified": true
+      },
+      "Ozone (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Benzene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Toluene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Xylene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "AT (\u00b0C)": {
+        "source": "\u00b0C",
+        "canonical": "degC",
+        "verified": true
+      },
+      "RH (%)": {
+        "source": "%",
+        "canonical": "%",
+        "verified": true
+      },
+      "WS (m/s)": {
+        "source": "m/s",
+        "canonical": "m/s",
+        "verified": true
+      },
+      "WD (deg)": {
+        "source": "deg",
+        "canonical": "degree",
+        "verified": true
+      },
+      "RF (mm)": {
+        "source": "mm",
+        "canonical": "mm",
+        "verified": true
+      },
+      "SR (W/mt2)": {
+        "source": "W/mt2",
+        "canonical": "W/m2",
+        "verified": true
+      },
+      "BP (mmHg)": {
+        "source": "mmHg",
+        "canonical": "hPa",
+        "verified": true
+      }
+    },
+    "minimum_samples_per_hour": 3,
+    "hours_excluded_for_incomplete_sampling": {
+      "pm25": 6704,
+      "pm10": 6748,
+      "no": 7873,
+      "no2": 7883,
+      "nox": 7872,
+      "nh3": 17545,
+      "so2": 17545,
+      "co": 7851,
+      "o3": 7573,
+      "benzene": 6799,
+      "toluene": 6818,
+      "xylene": 17545,
+      "temperature": 7155,
+      "humidity": 7157,
+      "wind_speed": 7137,
+      "wind_direction": 7154,
+      "rainfall": 6342,
+      "solar_radiation": 17545,
+      "pressure": 17545
+    },
+    "audit_file": "audit/019.csv.gz"
+  },
+  {
+    "file": "20_Revenue_Colony_Shivajinagar_15_minute_AQI_Data_for_2024-25.csv",
+    "sha256": "929460053765ce50118abc38eaa24b3104c60e987a3c178b3c78ae961b4d5ebe",
+    "bytes": 11224425,
+    "status": "read",
+    "rows": 62594,
+    "invalid_timestamps": 1,
+    "exact_duplicate_rows": 0,
+    "start": "2024-01-01 14:00:00+05:30",
+    "end": "2026-01-01 04:45:00+05:30",
+    "median_interval_hours": 0.25,
+    "gaps_over_one_hour": 83,
+    "stations": [
+      "site_5409"
+    ],
+    "columns": [
+      "Station ID",
+      "State",
+      "City",
+      "Station Name",
+      "Timestamp",
+      "PM2.5 (\u00b5g/m\u00b3)",
+      "PM10 (\u00b5g/m\u00b3)",
+      "NO (\u00b5g/m\u00b3)",
+      "NO2 (\u00b5g/m\u00b3)",
+      "NOx (ppb)",
+      "NH3 (\u00b5g/m\u00b3)",
+      "SO2 (\u00b5g/m\u00b3)",
+      "CO (mg/m\u00b3)",
+      "Ozone (\u00b5g/m\u00b3)",
+      "Benzene (\u00b5g/m\u00b3)",
+      "Toluene (\u00b5g/m\u00b3)",
+      "Xylene (\u00b5g/m\u00b3)",
+      "O Xylene (\u00b5g/m\u00b3)",
+      "Eth-Benzene (\u00b5g/m\u00b3)",
+      "MP-Xylene (\u00b5g/m\u00b3)",
+      "AT (\u00b0C)",
+      "RH (%)",
+      "WS (m/s)",
+      "WD (deg)",
+      "RF (mm)",
+      "TOT-RF (mm)",
+      "SR (W/mt2)",
+      "BP (mmHg)",
+      "VWS (m/s)"
+    ],
+    "units": {
+      "PM2.5 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "PM10 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NO (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NO2 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NOx (ppb)": {
+        "source": "ppb",
+        "canonical": "ppb",
+        "verified": true
+      },
+      "NH3 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "SO2 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "CO (mg/m\u00b3)": {
+        "source": "mg/m\u00b3",
+        "canonical": "mg/m3",
+        "verified": true
+      },
+      "Ozone (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Benzene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Toluene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Xylene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "AT (\u00b0C)": {
+        "source": "\u00b0C",
+        "canonical": "degC",
+        "verified": true
+      },
+      "RH (%)": {
+        "source": "%",
+        "canonical": "%",
+        "verified": true
+      },
+      "WS (m/s)": {
+        "source": "m/s",
+        "canonical": "m/s",
+        "verified": true
+      },
+      "WD (deg)": {
+        "source": "deg",
+        "canonical": "degree",
+        "verified": true
+      },
+      "RF (mm)": {
+        "source": "mm",
+        "canonical": "mm",
+        "verified": true
+      },
+      "SR (W/mt2)": {
+        "source": "W/mt2",
+        "canonical": "W/m2",
+        "verified": true
+      },
+      "BP (mmHg)": {
+        "source": "mmHg",
+        "canonical": "hPa",
+        "verified": true
+      }
+    },
+    "minimum_samples_per_hour": 3,
+    "hours_excluded_for_incomplete_sampling": {
+      "pm25": 1387,
+      "pm10": 1117,
+      "no": 1544,
+      "no2": 1218,
+      "nox": 1514,
+      "nh3": 16143,
+      "so2": 2033,
+      "co": 1036,
+      "o3": 698,
+      "benzene": 922,
+      "toluene": 3489,
+      "xylene": 4437,
+      "temperature": 16143,
+      "humidity": 16143,
+      "wind_speed": 16143,
+      "wind_direction": 16143,
+      "rainfall": 16143,
+      "solar_radiation": 16143,
+      "pressure": 16143
+    },
+    "audit_file": "audit/020.csv.gz"
+  },
+  {
+    "file": "21_Savitribai_Phule_Pune_University_MPCB_15_minute_AQI_Data_for_2024-25.csv",
+    "sha256": "63eaa4e16a5e08120dfee4412f5bc7a51fc6b9ac5a9d93e44c4648ef75cdad83",
+    "bytes": 14713165,
+    "status": "read",
+    "rows": 70177,
+    "invalid_timestamps": 1,
+    "exact_duplicate_rows": 0,
+    "start": "2024-01-01 05:30:00+05:30",
+    "end": "2026-01-01 05:15:00+05:30",
+    "median_interval_hours": 0.25,
+    "gaps_over_one_hour": 0,
+    "stations": [
+      "site_5767"
+    ],
+    "columns": [
+      "Station ID",
+      "State",
+      "City",
+      "Station Name",
+      "Timestamp",
+      "PM2.5 (\u00b5g/m\u00b3)",
+      "PM10 (\u00b5g/m\u00b3)",
+      "NO (\u00b5g/m\u00b3)",
+      "NO2 (\u00b5g/m\u00b3)",
+      "NOx (ppb)",
+      "NH3 (\u00b5g/m\u00b3)",
+      "SO2 (\u00b5g/m\u00b3)",
+      "CO (mg/m\u00b3)",
+      "Ozone (\u00b5g/m\u00b3)",
+      "Benzene (\u00b5g/m\u00b3)",
+      "Toluene (\u00b5g/m\u00b3)",
+      "Xylene (\u00b5g/m\u00b3)",
+      "O Xylene (\u00b5g/m\u00b3)",
+      "Eth-Benzene (\u00b5g/m\u00b3)",
+      "MP-Xylene (\u00b5g/m\u00b3)",
+      "AT (\u00b0C)",
+      "RH (%)",
+      "WS (m/s)",
+      "WD (deg)",
+      "RF (mm)",
+      "TOT-RF (mm)",
+      "SR (W/mt2)",
+      "BP (mmHg)",
+      "VWS (m/s)"
+    ],
+    "units": {
+      "PM2.5 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "PM10 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NO (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NO2 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NOx (ppb)": {
+        "source": "ppb",
+        "canonical": "ppb",
+        "verified": true
+      },
+      "NH3 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "SO2 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "CO (mg/m\u00b3)": {
+        "source": "mg/m\u00b3",
+        "canonical": "mg/m3",
+        "verified": true
+      },
+      "Ozone (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Benzene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Toluene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Xylene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "AT (\u00b0C)": {
+        "source": "\u00b0C",
+        "canonical": "degC",
+        "verified": true
+      },
+      "RH (%)": {
+        "source": "%",
+        "canonical": "%",
+        "verified": true
+      },
+      "WS (m/s)": {
+        "source": "m/s",
+        "canonical": "m/s",
+        "verified": true
+      },
+      "WD (deg)": {
+        "source": "deg",
+        "canonical": "degree",
+        "verified": true
+      },
+      "RF (mm)": {
+        "source": "mm",
+        "canonical": "mm",
+        "verified": true
+      },
+      "SR (W/mt2)": {
+        "source": "W/mt2",
+        "canonical": "W/m2",
+        "verified": true
+      },
+      "BP (mmHg)": {
+        "source": "mmHg",
+        "canonical": "hPa",
+        "verified": true
+      }
+    },
+    "minimum_samples_per_hour": 3,
+    "hours_excluded_for_incomplete_sampling": {
+      "pm25": 2150,
+      "pm10": 2163,
+      "no": 2147,
+      "no2": 2611,
+      "nox": 2044,
+      "nh3": 2183,
+      "so2": 2223,
+      "co": 1599,
+      "o3": 4641,
+      "benzene": 1636,
+      "toluene": 1637,
+      "xylene": 17545,
+      "temperature": 1451,
+      "humidity": 1453,
+      "wind_speed": 1469,
+      "wind_direction": 1479,
+      "rainfall": 1455,
+      "solar_radiation": 1452,
+      "pressure": 17545
+    },
+    "audit_file": "audit/021.csv.gz"
+  },
+  {
+    "file": "22_Transport_Nagar_Nigdi_15_minute_AQI_Data_for_2024-25.csv",
+    "sha256": "8f858f7292e0d4c1b25e3342ea9314f25fb8735eb611d285b84f8a55032d6132",
+    "bytes": 9483219,
+    "status": "read",
+    "rows": 57185,
+    "invalid_timestamps": 1,
+    "exact_duplicate_rows": 0,
+    "start": "2024-01-01 05:30:00+05:30",
+    "end": "2026-01-01 05:00:00+05:30",
+    "median_interval_hours": 0.25,
+    "gaps_over_one_hour": 130,
+    "stations": [
+      "site_5408"
+    ],
+    "columns": [
+      "Station ID",
+      "State",
+      "City",
+      "Station Name",
+      "Timestamp",
+      "PM2.5 (\u00b5g/m\u00b3)",
+      "PM10 (\u00b5g/m\u00b3)",
+      "NO (\u00b5g/m\u00b3)",
+      "NO2 (\u00b5g/m\u00b3)",
+      "NOx (ppb)",
+      "NH3 (\u00b5g/m\u00b3)",
+      "SO2 (\u00b5g/m\u00b3)",
+      "CO (mg/m\u00b3)",
+      "Ozone (\u00b5g/m\u00b3)",
+      "Benzene (\u00b5g/m\u00b3)",
+      "Toluene (\u00b5g/m\u00b3)",
+      "Xylene (\u00b5g/m\u00b3)",
+      "O Xylene (\u00b5g/m\u00b3)",
+      "Eth-Benzene (\u00b5g/m\u00b3)",
+      "MP-Xylene (\u00b5g/m\u00b3)",
+      "AT (\u00b0C)",
+      "RH (%)",
+      "WS (m/s)",
+      "WD (deg)",
+      "RF (mm)",
+      "TOT-RF (mm)",
+      "SR (W/mt2)",
+      "BP (mmHg)",
+      "VWS (m/s)"
+    ],
+    "units": {
+      "PM2.5 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "PM10 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NO (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NO2 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "NOx (ppb)": {
+        "source": "ppb",
+        "canonical": "ppb",
+        "verified": true
+      },
+      "NH3 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "SO2 (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "CO (mg/m\u00b3)": {
+        "source": "mg/m\u00b3",
+        "canonical": "mg/m3",
+        "verified": true
+      },
+      "Ozone (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Benzene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Toluene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "Xylene (\u00b5g/m\u00b3)": {
+        "source": "\u00b5g/m\u00b3",
+        "canonical": "ug/m3",
+        "verified": true
+      },
+      "AT (\u00b0C)": {
+        "source": "\u00b0C",
+        "canonical": "degC",
+        "verified": true
+      },
+      "RH (%)": {
+        "source": "%",
+        "canonical": "%",
+        "verified": true
+      },
+      "WS (m/s)": {
+        "source": "m/s",
+        "canonical": "m/s",
+        "verified": true
+      },
+      "WD (deg)": {
+        "source": "deg",
+        "canonical": "degree",
+        "verified": true
+      },
+      "RF (mm)": {
+        "source": "mm",
+        "canonical": "mm",
+        "verified": true
+      },
+      "SR (W/mt2)": {
+        "source": "W/mt2",
+        "canonical": "W/m2",
+        "verified": true
+      },
+      "BP (mmHg)": {
+        "source": "mmHg",
+        "canonical": "hPa",
+        "verified": true
+      }
+    },
+    "minimum_samples_per_hour": 3,
+    "hours_excluded_for_incomplete_sampling": {
+      "pm25": 564,
+      "pm10": 1060,
+      "no": 752,
+      "no2": 757,
+      "nox": 740,
+      "nh3": 14618,
+      "so2": 14618,
+      "co": 446,
+      "o3": 1034,
+      "benzene": 2260,
+      "toluene": 5550,
+      "xylene": 5545,
+      "temperature": 14618,
+      "humidity": 14618,
+      "wind_speed": 14618,
+      "wind_direction": 14618,
+      "rainfall": 14618,
+      "solar_radiation": 14618,
+      "pressure": 14618
+    },
+    "audit_file": "audit/022.csv.gz"
+  }
+]

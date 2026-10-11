@@ -1,0 +1,232 @@
+{
+  "pipeline_version": "1.0.0",
+  "version": "20261010T053915774417Z",
+  "fingerprint": "b692d75898796231238cac80ec108fa9d2fd6f5e69cb66294389b6a6e5377548",
+  "target": "xylene",
+  "unit": "ug/m3",
+  "horizon_hours": 24,
+  "chosen_model": "hist_gradient_boosting",
+  "features": [
+    "lag_0",
+    "lag_1",
+    "lag_3",
+    "lag_6",
+    "lag_12",
+    "lag_24",
+    "lag_48",
+    "lag_72",
+    "lag_168",
+    "rolling_6",
+    "rolling_24",
+    "rolling_72",
+    "hour_sin",
+    "hour_cos",
+    "month_sin",
+    "month_cos",
+    "dow"
+  ],
+  "trained_at": "2026-10-10T05:39:15.774417+00:00",
+  "data_period": [
+    "2024-01-01 05:00:00+05:30",
+    "2026-01-01 05:00:00+05:30"
+  ],
+  "stations": [
+    "site_5404",
+    "site_5405",
+    "site_5406",
+    "site_5407",
+    "site_5408",
+    "site_5409"
+  ],
+  "station_locations": {},
+  "split": {
+    "val_start": "2025-05-03 21:00:00+05:30",
+    "test_start": "2025-09-02 17:00:00+05:30",
+    "train_label_end": "2025-05-03 20:00:00+05:30",
+    "validation_label_end": "2025-09-02 16:00:00+05:30"
+  },
+  "results": {
+    "persistence": {
+      "val": {
+        "mae": 0.7311879218293543,
+        "rmse": 3.7699956879604226,
+        "r2": -0.6375285086635905,
+        "n": 6618
+      },
+      "test": {
+        "mae": 2.8895498303206595,
+        "rmse": 5.91109225298704,
+        "r2": 0.5606016021435711,
+        "n": 4813
+      }
+    },
+    "seasonal_average": {
+      "val": {
+        "mae": 1.295704146932301,
+        "rmse": 3.1744449302583146,
+        "r2": -0.16102817091243993,
+        "n": 6618
+      },
+      "test": {
+        "mae": 4.360870300299085,
+        "rmse": 9.128980541950394,
+        "r2": -0.0480151412603278,
+        "n": 4813
+      }
+    },
+    "hist_gradient_boosting": {
+      "val": {
+        "mae": 0.6948823216713316,
+        "rmse": 2.577361690407782,
+        "r2": 0.2346538523535343,
+        "n": 6618
+      },
+      "test": {
+        "mae": 3.3344674494646758,
+        "rmse": 7.345959101188972,
+        "r2": 0.3213903884329773,
+        "n": 4813
+      }
+    },
+    "random_forest": {
+      "val": {
+        "mae": 0.7212411422164416,
+        "rmse": 2.668722123198564,
+        "r2": 0.17943332679661617,
+        "n": 6618
+      },
+      "test": {
+        "mae": 2.9677258455512727,
+        "rmse": 6.4582360612551355,
+        "r2": 0.4754935599368654,
+        "n": 4813
+      }
+    }
+  },
+  "record_counts": {
+    "source_hourly_rows": 162713,
+    "valid_target_rows": 41355,
+    "eligible_forecast_pairs": 36232,
+    "train": 24732,
+    "validation": 6618,
+    "test": 4813,
+    "purged": 69
+  },
+  "training_label_end": "2025-05-03 20:00:00+05:30",
+  "test_period": [
+    "2025-09-03 17:00:00+05:30",
+    "2026-01-01 04:00:00+05:30"
+  ],
+  "test_stations": [
+    "site_5404",
+    "site_5406",
+    "site_5407",
+    "site_5408",
+    "site_5409"
+  ],
+  "shap_group_importance": null,
+  "station_holdout_forecasting": {
+    "status": "EVALUATED",
+    "task": "Forecasting at an unseen station WITH its own observed history; not spatial estimation at an unmonitored location",
+    "folds": [
+      {
+        "held_out_station": "site_5406",
+        "model": "hist_gradient_boosting",
+        "training_rows": 23778,
+        "validation_rows": 4599,
+        "test": {
+          "mae": 0.626695851850494,
+          "rmse": 0.8159064226146985,
+          "r2": -5.258901525638895,
+          "n": 327
+        },
+        "persistence_test": {
+          "mae": 0.2551885830784913,
+          "rmse": 0.35072433664148,
+          "r2": -0.15650954101363568,
+          "n": 327
+        },
+        "test_period": [
+          "2025-09-03 17:00:00+05:30",
+          "2025-09-20 00:00:00+05:30"
+        ]
+      },
+      {
+        "held_out_station": "site_5407",
+        "model": "hist_gradient_boosting",
+        "training_rows": 22803,
+        "validation_rows": 6618,
+        "test": {
+          "mae": 1.9420939287650125,
+          "rmse": 3.0291066691649187,
+          "r2": 0.11438431989566711,
+          "n": 1268
+        },
+        "persistence_test": {
+          "mae": 1.993842665615142,
+          "rmse": 3.622251687986217,
+          "r2": -0.266407313432224,
+          "n": 1268
+        },
+        "test_period": [
+          "2025-10-03 09:00:00+05:30",
+          "2026-01-01 01:00:00+05:30"
+        ]
+      },
+      {
+        "held_out_station": "site_5408",
+        "model": "hist_gradient_boosting",
+        "training_rows": 20835,
+        "validation_rows": 4968,
+        "test": {
+          "mae": 2.365400805210501,
+          "rmse": 6.897113666293417,
+          "r2": 0.28563837328000796,
+          "n": 1796
+        },
+        "persistence_test": {
+          "mae": 2.1491420749814405,
+          "rmse": 5.472004158408106,
+          "r2": 0.5503483531188105,
+          "n": 1796
+        },
+        "test_period": [
+          "2025-09-04 10:00:00+05:30",
+          "2025-12-29 21:00:00+05:30"
+        ]
+      },
+      {
+        "held_out_station": "site_5409",
+        "model": "hist_gradient_boosting",
+        "training_rows": 17205,
+        "validation_rows": 4843,
+        "test": {
+          "mae": 7.259440886905232,
+          "rmse": 12.454606755512122,
+          "r2": -0.16961237348345182,
+          "n": 1411
+        },
+        "persistence_test": {
+          "mae": 5.269789156626507,
+          "rmse": 8.321859354323337,
+          "r2": 0.47781708514557886,
+          "n": 1411
+        },
+        "test_period": [
+          "2025-10-31 09:00:00+05:30",
+          "2026-01-01 04:00:00+05:30"
+        ]
+      }
+    ]
+  },
+  "interval": {
+    "method": "absolute validation residual 90th percentile; not guaranteed under temporal shift",
+    "radius": 1.4026728049853538,
+    "test_coverage": 0.5169333056305838
+  },
+  "limitations": [
+    "Station forecasts require observed history; not causal intervention estimates.",
+    "No claim of accuracy at unmonitored locations.",
+    "Model is not refitted after evaluation; stored metrics describe the saved estimator."
+  ]
+}

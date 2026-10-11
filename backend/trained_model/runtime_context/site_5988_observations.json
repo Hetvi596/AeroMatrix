@@ -1,0 +1,183 @@
+{
+  "status": "MEASURED",
+  "region": {
+    "station": "site_5988",
+    "station_name": "Bhumkar Nagar, Pune - IITM",
+    "name": "Bhumkar Nagar",
+    "aliases": [
+      "Bhumkar Nagar"
+    ],
+    "longitude": null,
+    "latitude": null,
+    "source_files": "13_Bhumkar_Nagar_IITM_15_minute_AQI_Data_for_2024-25.csv"
+  },
+  "pollutants": {
+    "pm25": {
+      "status": "MEASURED",
+      "value": 94.9025,
+      "unit": "ug/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "pm10": {
+      "status": "MEASURED",
+      "value": 200.2025,
+      "unit": "ug/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "no2": {
+      "status": "MEASURED",
+      "value": 45.4575,
+      "unit": "ug/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "no": {
+      "status": "MEASURED",
+      "value": 4.125,
+      "unit": "ug/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "nox": {
+      "status": "MEASURED",
+      "value": 27.535,
+      "unit": "ppb",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "co": {
+      "status": "MEASURED",
+      "value": 1.6775,
+      "unit": "mg/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "o3": {
+      "status": "MEASURED",
+      "value": 65.7975,
+      "unit": "ug/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "benzene": {
+      "status": "MEASURED",
+      "value": 10.355,
+      "unit": "ug/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "toluene": {
+      "status": "MEASURED",
+      "value": 15.125,
+      "unit": "ug/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    }
+  },
+  "aqi": {
+    "status": "AVAILABLE",
+    "value": 183,
+    "category": "Moderate",
+    "dominant_pollutant": "pm25",
+    "reason": null,
+    "subindices": {
+      "pm25": {
+        "value": 183,
+        "bounded": false,
+        "concentration": 84.5116304347826,
+        "averaging_hours": 24
+      },
+      "pm10": {
+        "value": 144,
+        "bounded": false,
+        "concentration": 165.6036956521739,
+        "averaging_hours": 24
+      },
+      "no2": {
+        "value": 24,
+        "bounded": false,
+        "concentration": 19.46131578947368,
+        "averaging_hours": 24
+      }
+    },
+    "coverage_hours": {
+      "pm25": 23,
+      "pm10": 23,
+      "no2": 19,
+      "so2": 0,
+      "co": 23,
+      "o3": 23,
+      "nh3": 0
+    },
+    "excluded": {
+      "so2": "Fewer than 16 valid hourly observations in 24h",
+      "co": "Incomplete trailing 8h average",
+      "o3": "Incomplete trailing 8h average",
+      "nh3": "Fewer than 16 valid hourly observations in 24h"
+    },
+    "period_end": "2026-01-01T00:30:00+00:00",
+    "method": "CPCB National AQI; measured hourly data; conservative eight-hour completeness",
+    "timestamp_semantics": "completed_hour_end"
+  },
+  "historical": true,
+  "snapshot_end": "2026-01-01T05:00:00+05:30",
+  "source_files": "13_Bhumkar_Nagar_IITM_15_minute_AQI_Data_for_2024-25.csv",
+  "notice": "time and snapshot_end label hour starts; window.end and snapshot_window_end are completed-hour availability. Latest values can have different timestamps; AQI uses one coherent window.",
+  "snapshot_window_end": "2026-01-01T06:00:00+05:30"
+}

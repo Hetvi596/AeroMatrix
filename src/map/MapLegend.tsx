@@ -1,11 +1,16 @@
 import { useTwin } from '../store/useTwinStore';
 import { POLLUTANT_LABEL, POLLUTANT_RANGE, POLLUTANT_UNIT, RISK_COLOR, TRAFFIC_COLORS, deltaColor, pollutionColor, rgbToCss } from '../utils/colors';
 import { DataBadge } from '../components/ui';
+import { useCurrentField } from '../services/liveData';
+import { fmtIst } from '../services/pollutantData';
 
 export function MapLegend() {
   const pollutant = useTwin((s) => s.pollutant);
-  const mode = useTwin((s) => s.displayMode);
-  const result = useTwin((s) => s.activeResult);
+  const preview = useTwin((s) => s.previewResult);
+  const displayMode = useTwin((s) => s.displayMode);
+  const active = useTwin((s) => s.activeResult);
+  const result = preview ?? active;
+  const mode = preview ? (displayMode === 'delta' ? 'delta' : 'scenario') : displayMode;
   const layers = useTwin((s) => s.layers);
   const field = useTwin((s) => s.observedField);
   const aggWindow = useTwin((s) => s.aggWindow);
@@ -14,6 +19,8 @@ export function MapLegend() {
   const isObserved = mode === 'observed' && field;
   const forecast = useTwin((s) => s.forecastLayer);
   const isForecast = mode === 'forecast' && forecast;
+  const current = useCurrentField(pollutant);
+  const isCurrent = mode === 'current' && !preview && current;
 
   const [lo, hi] = POLLUTANT_RANGE[pollutant];
   const stops = Array.from({ length: 12 }, (_, i) => i / 11);
@@ -38,7 +45,7 @@ export function MapLegend() {
           {isDelta ? 'Δ ' : ''}
           {POLLUTANT_LABEL[pollutant]} <span className="font-normal text-sand-500">{POLLUTANT_UNIT[pollutant]}</span>
         </span>
-        <DataBadge status={isForecast ? 'MODEL_PREDICTION' : isObserved ? 'OBSERVED' : showScenario ? 'MODELED_SCENARIO' : 'DEMO'} />
+        <DataBadge status={isCurrent ? 'MODEL_DATA' : isForecast ? 'MODEL_PREDICTION' : isObserved ? 'OBSERVED' : showScenario ? 'MODELED_SCENARIO' : 'DEMO'} />
       </div>
       <div className="h-2 rounded-full" style={{ background: `linear-gradient(90deg, ${gradient})` }} />
       <div className="num mt-1 flex justify-between text-[10.5px] text-sand-400">
@@ -48,12 +55,14 @@ export function MapLegend() {
       </div>
       {isObserved && (
         <div className="mt-1 text-[10.5px] text-emerald-300/90">
-          IDW interpolation of {field!.stationCount} station mean(s) · {aggWindow === 'last24h' ? 'last 24 h' : 'whole period'}
+          {field!.stationCount} station{field!.stationCount === 1 ? '' : 's'} · {aggWindow === 'last24h' ? 'last 24 h' : 'whole period'}
         </div>
       )}
+      {isCurrent && <div className="mt-1 text-[10.5px] text-sand-400">Current · {fmtIst(current!.time)} IST</div>}
+      {!isCurrent && !isObserved && !isForecast && !showScenario && <div className="mt-1 text-[10.5px] text-sand-400">What-If baseline</div>}
       {isForecast && (
         <div className="mt-1 text-[10.5px] text-sky-300/90">
-          {forecast!.model} forecast valid {forecast!.validAt.slice(0, 16)} · IDW of {forecast!.stations.length} station forecast(s)
+          Forecast valid {forecast!.validAt.slice(0, 16)}
         </div>
       )}
       {!isDelta && pollutant === 'pm25' && (

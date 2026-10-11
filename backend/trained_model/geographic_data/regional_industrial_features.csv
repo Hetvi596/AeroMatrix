@@ -1,0 +1,59 @@
+region_id,name,area_km2,mapped_industrial_features,mapped_features_per_km2,mapped_industrial_footprint_km2,mapped_footprint_fraction,coverage_status,footprint_status
+pune-electoral-wards_2022.geojson:0,Dhanori - Vishrantwadi,13.063949625198235,0,0.0,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:1,Tingrenagar - Sanjay Park,6.048456932038106,0,0.0,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:2,Lohegaon - Vimannagar,31.73691863480746,3,0.0945271352433613,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:3,East Kharadi - Wagholi,35.56456889997806,0,0.0,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:4,West Kharadi - Vadgaon Sheri,4.091082332383958,0,0.0,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:5,Vadgaon Sheri - Ramwadi,3.359074664013905,5,1.488505168868525,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:6,Kalyaninagar - Nagpur Chawl,6.892822350006714,6,0.8704707150901917,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:7,Kalas - Phulenagar,4.031973145965535,0,0.0,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:8,Yerwada,1.1509087602989292,1,0.8688786066240967,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:9,Shivajinagar Gaothan - Sangamwadi,7.401449315237093,3,0.4053260209218767,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:10,Bopodi - Savitribai Phule Pune University,7.104829646969463,3,0.4222479846901942,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:11,Aundh - Balewadi,12.233727286488978,1,0.0817412368758953,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:12,Baner - Sus - Mahalunge,20.818456841315747,2,0.0960685998604302,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:13,Pashan - Bawdhan,19.154643725409244,4,0.2088266457649573,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:14,Gokhalenagar - Vadarwadi,4.781587854912505,1,0.2091355487639154,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:15,Fergusson College - Erandwane,5.805869648912619,5,0.861197426459006,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:16,Shaniwar peth - Navi Peth,2.278118465672636,0,0.0,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:17,Shaniwarwada - Kasba Peth,1.0967846715365903,0,0.0,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:18,Chhatrapati Shivaji Maharaj Stadium - Rasta peth,1.0325174916336708,0,0.0,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:19,Pune Station -Matoshri Ramabai Ambedkar Road,4.171901890509848,2,0.4793976590268233,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:20,Koregaon park - Mundhwa,8.325928567485564,4,0.4804268938387016,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:21,Manjari Bk. - Shewalwadi,31.316061543068606,0,0.0,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:22,Sadesataranali - Aakashwani,7.161818739416948,0,0.0,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:23,Magarpatta - Sadhana Vidyalaya,5.295505805898411,1,0.1888393737357719,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:24,Hadapsar Gaothan - Satavwadi,1.8463251443175976,0,0.0,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:25,Wanwadi Gaothan - Vaiduwadi,4.558033711584605,5,1.0969642430006832,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:26,Kasewadi - Lohiyanagar,0.943381665943106,0,0.0,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:27,Ghorpade peth Udyan - Mahatma Phule Mandai,1.2473248416259148,0,0.0,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:28,Jai Bhavaninagar - Kelewadi,3.0955658546104323,0,0.0,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:29,Kothrud Gaothan - Shivtirthnagar,1.8425679717220704,6,3.2563249183108183,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:30,Bhusari colony - Bavdhan Khurd,4.553978409659181,2,0.4391764343366045,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:31,Ideal colony - Mahatma Society,8.60321224157032,5,0.5811782691865061,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:32,Warje - Kondhave Dhavde,27.94683143439181,1,0.0357822317835067,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:33,Ramnagar - Uttamnagar Shivane,4.680381599434442,4,0.8546311694933899,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:34,Karvenagar,2.627059810505154,0,0.0,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:35,Janata Vasahat - Dattawadi,1.8137668032658816,0,0.0,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:36,Shivdarshan - Padmavati,2.742276925812177,0,0.0,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:37,Market yard - Maharshinagar,2.704183042577252,0,0.0,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:38,Bibvewadi - Gangadham,4.942577697043755,0,0.0,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:39,Kondhva Kh - Mithanagar,1.9531776485331935,0,0.0,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:40,Ramtekadi - Sayyadnagar,8.073580790670395,1,0.1238607782504105,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:41,Wanawadi - Kausar Baug,4.153351294815648,0,0.0,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:42,Kale Boratenagar - Sasanenagar,3.504629183259,0,0.0,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:43,Fursungi,6.5051883567978415,0,0.0,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:44,Mohammad wadi - Uruli Devachi,44.57281106942673,0,0.0,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:45,Kondhva Bk - Yewalewadi,17.198304968115583,1,0.0581452650045413,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:46,Upper Super Indiranagar,1.5018728955079943,0,0.0,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:47,Balajinagar - Shankar Maharaj Math,1.492396602853543,0,0.0,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:48,Sahakarnagar - Taljai,2.863710303378849,1,0.3491973328517605,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:49,Vadgaon Bk - Manikbaug,6.0713357191163,0,0.0,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:50,Nanded City - Sun City,6.226496767627359,0,0.0,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:51,Khadakwasla - Narhe,28.85442235631336,16,0.5545077216386969,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:52,Dhayari - Ambegaon,26.248710509388985,26,0.9905248484758892,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:53,Dhankawadi - Ambegaon Pathar,3.5370091525774514,0,0.0,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:54,Chaitanyanagar - Bharati Vidyapeeth,1.9895474035077951,0,0.0,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:55,Sukhsagarnagar - Rajiv Gandhinagar,2.8639956089446965,0,0.0,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:56,Katraj - Gokulnagar,20.410510130999256,0,0.0,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only
+pune-electoral-wards_2022.geojson:57,Mahatma Phule Smarak –Bhavani Peth,0.8177222670163822,0,0.0,,,PARTIAL_OSM_SAMPLE_NOT_COMPLETE_INVENTORY,UNAVAILABLE: supplied OSM cache has points/centers only

@@ -1,0 +1,104 @@
+{
+  "files": [
+    {
+      "file": "01_Alandi_IITM_AQI_Data_2017-2023.csv",
+      "sha256": "df9b8d5a034f58a69b225e8b7dcbee15627f0848138685d0bfb507af59aa2379",
+      "csv_records": 1325,
+      "station": "site_5405",
+      "valid_aqi_cells": 12320,
+      "missing_cells": 15304,
+      "invalid_cells": 0
+    },
+    {
+      "file": "02_Bhosari_IITM_AQI_Data_2017-2023.csv",
+      "sha256": "d7603bd882bb63b6ac810ddb679f3a178e2257bbbe2c26f853fcb7defb8da486",
+      "csv_records": 1325,
+      "station": "site_5406",
+      "valid_aqi_cells": 11685,
+      "missing_cells": 15939,
+      "invalid_cells": 0
+    },
+    {
+      "file": "03_Hadapsar_IITM_AQI_Data_2017-2023.csv",
+      "sha256": "d894cf235c2599077d98c08afd5c8db40330aaf73da6d2e1453e39a8509c9c7d",
+      "csv_records": 1325,
+      "station": "site_5407",
+      "valid_aqi_cells": 11059,
+      "missing_cells": 16565,
+      "invalid_cells": 0
+    },
+    {
+      "file": "04_Karve_Road_MPCB_AQI_Data_2017-2023.csv",
+      "sha256": "76ba60a60f0dd0a1cd80b8d7d47095579ab542ad1bf3fccbaaf88184a2233d7f",
+      "csv_records": 2455,
+      "station": "site_292",
+      "valid_aqi_cells": 38796,
+      "missing_cells": 15852,
+      "invalid_cells": 0
+    },
+    {
+      "file": "05_Katraj_Dairy_MPCB_AQI_Data_2023.csv",
+      "sha256": "d47760fa5c9cc2a8a328364a7c1a4914b4e09ea71d8deba2a002dcdbf7de1220",
+      "csv_records": 281,
+      "station": "site_5766",
+      "valid_aqi_cells": 4883,
+      "missing_cells": 1285,
+      "invalid_cells": 0
+    },
+    {
+      "file": "06_Mhada_Colony_IITM_AQI_Data_2017-2023.csv",
+      "sha256": "072d5d1a767d3e89c9bc5bd01b157b37f33585a57fc164ca1ffefda2c3ff38ef",
+      "csv_records": 1325,
+      "station": "site_5404",
+      "valid_aqi_cells": 22946,
+      "missing_cells": 4678,
+      "invalid_cells": 0
+    },
+    {
+      "file": "07_MIT-Kothrud_IITM_AQI_Data_2017-2023.csv",
+      "sha256": "5fd0710d3081569a576086fed27e1b01015752f3e4d280f53fe18a5b1d2729b0",
+      "csv_records": 1325,
+      "station": "historical:mit-kothrud-iitm",
+      "valid_aqi_cells": 12891,
+      "missing_cells": 14733,
+      "invalid_cells": 0
+    },
+    {
+      "file": "08_Revenue_Colony-Shivajinagar_IITM_AQI_Data_2017-2023.csv",
+      "sha256": "aa8d2c4472089288515d1d76351a4ae144ca2c0be5b4633fc7403aed92763166",
+      "csv_records": 1325,
+      "station": "site_5409",
+      "valid_aqi_cells": 19822,
+      "missing_cells": 7802,
+      "invalid_cells": 0
+    },
+    {
+      "file": "09_Savitribai_Phule_University_MPCB_AQI_Data_2023.csv",
+      "sha256": "8ac9486376f05e1facea5a494fe01c1d9e36577d1c02b87b9385dfd3a0e6ddce",
+      "csv_records": 281,
+      "station": "site_5767",
+      "valid_aqi_cells": 4717,
+      "missing_cells": 1451,
+      "invalid_cells": 0
+    },
+    {
+      "file": "10_Transport_Nagar-Nigdi_IITM_AQI_Data_2017-2023.csv",
+      "sha256": "1ccd767e4810f83870d6d67f60084faa025f36466efff2bf69ca08b7d28fab46",
+      "csv_records": 1325,
+      "station": "site_5408",
+      "valid_aqi_cells": 13927,
+      "missing_cells": 13697,
+      "invalid_cells": 0
+    }
+  ],
+  "valid_unique_aqi_records": 153046,
+  "duplicates_removed": 0,
+  "conflicting_records_excluded": 0,
+  "stations": 10,
+  "start": "2017-10-17 01:00:00+05:30",
+  "end": "2023-12-31 23:00:00+05:30",
+  "limitations": [
+    "Source-reported AQI, not reconstructed concentrations. No pollutant subindices or dominant pollutant in source.",
+    "Naive historical Pune times interpreted in Asia/Kolkata. Historical AQI is not a concentration training label."
+  ]
+}

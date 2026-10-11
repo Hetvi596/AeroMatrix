@@ -1,0 +1,544 @@
+{
+  "status": "HYPOTHETICAL_SENSITIVITY",
+  "central": {
+    "selected": [
+      "illustrative_A"
+    ],
+    "cost": 80,
+    "benefit": 2.4408754088474303
+  },
+  "scenarios": [
+    {
+      "selected": [],
+      "cost": 0.0,
+      "benefit": 0.0,
+      "baseline_case": "lower",
+      "baseline": 0,
+      "effect_factor": 0.7,
+      "budget": 70.0,
+      "unavailable_action": null,
+      "feasible": true,
+      "original_package_feasible": false,
+      "changed": true
+    },
+    {
+      "selected": [],
+      "cost": 0.0,
+      "benefit": 0.0,
+      "baseline_case": "lower",
+      "baseline": 0,
+      "effect_factor": 0.7,
+      "budget": 70.0,
+      "unavailable_action": "illustrative_A",
+      "feasible": true,
+      "original_package_feasible": false,
+      "changed": true
+    },
+    {
+      "selected": [],
+      "cost": 0.0,
+      "benefit": 0.0,
+      "baseline_case": "lower",
+      "baseline": 0,
+      "effect_factor": 0.7,
+      "budget": 100,
+      "unavailable_action": null,
+      "feasible": true,
+      "original_package_feasible": true,
+      "changed": true
+    },
+    {
+      "selected": [],
+      "cost": 0.0,
+      "benefit": 0.0,
+      "baseline_case": "lower",
+      "baseline": 0,
+      "effect_factor": 0.7,
+      "budget": 100,
+      "unavailable_action": "illustrative_A",
+      "feasible": true,
+      "original_package_feasible": false,
+      "changed": true
+    },
+    {
+      "selected": [],
+      "cost": 0.0,
+      "benefit": 0.0,
+      "baseline_case": "lower",
+      "baseline": 0,
+      "effect_factor": 1.0,
+      "budget": 70.0,
+      "unavailable_action": null,
+      "feasible": true,
+      "original_package_feasible": false,
+      "changed": true
+    },
+    {
+      "selected": [],
+      "cost": 0.0,
+      "benefit": 0.0,
+      "baseline_case": "lower",
+      "baseline": 0,
+      "effect_factor": 1.0,
+      "budget": 70.0,
+      "unavailable_action": "illustrative_A",
+      "feasible": true,
+      "original_package_feasible": false,
+      "changed": true
+    },
+    {
+      "selected": [],
+      "cost": 0.0,
+      "benefit": 0.0,
+      "baseline_case": "lower",
+      "baseline": 0,
+      "effect_factor": 1.0,
+      "budget": 100,
+      "unavailable_action": null,
+      "feasible": true,
+      "original_package_feasible": true,
+      "changed": true
+    },
+    {
+      "selected": [],
+      "cost": 0.0,
+      "benefit": 0.0,
+      "baseline_case": "lower",
+      "baseline": 0,
+      "effect_factor": 1.0,
+      "budget": 100,
+      "unavailable_action": "illustrative_A",
+      "feasible": true,
+      "original_package_feasible": false,
+      "changed": true
+    },
+    {
+      "selected": [],
+      "cost": 0.0,
+      "benefit": 0.0,
+      "baseline_case": "lower",
+      "baseline": 0,
+      "effect_factor": 1.3,
+      "budget": 70.0,
+      "unavailable_action": null,
+      "feasible": true,
+      "original_package_feasible": false,
+      "changed": true
+    },
+    {
+      "selected": [],
+      "cost": 0.0,
+      "benefit": 0.0,
+      "baseline_case": "lower",
+      "baseline": 0,
+      "effect_factor": 1.3,
+      "budget": 70.0,
+      "unavailable_action": "illustrative_A",
+      "feasible": true,
+      "original_package_feasible": false,
+      "changed": true
+    },
+    {
+      "selected": [],
+      "cost": 0.0,
+      "benefit": 0.0,
+      "baseline_case": "lower",
+      "baseline": 0,
+      "effect_factor": 1.3,
+      "budget": 100,
+      "unavailable_action": null,
+      "feasible": true,
+      "original_package_feasible": true,
+      "changed": true
+    },
+    {
+      "selected": [],
+      "cost": 0.0,
+      "benefit": 0.0,
+      "baseline_case": "lower",
+      "baseline": 0,
+      "effect_factor": 1.3,
+      "budget": 100,
+      "unavailable_action": "illustrative_A",
+      "feasible": true,
+      "original_package_feasible": false,
+      "changed": true
+    },
+    {
+      "selected": [
+        "illustrative_B"
+      ],
+      "cost": 45,
+      "benefit": 1.0251676717159204,
+      "baseline_case": "central",
+      "baseline": 12.204377044237154,
+      "effect_factor": 0.7,
+      "budget": 70.0,
+      "unavailable_action": null,
+      "feasible": true,
+      "original_package_feasible": false,
+      "changed": true
+    },
+    {
+      "selected": [
+        "illustrative_B"
+      ],
+      "cost": 45,
+      "benefit": 1.0251676717159204,
+      "baseline_case": "central",
+      "baseline": 12.204377044237154,
+      "effect_factor": 0.7,
+      "budget": 70.0,
+      "unavailable_action": "illustrative_A",
+      "feasible": true,
+      "original_package_feasible": false,
+      "changed": true
+    },
+    {
+      "selected": [
+        "illustrative_A"
+      ],
+      "cost": 80,
+      "benefit": 1.7086127861932017,
+      "baseline_case": "central",
+      "baseline": 12.204377044237154,
+      "effect_factor": 0.7,
+      "budget": 100,
+      "unavailable_action": null,
+      "feasible": true,
+      "original_package_feasible": true,
+      "changed": false
+    },
+    {
+      "selected": [
+        "illustrative_B"
+      ],
+      "cost": 45,
+      "benefit": 1.0251676717159204,
+      "baseline_case": "central",
+      "baseline": 12.204377044237154,
+      "effect_factor": 0.7,
+      "budget": 100,
+      "unavailable_action": "illustrative_A",
+      "feasible": true,
+      "original_package_feasible": false,
+      "changed": true
+    },
+    {
+      "selected": [
+        "illustrative_B"
+      ],
+      "cost": 45,
+      "benefit": 1.4645252453084583,
+      "baseline_case": "central",
+      "baseline": 12.204377044237154,
+      "effect_factor": 1.0,
+      "budget": 70.0,
+      "unavailable_action": null,
+      "feasible": true,
+      "original_package_feasible": false,
+      "changed": true
+    },
+    {
+      "selected": [
+        "illustrative_B"
+      ],
+      "cost": 45,
+      "benefit": 1.4645252453084583,
+      "baseline_case": "central",
+      "baseline": 12.204377044237154,
+      "effect_factor": 1.0,
+      "budget": 70.0,
+      "unavailable_action": "illustrative_A",
+      "feasible": true,
+      "original_package_feasible": false,
+      "changed": true
+    },
+    {
+      "selected": [
+        "illustrative_A"
+      ],
+      "cost": 80,
+      "benefit": 2.4408754088474303,
+      "baseline_case": "central",
+      "baseline": 12.204377044237154,
+      "effect_factor": 1.0,
+      "budget": 100,
+      "unavailable_action": null,
+      "feasible": true,
+      "original_package_feasible": true,
+      "changed": false
+    },
+    {
+      "selected": [
+        "illustrative_B"
+      ],
+      "cost": 45,
+      "benefit": 1.4645252453084583,
+      "baseline_case": "central",
+      "baseline": 12.204377044237154,
+      "effect_factor": 1.0,
+      "budget": 100,
+      "unavailable_action": "illustrative_A",
+      "feasible": true,
+      "original_package_feasible": false,
+      "changed": true
+    },
+    {
+      "selected": [
+        "illustrative_B"
+      ],
+      "cost": 45,
+      "benefit": 1.9038828189009962,
+      "baseline_case": "central",
+      "baseline": 12.204377044237154,
+      "effect_factor": 1.3,
+      "budget": 70.0,
+      "unavailable_action": null,
+      "feasible": true,
+      "original_package_feasible": false,
+      "changed": true
+    },
+    {
+      "selected": [
+        "illustrative_B"
+      ],
+      "cost": 45,
+      "benefit": 1.9038828189009962,
+      "baseline_case": "central",
+      "baseline": 12.204377044237154,
+      "effect_factor": 1.3,
+      "budget": 70.0,
+      "unavailable_action": "illustrative_A",
+      "feasible": true,
+      "original_package_feasible": false,
+      "changed": true
+    },
+    {
+      "selected": [
+        "illustrative_A"
+      ],
+      "cost": 80,
+      "benefit": 3.17313803150166,
+      "baseline_case": "central",
+      "baseline": 12.204377044237154,
+      "effect_factor": 1.3,
+      "budget": 100,
+      "unavailable_action": null,
+      "feasible": true,
+      "original_package_feasible": true,
+      "changed": false
+    },
+    {
+      "selected": [
+        "illustrative_B"
+      ],
+      "cost": 45,
+      "benefit": 1.9038828189009962,
+      "baseline_case": "central",
+      "baseline": 12.204377044237154,
+      "effect_factor": 1.3,
+      "budget": 100,
+      "unavailable_action": "illustrative_A",
+      "feasible": true,
+      "original_package_feasible": false,
+      "changed": true
+    },
+    {
+      "selected": [
+        "illustrative_B"
+      ],
+      "cost": 45,
+      "benefit": 6.91103706692639,
+      "baseline_case": "upper",
+      "baseline": 82.27425079674278,
+      "effect_factor": 0.7,
+      "budget": 70.0,
+      "unavailable_action": null,
+      "feasible": true,
+      "original_package_feasible": false,
+      "changed": true
+    },
+    {
+      "selected": [
+        "illustrative_B"
+      ],
+      "cost": 45,
+      "benefit": 6.91103706692639,
+      "baseline_case": "upper",
+      "baseline": 82.27425079674278,
+      "effect_factor": 0.7,
+      "budget": 70.0,
+      "unavailable_action": "illustrative_A",
+      "feasible": true,
+      "original_package_feasible": false,
+      "changed": true
+    },
+    {
+      "selected": [
+        "illustrative_A"
+      ],
+      "cost": 80,
+      "benefit": 11.51839511154399,
+      "baseline_case": "upper",
+      "baseline": 82.27425079674278,
+      "effect_factor": 0.7,
+      "budget": 100,
+      "unavailable_action": null,
+      "feasible": true,
+      "original_package_feasible": true,
+      "changed": false
+    },
+    {
+      "selected": [
+        "illustrative_B"
+      ],
+      "cost": 45,
+      "benefit": 6.91103706692639,
+      "baseline_case": "upper",
+      "baseline": 82.27425079674278,
+      "effect_factor": 0.7,
+      "budget": 100,
+      "unavailable_action": "illustrative_A",
+      "feasible": true,
+      "original_package_feasible": false,
+      "changed": true
+    },
+    {
+      "selected": [
+        "illustrative_B"
+      ],
+      "cost": 45,
+      "benefit": 9.872910095609132,
+      "baseline_case": "upper",
+      "baseline": 82.27425079674278,
+      "effect_factor": 1.0,
+      "budget": 70.0,
+      "unavailable_action": null,
+      "feasible": true,
+      "original_package_feasible": false,
+      "changed": true
+    },
+    {
+      "selected": [
+        "illustrative_B"
+      ],
+      "cost": 45,
+      "benefit": 9.872910095609132,
+      "baseline_case": "upper",
+      "baseline": 82.27425079674278,
+      "effect_factor": 1.0,
+      "budget": 70.0,
+      "unavailable_action": "illustrative_A",
+      "feasible": true,
+      "original_package_feasible": false,
+      "changed": true
+    },
+    {
+      "selected": [
+        "illustrative_A"
+      ],
+      "cost": 80,
+      "benefit": 16.454850159348553,
+      "baseline_case": "upper",
+      "baseline": 82.27425079674278,
+      "effect_factor": 1.0,
+      "budget": 100,
+      "unavailable_action": null,
+      "feasible": true,
+      "original_package_feasible": true,
+      "changed": false
+    },
+    {
+      "selected": [
+        "illustrative_B"
+      ],
+      "cost": 45,
+      "benefit": 9.872910095609132,
+      "baseline_case": "upper",
+      "baseline": 82.27425079674278,
+      "effect_factor": 1.0,
+      "budget": 100,
+      "unavailable_action": "illustrative_A",
+      "feasible": true,
+      "original_package_feasible": false,
+      "changed": true
+    },
+    {
+      "selected": [
+        "illustrative_B"
+      ],
+      "cost": 45,
+      "benefit": 12.834783124291876,
+      "baseline_case": "upper",
+      "baseline": 82.27425079674278,
+      "effect_factor": 1.3,
+      "budget": 70.0,
+      "unavailable_action": null,
+      "feasible": true,
+      "original_package_feasible": false,
+      "changed": true
+    },
+    {
+      "selected": [
+        "illustrative_B"
+      ],
+      "cost": 45,
+      "benefit": 12.834783124291876,
+      "baseline_case": "upper",
+      "baseline": 82.27425079674278,
+      "effect_factor": 1.3,
+      "budget": 70.0,
+      "unavailable_action": "illustrative_A",
+      "feasible": true,
+      "original_package_feasible": false,
+      "changed": true
+    },
+    {
+      "selected": [
+        "illustrative_A"
+      ],
+      "cost": 80,
+      "benefit": 21.391305207153124,
+      "baseline_case": "upper",
+      "baseline": 82.27425079674278,
+      "effect_factor": 1.3,
+      "budget": 100,
+      "unavailable_action": null,
+      "feasible": true,
+      "original_package_feasible": true,
+      "changed": false
+    },
+    {
+      "selected": [
+        "illustrative_B"
+      ],
+      "cost": 45,
+      "benefit": 12.834783124291876,
+      "baseline_case": "upper",
+      "baseline": 82.27425079674278,
+      "effect_factor": 1.3,
+      "budget": 100,
+      "unavailable_action": "illustrative_A",
+      "feasible": true,
+      "original_package_feasible": false,
+      "changed": true
+    }
+  ],
+  "unchanged_fraction": 0.16666666666666666,
+  "assumptions": [
+    {
+      "id": "illustrative_A",
+      "cost": 80,
+      "fraction": 0.2,
+      "source": "Explicit mathematical sensitivity assumption only; not a validated real-world intervention"
+    },
+    {
+      "id": "illustrative_B",
+      "cost": 45,
+      "fraction": 0.12,
+      "source": "Explicit mathematical sensitivity assumption only; not a validated real-world intervention"
+    }
+  ],
+  "limitations": "Effects and costs are supplied assumptions, not pollution-model causal estimates. Counts are scenario frequencies, not probabilities. Common baseline scaling can leave package rankings unchanged."
+}

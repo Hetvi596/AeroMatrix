@@ -1,0 +1,469 @@
+/* ==========================================================================
+   AeroSage inside AeroMatrix: placement and theme. Everything is scoped to
+   .aerosage-host; the module's own aerosage.css stays untouched.
+
+   Placement (inside .map-stage, which defines the inset variables):
+   - Launcher: bottom-right, beside any open right-hand panel (--dock-right),
+     above the cursor readout and the map attribution.
+   - Open panel, ≥1024 px: docked in the right column, full map height. The
+     stage's --assist-inset moves the camera toolbar, search and readouts aside.
+   - Open panel, <1024 px: a bottom sheet over the map, like Plan-It on phones.
+   ========================================================================== */
+
+.aerosage-host {
+  position: absolute;
+  z-index: 36;
+  right: calc(var(--dock-right) + 12px);
+  bottom: 64px;
+  transition: right 0.3s var(--ease-out-soft);
+  pointer-events: none;
+}
+.aerosage-host > * {
+  pointer-events: auto;
+}
+
+/* Docked panel. */
+.aerosage-host[data-open='1'] {
+  top: 12px;
+  bottom: 12px;
+  width: var(--assist-w);
+}
+
+@media (max-width: 1023px) {
+  .aerosage-host {
+    right: 16px;
+    bottom: calc(var(--sheet-bottom) + 16px);
+  }
+  .map-stage[data-plan='1'] .aerosage-host[data-open='0'] {
+    display: none; /* the Plan-It sheet owns the bottom of the screen */
+  }
+  .aerosage-host[data-open='1'] {
+    z-index: 45;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: auto;
+    width: auto;
+    height: min(88dvh, 100%);
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .aerosage-host {
+    right: calc(var(--dock-right) + 12px);
+    bottom: 28px;
+  }
+}
+
+/* ------------------------------------------------------------------ launcher */
+
+.aerosage-host .as-launcher {
+  --as-text: var(--color-sand-50);
+  gap: 9px;
+  padding: 5px 14px 5px 5px;
+  border: 1px solid rgba(251, 245, 233, 0.16);
+  background: color-mix(in srgb, var(--color-ink-900) 94%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 10px 28px -14px rgba(10, 2, 5, 0.85);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-sand-50);
+  transition: transform 0.15s var(--ease-out-soft), border-color 0.15s;
+}
+.aerosage-host .as-launcher:hover {
+  border-color: var(--color-accent-300);
+  transform: translateY(-1px);
+}
+.aerosage-host .as-launcher:active {
+  transform: scale(0.98);
+}
+.aerosage-host .as-launcher:focus-visible {
+  outline: 2px solid var(--color-accent-300);
+}
+.as-launcher-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 40%, #1c3a44, #0b1623);
+  object-fit: cover;
+}
+.aerosage-host .as-launcher i {
+  background: var(--color-emerald-300);
+}
+@media (max-width: 1023px) {
+  .aerosage-host .as-launcher span {
+    display: none; /* icon-only on small screens; the accessible name stays */
+  }
+  .aerosage-host .as-launcher {
+    padding: 5px;
+  }
+  .aerosage-host .as-launcher i {
+    display: none;
+  }
+}
+@media (max-height: 520px) and (min-width: 1024px) {
+  .aerosage-host .as-launcher span,
+  .aerosage-host .as-launcher i {
+    display: none;
+  }
+  .aerosage-host .as-launcher {
+    padding: 4px;
+  }
+}
+
+/* ------------------------------------------------------------------ panel */
+
+.aerosage-host .aerosage {
+  --as-bg: var(--color-ink-900);
+  --as-line: rgba(251, 245, 233, 0.1);
+  --as-muted: var(--color-sand-400);
+  --as-mint: var(--color-accent-500);
+  --as-text: var(--color-sand-50);
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  border: 1px solid rgba(251, 245, 233, 0.1);
+  border-radius: 16px;
+  background: var(--color-ink-900);
+  box-shadow: 0 18px 44px -24px rgba(10, 2, 5, 0.85);
+  font-family: var(--font-sans);
+  animation: slide-in 0.3s var(--ease-out-soft) both;
+}
+@media (max-width: 1023px) {
+  .aerosage-host .aerosage {
+    border-radius: 16px 16px 0 0;
+    animation: sheet-up 0.3s var(--ease-out-soft) both;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+/* The panel already uses the full column; the module's wide mode isn't needed here. */
+.aerosage-host button[aria-label='Expand panel'],
+.aerosage-host button[aria-label='Restore panel size'] {
+  display: none;
+}
+
+.aerosage-host .as-header {
+  padding: 14px 18px;
+}
+.aerosage-host .as-brand {
+  font-size: 17px;
+  letter-spacing: -0.01em;
+}
+.aerosage-host .as-brand small {
+  font: 500 11px/1.5 var(--font-sans);
+  letter-spacing: 0;
+  color: var(--color-sand-400);
+}
+.aerosage-host .as-brand-mark {
+  border-color: rgba(221, 116, 135, 0.4);
+  background: rgba(163, 38, 63, 0.18);
+  color: var(--color-accent-200);
+}
+.aerosage-host .as-icon {
+  color: var(--color-sand-300);
+}
+.aerosage-host .as-icon:hover {
+  background: rgba(251, 245, 233, 0.07);
+  color: var(--color-sand-50);
+}
+.aerosage-host .aerosage button:focus-visible,
+.aerosage-host .aerosage select:focus-visible,
+.aerosage-host .aerosage textarea:focus-visible {
+  outline-color: var(--color-accent-300);
+}
+
+.aerosage-host .as-character-area {
+  padding: 0 18px 12px;
+  background: radial-gradient(ellipse at center 35%, rgba(163, 38, 63, 0.16), transparent 70%);
+}
+.aerosage-host .as-avatar {
+  width: 168px;
+}
+.aerosage-host .as-avatar--compact {
+  width: 92px;
+}
+.aerosage-host .as-character-area--voice .as-avatar {
+  width: 190px;
+}
+.aerosage-host .as-avatar-status {
+  font: 600 10.5px var(--font-sans);
+  letter-spacing: 0.02em;
+  color: var(--color-emerald-200);
+}
+.aerosage-host .as-character-area h1 {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--color-sand-50);
+}
+.aerosage-host .as-character-area p {
+  font-size: 13px;
+  color: var(--color-sand-300);
+}
+
+.aerosage-host .as-context {
+  margin: 0 18px;
+  border-color: rgba(251, 245, 233, 0.1);
+  background: rgba(251, 245, 233, 0.04);
+  font: 500 11.5px var(--font-sans);
+  letter-spacing: 0;
+  color: var(--color-sand-200);
+}
+.aerosage-host .as-context .as-connected,
+.aerosage-host .as-context .as-offline {
+  font-size: 10.5px;
+  font-weight: 600;
+}
+.aerosage-host .as-connected {
+  color: var(--color-emerald-300);
+}
+.aerosage-host .as-offline {
+  color: var(--color-accent-200);
+}
+
+.aerosage-host .as-welcome {
+  padding: 14px 18px 6px;
+}
+.aerosage-host .as-welcome > span {
+  font: 600 11.5px var(--font-sans);
+  letter-spacing: 0;
+  color: var(--color-sand-400);
+}
+.aerosage-host .as-suggestions button {
+  border-color: rgba(251, 245, 233, 0.12);
+  background: rgba(251, 245, 233, 0.05);
+  color: var(--color-sand-100);
+  font-size: 12.5px;
+}
+.aerosage-host .as-suggestions button:hover {
+  border-color: var(--color-accent-300);
+}
+
+.aerosage-host .as-conversation {
+  padding: 10px 18px;
+  scrollbar-color: rgba(251, 245, 233, 0.18) transparent;
+  flex: 1 1 auto;
+  min-height: 60px;
+}
+.aerosage-host .as-message {
+  background: rgba(251, 245, 233, 0.05);
+  border-color: rgba(251, 245, 233, 0.1);
+  font-size: 13px;
+  color: var(--color-sand-100);
+}
+.aerosage-host .as-message--user {
+  background: rgba(163, 38, 63, 0.22);
+  border-color: rgba(221, 116, 135, 0.3);
+}
+.aerosage-host .as-message-label {
+  font: 600 11px var(--font-sans);
+  letter-spacing: 0;
+  color: var(--color-accent-200);
+}
+.aerosage-host .as-message-label span {
+  color: var(--color-sand-400);
+  font-weight: 500;
+}
+.aerosage-host .as-message details {
+  font-size: 11.5px;
+  color: var(--color-sand-300);
+}
+.aerosage-host .as-warning {
+  font-size: 11.5px;
+  color: #e8c48f;
+  border-top-color: rgba(251, 245, 233, 0.1);
+}
+.aerosage-host .as-progress {
+  font-size: 12px;
+  color: var(--color-sand-300);
+}
+.aerosage-host .as-progress span,
+.aerosage-host .as-wave i {
+  background: var(--color-accent-300);
+}
+
+.aerosage-host .as-footer {
+  padding: 12px 18px 12px;
+  border-top-color: rgba(251, 245, 233, 0.1);
+  background: var(--color-ink-950);
+}
+.aerosage-host .as-footer form {
+  border-color: rgba(251, 245, 233, 0.14);
+  background: var(--color-ink-850);
+}
+.aerosage-host .as-footer form:focus-within {
+  border-color: var(--color-accent-300);
+}
+.aerosage-host .as-footer textarea {
+  color: var(--color-sand-50);
+  font-size: 16px; /* 16px keeps mobile browsers from zooming into the field */
+  resize: none;
+}
+@media (min-width: 1024px) {
+  .aerosage-host .as-footer textarea {
+    font-size: 13px;
+  }
+}
+.aerosage-host .as-footer textarea::placeholder {
+  color: var(--color-sand-500);
+}
+.aerosage-host .as-send {
+  background: var(--color-accent-500);
+  color: #fff;
+}
+.aerosage-host .as-mic {
+  border-color: rgba(251, 245, 233, 0.16);
+  background: rgba(251, 245, 233, 0.06);
+  color: var(--color-sand-100);
+}
+.aerosage-host .as-mic.is-active {
+  background: var(--color-accent-500);
+  color: #fff;
+  box-shadow: 0 0 0 5px rgba(163, 38, 63, 0.25);
+}
+.aerosage-host .as-voice-copy span {
+  font-size: 12px;
+  color: var(--color-sand-100);
+}
+.aerosage-host .as-voice-copy small {
+  font-size: 11px;
+  color: var(--color-sand-400);
+}
+.aerosage-host .as-voice-controls select {
+  font-size: 12px;
+  color: var(--color-sand-100);
+  border-color: rgba(251, 245, 233, 0.14);
+  background: var(--color-ink-850);
+}
+.aerosage-host .as-bottom,
+.aerosage-host .as-clear {
+  font-size: 11.5px;
+  color: var(--color-sand-400);
+}
+.aerosage-host .as-bottom input {
+  accent-color: var(--color-accent-500);
+}
+.aerosage-host .as-privacy {
+  font-size: 10.5px;
+  color: var(--color-sand-500);
+}
+.aerosage-host .as-error,
+.aerosage-host .as-confirm {
+  margin: 8px 18px;
+  font-size: 12.5px;
+  border-color: rgba(221, 116, 135, 0.35);
+  background: rgba(163, 38, 63, 0.14);
+  color: var(--color-sand-100);
+}
+.aerosage-host .as-confirm button {
+  background: var(--color-accent-500);
+  border-color: var(--color-accent-400);
+  color: #fff;
+  font-size: 12.5px;
+}
+.aerosage-host .as-confirm button + button {
+  background: transparent;
+  color: var(--color-sand-100);
+  border-color: rgba(251, 245, 233, 0.2);
+}
+.aerosage-host .as-caption {
+  padding: 3px 18px;
+  color: var(--color-sand-200);
+}
+
+/* Short panels: smaller character so the conversation keeps its room. */
+@media (max-height: 760px) {
+  .aerosage-host .as-avatar {
+    width: 120px;
+  }
+  .aerosage-host .as-avatar--compact {
+    width: 72px;
+  }
+  .aerosage-host .as-character-area p {
+    display: none;
+  }
+}
+@media (max-height: 600px) {
+  .aerosage-host .as-avatar {
+    width: 84px;
+  }
+  .aerosage-host .as-character-area h1 {
+    font-size: 16px;
+  }
+  .aerosage-host .as-privacy {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aerosage-host .aerosage,
+  .aerosage-host .as-launcher {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* Never lose the input: the panel scrolls as a whole when space is short, with the
+   composer pinned to the bottom; otherwise the conversation scrolls on its own. */
+.aerosage-host .aerosage {
+  overflow-y: auto;
+}
+.aerosage-host .as-conversation {
+  flex: 1 1 0;
+  min-height: 120px;
+}
+.aerosage-host .as-footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+}
+.aerosage-host .as-avatar-status {
+  left: 50%;
+  right: auto;
+  bottom: -2px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+/* The composer border shows focus; no second outline inside it. */
+.aerosage-host .as-footer textarea:focus-visible {
+  outline: none;
+}
+
+/* Formatted assistant replies (headings, lists, bold) rendered as React elements. */
+.aerosage-host .as-message-text--rich {
+  white-space: normal;
+}
+.aerosage-host .as-message-text--rich p {
+  margin: 0 0 6px;
+}
+.aerosage-host .as-message-text--rich p:last-child {
+  margin-bottom: 0;
+}
+.aerosage-host .as-md-h {
+  font-weight: 600;
+  color: var(--color-sand-50);
+  margin-top: 8px !important;
+}
+.aerosage-host .as-md-list {
+  margin: 0 0 6px;
+  padding-left: 18px;
+  list-style: disc;
+}
+.aerosage-host .as-md-ol {
+  list-style: decimal;
+}
+.aerosage-host .as-md-list li {
+  margin: 2px 0;
+}
+.aerosage-host .as-message-text--rich strong {
+  font-weight: 600;
+  color: var(--color-sand-50);
+}
+.aerosage-host .as-message-text--rich code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  background: rgba(251, 245, 233, 0.08);
+  padding: 0 4px;
+  border-radius: 4px;
+}

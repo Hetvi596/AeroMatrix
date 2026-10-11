@@ -1,0 +1,226 @@
+{
+  "status": "MEASURED",
+  "region": {
+    "station": "site_5409",
+    "station_name": "Revenue Colony-Shivajinagar, Pune - IITM",
+    "name": "Revenue Colony-Shivajinagar",
+    "aliases": [
+      "Revenue Colony",
+      "Revenue Colony-Shivajinagar",
+      "Shivajinagar"
+    ],
+    "longitude": null,
+    "latitude": null,
+    "source_files": "20_Revenue_Colony_Shivajinagar_15_minute_AQI_Data_for_2024-25.csv"
+  },
+  "pollutants": {
+    "pm25": {
+      "status": "MEASURED",
+      "value": 76.3825,
+      "unit": "ug/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "pm10": {
+      "status": "MEASURED",
+      "value": 97.9775,
+      "unit": "ug/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "no2": {
+      "status": "MEASURED",
+      "value": 57.31,
+      "unit": "ug/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "no": {
+      "status": "MEASURED",
+      "value": 1.3275,
+      "unit": "ug/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "nox": {
+      "status": "MEASURED",
+      "value": 31.5625,
+      "unit": "ppb",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "so2": {
+      "status": "MEASURED",
+      "value": 7.975,
+      "unit": "ug/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "co": {
+      "status": "MEASURED",
+      "value": 1.73,
+      "unit": "mg/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "o3": {
+      "status": "MEASURED",
+      "value": 18.16,
+      "unit": "ug/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "benzene": {
+      "status": "MEASURED",
+      "value": 7.9825,
+      "unit": "ug/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "toluene": {
+      "status": "MEASURED",
+      "value": 21.1875,
+      "unit": "ug/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "xylene": {
+      "status": "MEASURED",
+      "value": 6.875,
+      "unit": "ug/m3",
+      "time": "2026-01-01T04:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2026-01-01T04:00:00+05:30",
+        "end": "2026-01-01T05:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    }
+  },
+  "aqi": {
+    "status": "AVAILABLE",
+    "value": 125,
+    "category": "Moderate",
+    "dominant_pollutant": "pm25",
+    "reason": null,
+    "subindices": {
+      "pm25": {
+        "value": 125,
+        "bounded": false,
+        "concentration": 67.69467391304349,
+        "averaging_hours": 24
+      },
+      "pm10": {
+        "value": 105,
+        "bounded": false,
+        "concentration": 107.00521739130434,
+        "averaging_hours": 24
+      },
+      "no2": {
+        "value": 67,
+        "bounded": false,
+        "concentration": 53.82152173913043,
+        "averaging_hours": 24
+      },
+      "so2": {
+        "value": 13,
+        "bounded": false,
+        "concentration": 9.979347826086956,
+        "averaging_hours": 24
+      },
+      "co": {
+        "value": 78,
+        "bounded": false,
+        "concentration": 1.5931250000000001,
+        "averaging_hours": 8
+      },
+      "o3": {
+        "value": 13,
+        "bounded": false,
+        "concentration": 13.194375,
+        "averaging_hours": 8
+      }
+    },
+    "coverage_hours": {
+      "pm25": 23,
+      "pm10": 23,
+      "no2": 23,
+      "so2": 23,
+      "co": 23,
+      "o3": 23,
+      "nh3": 0
+    },
+    "excluded": {
+      "nh3": "Fewer than 16 valid hourly observations in 24h"
+    },
+    "period_end": "2025-12-31T23:30:00+00:00",
+    "method": "CPCB National AQI; measured hourly data; conservative eight-hour completeness",
+    "timestamp_semantics": "completed_hour_end"
+  },
+  "historical": true,
+  "snapshot_end": "2026-01-01T04:00:00+05:30",
+  "source_files": "20_Revenue_Colony_Shivajinagar_15_minute_AQI_Data_for_2024-25.csv",
+  "notice": "time and snapshot_end label hour starts; window.end and snapshot_window_end are completed-hour availability. Latest values can have different timestamps; AQI uses one coherent window.",
+  "snapshot_window_end": "2026-01-01T05:00:00+05:30"
+}

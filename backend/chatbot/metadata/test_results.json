@@ -1,0 +1,282 @@
+{
+  "result": "PASS_API_INTEGRATION",
+  "real_backend_connected": true,
+  "real_pm25_forecast_matches_api": 96.68304484723336,
+  "real_observation_matches_api": 99.955,
+  "checks": [
+    {
+      "question": "Predict historical PM2.5 in Hadapsar.",
+      "answer": "Hadapsar — PM25: 96.683 ug/m3. Historical / Forecast. Time: 2026-01-02T05:00:00+05:30.\n\nIssued: 2026-01-01T05:00:00+05:30.\n\nPrediction interval: 77.6844–115.682 ug/m3; uncertainty: {'method': 'absolute validation residual 90th percentile; not guaranteed under temporal shift', 'radius': 18.998599888634793, 'test_coverage': 0.8040486590578179}.\n\nHeld-out test metrics: {'mae': 13.043733832738045, 'rmse': 23.442341470795427, 'r2': 0.71252572558271, 'n': 21291}.",
+      "intent": "forecast",
+      "status": "available",
+      "model_used": null,
+      "seconds": 0.277,
+      "warnings": []
+    },
+    {
+      "question": "Predict PM2.5 in Hadapsar.",
+      "answer": "Hadapsar — PM25: Unavailable. Bundled readings are historical. Supply recent hourly observations or set allow_historical=true explicitly..\n\nLatest source timestamp: 2026-01-02T05:00:00+05:30.",
+      "intent": "forecast",
+      "status": "unavailable",
+      "model_used": null,
+      "seconds": 0.221,
+      "warnings": []
+    },
+    {
+      "question": "Show historical PM2.5 in Hadapsar.",
+      "answer": "Hadapsar — PM25: 99.955 ug/m3. Historical / Observed. Time: 2026-01-01T04:00:00+05:30.",
+      "intent": "observation",
+      "status": "available",
+      "model_used": null,
+      "seconds": 0.213,
+      "warnings": []
+    },
+    {
+      "question": "What is the current AQI in Hadapsar?",
+      "answer": "Hadapsar — AQI: Unavailable. Only historical data are available; request historical data explicitly to view them.\n\nLatest source timestamp: 2026-01-01T00:30:00+00:00.",
+      "intent": "observation",
+      "status": "unavailable",
+      "model_used": null,
+      "seconds": 0.212,
+      "warnings": []
+    },
+    {
+      "question": "What is the predicted AQI in Shivajinagar?",
+      "answer": "Revenue Colony-Shivajinagar — AQI: Unavailable. Single-horizon point forecasts do not supply official AQI averaging windows.",
+      "intent": "forecast",
+      "status": "unavailable",
+      "model_used": null,
+      "seconds": 0.225,
+      "warnings": []
+    },
+    {
+      "question": "Predict historical PM2.5 in Kothrud.",
+      "answer": "Kothrud — PM25: Unavailable. No unambiguous supported monitoring station matches this region. Use /regions; no nearest-station substitution is performed..",
+      "intent": "forecast",
+      "status": "unavailable",
+      "model_used": null,
+      "seconds": 0.239,
+      "warnings": []
+    },
+    {
+      "question": "Show historical AQI in Kothrud.",
+      "answer": "Kothrud — AQI: 57 AQI (dimensionless). Historical / Source-reported AQI. Time: 2023-12-31 08:00:00+05:30.\n\nCategory: Satisfactory.",
+      "intent": "observation",
+      "status": "available",
+      "model_used": null,
+      "seconds": 0.729,
+      "warnings": []
+    },
+    {
+      "question": "Compare historical AQI in Hadapsar and Kothrud.",
+      "answer": "Hadapsar — AQI: 283 AQI (dimensionless). Historical / Observed. Time: 2026-01-01T00:30:00+00:00.\n\nCategory: Poor.\n\nKothrud — AQI: 57 AQI (dimensionless). Historical / Source-reported AQI. Time: 2023-12-31 08:00:00+05:30.\n\nCategory: Satisfactory.\n\nA fair ranking is unavailable: both regions need the same pollutant, timestamp, units and measurement/prediction status.",
+      "intent": "comparison",
+      "status": "available",
+      "model_used": null,
+      "seconds": 2.326,
+      "warnings": []
+    },
+    {
+      "question": "Which Pune locations have actual monitoring stations?",
+      "answer": "The connected backend supports these monitoring locations: Karve Road, Mhada Colony, Alandi, Bhosari, Hadapsar, Transport Nagar-Nigdi, Revenue Colony-Shivajinagar, Katraj Dairy, Savitribai Phule Pune University, Bhumkar Nagar, Panchawati Pashan, Dhankawadi. Coverage is station-specific; ward boundaries do not imply a forecast is available. Coordinates are unavailable where the API marks them so.",
+      "intent": "coverage",
+      "status": "available",
+      "model_used": null,
+      "seconds": 0.793,
+      "warnings": []
+    },
+    {
+      "question": "How reliable is the PM2.5 forecast?",
+      "answer": "Verified source excerpts (language-model synthesis unavailable):\n\n[KB1] ## Reliability and uncertainty\r\nPrediction intervals are estimates based on held-out errors and their empirical coverage is not a guarantee for a particular future hour. RMSE and MAE are pollutant-specific and expressed in concentration units. R2 can be negative; SO2 is a weak persistence baseline with negative test R2, and NH3 and benzene explain little test variance. Do not convert R2 into a blanket \"accuracy percentage.\" Reliability warnings must remain visible. A 24-hour-ahead point forecast does not supply all AQI averaging windows, so official forecast AQI is unavailable.\r\n\n\n[KB2] # Environmental concepts and pollutant definitions\r\n\r\nPM2.5 means airborne particles with diameters generally 2.5 micrometers or smaller; PM10 includes particles generally 10 micrometers or smaller. They can be emitted directly or form from precursor gases. Sources include combustion, road/construction dust, and atmospheric reactions. Particle concentration is commonly reported as micrograms per cubic metre.\r\n\r",
+      "intent": "reliability",
+      "status": "retrieved",
+      "model_used": null,
+      "seconds": 0.669,
+      "warnings": [
+        "Language model is not configured. Set GEMINI_API_KEY locally or configure Ollama."
+      ]
+    },
+    {
+      "question": "What is the AQI in Hadapsar?",
+      "answer": "Hadapsar — AQI: Unavailable. Only historical data are available; request historical data explicitly to view them.\n\nLatest source timestamp: 2026-01-01T00:30:00+00:00.",
+      "intent": "observation",
+      "status": "unavailable",
+      "model_used": null,
+      "seconds": 0.641,
+      "warnings": []
+    },
+    {
+      "question": "What is AeroMatrix?",
+      "answer": "Verified source excerpts (language-model synthesis unavailable):\n\n[KB1] # AeroMatrix purpose and verified implementation\r\n\r\nAeroMatrix is a Pune-focused air-pollution intelligence and environmental digital-twin prototype. Its inspected code includes a React interface, Cesium 3D map, observed-data CSV import, environmental layers, and a rule-based what-if simulator. A separately exported Python backend serves trained station-level pollutant forecasts and actual historical observations. AeroAI is a separately integrated chatbot; it does not replace the existing frontend.\r\n\r\n\n[KB2] ## Implementation versus future claims\r\nThe Cesium map supports layers, terrain, buildings, observations, and prototype scenario comparison. Imported station coordinates are required to place readings and forecasts correctly. The inspected exported models have no verified station coordinates. Validated street-level forecasts, arbitrary unseen-location pollution estimates, a live measurement connector, and validated causal intervention effects are not provided. Older frontend text about 72-hour forecasts and 10-meter micro-grids describes aspirations, not verified capabilities. The exported inference API and its model metadata supersede older README statements that training is still pending.\r\n",
+      "intent": "project",
+      "status": "retrieved",
+      "model_used": null,
+      "seconds": 0.061,
+      "warnings": [
+        "Language model is not configured. Set GEMINI_API_KEY locally or configure Ollama."
+      ]
+    },
+    {
+      "question": "What technologies does AeroMatrix use?",
+      "answer": "Verified source excerpts (language-model synthesis unavailable):\n\n[KB1] ## Architecture and technology stack\r\nThe frontend uses React, TypeScript, Vite, CesiumJS, and Zustand state in src/store/useTwinStore.ts. The landing page also uses Three.js and Tailwind. A FastAPI Python inference backend exposes REST routes and serves saved scikit-learn models. Some model targets select persistence, so not all targets use a learned regression estimator. The current exported backend has 12 pollutant models and a 24-hour forecast horizon. The chatbot uses FastAPI, SQLite FTS5 BM25 retrieval, SQLite session memory, and a configurable Gemini/Ollama language model. The chatbot does not train or duplicate the pollutant models.\r\n\r\n\n[KB2] # AeroMatrix purpose and verified implementation\r\n\r\nAeroMatrix is a Pune-focused air-pollution intelligence and environmental digital-twin prototype. Its inspected code includes a React interface, Cesium 3D map, observed-data CSV import, environmental layers, and a rule-based what-if simulator. A separately exported Python backend serves trained station-level pollutant forecasts and actual historical observations. AeroAI is a separately integrated chatbot; it does not replace the existing frontend.\r\n\r",
+      "intent": "project",
+      "status": "retrieved",
+      "model_used": null,
+      "seconds": 0.069,
+      "warnings": [
+        "Language model is not configured. Set GEMINI_API_KEY locally or configure Ollama."
+      ]
+    },
+    {
+      "question": "How does the project predict pollution?",
+      "answer": "Verified source excerpts (language-model synthesis unavailable):\n\n[KB1] # Pollution models training evaluation and reliability\r\n\r\nModels predict an hourly mean 24 hours ahead at supported monitoring stations. Training used lagged and rolling pollutant history, calendar features, and available observed weather. Splits were chronological with purging between splits. Fitted feature imputation uses training data only. Selection used validation performance, with final evaluation on held-out test data. These observational forecasts are not causal scenario models.\r\n\r\n\n[KB2] ## Reliability and uncertainty\r\nPrediction intervals are estimates based on held-out errors and their empirical coverage is not a guarantee for a particular future hour. RMSE and MAE are pollutant-specific and expressed in concentration units. R2 can be negative; SO2 is a weak persistence baseline with negative test R2, and NH3 and benzene explain little test variance. Do not convert R2 into a blanket \"accuracy percentage.\" Reliability warnings must remain visible. A 24-hour-ahead point forecast does not supply all AQI averaging windows, so official forecast AQI is unavailable.\r\n",
+      "intent": "project",
+      "status": "retrieved",
+      "model_used": null,
+      "seconds": 0.061,
+      "warnings": [
+        "Language model is not configured. Set GEMINI_API_KEY locally or configure Ollama."
+      ]
+    },
+    {
+      "question": "What are the limitations of the models?",
+      "answer": "Verified source excerpts (language-model synthesis unavailable):\n\n[KB1] # Environmental what-if simulator and causal limitations\r\n\r\nThe inspected TypeScript ScenarioService runs a deterministic prototype rule model. It supports traffic multipliers, road closures/diversions, industrial intensity/control, adding/removing industries, green cover and buffers, building changes, and weather settings. It compares baseline, scenario and delta values on the Cesium map. These outputs are MODELED SCENARIO results from an unvalidated causal prototype, not measured outcomes or proof of an intervention effect. The simulator runs in the frontend; the exported ML API has no simulation route.\r\n\r\n\n[KB2] ## Interpreting industries traffic and trees\r\nTraffic reduction may reduce emissions, but local concentrations also depend on meteorology, regional background, chemistry, and street geometry. Added industrial combustion can increase emissions depending on fuel, activity rate, exhaust stack and control technology. Trees can capture some particles, but their effect is location-dependent and can change airflow. No precise AQI reduction or pollution percentage can be inferred solely from a tree count or a factory count. Correlation-based pollutant forecasts cannot establish causal intervention effects.\r\n\r",
+      "intent": "project",
+      "status": "retrieved",
+      "model_used": null,
+      "seconds": 0.066,
+      "warnings": [
+        "Language model is not configured. Set GEMINI_API_KEY locally or configure Ollama."
+      ]
+    },
+    {
+      "question": "How does the sensor failure feature work?",
+      "answer": "Verified source excerpts (language-model synthesis unavailable):\n\n[KB1] ## Sensor failure and missing measurements\r\nThe station forecast requires observed target history, including a valid latest target measurement and at least 16 observed hours in the trailing 24 hours. It uses previous observations and available observed weather. Feature imputation does not create a missing target history. If a sensor stops and sufficient recent history is no longer available, forecasting is unavailable. The system cannot claim continuous sensor-loss replacement or unseen-location inference. A separately validated spatial model and verified coordinates would be required for that capability.\r\n\n\n[KB2] # Pollution models training evaluation and reliability\r\n\r\nModels predict an hourly mean 24 hours ahead at supported monitoring stations. Training used lagged and rolling pollutant history, calendar features, and available observed weather. Splits were chronological with purging between splits. Fitted feature imputation uses training data only. Selection used validation performance, with final evaluation on held-out test data. These observational forecasts are not causal scenario models.\r\n\r",
+      "intent": "project",
+      "status": "retrieved",
+      "model_used": null,
+      "seconds": 0.055,
+      "warnings": [
+        "Language model is not configured. Set GEMINI_API_KEY locally or configure Ollama."
+      ]
+    },
+    {
+      "question": "What is PM2.5?",
+      "answer": "Verified source excerpts (language-model synthesis unavailable):\n\n[KB1] # Environmental concepts and pollutant definitions\r\n\r\nPM2.5 means airborne particles with diameters generally 2.5 micrometers or smaller; PM10 includes particles generally 10 micrometers or smaller. They can be emitted directly or form from precursor gases. Sources include combustion, road/construction dust, and atmospheric reactions. Particle concentration is commonly reported as micrograms per cubic metre.\r\n\r\n\n[KB2] ## AQI availability\r\nThe backend uses CPCB National AQI and the maximum eligible pollutant subindex. It requires sufficient history and at least three eligible pollutants including PM2.5 or PM10. The export conservatively checks complete CO/O3 eight-hour windows and at least 16 hours in other 24-hour windows. Some severe values are lower bounds, and the separate high-ozone one-hour rule is not implemented. A single pollutant forecast is insufficient for official forecast AQI. Missing and unsupported results remain UNAVAILABLE.\r\n",
+      "intent": "concept",
+      "status": "retrieved",
+      "model_used": null,
+      "seconds": 0.07,
+      "warnings": [
+        "Language model is not configured. Set GEMINI_API_KEY locally or configure Ollama."
+      ]
+    },
+    {
+      "question": "What happens if we plant more trees?",
+      "answer": "Hypothetical scenario explanation. Verified source excerpts (language-model synthesis unavailable):\n\n[KB1] ## Interpreting industries traffic and trees\r\nTraffic reduction may reduce emissions, but local concentrations also depend on meteorology, regional background, chemistry, and street geometry. Added industrial combustion can increase emissions depending on fuel, activity rate, exhaust stack and control technology. Trees can capture some particles, but their effect is location-dependent and can change airflow. No precise AQI reduction or pollution percentage can be inferred solely from a tree count or a factory count. Correlation-based pollutant forecasts cannot establish causal intervention effects.\r\n\r\n\n[KB2] # Environmental what-if simulator and causal limitations\r\n\r\nThe inspected TypeScript ScenarioService runs a deterministic prototype rule model. It supports traffic multipliers, road closures/diversions, industrial intensity/control, adding/removing industries, green cover and buffers, building changes, and weather settings. It compares baseline, scenario and delta values on the Cesium map. These outputs are MODELED SCENARIO results from an unvalidated causal prototype, not measured outcomes or proof of an intervention effect. The simulator runs in the frontend; the exported ML API has no simulation route.\r\n\r",
+      "intent": "simulation",
+      "status": "retrieved",
+      "model_used": null,
+      "seconds": 0.086,
+      "warnings": [
+        "Language model is not configured. Set GEMINI_API_KEY locally or configure Ollama."
+      ]
+    },
+    {
+      "test": "actual_Gemini_English_Hindi_Hinglish",
+      "status": "NOT_RUN",
+      "reason": "No Gemini key configured"
+    }
+  ],
+  "original_project_imported": false,
+  "capabilities": {
+    "identity": "AeroSage — Your AI Environmental Copilot",
+    "llm": {
+      "configured": false,
+      "available": false,
+      "provider": "gemini",
+      "model": "gemini-3.5-flash-lite"
+    },
+    "ml_backend": {
+      "status": "ok",
+      "model_loaded": true,
+      "model_count": 12,
+      "supported_pollutants": [
+        "pm25",
+        "pm10",
+        "no2",
+        "no",
+        "nox",
+        "so2",
+        "co",
+        "o3",
+        "nh3",
+        "benzene",
+        "toluene",
+        "xylene"
+      ],
+      "station_count": 12,
+      "units": {
+        "pm25": "ug/m3",
+        "pm10": "ug/m3",
+        "no2": "ug/m3",
+        "no": "ug/m3",
+        "nox": "ppb",
+        "so2": "ug/m3",
+        "co": "mg/m3",
+        "o3": "ug/m3",
+        "nh3": "ug/m3",
+        "benzene": "ug/m3",
+        "toluene": "ug/m3",
+        "xylene": "ug/m3",
+        "spm": "ug/m3",
+        "pb": "ug/m3",
+        "temperature": "degC",
+        "humidity": "%",
+        "wind_speed": "m/s",
+        "wind_direction": "degree",
+        "rainfall": "mm",
+        "pressure": "hPa",
+        "solar_radiation": "W/m2"
+      },
+      "training_on_startup": false,
+      "bundled_data_is_historical": true,
+      "spatial_estimation_available": false
+    },
+    "knowledge": {
+      "available": true,
+      "chunks": 24,
+      "method": "SQLite FTS5 BM25",
+      "integrity": "Only manifest-hash-matching documents are indexed"
+    },
+    "languages": [
+      "en",
+      "hi",
+      "hinglish"
+    ],
+    "language_note": "Generative language support depends on configured model; deterministic API cards preserve English technical labels and source reasons.",
+    "streaming": "SSE progress and buffered answer chunks; not provider token streaming",
+    "memory": "SQLite, token-isolated sessions, bounded history and expiring retention",
+    "simulation": "Optional read-only scenario adapter; current frontend simulator is not automatically connected",
+    "web_browsing": false,
+    "suggested_questions": [
+      "What is AeroMatrix?",
+      "Which Pune locations have monitoring stations?",
+      "Show historical PM2.5 in Hadapsar.",
+      "How reliable are the models?",
+      "Explain machine learning."
+    ],
+    "welcome": "Hi, I’m AeroSage. Ask about AeroMatrix, pollution, or a general question."
+  },
+  "time_utc": "2026-10-10T17:29:16Z",
+  "portability": {
+    "fresh_venv_setup": "PASS",
+    "TEST_CHATBOT_bat": "PASS",
+    "pytest_passed": 43,
+    "pytest_failed": 0,
+    "warning": "Starlette test client httpx deprecation; no runtime failure",
+    "recorded_api_answers": 18,
+    "live_llm": "NOT_RUN: no Gemini key",
+    "original_project_modified": false
+  }
+}

@@ -1,0 +1,32 @@
+........................                                                 [100%]
+============================== warnings summary ===============================
+tests/test_task2.py: 18 warnings
+  C:\Users\HP\Documents\Codex\2026-10-10\c-users-hp-desktop-aeromatrix-main\work\task2-portability\AeroMatrix_Task2_Model\src\inference.py:38: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    weather=payload.get('weather',{});wt=pd.Timestamp(weather['timestamp']) if weather.get('timestamp') else None;expected=cutoff.floor('h')-pd.Timedelta(days=120)
+
+tests/test_task2.py: 18 warnings
+  C:\Users\HP\Documents\Codex\2026-10-10\c-users-hp-desktop-aeromatrix-main\work\task2-portability\AeroMatrix_Task2_Model\src\inference.py:48: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    return {'status':'AVAILABLE','category':'FORECAST_ML','pollutant':pollutant,'units':'ug/m3','station':target,'value':value,'cutoff':cutoff.isoformat(),'target_time':(cutoff+pd.Timedelta(hours=1)).isoformat(),'horizon_hours':1,'interval':[max(0,value-q),value+q],'model':meta['name'],'version':meta['version'],'baselines':{'idw':idw,'persistence':max(target_history)[1] if target_history else None},'reliability':{'status':'LOW' if excluded or out or len(values)<3 else 'CAUTION','donor_count':len(values),'nearest_km':float(min(d)),'oldest_donor_hours':float(max(ages)),'out_of_training_bounds':out,'weather_available':weather_ok,'weather_delay_days':120,'weather_missing_handling':'Training-only median plus missing indicators, if selected model includes weather','nominal_interval_coverage':.9,'coverage_warning':'Empirical coverage is in evaluation; 90% is not a guaranteed confidence probability for this case.'},'causal_effects_estimated':False}
+
+tests/test_task2.py: 12 warnings
+  C:\Users\HP\Documents\Codex\2026-10-10\c-users-hp-desktop-aeromatrix-main\work\task2-portability\AeroMatrix_Task2_Model\demos.py:14: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    targetweather=cutoff.floor('h')-pd.Timedelta(days=120);grid=stations[station]['weather_grid'];matched=weather[(weather.grid==grid)&(weather.timestamp==targetweather)] if not weather.empty else weather
+
+tests/test_task2.py::test_future_values_and_external_model_not_used
+  C:\Users\HP\Documents\Codex\2026-10-10\c-users-hp-desktop-aeromatrix-main\work\task2-portability\AeroMatrix_Task2_Model\tests\test_task2.py:27: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    payload=examples()[0]['input'];future=(pd.Timestamp(payload['cutoff'])+pd.Timedelta(hours=1)).isoformat()
+
+tests/test_task2.py: 13 warnings
+  C:\Users\HP\Documents\Codex\2026-10-10\c-users-hp-desktop-aeromatrix-main\work\task2-portability\AeroMatrix_Task2_Model\src\features.py:47: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    weather_time=times.floor('h')-pd.Timedelta(days=CONFIG['weather_delay_days'])
+
+tests/test_task2.py: 13 warnings
+  C:\Users\HP\Documents\Codex\2026-10-10\c-users-hp-desktop-aeromatrix-main\work\task2-portability\AeroMatrix_Task2_Model\src\features.py:53: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    f['actual']=wide[id].shift(-CONFIG['horizon_hours']).to_numpy();f['persistence']=past[:,j] if id!=excluded else np.nan;f['persistence_age']=pastage[:,j] if id!=excluded else np.nan;f['station']=id;f['pollutant']=pollutant;f['cutoff']=times;f['target_time']=times+pd.Timedelta(hours=CONFIG['horizon_hours']);f['weather_reference_time']=weather_time;f['target_current_missing']=~np.isfinite(visible[:,j]);f['nominal_loss']=level;rows.append(f)
+
+tests/test_task2.py::test_weather_is_delayed_not_contemporaneous
+  C:\Users\HP\Documents\Codex\2026-10-10\c-users-hp-desktop-aeromatrix-main\work\task2-portability\AeroMatrix_Task2_Model\tests\test_task2.py:36: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    stations,frames,weather=load();f=build(stations,frames['pm25'].iloc[-100:],weather,'pm25');assert ((f.cutoff-f.weather_reference_time)>=pd.Timedelta(days=120)).all()
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+24 passed, 76 warnings in 6.63s

@@ -1,0 +1,77 @@
+{
+  "pollution_csv_resources_inspected": 22,
+  "concentration_csv_files": 12,
+  "legacy_aqi_csv_files": 10,
+  "raw_concentration_csv_rows_including_invalid_separators": 644361,
+  "invalid_timestamp_separator_rows": 11,
+  "actual_concentration_records": 644350,
+  "cleaned_hourly_station_time_rows": 162713,
+  "hourly_rows_with_any_valid_pollutant": 139887,
+  "monitoring_station_count": 12,
+  "station_location_forecast_count": 12,
+  "distinct_station_time_rows_used_for_training_any_pollutant": 77604,
+  "sum_of_pollutant_specific_training_rows": 669208,
+  "count_note": "The summed pollutant training count reuses station-time observations across pollutants; it is not a distinct observation count.",
+  "date_coverage": [
+    "2024-01-01 05:00:00+05:30",
+    "2026-01-01 05:00:00+05:30"
+  ],
+  "valid_records_per_pollutant": {
+    "pm25": 133193,
+    "pm10": 131366,
+    "no2": 128620,
+    "no": 127839,
+    "nox": 130218,
+    "so2": 52554,
+    "co": 132950,
+    "o3": 127381,
+    "nh3": 28704,
+    "benzene": 117924,
+    "toluene": 95851,
+    "xylene": 41355
+  },
+  "historical_aqi": {
+    "valid_unique_aqi_records": 153046,
+    "duplicates_removed": 0,
+    "conflicting_records_excluded": 0,
+    "stations": 10,
+    "start": "2017-10-17 01:00:00+05:30",
+    "end": "2023-12-31 23:00:00+05:30",
+    "limitations": [
+      "Source-reported AQI, not reconstructed concentrations. No pollutant subindices or dominant pollutant in source.",
+      "Naive historical Pune times interpreted in Asia/Kolkata. Historical AQI is not a concentration training label."
+    ]
+  },
+  "boundary_features_all_versions": 190,
+  "primary_boundary_features": 58,
+  "primary_boundary": "pune-electoral-wards_2022.geojson",
+  "industrial_features": 551,
+  "industrial_features_used_in_models": false,
+  "industrial_exclusion_reason": "Station coordinates absent; only one OSM tile available; 2026 geometry does not establish 2024-2025 factory presence. District 2021 emissions remain district aggregates.",
+  "station_coordinate_count": 0,
+  "unmonitored_region_estimation_available": false,
+  "training_data_sources": [
+    "https://data.opencity.in/dataset/pune-hourly-air-quality-reports"
+  ],
+  "boundary_source": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Pune",
+  "unsupported_pollutants": {
+    "spm": {
+      "status": "UNAVAILABLE",
+      "reason": "No sufficient independent unit-verified observations"
+    },
+    "pb": {
+      "status": "UNAVAILABLE",
+      "reason": "No sufficient independent unit-verified observations"
+    }
+  },
+  "limitations": [
+    "No live data feed bundled. Current forecasts need caller-supplied recent observations.",
+    "Forecasts are at monitored station locations, not whole wards.",
+    "SO2 is a weak persistence baseline with negative test R2; NH3 and benzene explain little test variance.",
+    "No calibrated causal intervention effects or validated street-level predictions."
+  ],
+  "raw_legacy_aqi_table_csv_records": 12292,
+  "raw_csv_records_all_22_files": 656653,
+  "raw_count_note": "Legacy AQI CSV table records contain multiple hourly AQI cells; raw CSV rows and unfolded observations are different measures.",
+  "distinct_monitoring_locations_across_concentration_and_historical_aqi": 13
+}

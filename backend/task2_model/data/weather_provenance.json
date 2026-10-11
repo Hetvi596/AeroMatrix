@@ -1,0 +1,386 @@
+{
+  "source": "ERA5 via Open-Meteo Historical Weather API",
+  "primary_dataset": "https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels",
+  "documentation": "https://open-meteo.com/en/docs/historical-weather-api",
+  "attribution": "Generated using Copernicus Climate Change Service information; ECMWF ERA5 DOI 10.24381/cds.adbb2d47; Open-Meteo.com; CC BY 4.0",
+  "direct_CDS": "No CDS credentials supplied; used public ERA5 redistributor instead",
+  "retrieved_utc": "2026-10-10T23:14:01.342417+00:00",
+  "requests": [
+    {
+      "request": {
+        "latitude": 18.5,
+        "longitude": 73.75,
+        "start_date": "2020-11-13",
+        "end_date": "2020-12-31",
+        "hourly": "temperature_2m,relative_humidity_2m,dew_point_2m,wind_speed_10m,wind_direction_10m,precipitation,surface_pressure",
+        "models": "era5",
+        "timezone": "UTC",
+        "wind_speed_unit": "ms",
+        "cell_selection": "nearest",
+        "elevation": "nan"
+      },
+      "endpoint": "https://archive-api.open-meteo.com/v1/archive",
+      "cache_file": "18.5_73.75_2020.json.gz",
+      "status": "DOWNLOADED_OR_CACHED",
+      "sha256": "e1942c14c7a3448e330b397da0cbddcd2def5e977e02554a348a43368f4bca81",
+      "rows": 1176,
+      "returned_latitude": 18.5,
+      "returned_longitude": 73.75,
+      "units": {
+        "time": "iso8601",
+        "temperature_2m": "\u00b0C",
+        "relative_humidity_2m": "%",
+        "dew_point_2m": "\u00b0C",
+        "wind_speed_10m": "m/s",
+        "wind_direction_10m": "\u00b0",
+        "precipitation": "mm",
+        "surface_pressure": "hPa"
+      }
+    },
+    {
+      "request": {
+        "latitude": 18.5,
+        "longitude": 73.75,
+        "start_date": "2021-01-01",
+        "end_date": "2021-12-31",
+        "hourly": "temperature_2m,relative_humidity_2m,dew_point_2m,wind_speed_10m,wind_direction_10m,precipitation,surface_pressure",
+        "models": "era5",
+        "timezone": "UTC",
+        "wind_speed_unit": "ms",
+        "cell_selection": "nearest",
+        "elevation": "nan"
+      },
+      "endpoint": "https://archive-api.open-meteo.com/v1/archive",
+      "cache_file": "18.5_73.75_2021.json.gz",
+      "status": "DOWNLOADED_OR_CACHED",
+      "sha256": "7e4fedd37fad8561649209d1ddcfceef2266445be4ece0e75114cb34bb8a1e2c",
+      "rows": 8760,
+      "returned_latitude": 18.5,
+      "returned_longitude": 73.75,
+      "units": {
+        "time": "iso8601",
+        "temperature_2m": "\u00b0C",
+        "relative_humidity_2m": "%",
+        "dew_point_2m": "\u00b0C",
+        "wind_speed_10m": "m/s",
+        "wind_direction_10m": "\u00b0",
+        "precipitation": "mm",
+        "surface_pressure": "hPa"
+      }
+    },
+    {
+      "request": {
+        "latitude": 18.5,
+        "longitude": 73.75,
+        "start_date": "2022-01-01",
+        "end_date": "2022-12-31",
+        "hourly": "temperature_2m,relative_humidity_2m,dew_point_2m,wind_speed_10m,wind_direction_10m,precipitation,surface_pressure",
+        "models": "era5",
+        "timezone": "UTC",
+        "wind_speed_unit": "ms",
+        "cell_selection": "nearest",
+        "elevation": "nan"
+      },
+      "endpoint": "https://archive-api.open-meteo.com/v1/archive",
+      "cache_file": "18.5_73.75_2022.json.gz",
+      "status": "DOWNLOADED_OR_CACHED",
+      "sha256": "634a405c83df5a392fbb4bebb1135c7651e944a78be1202910297ae0d45cc367",
+      "rows": 8760,
+      "returned_latitude": 18.5,
+      "returned_longitude": 73.75,
+      "units": {
+        "time": "iso8601",
+        "temperature_2m": "\u00b0C",
+        "relative_humidity_2m": "%",
+        "dew_point_2m": "\u00b0C",
+        "wind_speed_10m": "m/s",
+        "wind_direction_10m": "\u00b0",
+        "precipitation": "mm",
+        "surface_pressure": "hPa"
+      }
+    },
+    {
+      "request": {
+        "latitude": 18.5,
+        "longitude": 73.75,
+        "start_date": "2023-01-01",
+        "end_date": "2023-12-31",
+        "hourly": "temperature_2m,relative_humidity_2m,dew_point_2m,wind_speed_10m,wind_direction_10m,precipitation,surface_pressure",
+        "models": "era5",
+        "timezone": "UTC",
+        "wind_speed_unit": "ms",
+        "cell_selection": "nearest",
+        "elevation": "nan"
+      },
+      "endpoint": "https://archive-api.open-meteo.com/v1/archive",
+      "cache_file": "18.5_73.75_2023.json.gz",
+      "status": "DOWNLOADED_OR_CACHED",
+      "sha256": "12ec58f45b1e9a711c341a89a18481323e30bb1bbee794fa6de06846c223a9e8",
+      "rows": 8760,
+      "returned_latitude": 18.5,
+      "returned_longitude": 73.75,
+      "units": {
+        "time": "iso8601",
+        "temperature_2m": "\u00b0C",
+        "relative_humidity_2m": "%",
+        "dew_point_2m": "\u00b0C",
+        "wind_speed_10m": "m/s",
+        "wind_direction_10m": "\u00b0",
+        "precipitation": "mm",
+        "surface_pressure": "hPa"
+      }
+    },
+    {
+      "request": {
+        "latitude": 18.5,
+        "longitude": 73.75,
+        "start_date": "2024-01-01",
+        "end_date": "2024-12-31",
+        "hourly": "temperature_2m,relative_humidity_2m,dew_point_2m,wind_speed_10m,wind_direction_10m,precipitation,surface_pressure",
+        "models": "era5",
+        "timezone": "UTC",
+        "wind_speed_unit": "ms",
+        "cell_selection": "nearest",
+        "elevation": "nan"
+      },
+      "endpoint": "https://archive-api.open-meteo.com/v1/archive",
+      "cache_file": "18.5_73.75_2024.json.gz",
+      "status": "DOWNLOADED_OR_CACHED",
+      "sha256": "c4a58638168aa3fced0cf9d42984b8d3898cbb657e0e0618ebe7671487db651b",
+      "rows": 8784,
+      "returned_latitude": 18.5,
+      "returned_longitude": 73.75,
+      "units": {
+        "time": "iso8601",
+        "temperature_2m": "\u00b0C",
+        "relative_humidity_2m": "%",
+        "dew_point_2m": "\u00b0C",
+        "wind_speed_10m": "m/s",
+        "wind_direction_10m": "\u00b0",
+        "precipitation": "mm",
+        "surface_pressure": "hPa"
+      }
+    },
+    {
+      "request": {
+        "latitude": 18.5,
+        "longitude": 73.75,
+        "start_date": "2025-01-01",
+        "end_date": "2025-09-01",
+        "hourly": "temperature_2m,relative_humidity_2m,dew_point_2m,wind_speed_10m,wind_direction_10m,precipitation,surface_pressure",
+        "models": "era5",
+        "timezone": "UTC",
+        "wind_speed_unit": "ms",
+        "cell_selection": "nearest",
+        "elevation": "nan"
+      },
+      "endpoint": "https://archive-api.open-meteo.com/v1/archive",
+      "cache_file": "18.5_73.75_2025.json.gz",
+      "status": "DOWNLOADED_OR_CACHED",
+      "sha256": "a929bec977c23c54f42ff876517675f1c81750eb1340e2d288f3221f2d93dd65",
+      "rows": 5856,
+      "returned_latitude": 18.5,
+      "returned_longitude": 73.75,
+      "units": {
+        "time": "iso8601",
+        "temperature_2m": "\u00b0C",
+        "relative_humidity_2m": "%",
+        "dew_point_2m": "\u00b0C",
+        "wind_speed_10m": "m/s",
+        "wind_direction_10m": "\u00b0",
+        "precipitation": "mm",
+        "surface_pressure": "hPa"
+      }
+    },
+    {
+      "request": {
+        "latitude": 18.5,
+        "longitude": 74.0,
+        "start_date": "2020-11-13",
+        "end_date": "2020-12-31",
+        "hourly": "temperature_2m,relative_humidity_2m,dew_point_2m,wind_speed_10m,wind_direction_10m,precipitation,surface_pressure",
+        "models": "era5",
+        "timezone": "UTC",
+        "wind_speed_unit": "ms",
+        "cell_selection": "nearest",
+        "elevation": "nan"
+      },
+      "endpoint": "https://archive-api.open-meteo.com/v1/archive",
+      "cache_file": "18.5_74.0_2020.json.gz",
+      "status": "DOWNLOADED_OR_CACHED",
+      "sha256": "ba225703d2bbe08f65ee319356f413f6763bfe063365e74d641038068fd7d633",
+      "rows": 1176,
+      "returned_latitude": 18.5,
+      "returned_longitude": 74.0,
+      "units": {
+        "time": "iso8601",
+        "temperature_2m": "\u00b0C",
+        "relative_humidity_2m": "%",
+        "dew_point_2m": "\u00b0C",
+        "wind_speed_10m": "m/s",
+        "wind_direction_10m": "\u00b0",
+        "precipitation": "mm",
+        "surface_pressure": "hPa"
+      }
+    },
+    {
+      "request": {
+        "latitude": 18.5,
+        "longitude": 74.0,
+        "start_date": "2021-01-01",
+        "end_date": "2021-12-31",
+        "hourly": "temperature_2m,relative_humidity_2m,dew_point_2m,wind_speed_10m,wind_direction_10m,precipitation,surface_pressure",
+        "models": "era5",
+        "timezone": "UTC",
+        "wind_speed_unit": "ms",
+        "cell_selection": "nearest",
+        "elevation": "nan"
+      },
+      "endpoint": "https://archive-api.open-meteo.com/v1/archive",
+      "cache_file": "18.5_74.0_2021.json.gz",
+      "status": "DOWNLOADED_OR_CACHED",
+      "sha256": "b8e0c6b74820b3640e1da9c098bc931add6467a88851ae0eb6eaefe67d9c3f81",
+      "rows": 8760,
+      "returned_latitude": 18.5,
+      "returned_longitude": 74.0,
+      "units": {
+        "time": "iso8601",
+        "temperature_2m": "\u00b0C",
+        "relative_humidity_2m": "%",
+        "dew_point_2m": "\u00b0C",
+        "wind_speed_10m": "m/s",
+        "wind_direction_10m": "\u00b0",
+        "precipitation": "mm",
+        "surface_pressure": "hPa"
+      }
+    },
+    {
+      "request": {
+        "latitude": 18.5,
+        "longitude": 74.0,
+        "start_date": "2022-01-01",
+        "end_date": "2022-12-31",
+        "hourly": "temperature_2m,relative_humidity_2m,dew_point_2m,wind_speed_10m,wind_direction_10m,precipitation,surface_pressure",
+        "models": "era5",
+        "timezone": "UTC",
+        "wind_speed_unit": "ms",
+        "cell_selection": "nearest",
+        "elevation": "nan"
+      },
+      "endpoint": "https://archive-api.open-meteo.com/v1/archive",
+      "cache_file": "18.5_74.0_2022.json.gz",
+      "status": "DOWNLOADED_OR_CACHED",
+      "sha256": "ee16eb63e54e385af257ca4262f7594c28b786d7560f4ab2571698edff1ee80f",
+      "rows": 8760,
+      "returned_latitude": 18.5,
+      "returned_longitude": 74.0,
+      "units": {
+        "time": "iso8601",
+        "temperature_2m": "\u00b0C",
+        "relative_humidity_2m": "%",
+        "dew_point_2m": "\u00b0C",
+        "wind_speed_10m": "m/s",
+        "wind_direction_10m": "\u00b0",
+        "precipitation": "mm",
+        "surface_pressure": "hPa"
+      }
+    },
+    {
+      "request": {
+        "latitude": 18.5,
+        "longitude": 74.0,
+        "start_date": "2023-01-01",
+        "end_date": "2023-12-31",
+        "hourly": "temperature_2m,relative_humidity_2m,dew_point_2m,wind_speed_10m,wind_direction_10m,precipitation,surface_pressure",
+        "models": "era5",
+        "timezone": "UTC",
+        "wind_speed_unit": "ms",
+        "cell_selection": "nearest",
+        "elevation": "nan"
+      },
+      "endpoint": "https://archive-api.open-meteo.com/v1/archive",
+      "cache_file": "18.5_74.0_2023.json.gz",
+      "status": "DOWNLOADED_OR_CACHED",
+      "sha256": "dcfa2ee409687844c3084eb0dd7b06581b3eaffe0a68bb3c71e7706469c91dad",
+      "rows": 8760,
+      "returned_latitude": 18.5,
+      "returned_longitude": 74.0,
+      "units": {
+        "time": "iso8601",
+        "temperature_2m": "\u00b0C",
+        "relative_humidity_2m": "%",
+        "dew_point_2m": "\u00b0C",
+        "wind_speed_10m": "m/s",
+        "wind_direction_10m": "\u00b0",
+        "precipitation": "mm",
+        "surface_pressure": "hPa"
+      }
+    },
+    {
+      "request": {
+        "latitude": 18.5,
+        "longitude": 74.0,
+        "start_date": "2024-01-01",
+        "end_date": "2024-12-31",
+        "hourly": "temperature_2m,relative_humidity_2m,dew_point_2m,wind_speed_10m,wind_direction_10m,precipitation,surface_pressure",
+        "models": "era5",
+        "timezone": "UTC",
+        "wind_speed_unit": "ms",
+        "cell_selection": "nearest",
+        "elevation": "nan"
+      },
+      "endpoint": "https://archive-api.open-meteo.com/v1/archive",
+      "cache_file": "18.5_74.0_2024.json.gz",
+      "status": "DOWNLOADED_OR_CACHED",
+      "sha256": "568f80e50c4b21b7df8e3ec89d2a7586e745c7e0917ad38980b35ae4712c5985",
+      "rows": 8784,
+      "returned_latitude": 18.5,
+      "returned_longitude": 74.0,
+      "units": {
+        "time": "iso8601",
+        "temperature_2m": "\u00b0C",
+        "relative_humidity_2m": "%",
+        "dew_point_2m": "\u00b0C",
+        "wind_speed_10m": "m/s",
+        "wind_direction_10m": "\u00b0",
+        "precipitation": "mm",
+        "surface_pressure": "hPa"
+      }
+    },
+    {
+      "request": {
+        "latitude": 18.5,
+        "longitude": 74.0,
+        "start_date": "2025-01-01",
+        "end_date": "2025-09-01",
+        "hourly": "temperature_2m,relative_humidity_2m,dew_point_2m,wind_speed_10m,wind_direction_10m,precipitation,surface_pressure",
+        "models": "era5",
+        "timezone": "UTC",
+        "wind_speed_unit": "ms",
+        "cell_selection": "nearest",
+        "elevation": "nan"
+      },
+      "endpoint": "https://archive-api.open-meteo.com/v1/archive",
+      "cache_file": "18.5_74.0_2025.json.gz",
+      "status": "DOWNLOADED_OR_CACHED",
+      "sha256": "880fbd00d1b40ddeecab18377ef94f5a114d4fdacb20c2e0469ced3e45456ff7",
+      "rows": 5856,
+      "returned_latitude": 18.5,
+      "returned_longitude": 74.0,
+      "units": {
+        "time": "iso8601",
+        "temperature_2m": "\u00b0C",
+        "relative_humidity_2m": "%",
+        "dew_point_2m": "\u00b0C",
+        "wind_speed_10m": "m/s",
+        "wind_direction_10m": "\u00b0",
+        "precipitation": "mm",
+        "surface_pressure": "hPa"
+      }
+    }
+  ],
+  "rows": 84192,
+  "grids": 2,
+  "availability_policy": "For model features, final ERA5 weather is delayed 120 days, beyond documented finalization of 2\u20133 months. As-of vintage files unavailable: retrospective archive revision caveat remains. Contemporary weather is archived but never used as a forecasting input.",
+  "spatial_policy": "Stations mapped to nearest 0.25-degree requested grid; returned grid coordinates stored. Nearby stations sharing a grid do not supply independent weather measurements."
+}

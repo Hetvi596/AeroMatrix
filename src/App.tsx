@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ChevronsLeft } from 'lucide-react';
 import { Header } from './components/Header';
 import { OrbitNav, SECTION_LABEL } from './components/OrbitNav';
@@ -6,13 +6,19 @@ import { LeftPanel } from './components/LeftPanel';
 import { RightPanel } from './components/RightPanel';
 import { BottomPanel } from './components/BottomPanel';
 import { IntroOverlay } from './components/IntroOverlay';
+import { PlanItPanel } from './plan/PlanItPanel';
 import { CesiumMap } from './map/CesiumMap';
 import { useTwin } from './store/useTwinStore';
 import { refreshForecastLayer } from './analytics/forecastLayer';
 import { applyDeepLink } from './deepLink';
+import { startLiveScenario } from './scenarios/liveScenario';
+import { startLiveDataWhenReady } from './services/liveData';
+import { AeroSageHost } from './aerosage/AeroSageHost';
 
 export function App() {
   const init = useTwin((s) => s.init);
+  const connectModelService = useTwin((s) => s.connectModelService);
+  const loadIndustry = useTwin((s) => s.loadIndustry);
   const loading = useTwin((s) => s.loading);
   const error = useTwin((s) => s.error);
   const section = useTwin((s) => s.section);
@@ -20,19 +26,44 @@ export function App() {
   const setLeftOpen = useTwin((s) => s.setLeftOpen);
   const bottomOpen = useTwin((s) => s.bottomOpen);
   const inspectorOpen = useTwin(
-    (s) => s.rightOpen && (!!s.selectedCellId || !!s.selectedIndustryId || !!s.selectedCandidateId || !!s.activeResult),
+    (s) =>
+      s.rightOpen &&
+      (!!s.selectedCellId ||
+        !!s.selectedIndustryId ||
+        !!s.selectedCandidateId ||
+        !!s.selectedStationId ||
+        s.selectedIndustrialArea !== null ||
+        !!s.selectedIndustrySite ||
+        !!s.activeResult),
   );
   const ready = !loading && !error;
+  const planItOpen = useTwin((s) => s.planItOpen);
+  // The single AeroSage assistant; open state drives the docked-panel layout.
+  const [assistantOpen, setAssistantOpen] = useState(false);
   const drawerOpen = inspectorOpen && ready;
 
   useEffect(() => {
-    init(10).then(() => {
+    // What-If parameters re-run the scenario automatically (debounced).
+    const stopLive = startLiveScenario();
+    // Station observations and forecasts from the trained model service (backend/trained_model).
+    const connected = connectModelService();
+    // Industrial geography (MIDC estates, OSM sites, emission factors) — small static file.
+    loadIndustry();
+    init(10).then(async () => {
+      await connected;
       // Links from the landing page (e.g. "Model in AeroMatrix →") land on the right screen.
       applyDeepLink();
-      // If the backend is running with a trained model, pick up its forecast layer quietly.
+      // Legacy grid forecast layer (backend/api); stays empty unless that service provides station coordinates.
       refreshForecastLayer().catch(() => undefined);
     });
-  }, [init]);
+    // Open-Meteo air-quality model data and weather, refreshed on a timer (shared by every screen).
+    // Starts once the city grid exists (a store subscription, so background-tab timer throttling can't delay it).
+    const stopData = startLiveDataWhenReady();
+    return () => {
+      stopLive();
+      stopData();
+    };
+  }, [init, connectModelService, loadIndustry]);
 
   return (
     <div className="flex h-full flex-col bg-ink-950">
@@ -44,6 +75,8 @@ export function App() {
           data-left={leftOpen ? '1' : '0'}
           data-right={drawerOpen ? '1' : '0'}
           data-sheet={drawerOpen ? '2' : leftOpen ? '1' : '0'}
+          data-plan={planItOpen && ready ? '1' : '0'}
+          data-assistant={assistantOpen ? '1' : '0'}
         >
           <CesiumMap />
 
@@ -82,7 +115,11 @@ export function App() {
             </aside>
           )}
 
+          {planItOpen && ready && <PlanItPanel />}
+
           <OrbitNav />
+
+          <AeroSageHost open={assistantOpen} onOpenChange={setAssistantOpen} />
         </div>
 
         {ready && (

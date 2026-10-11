@@ -1,0 +1,84 @@
+{
+  "capabilities": {
+    "identity": "AeroSage — Your AI Environmental Copilot",
+    "llm": {
+      "configured": false,
+      "available": false,
+      "provider": "gemini",
+      "model": "gemini-3.5-flash-lite"
+    },
+    "ml_backend": {
+      "status": "UNAVAILABLE",
+      "reason": "ML backend is unreachable or returned invalid JSON"
+    },
+    "knowledge": {
+      "available": true,
+      "chunks": 24,
+      "method": "SQLite FTS5 BM25",
+      "integrity": "Only manifest-hash-matching documents are indexed"
+    },
+    "languages": [
+      "en",
+      "hi",
+      "hinglish"
+    ],
+    "language_note": "Generative language support depends on configured model; deterministic API cards preserve English technical labels and source reasons.",
+    "streaming": "SSE progress and buffered answer chunks; not provider token streaming",
+    "memory": "SQLite, token-isolated sessions, bounded history and expiring retention",
+    "simulation": "Optional read-only scenario adapter; current frontend simulator is not automatically connected",
+    "web_browsing": false,
+    "suggested_questions": [
+      "What is AeroMatrix?",
+      "Which Pune locations have monitoring stations?",
+      "Show historical PM2.5 in Hadapsar.",
+      "How reliable are the models?",
+      "Explain machine learning."
+    ],
+    "welcome": "Hi, I’m AeroSage. Ask about AeroMatrix, pollution, or a general question."
+  },
+  "results": [
+    {
+      "question": "What is AeroMatrix?",
+      "status": "PASS",
+      "answer": "Verified source excerpts (language-model synthesis unavailable):\n\n[KB1] # AeroMatrix purpose and verified implementation\r\n\r\nAeroMatrix is a Pune-focused air-pollution intelligence and environmental digital-twin prototype. Its inspected code includes a React interface, Cesium 3D map, observed-data CSV import, environmental layers, and a rule-based what-if simulator. A separately exported Python backend serves trained station-level pollutant forecasts and actual historical observations. AeroAI is a separately integrated chatbot; it does not replace the existing frontend.\r\n\r\n\n[KB2] ## Implementation versus future claims\r\nThe Cesium map supports layers, terrain, buildings, observations, and prototype scenario comparison. Imported station coordinates are required to place readings and forecasts correctly. The inspected exported models have no verified station coordinates. Validated street-level forecasts, arbitrary unseen-location pollution estimates, a live measurement connector, and validated causal intervention effects are not provided. Older frontend text about 72-hour forecasts and 10-meter micro-grids describes aspirations, not verified capabilities. The exported inference API and its model metadata supersede older README statements that training is still pending.\r\n",
+      "intent": "project",
+      "data_status": "retrieved",
+      "seconds": 0.034
+    },
+    {
+      "question": "Which Pune locations have actual monitoring stations?",
+      "status": "UNAVAILABLE",
+      "answer": "ML backend is unreachable or returned invalid JSON",
+      "intent": "coverage",
+      "data_status": "unavailable",
+      "seconds": 2.296
+    },
+    {
+      "question": "Predict historical PM2.5 in Hadapsar.",
+      "status": "UNAVAILABLE",
+      "answer": "Hadapsar — PM25: Unavailable. ML backend is unreachable or returned invalid JSON.",
+      "intent": "forecast",
+      "data_status": "unavailable",
+      "seconds": 2.906
+    },
+    {
+      "question": "What is the current AQI in Hadapsar?",
+      "status": "UNAVAILABLE",
+      "answer": "Hadapsar — AQI: Unavailable. ML backend is unreachable or returned invalid JSON.",
+      "intent": "observation",
+      "data_status": "unavailable",
+      "seconds": 2.881
+    },
+    {
+      "test": "multi_turn_followup",
+      "status": "PASS"
+    },
+    {
+      "test": "live_general_English_Hindi_Hinglish",
+      "status": "NOT_RUN",
+      "reason": "Configured language model unavailable or key missing; no offline intelligence claimed"
+    }
+  ],
+  "original_project_needed": false,
+  "test_time": "2026-10-10T17:29:21Z"
+}

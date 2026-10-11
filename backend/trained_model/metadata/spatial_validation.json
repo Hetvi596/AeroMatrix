@@ -1,0 +1,74 @@
+{
+  "pm25": {
+    "pollutant": "pm25",
+    "status": "UNAVAILABLE",
+    "reason": "Needs at least four stations with verified coordinates and interior held-out coverage",
+    "max_distance_km": 10
+  },
+  "pm10": {
+    "pollutant": "pm10",
+    "status": "UNAVAILABLE",
+    "reason": "Needs at least four stations with verified coordinates and interior held-out coverage",
+    "max_distance_km": 10
+  },
+  "no2": {
+    "pollutant": "no2",
+    "status": "UNAVAILABLE",
+    "reason": "Needs at least four stations with verified coordinates and interior held-out coverage",
+    "max_distance_km": 10
+  },
+  "no": {
+    "pollutant": "no",
+    "status": "UNAVAILABLE",
+    "reason": "Needs at least four stations with verified coordinates and interior held-out coverage",
+    "max_distance_km": 10
+  },
+  "nox": {
+    "pollutant": "nox",
+    "status": "UNAVAILABLE",
+    "reason": "Needs at least four stations with verified coordinates and interior held-out coverage",
+    "max_distance_km": 10
+  },
+  "so2": {
+    "pollutant": "so2",
+    "status": "UNAVAILABLE",
+    "reason": "Needs at least four stations with verified coordinates and interior held-out coverage",
+    "max_distance_km": 10
+  },
+  "co": {
+    "pollutant": "co",
+    "status": "UNAVAILABLE",
+    "reason": "Needs at least four stations with verified coordinates and interior held-out coverage",
+    "max_distance_km": 10
+  },
+  "o3": {
+    "pollutant": "o3",
+    "status": "UNAVAILABLE",
+    "reason": "Needs at least four stations with verified coordinates and interior held-out coverage",
+    "max_distance_km": 10
+  },
+  "nh3": {
+    "pollutant": "nh3",
+    "status": "UNAVAILABLE",
+    "reason": "Needs at least four stations with verified coordinates and interior held-out coverage",
+    "max_distance_km": 10
+  },
+  "benzene": {
+    "pollutant": "benzene",
+    "status": "UNAVAILABLE",
+    "reason": "Needs at least four stations with verified coordinates and interior held-out coverage",
+    "max_distance_km": 10
+  },
+  "toluene": {
+    "pollutant": "toluene",
+    "status": "UNAVAILABLE",
+    "reason": "Needs at least four stations with verified coordinates and interior held-out coverage",
+    "max_distance_km": 10
+  },
+  "xylene": {
+    "pollutant": "xylene",
+    "status": "UNAVAILABLE",
+    "reason": "Needs at least four stations with verified coordinates and interior held-out coverage",
+    "max_distance_km": 10
+  }
+}

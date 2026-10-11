@@ -1,0 +1,902 @@
+[
+  {
+    "pollutant": "pm25",
+    "kind": "random",
+    "nominal_fraction": 0,
+    "seed": 17,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 0,
+    "realized_fraction": 0.0,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "random",
+    "nominal_fraction": 0,
+    "seed": 29,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 0,
+    "realized_fraction": 0.0,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "random",
+    "nominal_fraction": 0,
+    "seed": 43,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 0,
+    "realized_fraction": 0.0,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "random",
+    "nominal_fraction": 0.1,
+    "seed": 17,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 1185,
+    "realized_fraction": 0.10135135135135136,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "random",
+    "nominal_fraction": 0.1,
+    "seed": 29,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 1185,
+    "realized_fraction": 0.10135135135135136,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "random",
+    "nominal_fraction": 0.1,
+    "seed": 43,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 1183,
+    "realized_fraction": 0.1011802942182689,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "random",
+    "nominal_fraction": 0.3,
+    "seed": 17,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 3468,
+    "realized_fraction": 0.2966130687649675,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "random",
+    "nominal_fraction": 0.3,
+    "seed": 29,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 3543,
+    "realized_fraction": 0.3030277112555594,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "random",
+    "nominal_fraction": 0.3,
+    "seed": 43,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 3583,
+    "realized_fraction": 0.30644885391720833,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "random",
+    "nominal_fraction": 0.5,
+    "seed": 17,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 5732,
+    "realized_fraction": 0.4902497434143004,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "random",
+    "nominal_fraction": 0.5,
+    "seed": 29,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 5949,
+    "realized_fraction": 0.5088094423537461,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "random",
+    "nominal_fraction": 0.5,
+    "seed": 43,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 5840,
+    "realized_fraction": 0.49948682860075266,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "random",
+    "nominal_fraction": 0.7,
+    "seed": 17,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 8126,
+    "realized_fraction": 0.6950051317139925,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "random",
+    "nominal_fraction": 0.7,
+    "seed": 29,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 8280,
+    "realized_fraction": 0.708176530961341,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "random",
+    "nominal_fraction": 0.7,
+    "seed": 43,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 8128,
+    "realized_fraction": 0.6951761888470749,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "block12h",
+    "nominal_fraction": 0,
+    "seed": 17,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 0,
+    "realized_fraction": 0.0,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "block12h",
+    "nominal_fraction": 0,
+    "seed": 29,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 0,
+    "realized_fraction": 0.0,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "block12h",
+    "nominal_fraction": 0,
+    "seed": 43,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 0,
+    "realized_fraction": 0.0,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "block12h",
+    "nominal_fraction": 0.1,
+    "seed": 17,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 1159,
+    "realized_fraction": 0.0991276086212795,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "block12h",
+    "nominal_fraction": 0.1,
+    "seed": 29,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 1190,
+    "realized_fraction": 0.10177899418405748,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "block12h",
+    "nominal_fraction": 0.1,
+    "seed": 43,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 1372,
+    "realized_fraction": 0.11734519329456038,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "block12h",
+    "nominal_fraction": 0.3,
+    "seed": 17,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 3557,
+    "realized_fraction": 0.3042251111871365,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "block12h",
+    "nominal_fraction": 0.3,
+    "seed": 29,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 3437,
+    "realized_fraction": 0.2939616832021895,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "block12h",
+    "nominal_fraction": 0.3,
+    "seed": 43,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 3767,
+    "realized_fraction": 0.3221861101607937,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "block12h",
+    "nominal_fraction": 0.5,
+    "seed": 17,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 6064,
+    "realized_fraction": 0.518645227505987,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "block12h",
+    "nominal_fraction": 0.5,
+    "seed": 29,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 5931,
+    "realized_fraction": 0.5072699281560041,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "block12h",
+    "nominal_fraction": 0.5,
+    "seed": 43,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 5996,
+    "realized_fraction": 0.5128292849811837,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "block12h",
+    "nominal_fraction": 0.7,
+    "seed": 17,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 8240,
+    "realized_fraction": 0.7047553882996921,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "block12h",
+    "nominal_fraction": 0.7,
+    "seed": 29,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 8259,
+    "realized_fraction": 0.7063804310639754,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "block12h",
+    "nominal_fraction": 0.7,
+    "seed": 43,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 8235,
+    "realized_fraction": 0.704327745466986,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "station",
+    "nominal_fraction": 0,
+    "seed": 17,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 0,
+    "realized_fraction": 0.0,
+    "whole_station_count": 0
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "station",
+    "nominal_fraction": 0,
+    "seed": 29,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 0,
+    "realized_fraction": 0.0,
+    "whole_station_count": 0
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "station",
+    "nominal_fraction": 0,
+    "seed": 43,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 0,
+    "realized_fraction": 0.0,
+    "whole_station_count": 0
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "station",
+    "nominal_fraction": 0.1,
+    "seed": 17,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 3388,
+    "realized_fraction": 0.2897707834416695,
+    "whole_station_count": 1
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "station",
+    "nominal_fraction": 0.1,
+    "seed": 29,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 1284,
+    "realized_fraction": 0.1098186794389326,
+    "whole_station_count": 1
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "station",
+    "nominal_fraction": 0.1,
+    "seed": 43,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 3157,
+    "realized_fraction": 0.2700136845706466,
+    "whole_station_count": 1
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "station",
+    "nominal_fraction": 0.3,
+    "seed": 17,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 4441,
+    "realized_fraction": 0.3798323640095792,
+    "whole_station_count": 2
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "station",
+    "nominal_fraction": 0.3,
+    "seed": 29,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 6459,
+    "realized_fraction": 0.5524290112897707,
+    "whole_station_count": 2
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "station",
+    "nominal_fraction": 0.3,
+    "seed": 43,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 6545,
+    "realized_fraction": 0.5597844680123161,
+    "whole_station_count": 2
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "station",
+    "nominal_fraction": 0.5,
+    "seed": 17,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 4441,
+    "realized_fraction": 0.3798323640095792,
+    "whole_station_count": 2
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "station",
+    "nominal_fraction": 0.5,
+    "seed": 29,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 6459,
+    "realized_fraction": 0.5524290112897707,
+    "whole_station_count": 2
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "station",
+    "nominal_fraction": 0.5,
+    "seed": 43,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 6545,
+    "realized_fraction": 0.5597844680123161,
+    "whole_station_count": 2
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "station",
+    "nominal_fraction": 0.7,
+    "seed": 17,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 8304,
+    "realized_fraction": 0.7102292165583305,
+    "whole_station_count": 4
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "station",
+    "nominal_fraction": 0.7,
+    "seed": 29,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 8304,
+    "realized_fraction": 0.7102292165583305,
+    "whole_station_count": 4
+  },
+  {
+    "pollutant": "pm25",
+    "kind": "station",
+    "nominal_fraction": 0.7,
+    "seed": 43,
+    "observed_test_inputs": 11692,
+    "masked_test_inputs": 10408,
+    "realized_fraction": 0.8901813205610674,
+    "whole_station_count": 4
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "random",
+    "nominal_fraction": 0,
+    "seed": 17,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 0,
+    "realized_fraction": 0.0,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "random",
+    "nominal_fraction": 0,
+    "seed": 29,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 0,
+    "realized_fraction": 0.0,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "random",
+    "nominal_fraction": 0,
+    "seed": 43,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 0,
+    "realized_fraction": 0.0,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "random",
+    "nominal_fraction": 0.1,
+    "seed": 17,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 1182,
+    "realized_fraction": 0.10059574468085106,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "random",
+    "nominal_fraction": 0.1,
+    "seed": 29,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 1189,
+    "realized_fraction": 0.10119148936170212,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "random",
+    "nominal_fraction": 0.1,
+    "seed": 43,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 1193,
+    "realized_fraction": 0.10153191489361701,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "random",
+    "nominal_fraction": 0.3,
+    "seed": 17,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 3480,
+    "realized_fraction": 0.29617021276595745,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "random",
+    "nominal_fraction": 0.3,
+    "seed": 29,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 3549,
+    "realized_fraction": 0.30204255319148937,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "random",
+    "nominal_fraction": 0.3,
+    "seed": 43,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 3598,
+    "realized_fraction": 0.3062127659574468,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "random",
+    "nominal_fraction": 0.5,
+    "seed": 17,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 5761,
+    "realized_fraction": 0.49029787234042554,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "random",
+    "nominal_fraction": 0.5,
+    "seed": 29,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 5963,
+    "realized_fraction": 0.5074893617021277,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "random",
+    "nominal_fraction": 0.5,
+    "seed": 43,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 5875,
+    "realized_fraction": 0.5,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "random",
+    "nominal_fraction": 0.7,
+    "seed": 17,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 8162,
+    "realized_fraction": 0.6946382978723404,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "random",
+    "nominal_fraction": 0.7,
+    "seed": 29,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 8299,
+    "realized_fraction": 0.7062978723404255,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "random",
+    "nominal_fraction": 0.7,
+    "seed": 43,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 8164,
+    "realized_fraction": 0.6948085106382978,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "block12h",
+    "nominal_fraction": 0,
+    "seed": 17,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 0,
+    "realized_fraction": 0.0,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "block12h",
+    "nominal_fraction": 0,
+    "seed": 29,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 0,
+    "realized_fraction": 0.0,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "block12h",
+    "nominal_fraction": 0,
+    "seed": 43,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 0,
+    "realized_fraction": 0.0,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "block12h",
+    "nominal_fraction": 0.1,
+    "seed": 17,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 1185,
+    "realized_fraction": 0.10085106382978723,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "block12h",
+    "nominal_fraction": 0.1,
+    "seed": 29,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 1202,
+    "realized_fraction": 0.10229787234042553,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "block12h",
+    "nominal_fraction": 0.1,
+    "seed": 43,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 1381,
+    "realized_fraction": 0.11753191489361701,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "block12h",
+    "nominal_fraction": 0.3,
+    "seed": 17,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 3576,
+    "realized_fraction": 0.30434042553191487,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "block12h",
+    "nominal_fraction": 0.3,
+    "seed": 29,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 3446,
+    "realized_fraction": 0.29327659574468085,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "block12h",
+    "nominal_fraction": 0.3,
+    "seed": 43,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 3801,
+    "realized_fraction": 0.32348936170212766,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "block12h",
+    "nominal_fraction": 0.5,
+    "seed": 17,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 6116,
+    "realized_fraction": 0.5205106382978724,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "block12h",
+    "nominal_fraction": 0.5,
+    "seed": 29,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 5910,
+    "realized_fraction": 0.5029787234042553,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "block12h",
+    "nominal_fraction": 0.5,
+    "seed": 43,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 6041,
+    "realized_fraction": 0.514127659574468,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "block12h",
+    "nominal_fraction": 0.7,
+    "seed": 17,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 8286,
+    "realized_fraction": 0.7051914893617022,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "block12h",
+    "nominal_fraction": 0.7,
+    "seed": 29,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 8261,
+    "realized_fraction": 0.703063829787234,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "block12h",
+    "nominal_fraction": 0.7,
+    "seed": 43,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 8271,
+    "realized_fraction": 0.7039148936170213,
+    "whole_station_count": null
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "station",
+    "nominal_fraction": 0,
+    "seed": 17,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 0,
+    "realized_fraction": 0.0,
+    "whole_station_count": 0
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "station",
+    "nominal_fraction": 0,
+    "seed": 29,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 0,
+    "realized_fraction": 0.0,
+    "whole_station_count": 0
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "station",
+    "nominal_fraction": 0,
+    "seed": 43,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 0,
+    "realized_fraction": 0.0,
+    "whole_station_count": 0
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "station",
+    "nominal_fraction": 0.1,
+    "seed": 17,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 3364,
+    "realized_fraction": 0.28629787234042553,
+    "whole_station_count": 1
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "station",
+    "nominal_fraction": 0.1,
+    "seed": 29,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 1315,
+    "realized_fraction": 0.11191489361702128,
+    "whole_station_count": 1
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "station",
+    "nominal_fraction": 0.1,
+    "seed": 43,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 3142,
+    "realized_fraction": 0.2674042553191489,
+    "whole_station_count": 1
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "station",
+    "nominal_fraction": 0.3,
+    "seed": 17,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 4457,
+    "realized_fraction": 0.3793191489361702,
+    "whole_station_count": 2
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "station",
+    "nominal_fraction": 0.3,
+    "seed": 29,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 6435,
+    "realized_fraction": 0.5476595744680851,
+    "whole_station_count": 2
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "station",
+    "nominal_fraction": 0.3,
+    "seed": 43,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 6506,
+    "realized_fraction": 0.5537021276595745,
+    "whole_station_count": 2
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "station",
+    "nominal_fraction": 0.5,
+    "seed": 17,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 4457,
+    "realized_fraction": 0.3793191489361702,
+    "whole_station_count": 2
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "station",
+    "nominal_fraction": 0.5,
+    "seed": 29,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 6435,
+    "realized_fraction": 0.5476595744680851,
+    "whole_station_count": 2
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "station",
+    "nominal_fraction": 0.5,
+    "seed": 43,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 6506,
+    "realized_fraction": 0.5537021276595745,
+    "whole_station_count": 2
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "station",
+    "nominal_fraction": 0.7,
+    "seed": 17,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 8386,
+    "realized_fraction": 0.7137021276595744,
+    "whole_station_count": 4
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "station",
+    "nominal_fraction": 0.7,
+    "seed": 29,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 8386,
+    "realized_fraction": 0.7137021276595744,
+    "whole_station_count": 4
+  },
+  {
+    "pollutant": "pm10",
+    "kind": "station",
+    "nominal_fraction": 0.7,
+    "seed": 43,
+    "observed_test_inputs": 11750,
+    "masked_test_inputs": 10435,
+    "realized_fraction": 0.8880851063829788,
+    "whole_station_count": 4
+  }
+]

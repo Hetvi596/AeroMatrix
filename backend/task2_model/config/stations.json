@@ -1,0 +1,103 @@
+{
+  "site_5404": {
+    "name": "Mhada Colony, Pune - IITM",
+    "city": "Pune",
+    "latitude": null,
+    "longitude": null,
+    "coordinate_status": "missing in supplied CSV"
+  },
+  "site_5406": {
+    "name": "Bhosari, Pune - IITM",
+    "city": "Pune",
+    "latitude": null,
+    "longitude": null,
+    "coordinate_status": "missing in supplied CSV"
+  },
+  "site_5408": {
+    "name": "Transport Nagar-Nigdi, Pune - IITM",
+    "city": "Pune",
+    "latitude": null,
+    "longitude": null,
+    "coordinate_status": "missing in supplied CSV"
+  },
+  "site_5409": {
+    "name": "Revenue Colony-Shivajinagar, Pune - IITM",
+    "city": "Pune",
+    "latitude": 18.52974978,
+    "longitude": 73.84968215,
+    "coordinate_status": "Exact station name matched to official Annexure R1-IV, printed page 342",
+    "coordinate_source": "https://www.greentribunal.gov.in/sites/default/files/news_updates/Affidavit%20in%20Reply%20by%20R-1%20in%20OA%20No.48-2025%20%28page%20nos.245-352%29.pdf",
+    "weather_grid": "18.5_73.75"
+  },
+  "site_5407": {
+    "name": "Hadapsar, Pune - IITM",
+    "city": "Pune",
+    "latitude": 18.501793,
+    "longitude": 73.927532,
+    "coordinate_status": "Exact station name matched to official Annexure R1-IV, printed page 342",
+    "coordinate_source": "https://www.greentribunal.gov.in/sites/default/files/news_updates/Affidavit%20in%20Reply%20by%20R-1%20in%20OA%20No.48-2025%20%28page%20nos.245-352%29.pdf",
+    "weather_grid": "18.5_74.0"
+  },
+  "site_5764": {
+    "name": "Park Street Wakad, Pimpri Chinchwad - MPCB",
+    "city": "Pimpri-Chinchwad",
+    "latitude": null,
+    "longitude": null,
+    "coordinate_status": "missing in supplied CSV"
+  },
+  "site_5765": {
+    "name": "Thergaon, Pimpri Chinchwad - MPCB",
+    "city": "Pimpri-Chinchwad",
+    "latitude": null,
+    "longitude": null,
+    "coordinate_status": "missing in supplied CSV"
+  },
+  "site_5766": {
+    "name": "Katraj Dairy, Pune - MPCB",
+    "city": "Pune",
+    "latitude": 18.45445,
+    "longitude": 73.854155,
+    "coordinate_status": "Exact station name matched to official Annexure R1-IV, printed page 342",
+    "coordinate_source": "https://www.greentribunal.gov.in/sites/default/files/news_updates/Affidavit%20in%20Reply%20by%20R-1%20in%20OA%20No.48-2025%20%28page%20nos.245-352%29.pdf",
+    "weather_grid": "18.5_73.75"
+  },
+  "site_5763": {
+    "name": "Gavalinagar, Pimpri Chinchwad - MPCB",
+    "city": "Pimpri-Chinchwad",
+    "latitude": null,
+    "longitude": null,
+    "coordinate_status": "missing in supplied CSV"
+  },
+  "site_5988": {
+    "name": "Bhumkar Nagar, Pune - IITM",
+    "city": "Pune",
+    "latitude": null,
+    "longitude": null,
+    "coordinate_status": "missing in supplied CSV"
+  },
+  "site_5996": {
+    "name": "Panchawati_Pashan, Pune - IITM",
+    "city": "Pune",
+    "latitude": 18.536457,
+    "longitude": 73.805454,
+    "coordinate_status": "Exact station name matched to official Annexure R1-IV, printed page 342",
+    "coordinate_source": "https://www.greentribunal.gov.in/sites/default/files/news_updates/Affidavit%20in%20Reply%20by%20R-1%20in%20OA%20No.48-2025%20%28page%20nos.245-352%29.pdf",
+    "weather_grid": "18.5_73.75"
+  },
+  "site_5998": {
+    "name": "Savta Mali Nagar, Pimpri-Chinchwad - IITM",
+    "city": "Pimpri-Chinchwad",
+    "latitude": null,
+    "longitude": null,
+    "coordinate_status": "missing in supplied CSV"
+  },
+  "site_6012": {
+    "name": "Dhankawadi, Pune - IITM",
+    "city": "Pune",
+    "latitude": 18.459883,
+    "longitude": 73.852193,
+    "coordinate_status": "Exact station name matched to official Annexure R1-IV, printed page 342",
+    "coordinate_source": "https://www.greentribunal.gov.in/sites/default/files/news_updates/Affidavit%20in%20Reply%20by%20R-1%20in%20OA%20No.48-2025%20%28page%20nos.245-352%29.pdf",
+    "weather_grid": "18.5_73.75"
+  }
+}

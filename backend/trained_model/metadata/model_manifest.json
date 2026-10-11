@@ -1,0 +1,237 @@
+{
+  "format_version": 1,
+  "horizon_hours": 24,
+  "models": {
+    "pm25": {
+      "artifact": "models/pm25/model.joblib",
+      "metadata": "models/pm25/metadata.json",
+      "sha256": "b27f5aa0161bc5ada8cc0cbad31f91580dec20567d56aabcf02beda5c46b89da",
+      "algorithm": "random_forest",
+      "version": "20261010T052431265830Z",
+      "validation_status": "EVALUATED",
+      "record_counts": {
+        "source_hourly_rows": 162713,
+        "valid_target_rows": 133193,
+        "eligible_forecast_pairs": 116208,
+        "train": 70133,
+        "validation": 24423,
+        "test": 21291,
+        "purged": 361
+      }
+    },
+    "pm10": {
+      "artifact": "models/pm10/model.joblib",
+      "metadata": "models/pm10/metadata.json",
+      "sha256": "b098f2a8018a724ecfbf8d1ea3aaef80dbfdc110222b67645837e587950d8297",
+      "algorithm": "random_forest",
+      "version": "20261010T052500785198Z",
+      "validation_status": "EVALUATED",
+      "record_counts": {
+        "source_hourly_rows": 162713,
+        "valid_target_rows": 131366,
+        "eligible_forecast_pairs": 113899,
+        "train": 69586,
+        "validation": 22894,
+        "test": 21055,
+        "purged": 364
+      }
+    },
+    "no2": {
+      "artifact": "models/no2/model.joblib",
+      "metadata": "models/no2/metadata.json",
+      "sha256": "2ac6bd66201cbb4e12e361120fc187783f459c525812246c839fb8de3868ed77",
+      "algorithm": "random_forest",
+      "version": "20261010T052535286757Z",
+      "validation_status": "EVALUATED",
+      "record_counts": {
+        "source_hourly_rows": 162713,
+        "valid_target_rows": 128620,
+        "eligible_forecast_pairs": 112113,
+        "train": 68357,
+        "validation": 22423,
+        "test": 20989,
+        "purged": 344
+      }
+    },
+    "no": {
+      "artifact": "models/no/model.joblib",
+      "metadata": "models/no/metadata.json",
+      "sha256": "7397898cc32e58c64616b0816fa09d8b2dc4bf7d90ecf8bfc61f5afe490d63f9",
+      "algorithm": "random_forest",
+      "version": "20261010T052640684506Z",
+      "validation_status": "EVALUATED",
+      "record_counts": {
+        "source_hourly_rows": 162713,
+        "valid_target_rows": 127839,
+        "eligible_forecast_pairs": 111019,
+        "train": 67222,
+        "validation": 22428,
+        "test": 21027,
+        "purged": 342
+      }
+    },
+    "nox": {
+      "artifact": "models/nox/model.joblib",
+      "metadata": "models/nox/metadata.json",
+      "sha256": "4e280eb41854293773ad69b9cf1bd14676c1520b04d53a28df963b7a52497cbe",
+      "algorithm": "random_forest",
+      "version": "20261010T052846107296Z",
+      "validation_status": "EVALUATED",
+      "record_counts": {
+        "source_hourly_rows": 162713,
+        "valid_target_rows": 130218,
+        "eligible_forecast_pairs": 114606,
+        "train": 69615,
+        "validation": 22589,
+        "test": 22048,
+        "purged": 354
+      }
+    },
+    "so2": {
+      "artifact": "models/so2/model.joblib",
+      "metadata": "models/so2/metadata.json",
+      "sha256": "d3fad5ca1b5214f028c6e6928582a2b228338b16ba605ded18b04484a3c139de",
+      "algorithm": "persistence",
+      "version": "20261010T053012055896Z",
+      "validation_status": "WEAK",
+      "record_counts": {
+        "source_hourly_rows": 162713,
+        "valid_target_rows": 52554,
+        "eligible_forecast_pairs": 44596,
+        "train": 28631,
+        "validation": 9262,
+        "test": 6554,
+        "purged": 149
+      }
+    },
+    "co": {
+      "artifact": "models/co/model.joblib",
+      "metadata": "models/co/metadata.json",
+      "sha256": "37d4d3b7e9a665540e0af50d5ec644cdcca5ca47bf23a1ec21049c061ad849df",
+      "algorithm": "hist_gradient_boosting",
+      "version": "20261010T053146354971Z",
+      "validation_status": "EVALUATED",
+      "record_counts": {
+        "source_hourly_rows": 162713,
+        "valid_target_rows": 132950,
+        "eligible_forecast_pairs": 118558,
+        "train": 72288,
+        "validation": 23849,
+        "test": 22081,
+        "purged": 340
+      }
+    },
+    "o3": {
+      "artifact": "models/o3/model.joblib",
+      "metadata": "models/o3/metadata.json",
+      "sha256": "898daaaee9fcf28753a7a2dc4f6ef85492b57035308ddc1cf1137be2be300f15",
+      "algorithm": "hist_gradient_boosting",
+      "version": "20261010T053355129830Z",
+      "validation_status": "EVALUATED",
+      "record_counts": {
+        "source_hourly_rows": 162713,
+        "valid_target_rows": 127381,
+        "eligible_forecast_pairs": 105711,
+        "train": 64746,
+        "validation": 22853,
+        "test": 17778,
+        "purged": 334
+      }
+    },
+    "nh3": {
+      "artifact": "models/nh3/model.joblib",
+      "metadata": "models/nh3/metadata.json",
+      "sha256": "a3bbdb31f63b9644d60cba31f2052a5b69d634d368ad0707cd3dac88e771a79d",
+      "algorithm": "random_forest",
+      "version": "20261010T053501189404Z",
+      "validation_status": "WEAK",
+      "record_counts": {
+        "source_hourly_rows": 162713,
+        "valid_target_rows": 28704,
+        "eligible_forecast_pairs": 24460,
+        "train": 14700,
+        "validation": 5128,
+        "test": 4560,
+        "purged": 72
+      }
+    },
+    "benzene": {
+      "artifact": "models/benzene/model.joblib",
+      "metadata": "models/benzene/metadata.json",
+      "sha256": "b2ee156d6356450921428c3db4c8f9c0c4e9fb123319f96fd583bae2da69e60e",
+      "algorithm": "random_forest",
+      "version": "20261010T053630824592Z",
+      "validation_status": "WEAK",
+      "record_counts": {
+        "source_hourly_rows": 162713,
+        "valid_target_rows": 117924,
+        "eligible_forecast_pairs": 103935,
+        "train": 69741,
+        "validation": 18276,
+        "test": 15650,
+        "purged": 268
+      }
+    },
+    "toluene": {
+      "artifact": "models/toluene/model.joblib",
+      "metadata": "models/toluene/metadata.json",
+      "sha256": "e202a0a848aa62c4e7ccce9c2af6bcbfb0a9cb2b55bb3822df629c00c28020db",
+      "algorithm": "hist_gradient_boosting",
+      "version": "20261010T053819298926Z",
+      "validation_status": "EVALUATED",
+      "record_counts": {
+        "source_hourly_rows": 162713,
+        "valid_target_rows": 95851,
+        "eligible_forecast_pairs": 83177,
+        "train": 49457,
+        "validation": 17141,
+        "test": 16363,
+        "purged": 216
+      }
+    },
+    "xylene": {
+      "artifact": "models/xylene/model.joblib",
+      "metadata": "models/xylene/metadata.json",
+      "sha256": "318bd92fd90062462f630c09472a80bba0ab5e8cb34bde90a2a89d7cca9ff966",
+      "algorithm": "hist_gradient_boosting",
+      "version": "20261010T053915774417Z",
+      "validation_status": "EVALUATED",
+      "record_counts": {
+        "source_hourly_rows": 162713,
+        "valid_target_rows": 41355,
+        "eligible_forecast_pairs": 36232,
+        "train": 24732,
+        "validation": 6618,
+        "test": 4813,
+        "purged": 69
+      }
+    }
+  },
+  "units": {
+    "pm25": "ug/m3",
+    "pm10": "ug/m3",
+    "no2": "ug/m3",
+    "no": "ug/m3",
+    "nox": "ppb",
+    "so2": "ug/m3",
+    "co": "mg/m3",
+    "o3": "ug/m3",
+    "nh3": "ug/m3",
+    "benzene": "ug/m3",
+    "toluene": "ug/m3",
+    "xylene": "ug/m3",
+    "spm": "ug/m3",
+    "pb": "ug/m3",
+    "temperature": "degC",
+    "humidity": "%",
+    "wind_speed": "m/s",
+    "wind_direction": "degree",
+    "rainfall": "mm",
+    "pressure": "hPa",
+    "solar_radiation": "W/m2"
+  },
+  "unsupported_pollutants": [
+    "spm",
+    "pb"
+  ]
+}

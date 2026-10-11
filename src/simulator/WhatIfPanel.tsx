@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Play, RotateCcw, MousePointerClick, Plus, Trash2, Factory, TreePine, Car, CloudSun, Building2, ShieldCheck, Route, MapPin } from 'lucide-react';
 import { useTwin } from '../store/useTwinStore';
 import { Block, Button, DeltaText, Disclaimer, SectionHeader, Slider, Toggle } from '../components/ui';
+import { RegionPicker, RegionScenarioBlock } from '../components/RegionScenarioPanels';
+import { paramsKey } from '../scenarios/liveScenario';
 import { cellAt, defaultParams, makeScenarioIndustry } from '../services/scenarioService';
 import type { IndustryCategory, ScenarioParams } from '../types';
 import { cellAreaKm2 } from '../utils/geo';
@@ -13,8 +15,7 @@ const pct = (v: number) => `${Math.round(v * 100)}%`;
 const signedPct = (v: number) => `${v >= 1 ? '+' : ''}${Math.round((v - 1) * 100)}%`;
 const TREE_CANOPY_M2 = 40; // assumed mature canopy per tree (illustrative)
 const FIELD = 'rounded-lg bg-ink-950 text-sand-100 ring-1 ring-inset ring-sand-100/15 outline-none focus-visible:ring-2 focus-visible:ring-accent-400';
-/** Parameters compared without the display name (runDraft may assign one). */
-const paramsKey = (p: ScenarioParams) => JSON.stringify({ ...p, name: '' });
+
 
 function GroupTitle({ icon: Icon, children }: { icon: typeof Car; children: string }) {
   return (
@@ -47,6 +48,10 @@ export function WhatIfPanel() {
     if (run()) setRightOpen(true);
   };
   const upToDate = !!result && paramsKey(result.params) === paramsKey(draft);
+  const live = useTwin((s) => s.liveScenario);
+  const setLive = useTwin((s) => s.setLiveScenario);
+  const online = useTwin((s) => s.modelService.status === 'online');
+  const weatherCases = useTwin((s) => s.industry?.weatherCases) ?? [];
 
   const [closure, setClosure] = useState({ roadId: majorRoads(base)[0]?.id ?? '', divertTo: '', share: 0.7 });
   const [trees, setTrees] = useState(-500);
@@ -63,9 +68,18 @@ export function WhatIfPanel() {
 
   return (
     <div className="flex min-h-full flex-col">
-      <SectionHeader title="What-If" />
+      <SectionHeader title="What-If" subtitle="Change conditions and see the modelled effect." />
 
-      <Block title="Name and presets">
+      {online && (
+        <Block title="Region forecast">
+          <RegionPicker />
+          <div className="mt-3">
+            <RegionScenarioBlock />
+          </div>
+        </Block>
+      )}
+
+      <Block title="Scenario">
         <input
           value={draft.name === 'Baseline' ? '' : draft.name}
           placeholder="Scenario name (optional)"
@@ -141,7 +155,7 @@ export function WhatIfPanel() {
       {/* Traffic */}
       <Block>
         <GroupTitle icon={Car}>Traffic</GroupTitle>
-        <Slider label="City-wide traffic intensity" value={draft.trafficMultiplier} min={0.3} max={2} step={0.05} format={signedPct} onChange={(v) => update({ trafficMultiplier: v })} />
+        <Slider label="City-wide traffic intensity" hint="Change in vehicle traffic on every road. 0% is today." value={draft.trafficMultiplier} min={0.3} max={2} step={0.05} format={signedPct} onChange={(v) => update({ trafficMultiplier: v })} />
         <Slider
           label={`Area traffic ${hasArea ? '' : '(select an area)'}`}
           value={draft.areaTrafficMultiplier}
@@ -151,7 +165,7 @@ export function WhatIfPanel() {
           format={signedPct}
           onChange={(v) => update({ areaTrafficMultiplier: v })}
         />
-        <Slider label="Public transport mode shift" value={draft.publicTransportShift} min={0} max={0.5} step={0.01} format={pct} onChange={(v) => update({ publicTransportShift: v })} />
+        <Slider label="Public transport mode shift" hint="Share of trips moved from private vehicles to buses and metro." value={draft.publicTransportShift} min={0} max={0.5} step={0.01} format={pct} onChange={(v) => update({ publicTransportShift: v })} />
       </Block>
 
       {/* Roads */}
@@ -283,8 +297,8 @@ export function WhatIfPanel() {
       {/* Pollution control */}
       <Block>
         <GroupTitle icon={ShieldCheck}>Pollution control</GroupTitle>
-        <Slider label="Additional industrial control efficiency" value={draft.industrialControl} min={0} max={0.9} step={0.05} format={pct} onChange={(v) => update({ industrialControl: v })} />
-        <Slider label="Vehicle emission control" value={draft.vehicleEmissionControl} min={0} max={0.8} step={0.05} format={pct} onChange={(v) => update({ vehicleEmissionControl: v })} />
+        <Slider label="Additional industrial control efficiency" hint="Extra share of each factory's remaining emissions captured by new controls." value={draft.industrialControl} min={0} max={0.9} step={0.05} format={pct} onChange={(v) => update({ industrialControl: v })} />
+        <Slider label="Vehicle emission control" hint="Cut in emissions per vehicle, e.g. cleaner fuel or engines." value={draft.vehicleEmissionControl} min={0} max={0.8} step={0.05} format={pct} onChange={(v) => update({ vehicleEmissionControl: v })} />
       </Block>
 
       {/* Green */}
@@ -331,12 +345,35 @@ export function WhatIfPanel() {
           format={(v) => `${v > 0 ? '+' : ''}${Math.round(v * 100)} pts`}
           onChange={(v) => update({ buildingDensityDelta: v })}
         />
-        <Slider label="Building height" value={draft.buildingHeightMultiplier} min={0.5} max={3} step={0.1} format={(v) => `×${v.toFixed(1)}`} onChange={(v) => update({ buildingHeightMultiplier: v })} />
+        <Slider label="Building height" hint="Taller buildings trap more pollution in street canyons." value={draft.buildingHeightMultiplier} min={0.5} max={3} step={0.1} format={(v) => `×${v.toFixed(1)}`} onChange={(v) => update({ buildingHeightMultiplier: v })} />
       </Block>
 
       {/* Weather */}
       <Block>
         <GroupTitle icon={CloudSun}>Weather</GroupTitle>
+        <p className="mb-1 text-[11.5px] text-sand-500">Weather changes how far pollution spreads.</p>
+        {weatherCases.length > 0 && (
+          <label className="mb-1 block text-[12px] text-sand-400">
+            ERA5 seasonal case (2024–25)
+            <select
+              value=""
+              onChange={(e) => {
+                const c = weatherCases[Number(e.target.value)];
+                if (c) updateWeather(c.weather);
+              }}
+              className={`mt-1 w-full cursor-pointer px-2 py-1.5 text-[12.5px] ${FIELD}`}
+            >
+              <option value="" disabled>
+                Choose an industrial area and season…
+              </option>
+              {weatherCases.map((c, i) => (
+                <option key={`${c.areaCode}-${c.season}`} value={i}>
+                  {c.areaName}: {c.label}
+                </option>
+              ))}
+            </select>
+          </label>
+        )}
         <Slider label="Temperature" value={draft.weather.temperature} min={5} max={45} step={0.5} format={(v) => `${v}°C`} onChange={(v) => updateWeather({ temperature: v })} />
         <Slider label="Wind speed" value={draft.weather.windSpeed} min={0.2} max={12} step={0.1} format={(v) => `${v.toFixed(1)} m/s`} onChange={(v) => updateWeather({ windSpeed: v })} />
         <Slider label="Wind direction (from)" value={draft.weather.windDirection} min={0} max={359} step={5} format={(v) => `${v}°`} onChange={(v) => updateWeather({ windDirection: v })} />
@@ -373,9 +410,10 @@ export function WhatIfPanel() {
             </button>
           )}
         </div>
+        <Toggle checked={live} onChange={setLive} label="Update map and chart as I change values" />
         <div className="flex gap-2">
           <Button onClick={reset} title="Reset all parameters to baseline">
-            <RotateCcw size={14} aria-hidden="true" /> Reset
+            <RotateCcw size={14} aria-hidden="true" /> Reset scenario
           </Button>
           <Button variant="primary" className="flex-1 !min-h-9" onClick={runAndShow}>
             <Play size={14} aria-hidden="true" /> {upToDate ? 'Run again' : 'Run scenario'}

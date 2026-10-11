@@ -1,0 +1,148 @@
+{
+  "status": "PASS",
+  "raw_csv_present": false,
+  "cleaned_data_present": false,
+  "original_project_required": false,
+  "all_four_http_cases": [
+    {
+      "case": "A_normal",
+      "status": "PASS",
+      "prediction": {
+        "status": "AVAILABLE",
+        "category": "FORECAST_ML",
+        "pollutant": "pm25",
+        "units": "ug/m3",
+        "station": "site_5766",
+        "value": 12.20437704423715,
+        "cutoff": "2025-06-30T11:30:00+00:00",
+        "target_time": "2025-06-30T12:30:00+00:00",
+        "horizon_hours": 1,
+        "interval": [
+          0,
+          82.27425079674278
+        ],
+        "model": "pm25_network",
+        "version": "task2-20261011-v1",
+        "baselines": {
+          "idw": 22.432061209630692,
+          "persistence": 18.84
+        },
+        "reliability": {
+          "status": "LOW",
+          "donor_count": 2,
+          "nearest_km": 8.386228648237582,
+          "oldest_donor_hours": 0.0,
+          "out_of_training_bounds": [],
+          "weather_available": true,
+          "weather_delay_days": 120,
+          "weather_missing_handling": "Training-only median plus missing indicators, if selected model includes weather",
+          "nominal_interval_coverage": 0.9,
+          "coverage_warning": "Empirical coverage is in evaluation; 90% is not a guaranteed confidence probability for this case."
+        },
+        "causal_effects_estimated": false
+      },
+      "seconds": 2.6687
+    },
+    {
+      "case": "B_missing_readings",
+      "status": "PASS",
+      "prediction": {
+        "status": "AVAILABLE",
+        "category": "FORECAST_ML",
+        "pollutant": "pm25",
+        "units": "ug/m3",
+        "station": "site_5766",
+        "value": 13.900273864759802,
+        "cutoff": "2025-07-06T22:30:00+00:00",
+        "target_time": "2025-07-06T23:30:00+00:00",
+        "horizon_hours": 1,
+        "interval": [
+          0,
+          83.97014761726543
+        ],
+        "model": "pm25_network",
+        "version": "task2-20261011-v1",
+        "baselines": {
+          "idw": 16.708355396325373,
+          "persistence": 17.44
+        },
+        "reliability": {
+          "status": "LOW",
+          "donor_count": 3,
+          "nearest_km": 0.6385832039638071,
+          "oldest_donor_hours": 0.0,
+          "out_of_training_bounds": [
+            "nearest_km",
+            "mean_distance_km"
+          ],
+          "weather_available": true,
+          "weather_delay_days": 120,
+          "weather_missing_handling": "Training-only median plus missing indicators, if selected model includes weather",
+          "nominal_interval_coverage": 0.9,
+          "coverage_warning": "Empirical coverage is in evaluation; 90% is not a guaranteed confidence probability for this case."
+        },
+        "causal_effects_estimated": false
+      },
+      "seconds": 0.0216
+    },
+    {
+      "case": "C_unseen_station",
+      "status": "PASS",
+      "prediction": {
+        "status": "AVAILABLE",
+        "category": "FORECAST_ML",
+        "pollutant": "pm25",
+        "units": "ug/m3",
+        "station": "site_5407",
+        "value": 9.224218403386612,
+        "cutoff": "2025-04-20T04:30:00+00:00",
+        "target_time": "2025-04-20T05:30:00+00:00",
+        "horizon_hours": 1,
+        "interval": [
+          0,
+          79.14796838140967
+        ],
+        "model": "pm25_site_5407",
+        "version": "task2-20261011-v1",
+        "baselines": {
+          "idw": 51.99444714680181,
+          "persistence": null
+        },
+        "reliability": {
+          "status": "LOW",
+          "donor_count": 3,
+          "nearest_km": 8.777345620560881,
+          "oldest_donor_hours": 0.0,
+          "out_of_training_bounds": [
+            "longitude",
+            "month_sin",
+            "neighbor_count",
+            "nearest_km",
+            "mean_distance_km"
+          ],
+          "weather_available": true,
+          "weather_delay_days": 120,
+          "weather_missing_handling": "Training-only median plus missing indicators, if selected model includes weather",
+          "nominal_interval_coverage": 0.9,
+          "coverage_warning": "Empirical coverage is in evaluation; 90% is not a guaranteed confidence probability for this case."
+        },
+        "causal_effects_estimated": false
+      },
+      "seconds": 0.035
+    },
+    {
+      "case": "D_severe_loss",
+      "status": "PASS",
+      "prediction": {
+        "status": "UNAVAILABLE",
+        "value": null,
+        "reason": "At least two distinct valid measured donor stations within the prior two hours are required",
+        "pollutant": "pm25",
+        "units": "ug/m3"
+      },
+      "seconds": 0.0029
+    }
+  ],
+  "invalid_request_rejected": true,
+  "created_utc": "2026-10-10T23:22:05Z"
+}

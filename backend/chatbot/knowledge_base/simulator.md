@@ -1,0 +1,9 @@
+# Environmental what-if simulator and causal limitations
+
+The inspected TypeScript ScenarioService runs a deterministic prototype rule model. It supports traffic multipliers, road closures/diversions, industrial intensity/control, adding/removing industries, green cover and buffers, building changes, and weather settings. It compares baseline, scenario and delta values on the Cesium map. These outputs are MODELED SCENARIO results from an unvalidated causal prototype, not measured outcomes or proof of an intervention effect. The simulator runs in the frontend; the exported ML API has no simulation route.
+
+## Interpreting industries traffic and trees
+Traffic reduction may reduce emissions, but local concentrations also depend on meteorology, regional background, chemistry, and street geometry. Added industrial combustion can increase emissions depending on fuel, activity rate, exhaust stack and control technology. Trees can capture some particles, but their effect is location-dependent and can change airflow. No precise AQI reduction or pollution percentage can be inferred solely from a tree count or a factory count. Correlation-based pollutant forecasts cannot establish causal intervention effects.
+
+## Available supplementary scenario datasets
+A separately prepared scenario-data package contains 28 official Pune-district MIDC industrial-area boundaries (29 plot table rows, two sharing an area code), 11 source-reported fuel emission factors, 2021 district sector totals, and 52,632 hourly ERA5 reanalysis rows for three industrial-area sample locations in 2024–2025. These are scenario inputs, not a validated dispersion model. Fuel use multiplied by an applicable factor estimates emitted mass; ambient concentration requires dispersion/chemistry and source parameters. No numerical scenario result is claimed without a configured, verified simulation API response.

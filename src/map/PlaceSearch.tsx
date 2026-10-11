@@ -2,6 +2,9 @@ import { useMemo, useRef, useState, type KeyboardEvent } from 'react';
 import { MapPin, Search, X } from 'lucide-react';
 import { useTwin } from '../store/useTwinStore';
 import { PUNE_LOCALITIES, searchLocalities, type Locality, type LocalityRegion } from '../data/geojson/puneLocalities';
+import { localityRecord } from '../services/liveData';
+import { RecordMeta, RecordValue, recordTitle } from '../components/LivePanels';
+import { POLLUTANT_LABEL } from '../utils/colors';
 
 const REGION_ORDER: LocalityRegion[] = ['Central', 'East', 'West', 'North', 'South', 'PCMC'];
 const REGION_LABEL: Record<LocalityRegion, string> = {
@@ -27,6 +30,9 @@ export function PlaceSearch() {
   // Flat order used for keyboard navigation (grouped view follows region order).
   const ordered: Locality[] = grouped ? REGION_ORDER.flatMap((r) => results.filter((l) => l.region === r)) : results;
   const current = PUNE_LOCALITIES.find((p) => p.id === highlighted);
+  const live = useTwin((s) => s.live);
+  const pollutant = useTwin((s) => s.pollutant);
+  const here = useMemo(() => (current ? localityRecord({ live }, current.id, pollutant) : null), [current, live, pollutant]);
 
   const choose = (l: Locality) => {
     goToPlace(l.id);
@@ -94,6 +100,16 @@ export function PlaceSearch() {
           </button>
         )}
       </div>
+      {here && !open && (
+        <div className="float-surface mt-1.5 flex items-center gap-2 rounded-xl px-3 py-1.5 text-[12px]" title={`${recordTitle(here)}. Reference: ${here.place.reference}`}>
+          <span className="truncate font-semibold text-sand-100">{current!.name}</span>
+          <span className="text-sand-400">{POLLUTANT_LABEL[pollutant]}</span>
+          <RecordValue r={here} />
+          <span className="ml-auto truncate text-[11px] text-sand-500">
+            <RecordMeta r={here} />
+          </span>
+        </div>
+      )}
       {open && (
         <div className="float-surface mt-1.5 max-h-[340px] overflow-y-auto rounded-xl p-1.5">
           {ordered.length === 0 && <div className="px-2 py-2 text-[12px] text-sand-500">No area matches “{query}”.</div>}

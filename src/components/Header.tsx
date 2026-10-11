@@ -1,18 +1,19 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, CircleHelp, Columns2, Info, Upload, X } from 'lucide-react';
-import { useTwin } from '../store/useTwinStore';
+import { hasCurrentField, useTwin } from '../store/useTwinStore';
 import { STATUS_STYLE, Segmented } from './ui';
 import { LogoMark, Wordmark } from './Brand';
 import type { DataStatus, DisplayMode, Pollutant } from '../types';
 import { POLLUTANT_LABEL } from '../utils/colors';
 
-/** Optional link back to the marketing site (set VITE_LANDING_URL in .env). */
-const LANDING_URL = (import.meta.env.VITE_LANDING_URL as string | undefined)?.trim();
+/** Link back to the landing page: the local one started by RUN_AEROMATRIX.bat, or VITE_LANDING_URL. */
+const LANDING_URL = ((import.meta.env.VITE_LANDING_URL as string | undefined)?.trim() || 'http://localhost:3000/');
 
 /** Which source the map is currently drawing from. */
 export function useMapSource(): DataStatus {
   return useTwin((s) => {
     if (s.displayMode === 'observed' && s.observedField) return 'OBSERVED';
+    if (s.displayMode === 'current' && hasCurrentField(s, s.pollutant)) return 'MODEL_DATA';
     if (s.displayMode === 'forecast' && s.forecastLayer) return 'MODEL_PREDICTION';
     if ((s.displayMode === 'scenario' || s.displayMode === 'delta') && s.activeResult) return 'MODELED_SCENARIO';
     return 'DEMO';
@@ -23,8 +24,10 @@ export function useMapSource(): DataStatus {
 function DataSourcesMenu() {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-  const hasObs = useTwin((s) => !!s.observations || !!s.weatherObs);
-  const forecast = useTwin((s) => !!s.forecastLayer);
+  const service = useTwin((s) => s.modelService.status);
+  const hasObs = useTwin((s) => !!s.observations || !!s.weatherObs || s.modelService.status === 'online');
+  const forecast = useTwin((s) => !!s.forecastLayer || s.modelService.status === 'online');
+  const live = useTwin((s) => s.live);
   const scenario = useTwin((s) => !!s.activeResult);
   const setSection = useTwin((s) => s.setSection);
   const setLeftOpen = useTwin((s) => s.setLeftOpen);
@@ -43,10 +46,31 @@ function DataSourcesMenu() {
   }, [open]);
 
   const rows: { s: DataStatus; on: boolean; text: string }[] = [
-    { s: 'OBSERVED', on: hasObs, text: hasObs ? 'Imported CPCB or weather files are in use.' : 'Available after importing CPCB or weather files.' },
-    { s: 'MODEL_PREDICTION', on: forecast, text: forecast ? 'Forecasts from the trained model are loaded.' : 'Available once a model is trained on real data.' },
+    {
+      s: 'OBSERVED',
+      on: hasObs,
+      text:
+        service === 'online'
+          ? 'Station readings in the source files run to Jan 2026: historical, never shown as current.'
+          : hasObs
+            ? 'Imported CPCB or weather files are in use.'
+            : 'Start the model service or import CPCB files.',
+    },
+    {
+      s: 'MODEL_DATA',
+      on: live.status === 'ready' || !!live.updatedAt,
+      text:
+        live.status === 'error' && !live.updatedAt
+          ? `Open-Meteo air-quality data unavailable: ${live.error}.`
+          : 'Current air quality and weather from the Open-Meteo (CAMS) model. Not station readings.',
+    },
+    {
+      s: 'MODEL_PREDICTION',
+      on: forecast,
+      text: service === 'online' ? '+24 h station forecasts from the trained models.' : 'Available when the model service is running.',
+    },
     { s: 'MODELED_SCENARIO', on: scenario, text: 'What-if results from the prototype rule model, uncalibrated.' },
-    { s: 'DEMO', on: true, text: 'Deterministic values from the prototype model, not measurements.' },
+    { s: 'DEMO', on: true, text: 'The What-If baseline: prototype dispersion model on demo inputs, not measurements.' },
   ];
 
   return (
@@ -96,6 +120,26 @@ function DataSourcesMenu() {
   );
 }
 
+/** Opens Plan-It, the budget-constrained intervention planner. */
+function PlanItButton() {
+  const open = useTwin((s) => s.planItOpen);
+  const setOpen = useTwin((s) => s.setPlanItOpen);
+  return (
+    <button
+      type="button"
+      onClick={() => setOpen(!open)}
+      aria-pressed={open}
+      aria-label="Plan-It: plan interventions within a budget"
+      title="Plan-It: plan interventions within a budget"
+      className={`grid h-8 w-8 shrink-0 cursor-pointer place-items-center rounded-lg text-[13px] font-bold ring-1 ring-inset transition-colors ${
+        open ? 'bg-accent-500 text-white ring-accent-400' : 'text-sand-100 ring-sand-100/15 hover:text-white hover:ring-sand-100/30'
+      }`}
+    >
+      P
+    </button>
+  );
+}
+
 export function Header() {
   const mode = useTwin((s) => s.displayMode);
   const setMode = useTwin((s) => s.setDisplayMode);
@@ -105,6 +149,7 @@ export function Header() {
   const clear = useTwin((s) => s.clearResult);
   const observedField = useTwin((s) => s.observedField);
   const forecastLayer = useTwin((s) => s.forecastLayer);
+  const hasCurrent = useTwin((s) => hasCurrentField(s, s.pollutant));
   const compareOn = useTwin((s) => s.compareOn);
   const setCompare = useTwin((s) => s.setCompare);
   const setIntroOpen = useTwin((s) => s.setIntroOpen);
@@ -128,6 +173,7 @@ export function Header() {
               if (m !== 'scenario') setCompare(false);
             }}
             options={[
+              ...(hasCurrent ? [{ value: 'current' as const, label: 'Current' }] : []),
               ...(observedField ? [{ value: 'observed' as const, label: 'Observed' }] : []),
               ...(forecastLayer ? [{ value: 'forecast' as const, label: `Forecast +${forecastLayer.horizonHours}h`, disabled: forecastLayer.pollutant !== pollutant }] : []),
               { value: 'baseline', label: 'Baseline' },
@@ -180,6 +226,7 @@ export function Header() {
           </select>
         </label>
 
+        <PlanItButton />
         <DataSourcesMenu />
         <button
           type="button"
@@ -190,14 +237,15 @@ export function Header() {
         >
           <CircleHelp size={15} />
         </button>
-        {LANDING_URL && (
-          <a
-            href={LANDING_URL}
-            className="hidden h-8 items-center gap-1.5 rounded-lg px-3 text-[12px] font-medium text-accent-200 ring-1 ring-inset ring-accent-400/55 hover:bg-accent-500/10 lg:flex"
-          >
-            <ArrowLeft size={13} /> Back to site
-          </a>
-        )}
+        <a
+          href={LANDING_URL}
+          title="Back to the AeroMatrix landing page"
+          aria-label="Back to the landing page"
+          className="flex h-8 shrink-0 items-center gap-1.5 rounded-lg px-2 text-[12px] font-medium text-accent-200 ring-1 ring-inset ring-accent-400/55 transition-colors hover:bg-accent-500/10 lg:px-3"
+        >
+          <ArrowLeft size={14} aria-hidden="true" />
+          <span className="hidden lg:inline">Back to site</span>
+        </a>
       </div>
     </header>
   );

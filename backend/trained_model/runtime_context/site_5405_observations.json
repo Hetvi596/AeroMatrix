@@ -1,0 +1,206 @@
+{
+  "status": "MEASURED",
+  "region": {
+    "station": "site_5405",
+    "station_name": "Alandi, Pune - IITM",
+    "name": "Alandi",
+    "aliases": [
+      "Alandi"
+    ],
+    "longitude": null,
+    "latitude": null,
+    "source_files": "11_Alandi_IITM_15_minute_AQI_Data_for_2024-25.csv"
+  },
+  "pollutants": {
+    "pm25": {
+      "status": "MEASURED",
+      "value": 154.57,
+      "unit": "ug/m3",
+      "time": "2025-01-28T16:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2025-01-28T16:00:00+05:30",
+        "end": "2025-01-28T17:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "pm10": {
+      "status": "MEASURED",
+      "value": 280.89,
+      "unit": "ug/m3",
+      "time": "2025-01-28T16:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2025-01-28T16:00:00+05:30",
+        "end": "2025-01-28T17:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "no2": {
+      "status": "MEASURED",
+      "value": 33.47,
+      "unit": "ug/m3",
+      "time": "2025-01-28T16:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2025-01-28T16:00:00+05:30",
+        "end": "2025-01-28T17:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "no": {
+      "status": "MEASURED",
+      "value": 5.419999999999999,
+      "unit": "ug/m3",
+      "time": "2025-01-28T16:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2025-01-28T16:00:00+05:30",
+        "end": "2025-01-28T17:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "nox": {
+      "status": "MEASURED",
+      "value": 22.066666666666663,
+      "unit": "ppb",
+      "time": "2025-01-28T16:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2025-01-28T16:00:00+05:30",
+        "end": "2025-01-28T17:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "co": {
+      "status": "MEASURED",
+      "value": 0.82,
+      "unit": "mg/m3",
+      "time": "2025-01-28T16:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2025-01-28T16:00:00+05:30",
+        "end": "2025-01-28T17:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "o3": {
+      "status": "MEASURED",
+      "value": 88.73333333333333,
+      "unit": "ug/m3",
+      "time": "2025-01-28T16:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2025-01-28T16:00:00+05:30",
+        "end": "2025-01-28T17:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "benzene": {
+      "status": "MEASURED",
+      "value": 3.2533333333333334,
+      "unit": "ug/m3",
+      "time": "2025-01-28T16:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2025-01-28T16:00:00+05:30",
+        "end": "2025-01-28T17:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "toluene": {
+      "status": "MEASURED",
+      "value": 8.923333333333334,
+      "unit": "ug/m3",
+      "time": "2025-01-28T16:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2025-01-28T16:00:00+05:30",
+        "end": "2025-01-28T17:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "xylene": {
+      "status": "MEASURED",
+      "value": 2.1466666666666665,
+      "unit": "ug/m3",
+      "time": "2025-01-28T16:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2025-01-28T16:00:00+05:30",
+        "end": "2025-01-28T17:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    }
+  },
+  "aqi": {
+    "status": "AVAILABLE",
+    "value": 204,
+    "category": "Poor",
+    "dominant_pollutant": "pm25",
+    "reason": null,
+    "subindices": {
+      "pm25": {
+        "value": 204,
+        "bounded": false,
+        "concentration": 92.39777777777778,
+        "averaging_hours": 24
+      },
+      "pm10": {
+        "value": 163,
+        "bounded": false,
+        "concentration": 194.99156250000001,
+        "averaging_hours": 24
+      },
+      "no2": {
+        "value": 66,
+        "bounded": false,
+        "concentration": 53.19767361111111,
+        "averaging_hours": 24
+      },
+      "co": {
+        "value": 62,
+        "bounded": false,
+        "concentration": 1.3490625,
+        "averaging_hours": 8
+      },
+      "o3": {
+        "value": 23,
+        "bounded": false,
+        "concentration": 23.170416666666668,
+        "averaging_hours": 8
+      }
+    },
+    "coverage_hours": {
+      "pm25": 24,
+      "pm10": 24,
+      "no2": 24,
+      "so2": 0,
+      "co": 24,
+      "o3": 23,
+      "nh3": 0
+    },
+    "excluded": {
+      "so2": "Fewer than 16 valid hourly observations in 24h",
+      "nh3": "Fewer than 16 valid hourly observations in 24h"
+    },
+    "period_end": "2025-01-28T11:30:00+00:00",
+    "method": "CPCB National AQI; measured hourly data; conservative eight-hour completeness",
+    "timestamp_semantics": "completed_hour_end"
+  },
+  "historical": true,
+  "snapshot_end": "2025-01-28T16:00:00+05:30",
+  "source_files": "11_Alandi_IITM_15_minute_AQI_Data_for_2024-25.csv",
+  "notice": "time and snapshot_end label hour starts; window.end and snapshot_window_end are completed-hour availability. Latest values can have different timestamps; AQI uses one coherent window.",
+  "snapshot_window_end": "2025-01-28T17:00:00+05:30"
+}

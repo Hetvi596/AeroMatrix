@@ -35,6 +35,45 @@ A Google Maps Platform key (`VITE_GOOGLE_MAPS_API_KEY`, Map Tiles API enabled) a
 
 Other settings: `VITE_API_URL` if the backend isn't at `http://localhost:8000`.
 
+## One-click start (Windows)
+
+Double-click **`RUN_AEROMATRIX.bat`**. It finds 64-bit Python 3.12 (`py -3.12`, a uv install, or `AEROMATRIX_PYTHON`), starts the trained
+model service from `backend/trained_model` on http://127.0.0.1:8000, starts the web app on http://localhost:5173 and opens the browser.
+First run needs internet to install pinned Python and Node packages; later runs are offline. The models are never retrained.
+
+### Trained model service (`backend/trained_model`)
+
+12 trained models (+24 h forecasts) for 12 Pune/PCMC monitoring stations, plus measured station snapshots and CPCB AQI. See
+`backend/trained_model/INTEGRATION_GUIDE.md`. In the app: **Overview** and **Air Quality → Monitoring stations**; click a station
+for measured AQI, latest concentrations and the +24 h forecast with its interval. The bundled readings are historical, so a current
+forecast shows as unavailable unless *Include historical forecast* is on. Station coordinates aren't in the source data, so stations
+aren't drawn on the map, and the zone grid / heatmap stays the prototype model (labelled *Demo values*).
+
+### Missing sensors and unseen locations (`backend/task2_model`, Task 2)
+
+The trained Task 2 package (12 scikit-learn models: PM2.5 and PM10, a network model plus one whole-station holdout model for each
+of the five coordinate-verified Pune stations) runs unmodified behind `aeromatrix_service.py` on http://127.0.0.1:8030
+(`RUN_AEROMATRIX.bat` starts it). In the app: **Sensors** in the launcher (Sensor Intelligence). Pick a station and an hour from the
+held-out test period (Feb–Sep 2025) and run the prediction: cards show next-hour PM2.5 and PM10 and an estimated PM-based AQI (CPCB
+breakpoints on 24 h means of the recorded hours plus the forecast, needing 16 valid hours per pollutant; otherwise "AQI unavailable").
+Switch nearby sensors off, apply the package's evaluated loss scenarios, or treat the station as unseen. Results are historical
+replays, not live, and the AQI is never an official CPCB value (that needs at least three pollutants). In normal hours persistence beat the ML model; see
+`backend/task2_model/TRAINING_RESULTS.md`. The browser reaches the service only through the Vite proxy's read-only endpoints;
+`/task2/predict` stays on localhost. Tests: `backend\task2_model\.venv\Scripts\python.exe -m pytest -q tests --basetemp=runtime\pytest`.
+
+### Industry data (`public/data/industry`)
+
+Built from the AeroMatrix industry scenario dataset (28 MIDC estates, 551 partial OSM industry points, TERI/ARAI fuel emission
+factors, 2021 district inventory, ERA5 2024–25 weather):
+
+```
+node scripts/build-industry-data.mjs data/industry_scenario
+```
+
+**Industries** lists the estates and turns on the *MIDC industrial areas* / *Mapped industry sites* map layers. An estate or site card
+can reduce, shut down or relocate the modeled sources in or within 1 km of it (prototype engine; source intensities are assumptions,
+because the dataset has no facility emissions), estimate emitted mass from fuel use, and apply ERA5 seasonal weather.
+
 ## Using real data (Phase 7)
 
 ### 0. Real city geometry (OpenStreetMap)

@@ -1,0 +1,486 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "pollutant": "pm25",
+      "fold": "network",
+      "cohort": "common_three",
+      "method": "ml",
+      "status": "PASS",
+      "n": 10703
+    },
+    {
+      "pollutant": "pm25",
+      "fold": "network",
+      "cohort": "common_three",
+      "method": "idw",
+      "status": "PASS",
+      "n": 10703
+    },
+    {
+      "pollutant": "pm25",
+      "fold": "network",
+      "cohort": "common_three",
+      "method": "persistence",
+      "status": "PASS",
+      "n": 10703
+    },
+    {
+      "pollutant": "pm25",
+      "fold": "network",
+      "cohort": "common_spatial",
+      "method": "ml",
+      "status": "PASS",
+      "n": 10756
+    },
+    {
+      "pollutant": "pm25",
+      "fold": "network",
+      "cohort": "common_spatial",
+      "method": "idw",
+      "status": "PASS",
+      "n": 10756
+    },
+    {
+      "pollutant": "pm25",
+      "fold": "site_5407",
+      "cohort": "common_three",
+      "method": "ml",
+      "status": "PASS",
+      "n": 0
+    },
+    {
+      "pollutant": "pm25",
+      "fold": "site_5407",
+      "cohort": "common_three",
+      "method": "idw",
+      "status": "PASS",
+      "n": 0
+    },
+    {
+      "pollutant": "pm25",
+      "fold": "site_5407",
+      "cohort": "common_three",
+      "method": "persistence",
+      "status": "PASS",
+      "n": 0
+    },
+    {
+      "pollutant": "pm25",
+      "fold": "site_5407",
+      "cohort": "common_spatial",
+      "method": "ml",
+      "status": "PASS",
+      "n": 771
+    },
+    {
+      "pollutant": "pm25",
+      "fold": "site_5407",
+      "cohort": "common_spatial",
+      "method": "idw",
+      "status": "PASS",
+      "n": 771
+    },
+    {
+      "pollutant": "pm25",
+      "fold": "site_5409",
+      "cohort": "common_three",
+      "method": "ml",
+      "status": "PASS",
+      "n": 0
+    },
+    {
+      "pollutant": "pm25",
+      "fold": "site_5409",
+      "cohort": "common_three",
+      "method": "idw",
+      "status": "PASS",
+      "n": 0
+    },
+    {
+      "pollutant": "pm25",
+      "fold": "site_5409",
+      "cohort": "common_three",
+      "method": "persistence",
+      "status": "PASS",
+      "n": 0
+    },
+    {
+      "pollutant": "pm25",
+      "fold": "site_5409",
+      "cohort": "common_spatial",
+      "method": "ml",
+      "status": "PASS",
+      "n": 2850
+    },
+    {
+      "pollutant": "pm25",
+      "fold": "site_5409",
+      "cohort": "common_spatial",
+      "method": "idw",
+      "status": "PASS",
+      "n": 2850
+    },
+    {
+      "pollutant": "pm25",
+      "fold": "site_5766",
+      "cohort": "common_three",
+      "method": "ml",
+      "status": "PASS",
+      "n": 0
+    },
+    {
+      "pollutant": "pm25",
+      "fold": "site_5766",
+      "cohort": "common_three",
+      "method": "idw",
+      "status": "PASS",
+      "n": 0
+    },
+    {
+      "pollutant": "pm25",
+      "fold": "site_5766",
+      "cohort": "common_three",
+      "method": "persistence",
+      "status": "PASS",
+      "n": 0
+    },
+    {
+      "pollutant": "pm25",
+      "fold": "site_5766",
+      "cohort": "common_spatial",
+      "method": "ml",
+      "status": "PASS",
+      "n": 2941
+    },
+    {
+      "pollutant": "pm25",
+      "fold": "site_5766",
+      "cohort": "common_spatial",
+      "method": "idw",
+      "status": "PASS",
+      "n": 2941
+    },
+    {
+      "pollutant": "pm25",
+      "fold": "site_5996",
+      "cohort": "common_three",
+      "method": "ml",
+      "status": "PASS",
+      "n": 0
+    },
+    {
+      "pollutant": "pm25",
+      "fold": "site_5996",
+      "cohort": "common_three",
+      "method": "idw",
+      "status": "PASS",
+      "n": 0
+    },
+    {
+      "pollutant": "pm25",
+      "fold": "site_5996",
+      "cohort": "common_three",
+      "method": "persistence",
+      "status": "PASS",
+      "n": 0
+    },
+    {
+      "pollutant": "pm25",
+      "fold": "site_5996",
+      "cohort": "common_spatial",
+      "method": "ml",
+      "status": "PASS",
+      "n": 2978
+    },
+    {
+      "pollutant": "pm25",
+      "fold": "site_5996",
+      "cohort": "common_spatial",
+      "method": "idw",
+      "status": "PASS",
+      "n": 2978
+    },
+    {
+      "pollutant": "pm25",
+      "fold": "site_6012",
+      "cohort": "common_three",
+      "method": "ml",
+      "status": "PASS",
+      "n": 0
+    },
+    {
+      "pollutant": "pm25",
+      "fold": "site_6012",
+      "cohort": "common_three",
+      "method": "idw",
+      "status": "PASS",
+      "n": 0
+    },
+    {
+      "pollutant": "pm25",
+      "fold": "site_6012",
+      "cohort": "common_three",
+      "method": "persistence",
+      "status": "PASS",
+      "n": 0
+    },
+    {
+      "pollutant": "pm25",
+      "fold": "site_6012",
+      "cohort": "common_spatial",
+      "method": "ml",
+      "status": "PASS",
+      "n": 1216
+    },
+    {
+      "pollutant": "pm25",
+      "fold": "site_6012",
+      "cohort": "common_spatial",
+      "method": "idw",
+      "status": "PASS",
+      "n": 1216
+    },
+    {
+      "pollutant": "pm10",
+      "fold": "network",
+      "cohort": "common_three",
+      "method": "ml",
+      "status": "PASS",
+      "n": 10781
+    },
+    {
+      "pollutant": "pm10",
+      "fold": "network",
+      "cohort": "common_three",
+      "method": "idw",
+      "status": "PASS",
+      "n": 10781
+    },
+    {
+      "pollutant": "pm10",
+      "fold": "network",
+      "cohort": "common_three",
+      "method": "persistence",
+      "status": "PASS",
+      "n": 10781
+    },
+    {
+      "pollutant": "pm10",
+      "fold": "network",
+      "cohort": "common_spatial",
+      "method": "ml",
+      "status": "PASS",
+      "n": 10835
+    },
+    {
+      "pollutant": "pm10",
+      "fold": "network",
+      "cohort": "common_spatial",
+      "method": "idw",
+      "status": "PASS",
+      "n": 10835
+    },
+    {
+      "pollutant": "pm10",
+      "fold": "site_5407",
+      "cohort": "common_three",
+      "method": "ml",
+      "status": "PASS",
+      "n": 0
+    },
+    {
+      "pollutant": "pm10",
+      "fold": "site_5407",
+      "cohort": "common_three",
+      "method": "idw",
+      "status": "PASS",
+      "n": 0
+    },
+    {
+      "pollutant": "pm10",
+      "fold": "site_5407",
+      "cohort": "common_three",
+      "method": "persistence",
+      "status": "PASS",
+      "n": 0
+    },
+    {
+      "pollutant": "pm10",
+      "fold": "site_5407",
+      "cohort": "common_spatial",
+      "method": "ml",
+      "status": "PASS",
+      "n": 837
+    },
+    {
+      "pollutant": "pm10",
+      "fold": "site_5407",
+      "cohort": "common_spatial",
+      "method": "idw",
+      "status": "PASS",
+      "n": 837
+    },
+    {
+      "pollutant": "pm10",
+      "fold": "site_5409",
+      "cohort": "common_three",
+      "method": "ml",
+      "status": "PASS",
+      "n": 0
+    },
+    {
+      "pollutant": "pm10",
+      "fold": "site_5409",
+      "cohort": "common_three",
+      "method": "idw",
+      "status": "PASS",
+      "n": 0
+    },
+    {
+      "pollutant": "pm10",
+      "fold": "site_5409",
+      "cohort": "common_three",
+      "method": "persistence",
+      "status": "PASS",
+      "n": 0
+    },
+    {
+      "pollutant": "pm10",
+      "fold": "site_5409",
+      "cohort": "common_spatial",
+      "method": "ml",
+      "status": "PASS",
+      "n": 2843
+    },
+    {
+      "pollutant": "pm10",
+      "fold": "site_5409",
+      "cohort": "common_spatial",
+      "method": "idw",
+      "status": "PASS",
+      "n": 2843
+    },
+    {
+      "pollutant": "pm10",
+      "fold": "site_5766",
+      "cohort": "common_three",
+      "method": "ml",
+      "status": "PASS",
+      "n": 0
+    },
+    {
+      "pollutant": "pm10",
+      "fold": "site_5766",
+      "cohort": "common_three",
+      "method": "idw",
+      "status": "PASS",
+      "n": 0
+    },
+    {
+      "pollutant": "pm10",
+      "fold": "site_5766",
+      "cohort": "common_three",
+      "method": "persistence",
+      "status": "PASS",
+      "n": 0
+    },
+    {
+      "pollutant": "pm10",
+      "fold": "site_5766",
+      "cohort": "common_spatial",
+      "method": "ml",
+      "status": "PASS",
+      "n": 2880
+    },
+    {
+      "pollutant": "pm10",
+      "fold": "site_5766",
+      "cohort": "common_spatial",
+      "method": "idw",
+      "status": "PASS",
+      "n": 2880
+    },
+    {
+      "pollutant": "pm10",
+      "fold": "site_5996",
+      "cohort": "common_three",
+      "method": "ml",
+      "status": "PASS",
+      "n": 0
+    },
+    {
+      "pollutant": "pm10",
+      "fold": "site_5996",
+      "cohort": "common_three",
+      "method": "idw",
+      "status": "PASS",
+      "n": 0
+    },
+    {
+      "pollutant": "pm10",
+      "fold": "site_5996",
+      "cohort": "common_three",
+      "method": "persistence",
+      "status": "PASS",
+      "n": 0
+    },
+    {
+      "pollutant": "pm10",
+      "fold": "site_5996",
+      "cohort": "common_spatial",
+      "method": "ml",
+      "status": "PASS",
+      "n": 3018
+    },
+    {
+      "pollutant": "pm10",
+      "fold": "site_5996",
+      "cohort": "common_spatial",
+      "method": "idw",
+      "status": "PASS",
+      "n": 3018
+    },
+    {
+      "pollutant": "pm10",
+      "fold": "site_6012",
+      "cohort": "common_three",
+      "method": "ml",
+      "status": "PASS",
+      "n": 0
+    },
+    {
+      "pollutant": "pm10",
+      "fold": "site_6012",
+      "cohort": "common_three",
+      "method": "idw",
+      "status": "PASS",
+      "n": 0
+    },
+    {
+      "pollutant": "pm10",
+      "fold": "site_6012",
+      "cohort": "common_three",
+      "method": "persistence",
+      "status": "PASS",
+      "n": 0
+    },
+    {
+      "pollutant": "pm10",
+      "fold": "site_6012",
+      "cohort": "common_spatial",
+      "method": "ml",
+      "status": "PASS",
+      "n": 1257
+    },
+    {
+      "pollutant": "pm10",
+      "fold": "site_6012",
+      "cohort": "common_spatial",
+      "method": "idw",
+      "status": "PASS",
+      "n": 1257
+    }
+  ],
+  "note": "Independent recomputation from saved prediction rows for every model at zero additional loss; all mask configurations additionally tested for reproducibility."
+}

@@ -1,0 +1,954 @@
+[
+  {
+    "station": "site_292",
+    "pollutant": "pm25",
+    "api_value": 103.74068930341096,
+    "original_direct_value": 103.74068930341096,
+    "portable_direct_value": 103.74068930341096,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_292",
+    "pollutant": "pm10",
+    "api_value": 100.97420147467211,
+    "original_direct_value": 100.97420147467211,
+    "portable_direct_value": 100.97420147467211,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_292",
+    "pollutant": "no2",
+    "api_value": 9.077777440544706,
+    "original_direct_value": 9.077777440544708,
+    "portable_direct_value": 9.077777440544706,
+    "absolute_error": 1.7763568394002505e-15
+  },
+  {
+    "station": "site_292",
+    "pollutant": "no",
+    "api_value": 5.7415824111780065,
+    "original_direct_value": 5.7415824111780065,
+    "portable_direct_value": 5.7415824111780065,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_292",
+    "pollutant": "nox",
+    "api_value": 14.594373716697955,
+    "original_direct_value": 14.594373716697953,
+    "portable_direct_value": 14.594373716697955,
+    "absolute_error": 1.7763568394002505e-15
+  },
+  {
+    "station": "site_292",
+    "pollutant": "so2",
+    "api_value": 33.33,
+    "original_direct_value": 33.33,
+    "portable_direct_value": 33.33,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_292",
+    "pollutant": "co",
+    "api_value": 1.6079770986213167,
+    "original_direct_value": 1.6079770986213167,
+    "portable_direct_value": 1.6079770986213167,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_292",
+    "pollutant": "o3",
+    "api_value": 63.49375807710149,
+    "original_direct_value": 63.49375807710149,
+    "portable_direct_value": 63.49375807710149,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_292",
+    "pollutant": "benzene",
+    "api_value": 8.689192440806007,
+    "original_direct_value": 8.689192440806007,
+    "portable_direct_value": 8.689192440806009,
+    "absolute_error": 1.7763568394002505e-15
+  },
+  {
+    "station": "site_5404",
+    "pollutant": "pm25",
+    "api_value": 92.6321206056393,
+    "original_direct_value": 92.6321206056393,
+    "portable_direct_value": 92.6321206056393,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5404",
+    "pollutant": "pm10",
+    "api_value": 226.1857833547243,
+    "original_direct_value": 226.1857833547243,
+    "portable_direct_value": 226.1857833547243,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5404",
+    "pollutant": "no2",
+    "api_value": 52.1622701725323,
+    "original_direct_value": 52.1622701725323,
+    "portable_direct_value": 52.1622701725323,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5404",
+    "pollutant": "no",
+    "api_value": 25.46645074612271,
+    "original_direct_value": 25.46645074612271,
+    "portable_direct_value": 25.46645074612271,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5404",
+    "pollutant": "nox",
+    "api_value": 51.451401608374866,
+    "original_direct_value": 51.451401608374866,
+    "portable_direct_value": 51.451401608374866,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5404",
+    "pollutant": "co",
+    "api_value": 2.487479228008147,
+    "original_direct_value": 2.487479228008147,
+    "portable_direct_value": 2.487479228008147,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5404",
+    "pollutant": "o3",
+    "api_value": 15.337308686091065,
+    "original_direct_value": 15.337308686091065,
+    "portable_direct_value": 15.337308686091065,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5404",
+    "pollutant": "benzene",
+    "api_value": 1.2509590240454476,
+    "original_direct_value": 1.2509590240454478,
+    "portable_direct_value": 1.2509590240454473,
+    "absolute_error": 2.220446049250313e-16
+  },
+  {
+    "station": "site_5404",
+    "pollutant": "toluene",
+    "api_value": 4.223192592165758,
+    "original_direct_value": 4.223192592165758,
+    "portable_direct_value": 4.223192592165758,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5404",
+    "pollutant": "xylene",
+    "api_value": 0.8648747300902622,
+    "original_direct_value": 0.8648747300902622,
+    "portable_direct_value": 0.8648747300902622,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5405",
+    "pollutant": "pm25",
+    "api_value": 102.11429022583482,
+    "original_direct_value": 102.11429022583482,
+    "portable_direct_value": 102.11429022583482,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5405",
+    "pollutant": "pm10",
+    "api_value": 237.806189025821,
+    "original_direct_value": 237.806189025821,
+    "portable_direct_value": 237.806189025821,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5405",
+    "pollutant": "no2",
+    "api_value": 36.573399515275376,
+    "original_direct_value": 36.57339951527538,
+    "portable_direct_value": 36.57339951527538,
+    "absolute_error": 7.105427357601002e-15
+  },
+  {
+    "station": "site_5405",
+    "pollutant": "no",
+    "api_value": 9.11557172436676,
+    "original_direct_value": 9.11557172436676,
+    "portable_direct_value": 9.115571724366763,
+    "absolute_error": 3.552713678800501e-15
+  },
+  {
+    "station": "site_5405",
+    "pollutant": "nox",
+    "api_value": 24.35505047961669,
+    "original_direct_value": 24.35505047961669,
+    "portable_direct_value": 24.35505047961669,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5405",
+    "pollutant": "co",
+    "api_value": 1.020898103671615,
+    "original_direct_value": 1.020898103671615,
+    "portable_direct_value": 1.020898103671615,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5405",
+    "pollutant": "o3",
+    "api_value": 81.73291762023078,
+    "original_direct_value": 81.73291762023078,
+    "portable_direct_value": 81.73291762023078,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5405",
+    "pollutant": "benzene",
+    "api_value": 3.98111821655137,
+    "original_direct_value": 3.981118216551369,
+    "portable_direct_value": 3.98111821655137,
+    "absolute_error": 8.881784197001252e-16
+  },
+  {
+    "station": "site_5405",
+    "pollutant": "toluene",
+    "api_value": 10.03151204111332,
+    "original_direct_value": 10.03151204111332,
+    "portable_direct_value": 10.03151204111332,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5405",
+    "pollutant": "xylene",
+    "api_value": 2.1964280366943294,
+    "original_direct_value": 2.1964280366943294,
+    "portable_direct_value": 2.1964280366943294,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5406",
+    "pollutant": "pm25",
+    "api_value": 29.56952168147377,
+    "original_direct_value": 29.56952168147377,
+    "portable_direct_value": 29.569521681473777,
+    "absolute_error": 7.105427357601002e-15
+  },
+  {
+    "station": "site_5406",
+    "pollutant": "pm10",
+    "api_value": 27.97999974124503,
+    "original_direct_value": 27.979999741245024,
+    "portable_direct_value": 27.979999741245024,
+    "absolute_error": 7.105427357601002e-15
+  },
+  {
+    "station": "site_5406",
+    "pollutant": "no2",
+    "api_value": 29.62252010097912,
+    "original_direct_value": 29.62252010097912,
+    "portable_direct_value": 29.62252010097912,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5406",
+    "pollutant": "no",
+    "api_value": 20.741090247859002,
+    "original_direct_value": 20.741090247859,
+    "portable_direct_value": 20.741090247859,
+    "absolute_error": 3.552713678800501e-15
+  },
+  {
+    "station": "site_5406",
+    "pollutant": "nox",
+    "api_value": 29.227717811534042,
+    "original_direct_value": 29.227717811534042,
+    "portable_direct_value": 29.227717811534042,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5406",
+    "pollutant": "co",
+    "api_value": 0.6185621511692335,
+    "original_direct_value": 0.6185621511692335,
+    "portable_direct_value": 0.6185621511692335,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5406",
+    "pollutant": "o3",
+    "api_value": 97.85575193749649,
+    "original_direct_value": 97.85575193749649,
+    "portable_direct_value": 97.85575193749649,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5406",
+    "pollutant": "benzene",
+    "api_value": 4.769971634173463,
+    "original_direct_value": 4.769971634173463,
+    "portable_direct_value": 4.769971634173463,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5406",
+    "pollutant": "toluene",
+    "api_value": 3.4705319481229013,
+    "original_direct_value": 3.4705319481229013,
+    "portable_direct_value": 3.4705319481229013,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5406",
+    "pollutant": "xylene",
+    "api_value": 1.8730494396978774,
+    "original_direct_value": 1.8730494396978774,
+    "portable_direct_value": 1.8730494396978774,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5407",
+    "pollutant": "pm25",
+    "api_value": 96.68304484723336,
+    "original_direct_value": 96.68304484723336,
+    "portable_direct_value": 96.68304484723336,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5407",
+    "pollutant": "pm10",
+    "api_value": 204.89296568925255,
+    "original_direct_value": 204.89296568925255,
+    "portable_direct_value": 204.89296568925255,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5407",
+    "pollutant": "no2",
+    "api_value": 36.12250712185175,
+    "original_direct_value": 36.12250712185175,
+    "portable_direct_value": 36.12250712185175,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5407",
+    "pollutant": "no",
+    "api_value": 18.93191762354625,
+    "original_direct_value": 18.93191762354625,
+    "portable_direct_value": 18.93191762354625,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5407",
+    "pollutant": "nox",
+    "api_value": 37.46804760085974,
+    "original_direct_value": 37.46804760085974,
+    "portable_direct_value": 37.46804760085974,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5407",
+    "pollutant": "co",
+    "api_value": 1.923764864421214,
+    "original_direct_value": 1.923764864421214,
+    "portable_direct_value": 1.923764864421214,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5407",
+    "pollutant": "o3",
+    "api_value": 13.407395992291399,
+    "original_direct_value": 13.407395992291399,
+    "portable_direct_value": 13.407395992291399,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5407",
+    "pollutant": "benzene",
+    "api_value": 10.237161964175634,
+    "original_direct_value": 10.237161964175634,
+    "portable_direct_value": 10.237161964175636,
+    "absolute_error": 1.7763568394002505e-15
+  },
+  {
+    "station": "site_5407",
+    "pollutant": "toluene",
+    "api_value": 18.21692784914842,
+    "original_direct_value": 18.21692784914842,
+    "portable_direct_value": 18.21692784914842,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5407",
+    "pollutant": "xylene",
+    "api_value": 3.198347426872095,
+    "original_direct_value": 3.198347426872095,
+    "portable_direct_value": 3.198347426872095,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5408",
+    "pollutant": "pm25",
+    "api_value": 39.24272218230362,
+    "original_direct_value": 39.24272218230362,
+    "portable_direct_value": 39.24272218230362,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5408",
+    "pollutant": "pm10",
+    "api_value": 133.51102204616288,
+    "original_direct_value": 133.51102204616285,
+    "portable_direct_value": 133.51102204616285,
+    "absolute_error": 2.842170943040401e-14
+  },
+  {
+    "station": "site_5408",
+    "pollutant": "no2",
+    "api_value": 46.47492328613585,
+    "original_direct_value": 46.47492328613585,
+    "portable_direct_value": 46.474923286135834,
+    "absolute_error": 1.4210854715202004e-14
+  },
+  {
+    "station": "site_5408",
+    "pollutant": "no",
+    "api_value": 6.588347880415289,
+    "original_direct_value": 6.588347880415289,
+    "portable_direct_value": 6.588347880415287,
+    "absolute_error": 1.7763568394002505e-15
+  },
+  {
+    "station": "site_5408",
+    "pollutant": "nox",
+    "api_value": 28.89548252930762,
+    "original_direct_value": 28.89548252930762,
+    "portable_direct_value": 28.89548252930762,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5408",
+    "pollutant": "co",
+    "api_value": 1.2013261741073862,
+    "original_direct_value": 1.2013261741073862,
+    "portable_direct_value": 1.2013261741073862,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5408",
+    "pollutant": "o3",
+    "api_value": 72.01943009311381,
+    "original_direct_value": 72.01943009311381,
+    "portable_direct_value": 72.01943009311381,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5408",
+    "pollutant": "benzene",
+    "api_value": 5.593395963149662,
+    "original_direct_value": 5.593395963149662,
+    "portable_direct_value": 5.593395963149662,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5408",
+    "pollutant": "toluene",
+    "api_value": 8.16803769733284,
+    "original_direct_value": 8.16803769733284,
+    "portable_direct_value": 8.16803769733284,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5408",
+    "pollutant": "xylene",
+    "api_value": 2.0223059615298076,
+    "original_direct_value": 2.0223059615298076,
+    "portable_direct_value": 2.0223059615298076,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5409",
+    "pollutant": "pm25",
+    "api_value": 95.61114818126252,
+    "original_direct_value": 95.61114818126252,
+    "portable_direct_value": 95.61114818126252,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5409",
+    "pollutant": "pm10",
+    "api_value": 114.83457596165348,
+    "original_direct_value": 114.83457596165347,
+    "portable_direct_value": 114.83457596165347,
+    "absolute_error": 1.4210854715202004e-14
+  },
+  {
+    "station": "site_5409",
+    "pollutant": "no2",
+    "api_value": 68.4456480170322,
+    "original_direct_value": 68.4456480170322,
+    "portable_direct_value": 68.4456480170322,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5409",
+    "pollutant": "no",
+    "api_value": 32.15089367841027,
+    "original_direct_value": 32.15089367841027,
+    "portable_direct_value": 32.15089367841027,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5409",
+    "pollutant": "nox",
+    "api_value": 99.49966058435987,
+    "original_direct_value": 99.49966058435987,
+    "portable_direct_value": 99.49966058435987,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5409",
+    "pollutant": "so2",
+    "api_value": 7.975,
+    "original_direct_value": 7.975,
+    "portable_direct_value": 7.975,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5409",
+    "pollutant": "co",
+    "api_value": 2.2318115158083556,
+    "original_direct_value": 2.2318115158083556,
+    "portable_direct_value": 2.2318115158083556,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5409",
+    "pollutant": "o3",
+    "api_value": 16.23624670867232,
+    "original_direct_value": 16.23624670867232,
+    "portable_direct_value": 16.23624670867232,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5409",
+    "pollutant": "benzene",
+    "api_value": 11.183194524854281,
+    "original_direct_value": 11.183194524854281,
+    "portable_direct_value": 11.183194524854281,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5409",
+    "pollutant": "toluene",
+    "api_value": 21.906109455521378,
+    "original_direct_value": 21.906109455521378,
+    "portable_direct_value": 21.906109455521378,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5409",
+    "pollutant": "xylene",
+    "api_value": 6.333630737419473,
+    "original_direct_value": 6.333630737419473,
+    "portable_direct_value": 6.333630737419473,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5766",
+    "pollutant": "pm25",
+    "api_value": 50.24320314941313,
+    "original_direct_value": 50.24320314941313,
+    "portable_direct_value": 50.24320314941313,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5766",
+    "pollutant": "pm10",
+    "api_value": 99.86944596540478,
+    "original_direct_value": 99.86944596540478,
+    "portable_direct_value": 99.86944596540478,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5766",
+    "pollutant": "no2",
+    "api_value": 37.92545895643766,
+    "original_direct_value": 37.925458956437666,
+    "portable_direct_value": 37.92545895643766,
+    "absolute_error": 7.105427357601002e-15
+  },
+  {
+    "station": "site_5766",
+    "pollutant": "no",
+    "api_value": 14.323207684673779,
+    "original_direct_value": 14.323207684673779,
+    "portable_direct_value": 14.323207684673775,
+    "absolute_error": 3.552713678800501e-15
+  },
+  {
+    "station": "site_5766",
+    "pollutant": "nox",
+    "api_value": 26.59263129557332,
+    "original_direct_value": 26.59263129557332,
+    "portable_direct_value": 26.59263129557332,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5766",
+    "pollutant": "so2",
+    "api_value": 2.3625,
+    "original_direct_value": 2.3625,
+    "portable_direct_value": 2.3625,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5766",
+    "pollutant": "co",
+    "api_value": 1.5282874482354551,
+    "original_direct_value": 1.5282874482354551,
+    "portable_direct_value": 1.5282874482354551,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5766",
+    "pollutant": "o3",
+    "api_value": 16.459987745889364,
+    "original_direct_value": 16.459987745889364,
+    "portable_direct_value": 16.459987745889364,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5766",
+    "pollutant": "nh3",
+    "api_value": 21.97310942223187,
+    "original_direct_value": 21.973109422231868,
+    "portable_direct_value": 21.97310942223187,
+    "absolute_error": 3.552713678800501e-15
+  },
+  {
+    "station": "site_5766",
+    "pollutant": "benzene",
+    "api_value": 0.962152071855218,
+    "original_direct_value": 0.962152071855218,
+    "portable_direct_value": 0.962152071855218,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5766",
+    "pollutant": "toluene",
+    "api_value": 4.399974311902724,
+    "original_direct_value": 4.399974311902724,
+    "portable_direct_value": 4.399974311902724,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5767",
+    "pollutant": "pm25",
+    "api_value": 37.59712525456205,
+    "original_direct_value": 37.59712525456205,
+    "portable_direct_value": 37.59712525456205,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5767",
+    "pollutant": "pm10",
+    "api_value": 82.9050779306861,
+    "original_direct_value": 82.9050779306861,
+    "portable_direct_value": 82.9050779306861,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5767",
+    "pollutant": "no2",
+    "api_value": 29.17684541400748,
+    "original_direct_value": 29.17684541400748,
+    "portable_direct_value": 29.17684541400748,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5767",
+    "pollutant": "no",
+    "api_value": 40.58394349184796,
+    "original_direct_value": 40.58394349184796,
+    "portable_direct_value": 40.58394349184796,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5767",
+    "pollutant": "nox",
+    "api_value": 41.18833655042878,
+    "original_direct_value": 41.18833655042878,
+    "portable_direct_value": 41.18833655042878,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5767",
+    "pollutant": "so2",
+    "api_value": 0.8400000000000001,
+    "original_direct_value": 0.8400000000000001,
+    "portable_direct_value": 0.8400000000000001,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5767",
+    "pollutant": "co",
+    "api_value": 1.4685922169337033,
+    "original_direct_value": 1.4685922169337033,
+    "portable_direct_value": 1.4685922169337033,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5767",
+    "pollutant": "o3",
+    "api_value": 7.878439843019347,
+    "original_direct_value": 7.878439843019347,
+    "portable_direct_value": 7.878439843019347,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5767",
+    "pollutant": "nh3",
+    "api_value": 9.754295308836063,
+    "original_direct_value": 9.754295308836063,
+    "portable_direct_value": 9.754295308836063,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5767",
+    "pollutant": "benzene",
+    "api_value": 9.402131591628017,
+    "original_direct_value": 9.402131591628017,
+    "portable_direct_value": 9.402131591628017,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5767",
+    "pollutant": "toluene",
+    "api_value": 35.13465820152923,
+    "original_direct_value": 35.13465820152923,
+    "portable_direct_value": 35.13465820152923,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5988",
+    "pollutant": "pm25",
+    "api_value": 98.48334219149805,
+    "original_direct_value": 98.48334219149805,
+    "portable_direct_value": 98.48334219149804,
+    "absolute_error": 1.4210854715202004e-14
+  },
+  {
+    "station": "site_5988",
+    "pollutant": "pm10",
+    "api_value": 218.06341032246127,
+    "original_direct_value": 218.06341032246132,
+    "portable_direct_value": 218.06341032246127,
+    "absolute_error": 5.684341886080802e-14
+  },
+  {
+    "station": "site_5988",
+    "pollutant": "no2",
+    "api_value": 35.071605166668796,
+    "original_direct_value": 35.071605166668796,
+    "portable_direct_value": 35.0716051666688,
+    "absolute_error": 7.105427357601002e-15
+  },
+  {
+    "station": "site_5988",
+    "pollutant": "no",
+    "api_value": 5.592704787318132,
+    "original_direct_value": 5.592704787318132,
+    "portable_direct_value": 5.592704787318132,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5988",
+    "pollutant": "nox",
+    "api_value": 20.76232112489356,
+    "original_direct_value": 20.76232112489356,
+    "portable_direct_value": 20.76232112489356,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5988",
+    "pollutant": "co",
+    "api_value": 1.718874843245376,
+    "original_direct_value": 1.718874843245376,
+    "portable_direct_value": 1.718874843245376,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5988",
+    "pollutant": "o3",
+    "api_value": 46.26715450010721,
+    "original_direct_value": 46.26715450010721,
+    "portable_direct_value": 46.26715450010721,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5988",
+    "pollutant": "benzene",
+    "api_value": 9.813764738982005,
+    "original_direct_value": 9.813764738982005,
+    "portable_direct_value": 9.813764738982007,
+    "absolute_error": 1.7763568394002505e-15
+  },
+  {
+    "station": "site_5988",
+    "pollutant": "toluene",
+    "api_value": 11.90283485524328,
+    "original_direct_value": 11.90283485524328,
+    "portable_direct_value": 11.90283485524328,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5996",
+    "pollutant": "pm25",
+    "api_value": 77.54458319682402,
+    "original_direct_value": 77.54458319682402,
+    "portable_direct_value": 77.54458319682402,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5996",
+    "pollutant": "pm10",
+    "api_value": 109.78317013705154,
+    "original_direct_value": 109.78317013705157,
+    "portable_direct_value": 109.78317013705154,
+    "absolute_error": 2.842170943040401e-14
+  },
+  {
+    "station": "site_5996",
+    "pollutant": "no2",
+    "api_value": 23.18146074873909,
+    "original_direct_value": 23.18146074873909,
+    "portable_direct_value": 23.18146074873909,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5996",
+    "pollutant": "no",
+    "api_value": 3.730914641522883,
+    "original_direct_value": 3.730914641522883,
+    "portable_direct_value": 3.730914641522883,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5996",
+    "pollutant": "nox",
+    "api_value": 27.445571841981284,
+    "original_direct_value": 27.445571841981284,
+    "portable_direct_value": 27.445571841981284,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5996",
+    "pollutant": "co",
+    "api_value": 0.7277981821329814,
+    "original_direct_value": 0.7277981821329814,
+    "portable_direct_value": 0.7277981821329814,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5996",
+    "pollutant": "o3",
+    "api_value": 10.749603171245639,
+    "original_direct_value": 10.749603171245639,
+    "portable_direct_value": 10.749603171245639,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_5996",
+    "pollutant": "benzene",
+    "api_value": 3.1171481300683763,
+    "original_direct_value": 3.1171481300683763,
+    "portable_direct_value": 3.117148130068376,
+    "absolute_error": 4.440892098500626e-16
+  },
+  {
+    "station": "site_5996",
+    "pollutant": "toluene",
+    "api_value": 12.809263754799174,
+    "original_direct_value": 12.809263754799174,
+    "portable_direct_value": 12.809263754799174,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_6012",
+    "pollutant": "pm25",
+    "api_value": 117.37430375794824,
+    "original_direct_value": 117.37430375794824,
+    "portable_direct_value": 117.37430375794824,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_6012",
+    "pollutant": "pm10",
+    "api_value": 156.48760065754232,
+    "original_direct_value": 156.48760065754232,
+    "portable_direct_value": 156.48760065754232,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_6012",
+    "pollutant": "no2",
+    "api_value": 8.955318312472219,
+    "original_direct_value": 8.955318312472219,
+    "portable_direct_value": 8.955318312472219,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_6012",
+    "pollutant": "no",
+    "api_value": 7.590090096310045,
+    "original_direct_value": 7.590090096310045,
+    "portable_direct_value": 7.590090096310044,
+    "absolute_error": 8.881784197001252e-16
+  },
+  {
+    "station": "site_6012",
+    "pollutant": "nox",
+    "api_value": 15.575365358150899,
+    "original_direct_value": 15.575365358150899,
+    "portable_direct_value": 15.575365358150899,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_6012",
+    "pollutant": "co",
+    "api_value": 0.644024392094205,
+    "original_direct_value": 0.644024392094205,
+    "portable_direct_value": 0.644024392094205,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_6012",
+    "pollutant": "o3",
+    "api_value": 7.253311883976391,
+    "original_direct_value": 7.253311883976391,
+    "portable_direct_value": 7.253311883976391,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_6012",
+    "pollutant": "benzene",
+    "api_value": 11.87245789515865,
+    "original_direct_value": 11.87245789515865,
+    "portable_direct_value": 11.87245789515865,
+    "absolute_error": 0.0
+  },
+  {
+    "station": "site_6012",
+    "pollutant": "toluene",
+    "api_value": 7.954131762616454,
+    "original_direct_value": 7.954131762616454,
+    "portable_direct_value": 7.954131762616454,
+    "absolute_error": 0.0
+  }
+]

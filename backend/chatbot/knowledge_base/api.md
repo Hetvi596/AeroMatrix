@@ -1,0 +1,9 @@
+# Exported ML API behavior and data status
+
+The separately exported AeroMatrix_Trained_Backend is a read-only inference service, normally on port 8000. GET /health lists pollutants; GET /regions lists supported station aliases and wards; GET /pollution?region= returns actual stored observations and measured-window AQI. GET /forecast?region=&pollutant=&allow_historical=false returns saved-model forecasts. Current forecasts require verified recent histories sent to POST /forecast by the trusted application pipeline; the chatbot does not treat user-typed readings as verified observations. GET /model/metrics returns model metadata. GET /aqi/history?region= returns older source-reported AQI. GET /location provides boundary lookup but withholds unsupported spatial pollution predictions.
+
+## Historical versus current
+Bundled histories are snapshots, not a live feed. Historical observations retain source time and historical=true. Forecasts from old histories require explicit allow_historical=true. AeroAI withholds old numerical readings from current-data requests and offers historical review instead. Measured observations, predicted concentrations, source-reported AQI, and hypothetical scenarios must be labeled separately. Forecast valid_at differs from issued_at. Different timestamps must not be used to rank two localities as if contemporaneous. CO is in mg/m3 while the other supported concentration targets use ug/m3.
+
+## AQI availability
+The backend uses CPCB National AQI and the maximum eligible pollutant subindex. It requires sufficient history and at least three eligible pollutants including PM2.5 or PM10. The export conservatively checks complete CO/O3 eight-hour windows and at least 16 hours in other 24-hour windows. Some severe values are lower bounds, and the separate high-ozone one-hour rule is not implemented. A single pollutant forecast is insufficient for official forecast AQI. Missing and unsupported results remain UNAVAILABLE.

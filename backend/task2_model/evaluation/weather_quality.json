@@ -1,0 +1,25 @@
+{
+  "rows": 84192,
+  "missing": {
+    "temperature_2m": 0,
+    "relative_humidity_2m": 0,
+    "dew_point_2m": 0,
+    "wind_speed_10m": 0,
+    "wind_direction_10m": 0,
+    "precipitation": 0,
+    "surface_pressure": 0,
+    "timestamp": 0,
+    "grid": 0
+  },
+  "usage": "120-day lag, no future or contemporaneous reanalysis features",
+  "units": {
+    "time": "iso8601",
+    "temperature_2m": "\u00b0C",
+    "relative_humidity_2m": "%",
+    "dew_point_2m": "\u00b0C",
+    "wind_speed_10m": "m/s",
+    "wind_direction_10m": "\u00b0",
+    "precipitation": "mm",
+    "surface_pressure": "hPa"
+  }
+}

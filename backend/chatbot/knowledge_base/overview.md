@@ -1,0 +1,9 @@
+# AeroMatrix purpose and verified implementation
+
+AeroMatrix is a Pune-focused air-pollution intelligence and environmental digital-twin prototype. Its inspected code includes a React interface, Cesium 3D map, observed-data CSV import, environmental layers, and a rule-based what-if simulator. A separately exported Python backend serves trained station-level pollutant forecasts and actual historical observations. AeroAI is a separately integrated chatbot; it does not replace the existing frontend.
+
+## Architecture and technology stack
+The frontend uses React, TypeScript, Vite, CesiumJS, and Zustand state in src/store/useTwinStore.ts. The landing page also uses Three.js and Tailwind. A FastAPI Python inference backend exposes REST routes and serves saved scikit-learn models. Some model targets select persistence, so not all targets use a learned regression estimator. The current exported backend has 12 pollutant models and a 24-hour forecast horizon. The chatbot uses FastAPI, SQLite FTS5 BM25 retrieval, SQLite session memory, and a configurable Gemini/Ollama language model. The chatbot does not train or duplicate the pollutant models.
+
+## Implementation versus future claims
+The Cesium map supports layers, terrain, buildings, observations, and prototype scenario comparison. Imported station coordinates are required to place readings and forecasts correctly. The inspected exported models have no verified station coordinates. Validated street-level forecasts, arbitrary unseen-location pollution estimates, a live measurement connector, and validated causal intervention effects are not provided. Older frontend text about 72-hour forecasts and 10-meter micro-grids describes aspirations, not verified capabilities. The exported inference API and its model metadata supersede older README statements that training is still pending.

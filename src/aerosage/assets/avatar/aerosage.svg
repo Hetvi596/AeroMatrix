@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none" role="img" aria-labelledby="title desc"><title id="title">AeroSage</title><desc id="desc">Original environmental AI character with a pearl titanium shell, dark glass face, and cyan and emerald lights.</desc>
+<defs>
+<linearGradient id="shell" x1="102" y1="80" x2="285" y2="300" gradientUnits="userSpaceOnUse"><stop stop-color="#eefcfa"/><stop offset=".28" stop-color="#aec8d2"/><stop offset=".55" stop-color="#4b7286"/><stop offset=".78" stop-color="#9db9c1"/><stop offset="1" stop-color="#19394c"/></linearGradient>
+<linearGradient id="chest" x1="114" y1="257" x2="272" y2="389" gradientUnits="userSpaceOnUse"><stop stop-color="#9badba"/><stop offset=".22" stop-color="#294c60"/><stop offset=".65" stop-color="#0b2738"/><stop offset="1" stop-color="#0d1d2a" stop-opacity="0"/></linearGradient>
+<linearGradient id="visor" x1="128" y1="131" x2="255" y2="247" gradientUnits="userSpaceOnUse"><stop stop-color="#163746"/><stop offset=".45" stop-color="#051a28"/><stop offset="1" stop-color="#0c343d"/></linearGradient>
+<linearGradient id="light" x1="120" y1="100" x2="280" y2="260"><stop stop-color="#79f8ff"/><stop offset="1" stop-color="#58ecc2"/></linearGradient>
+<radialGradient id="halo"><stop stop-color="#3bf3d0" stop-opacity=".22"/><stop offset="1" stop-color="#20cfc0" stop-opacity="0"/></radialGradient>
+<filter id="glow"><feGaussianBlur stdDeviation="3"/></filter>
+</defs>
+<circle cx="200" cy="196" r="180" fill="url(#halo)"/>
+<ellipse cx="200" cy="210" rx="153" ry="153" stroke="#55dbc9" stroke-opacity=".12"/><path d="M65 151a149 149 0 0 1 203-74M329 275a147 147 0 0 1-200 61" stroke="#73eae1" stroke-opacity=".4" stroke-width="1.5"/>
+<circle cx="65" cy="151" r="4" fill="#81ffe7"/><circle cx="330" cy="275" r="3" fill="#78e9ff"/>
+<path d="M80 379c0-54 21-83 68-101l24-14h56l24 14c47 18 68 47 68 101" fill="url(#chest)" stroke="#88e8e2" stroke-opacity=".2"/>
+<path d="M149 281l51 37 51-37M104 326l46-23M296 326l-46-23" stroke="#b0d2df" stroke-opacity=".38"/>
+<path d="M181 254h38v35c-6 17-32 17-38 0z" fill="#315769"/>
+<path d="M165 268c9 12 61 12 70 0l-6 20c-14 17-45 17-58 0z" fill="#102c3a" stroke="#7caeba"/>
+<path d="M171 279c17 10 41 10 58 0" stroke="#6cf9d6" stroke-width="3"/>
+<path d="M101 157c0-52 31-86 94-90 55-3 101 35 104 87l-9 62c-5 34-44 65-89 65-47 0-85-30-92-67z" fill="url(#shell)"/>
+<path d="M119 128c18-36 48-47 84-46 34 0 59 15 76 38" stroke="#fff" stroke-opacity=".55" stroke-width="3"/>
+<path d="M195 69v24M126 113l14 12M273 110l-15 15" stroke="#416b7e" stroke-width="3"/>
+<path d="M124 137c39-17 111-19 152 0 11 5 15 17 13 29l-8 49c-3 21-28 40-77 42-47 2-77-21-82-45l-10-47c-3-13 0-23 12-28z" fill="url(#visor)" stroke="#8ab9c7" stroke-width="2"/>
+<path d="M130 141c35-13 99-15 135-1" stroke="#e1ffff" stroke-opacity=".19" stroke-width="3"/>
+<path d="M136 183q17-12 34 0M231 183q17-12 34 0" stroke="#52f8da" stroke-width="11" filter="url(#glow)"/>
+<path d="M138 181q16-12 32 0M232 181q16-12 32 0" stroke="url(#light)" stroke-width="5" stroke-linecap="round"/>
+<path d="M185 220q16 13 32 0" stroke="#76ffe0" stroke-width="3" stroke-linecap="round"/>
+<path d="M145 218h10M246 218h10" stroke="#4adbb8" stroke-opacity=".4" stroke-width="2"/>
+<path d="M199 147h4" stroke="#77eddc" stroke-width="3" stroke-linecap="round"/>
+<path d="M99 158c-15 1-20 12-18 37 1 22 7 32 24 30l-6-67z" fill="#28586a" stroke="#93cad4"/>
+<path d="M94 168l3 42" stroke="#66f8e0" stroke-width="4" stroke-linecap="round"/>
+<path d="M299 158c15 1 20 12 18 37-1 22-7 32-24 30l6-67z" fill="#163749" stroke="#7099aa"/>
+<path d="M305 168l-3 42" stroke="#61dce6" stroke-width="4" stroke-linecap="round"/>
+<path d="M139 250c36 31 90 33 125-2" stroke="#87f2dd" stroke-opacity=".5"/>
+<path d="M200 327c-14-8-24 2-13 13l13 12 13-12c11-11 1-21-13-13z" fill="#48e7c2" fill-opacity=".15" stroke="#6be5c9" stroke-width="1.5"/>
+<path d="M196 339l4-6 4 6-4 6z" fill="#a3ffe8"/>
+</svg>

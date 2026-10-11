@@ -1,0 +1,517 @@
+{
+  "file": "Pune_Pimpri_Chinchwad_Air_Quality.csv",
+  "sha256": "ac9539b656390d879e2386f9c65dd296f3c77b3199964d9153b122ff1c47162d",
+  "rows": 1820868,
+  "schema": [
+    "station_id",
+    "station_name",
+    "state_name",
+    "city_name",
+    "parameter_name",
+    "unit",
+    "collected_at",
+    "value",
+    "source"
+  ],
+  "stations": {
+    "site_5404": {
+      "name": "Mhada Colony, Pune - IITM",
+      "city": "Pune",
+      "latitude": null,
+      "longitude": null,
+      "coordinate_status": "missing in supplied CSV"
+    },
+    "site_5406": {
+      "name": "Bhosari, Pune - IITM",
+      "city": "Pune",
+      "latitude": null,
+      "longitude": null,
+      "coordinate_status": "missing in supplied CSV"
+    },
+    "site_5408": {
+      "name": "Transport Nagar-Nigdi, Pune - IITM",
+      "city": "Pune",
+      "latitude": null,
+      "longitude": null,
+      "coordinate_status": "missing in supplied CSV"
+    },
+    "site_5409": {
+      "name": "Revenue Colony-Shivajinagar, Pune - IITM",
+      "city": "Pune",
+      "latitude": null,
+      "longitude": null,
+      "coordinate_status": "missing in supplied CSV"
+    },
+    "site_5407": {
+      "name": "Hadapsar, Pune - IITM",
+      "city": "Pune",
+      "latitude": null,
+      "longitude": null,
+      "coordinate_status": "missing in supplied CSV"
+    },
+    "site_5764": {
+      "name": "Park Street Wakad, Pimpri Chinchwad - MPCB",
+      "city": "Pimpri-Chinchwad",
+      "latitude": null,
+      "longitude": null,
+      "coordinate_status": "missing in supplied CSV"
+    },
+    "site_5765": {
+      "name": "Thergaon, Pimpri Chinchwad - MPCB",
+      "city": "Pimpri-Chinchwad",
+      "latitude": null,
+      "longitude": null,
+      "coordinate_status": "missing in supplied CSV"
+    },
+    "site_5766": {
+      "name": "Katraj Dairy, Pune - MPCB",
+      "city": "Pune",
+      "latitude": null,
+      "longitude": null,
+      "coordinate_status": "missing in supplied CSV"
+    },
+    "site_5763": {
+      "name": "Gavalinagar, Pimpri Chinchwad - MPCB",
+      "city": "Pimpri-Chinchwad",
+      "latitude": null,
+      "longitude": null,
+      "coordinate_status": "missing in supplied CSV"
+    },
+    "site_5988": {
+      "name": "Bhumkar Nagar, Pune - IITM",
+      "city": "Pune",
+      "latitude": null,
+      "longitude": null,
+      "coordinate_status": "missing in supplied CSV"
+    },
+    "site_5996": {
+      "name": "Panchawati_Pashan, Pune - IITM",
+      "city": "Pune",
+      "latitude": null,
+      "longitude": null,
+      "coordinate_status": "missing in supplied CSV"
+    },
+    "site_5998": {
+      "name": "Savta Mali Nagar, Pimpri-Chinchwad - IITM",
+      "city": "Pimpri-Chinchwad",
+      "latitude": null,
+      "longitude": null,
+      "coordinate_status": "missing in supplied CSV"
+    },
+    "site_6012": {
+      "name": "Dhankawadi, Pune - IITM",
+      "city": "Pune",
+      "latitude": null,
+      "longitude": null,
+      "coordinate_status": "missing in supplied CSV"
+    }
+  },
+  "parameters": {
+    "Benzene": 168489,
+    "Ozone": 170423,
+    "PM2.5": 185369,
+    "PM10": 186955,
+    "NO2": 162048,
+    "NO": 160952,
+    "NOx": 162056,
+    "CO": 161156,
+    "MP-Xylene": 150403,
+    "SO2": 78088,
+    "Eth-Benzene": 87187,
+    "Toluene": 80004,
+    "Xylene": 17722,
+    "NH3": 50016
+  },
+  "units": {
+    "Benzene": [
+      "\u00b5g/m\u00b3"
+    ],
+    "CO": [
+      "mg/m\u00b3"
+    ],
+    "Eth-Benzene": [
+      "\u00b5g/m\u00b3"
+    ],
+    "MP-Xylene": [
+      "\u00b5g/m\u00b3"
+    ],
+    "NO": [
+      "\u00b5g/m\u00b3"
+    ],
+    "NO2": [
+      "\u00b5g/m\u00b3"
+    ],
+    "NOx": [
+      "ppb"
+    ],
+    "Ozone": [
+      "\u00b5g/m\u00b3"
+    ],
+    "PM10": [
+      "\u00b5g/m\u00b3"
+    ],
+    "PM2.5": [
+      "\u00b5g/m\u00b3"
+    ],
+    "SO2": [
+      "\u00b5g/m\u00b3"
+    ],
+    "Toluene": [
+      "\u00b5g/m\u00b3"
+    ],
+    "Xylene": [
+      "\u00b5g/m\u00b3"
+    ],
+    "NH3": [
+      "\u00b5g/m\u00b3"
+    ]
+  },
+  "sources": {
+    "cpcb_caaqm": 1820868
+  },
+  "missing": {
+    "station_id": 0,
+    "station_name": 0,
+    "state_name": 0,
+    "city_name": 0,
+    "parameter_name": 0,
+    "unit": 0,
+    "collected_at": 0,
+    "value": 0,
+    "source": 0
+  },
+  "invalid_timestamps": 0,
+  "nonfinite_values": 0,
+  "negative_values": 0,
+  "start": "2020-11-13 14:00:00",
+  "end": "2025-09-01 23:00:00",
+  "exact_duplicate_rows": 0,
+  "duplicate_key_rows": 0,
+  "duplicate_method": "64-bit pandas row/key hashes for complete-file audit; target conflicts subsequently verified by exact group values",
+  "target_invalid_excluded": 0,
+  "conflicting_target_keys_excluded": 0,
+  "exact_target_duplicates_removed": 0,
+  "off_hour_target_rows_excluded": 0,
+  "valid_unique_targets": {
+    "pm10": 186955,
+    "pm25": 185369
+  },
+  "large_positive_values_retained": 0,
+  "coverage": [
+    {
+      "station": "site_5404",
+      "pollutant": "pm10",
+      "n": 29414,
+      "start": "2020-11-13 08:30:00+00:00",
+      "end": "2025-09-01 17:30:00+00:00",
+      "expected_hourly_bins": 42082,
+      "missing_hourly_bins": 12668,
+      "non_hourly_gaps": 214,
+      "min": 2.64,
+      "max": 753.16
+    },
+    {
+      "station": "site_5404",
+      "pollutant": "pm25",
+      "n": 29478,
+      "start": "2020-11-13 08:30:00+00:00",
+      "end": "2025-09-01 17:30:00+00:00",
+      "expected_hourly_bins": 42082,
+      "missing_hourly_bins": 12604,
+      "non_hourly_gaps": 209,
+      "min": 0.08,
+      "max": 887.3825
+    },
+    {
+      "station": "site_5406",
+      "pollutant": "pm10",
+      "n": 19929,
+      "start": "2020-11-13 08:30:00+00:00",
+      "end": "2025-09-01 17:30:00+00:00",
+      "expected_hourly_bins": 42082,
+      "missing_hourly_bins": 22153,
+      "non_hourly_gaps": 340,
+      "min": 4.0,
+      "max": 958.5499999999998
+    },
+    {
+      "station": "site_5406",
+      "pollutant": "pm25",
+      "n": 19873,
+      "start": "2020-11-13 08:30:00+00:00",
+      "end": "2025-09-01 17:30:00+00:00",
+      "expected_hourly_bins": 42082,
+      "missing_hourly_bins": 22209,
+      "non_hourly_gaps": 341,
+      "min": 0.93,
+      "max": 760.64
+    },
+    {
+      "station": "site_5407",
+      "pollutant": "pm10",
+      "n": 10536,
+      "start": "2021-01-12 08:30:00+00:00",
+      "end": "2025-05-11 14:30:00+00:00",
+      "expected_hourly_bins": 37927,
+      "missing_hourly_bins": 27391,
+      "non_hourly_gaps": 113,
+      "min": 2.07,
+      "max": 970.32
+    },
+    {
+      "station": "site_5407",
+      "pollutant": "pm25",
+      "n": 10593,
+      "start": "2021-01-12 08:30:00+00:00",
+      "end": "2025-05-11 14:30:00+00:00",
+      "expected_hourly_bins": 37927,
+      "missing_hourly_bins": 27334,
+      "non_hourly_gaps": 110,
+      "min": 0.02,
+      "max": 860.47
+    },
+    {
+      "station": "site_5408",
+      "pollutant": "pm10",
+      "n": 22878,
+      "start": "2020-11-13 08:30:00+00:00",
+      "end": "2025-08-29 17:30:00+00:00",
+      "expected_hourly_bins": 42010,
+      "missing_hourly_bins": 19132,
+      "non_hourly_gaps": 341,
+      "min": 0.47,
+      "max": 986.2
+    },
+    {
+      "station": "site_5408",
+      "pollutant": "pm25",
+      "n": 23560,
+      "start": "2020-11-13 08:30:00+00:00",
+      "end": "2025-08-29 17:30:00+00:00",
+      "expected_hourly_bins": 42010,
+      "missing_hourly_bins": 18450,
+      "non_hourly_gaps": 325,
+      "min": 0.07,
+      "max": 927.01
+    },
+    {
+      "station": "site_5409",
+      "pollutant": "pm10",
+      "n": 30642,
+      "start": "2020-11-13 08:30:00+00:00",
+      "end": "2025-08-10 09:30:00+00:00",
+      "expected_hourly_bins": 41546,
+      "missing_hourly_bins": 10904,
+      "non_hourly_gaps": 173,
+      "min": 1.97,
+      "max": 997.56
+    },
+    {
+      "station": "site_5409",
+      "pollutant": "pm25",
+      "n": 30713,
+      "start": "2020-11-13 08:30:00+00:00",
+      "end": "2025-08-10 09:30:00+00:00",
+      "expected_hourly_bins": 41546,
+      "missing_hourly_bins": 10833,
+      "non_hourly_gaps": 175,
+      "min": 2.65,
+      "max": 994.79
+    },
+    {
+      "station": "site_5763",
+      "pollutant": "pm10",
+      "n": 12990,
+      "start": "2023-06-23 09:30:00+00:00",
+      "end": "2024-12-31 17:30:00+00:00",
+      "expected_hourly_bins": 13377,
+      "missing_hourly_bins": 387,
+      "non_hourly_gaps": 99,
+      "min": 1.24,
+      "max": 988.79
+    },
+    {
+      "station": "site_5763",
+      "pollutant": "pm25",
+      "n": 11778,
+      "start": "2023-06-23 09:30:00+00:00",
+      "end": "2024-12-31 17:30:00+00:00",
+      "expected_hourly_bins": 13377,
+      "missing_hourly_bins": 1599,
+      "non_hourly_gaps": 104,
+      "min": 0.3725,
+      "max": 952.8966666666666
+    },
+    {
+      "station": "site_5764",
+      "pollutant": "pm10",
+      "n": 13740,
+      "start": "2023-04-27 11:30:00+00:00",
+      "end": "2024-12-31 17:30:00+00:00",
+      "expected_hourly_bins": 14743,
+      "missing_hourly_bins": 1003,
+      "non_hourly_gaps": 112,
+      "min": 0.27,
+      "max": 860.75
+    },
+    {
+      "station": "site_5764",
+      "pollutant": "pm25",
+      "n": 12640,
+      "start": "2023-04-27 11:30:00+00:00",
+      "end": "2024-12-31 17:30:00+00:00",
+      "expected_hourly_bins": 14743,
+      "missing_hourly_bins": 2103,
+      "non_hourly_gaps": 101,
+      "min": 0.01,
+      "max": 906.64
+    },
+    {
+      "station": "site_5765",
+      "pollutant": "pm10",
+      "n": 12846,
+      "start": "2023-05-15 10:30:00+00:00",
+      "end": "2024-12-31 17:30:00+00:00",
+      "expected_hourly_bins": 14312,
+      "missing_hourly_bins": 1466,
+      "non_hourly_gaps": 130,
+      "min": 0.33,
+      "max": 977.24
+    },
+    {
+      "station": "site_5765",
+      "pollutant": "pm25",
+      "n": 12813,
+      "start": "2023-05-15 10:30:00+00:00",
+      "end": "2024-12-31 17:30:00+00:00",
+      "expected_hourly_bins": 14312,
+      "missing_hourly_bins": 1499,
+      "non_hourly_gaps": 140,
+      "min": 0.01,
+      "max": 770.71
+    },
+    {
+      "station": "site_5766",
+      "pollutant": "pm10",
+      "n": 14803,
+      "start": "2023-05-22 11:30:00+00:00",
+      "end": "2025-09-01 17:30:00+00:00",
+      "expected_hourly_bins": 19999,
+      "missing_hourly_bins": 5196,
+      "non_hourly_gaps": 221,
+      "min": 0.03,
+      "max": 874.86
+    },
+    {
+      "station": "site_5766",
+      "pollutant": "pm25",
+      "n": 14846,
+      "start": "2023-05-22 11:30:00+00:00",
+      "end": "2025-09-01 17:30:00+00:00",
+      "expected_hourly_bins": 19999,
+      "missing_hourly_bins": 5153,
+      "non_hourly_gaps": 213,
+      "min": 0.01,
+      "max": 740.71
+    },
+    {
+      "station": "site_5988",
+      "pollutant": "pm10",
+      "n": 8219,
+      "start": "2024-05-21 07:30:00+00:00",
+      "end": "2025-09-01 17:30:00+00:00",
+      "expected_hourly_bins": 11243,
+      "missing_hourly_bins": 3024,
+      "non_hourly_gaps": 99,
+      "min": 0.8,
+      "max": 999.99
+    },
+    {
+      "station": "site_5988",
+      "pollutant": "pm25",
+      "n": 8130,
+      "start": "2024-05-21 07:30:00+00:00",
+      "end": "2025-09-01 17:30:00+00:00",
+      "expected_hourly_bins": 11243,
+      "missing_hourly_bins": 3113,
+      "non_hourly_gaps": 127,
+      "min": 0.01,
+      "max": 672.08
+    },
+    {
+      "station": "site_5996",
+      "pollutant": "pm10",
+      "n": 6343,
+      "start": "2024-07-18 11:30:00+00:00",
+      "end": "2025-09-01 17:30:00+00:00",
+      "expected_hourly_bins": 9847,
+      "missing_hourly_bins": 3504,
+      "non_hourly_gaps": 35,
+      "min": 3.36,
+      "max": 611.32
+    },
+    {
+      "station": "site_5996",
+      "pollutant": "pm25",
+      "n": 6361,
+      "start": "2024-07-18 12:30:00+00:00",
+      "end": "2025-09-01 17:30:00+00:00",
+      "expected_hourly_bins": 9846,
+      "missing_hourly_bins": 3485,
+      "non_hourly_gaps": 43,
+      "min": 1.21,
+      "max": 195.0
+    },
+    {
+      "station": "site_5998",
+      "pollutant": "pm10",
+      "n": 3300,
+      "start": "2024-08-05 10:30:00+00:00",
+      "end": "2024-12-31 17:30:00+00:00",
+      "expected_hourly_bins": 3560,
+      "missing_hourly_bins": 260,
+      "non_hourly_gaps": 33,
+      "min": 4.96,
+      "max": 799.01
+    },
+    {
+      "station": "site_5998",
+      "pollutant": "pm25",
+      "n": 3300,
+      "start": "2024-08-05 10:30:00+00:00",
+      "end": "2024-12-31 17:30:00+00:00",
+      "expected_hourly_bins": 3560,
+      "missing_hourly_bins": 260,
+      "non_hourly_gaps": 35,
+      "min": 3.0,
+      "max": 588.16
+    },
+    {
+      "station": "site_6012",
+      "pollutant": "pm10",
+      "n": 1315,
+      "start": "2025-03-31 18:30:00+00:00",
+      "end": "2025-09-01 17:30:00+00:00",
+      "expected_hourly_bins": 3696,
+      "missing_hourly_bins": 2381,
+      "non_hourly_gaps": 58,
+      "min": 4.24,
+      "max": 270.61
+    },
+    {
+      "station": "site_6012",
+      "pollutant": "pm25",
+      "n": 1284,
+      "start": "2025-03-31 18:30:00+00:00",
+      "end": "2025-09-01 17:30:00+00:00",
+      "expected_hourly_bins": 3696,
+      "missing_hourly_bins": 2412,
+      "non_hourly_gaps": 52,
+      "min": 1.84,
+      "max": 234.0
+    }
+  ],
+  "timestamp_assumption": "CSV has naive timestamps. Interpreted as Asia/Kolkata because source is CPCB India; explicit timezone/publication timestamps are absent. Treat as hourly interval-end values, available at cutoff in retrospective evaluation; live arrival latency unverified.",
+  "coordinates_present": false,
+  "weather_columns_present": false
+}

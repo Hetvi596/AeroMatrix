@@ -1,0 +1,180 @@
+{
+  "status": "MEASURED",
+  "region": {
+    "station": "site_5406",
+    "station_name": "Bhosari, Pune - IITM",
+    "name": "Bhosari",
+    "aliases": [
+      "Bhosari"
+    ],
+    "longitude": null,
+    "latitude": null,
+    "source_files": "12_Bhosari_IITM_15_minute_AQI_Data_for_2024-25.csv"
+  },
+  "pollutants": {
+    "pm25": {
+      "status": "MEASURED",
+      "value": 5.0,
+      "unit": "ug/m3",
+      "time": "2025-12-12T17:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2025-12-12T17:00:00+05:30",
+        "end": "2025-12-12T18:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "pm10": {
+      "status": "MEASURED",
+      "value": 9.0,
+      "unit": "ug/m3",
+      "time": "2025-12-12T17:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2025-12-12T17:00:00+05:30",
+        "end": "2025-12-12T18:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "no2": {
+      "status": "MEASURED",
+      "value": 23.1875,
+      "unit": "ug/m3",
+      "time": "2025-09-20T00:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2025-09-20T00:00:00+05:30",
+        "end": "2025-09-20T01:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "no": {
+      "status": "MEASURED",
+      "value": 20.1975,
+      "unit": "ug/m3",
+      "time": "2025-09-20T00:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2025-09-20T00:00:00+05:30",
+        "end": "2025-09-20T01:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "nox": {
+      "status": "MEASURED",
+      "value": 28.7525,
+      "unit": "ppb",
+      "time": "2025-09-20T00:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2025-09-20T00:00:00+05:30",
+        "end": "2025-09-20T01:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "co": {
+      "status": "MEASURED",
+      "value": 0.65,
+      "unit": "mg/m3",
+      "time": "2025-12-12T17:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2025-12-12T17:00:00+05:30",
+        "end": "2025-12-12T18:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "o3": {
+      "status": "MEASURED",
+      "value": 117.01,
+      "unit": "ug/m3",
+      "time": "2025-12-12T17:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2025-12-12T17:00:00+05:30",
+        "end": "2025-12-12T18:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "benzene": {
+      "status": "MEASURED",
+      "value": 4.7175,
+      "unit": "ug/m3",
+      "time": "2025-09-20T00:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2025-09-20T00:00:00+05:30",
+        "end": "2025-09-20T01:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "toluene": {
+      "status": "MEASURED",
+      "value": 3.5025,
+      "unit": "ug/m3",
+      "time": "2025-09-20T00:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2025-09-20T00:00:00+05:30",
+        "end": "2025-09-20T01:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    },
+    "xylene": {
+      "status": "MEASURED",
+      "value": 1.4125,
+      "unit": "ug/m3",
+      "time": "2025-09-20T00:00:00+05:30",
+      "historical": true,
+      "source": "Provided OpenCity/CPCB station CSV; hourly mean of at least 3 valid quarter-hour observations",
+      "window": {
+        "start": "2025-09-20T00:00:00+05:30",
+        "end": "2025-09-20T01:00:00+05:30",
+        "statistic": "hourly_mean"
+      }
+    }
+  },
+  "aqi": {
+    "status": "UNAVAILABLE",
+    "value": null,
+    "category": null,
+    "dominant_pollutant": null,
+    "reason": "Requires at least three eligible pollutants including PM2.5 or PM10",
+    "subindices": {},
+    "coverage_hours": {
+      "pm25": 1,
+      "pm10": 1,
+      "no2": 0,
+      "so2": 0,
+      "co": 1,
+      "o3": 20,
+      "nh3": 0
+    },
+    "excluded": {
+      "pm25": "Fewer than 16 valid hourly observations in 24h",
+      "pm10": "Fewer than 16 valid hourly observations in 24h",
+      "no2": "Fewer than 16 valid hourly observations in 24h",
+      "so2": "Fewer than 16 valid hourly observations in 24h",
+      "co": "Fewer than 16 valid hourly observations in 24h",
+      "o3": "Incomplete trailing 8h average",
+      "nh3": "Fewer than 16 valid hourly observations in 24h"
+    },
+    "period_end": "2025-12-12T13:30:00+00:00",
+    "method": "CPCB National AQI; measured hourly data; conservative eight-hour completeness",
+    "timestamp_semantics": "completed_hour_end"
+  },
+  "historical": true,
+  "snapshot_end": "2025-12-12T18:00:00+05:30",
+  "source_files": "12_Bhosari_IITM_15_minute_AQI_Data_for_2024-25.csv",
+  "notice": "time and snapshot_end label hour starts; window.end and snapshot_window_end are completed-hour availability. Latest values can have different timestamps; AQI uses one coherent window.",
+  "snapshot_window_end": "2025-12-12T19:00:00+05:30"
+}

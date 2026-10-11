@@ -1,0 +1,138 @@
+[
+  {
+    "station": "site_292",
+    "station_name": "Karve Road, Pune - MPCB",
+    "name": "Karve Road",
+    "aliases": [
+      "Karve Road"
+    ],
+    "longitude": null,
+    "latitude": null,
+    "source_files": "16_Karve_Road_MPCB_15_minute_AQI_Data_for_2024-25.csv"
+  },
+  {
+    "station": "site_5404",
+    "station_name": "Mhada Colony, Pune - IITM",
+    "name": "Mhada Colony",
+    "aliases": [
+      "Mhada Colony"
+    ],
+    "longitude": null,
+    "latitude": null,
+    "source_files": "18_Mhada_Colony_IITM_15_minute_AQI_Data_for_2024-25.csv"
+  },
+  {
+    "station": "site_5405",
+    "station_name": "Alandi, Pune - IITM",
+    "name": "Alandi",
+    "aliases": [
+      "Alandi"
+    ],
+    "longitude": null,
+    "latitude": null,
+    "source_files": "11_Alandi_IITM_15_minute_AQI_Data_for_2024-25.csv"
+  },
+  {
+    "station": "site_5406",
+    "station_name": "Bhosari, Pune - IITM",
+    "name": "Bhosari",
+    "aliases": [
+      "Bhosari"
+    ],
+    "longitude": null,
+    "latitude": null,
+    "source_files": "12_Bhosari_IITM_15_minute_AQI_Data_for_2024-25.csv"
+  },
+  {
+    "station": "site_5407",
+    "station_name": "Hadapsar, Pune - IITM",
+    "name": "Hadapsar",
+    "aliases": [
+      "Hadapsar"
+    ],
+    "longitude": null,
+    "latitude": null,
+    "source_files": "15_Hadapsar_IITM_15_minute_AQI_Data_for_2024-25.csv"
+  },
+  {
+    "station": "site_5408",
+    "station_name": "Transport Nagar-Nigdi, Pune - IITM",
+    "name": "Transport Nagar-Nigdi",
+    "aliases": [
+      "Nigdi",
+      "Transport Nagar",
+      "Transport Nagar-Nigdi"
+    ],
+    "longitude": null,
+    "latitude": null,
+    "source_files": "22_Transport_Nagar_Nigdi_15_minute_AQI_Data_for_2024-25.csv"
+  },
+  {
+    "station": "site_5409",
+    "station_name": "Revenue Colony-Shivajinagar, Pune - IITM",
+    "name": "Revenue Colony-Shivajinagar",
+    "aliases": [
+      "Revenue Colony",
+      "Revenue Colony-Shivajinagar",
+      "Shivajinagar"
+    ],
+    "longitude": null,
+    "latitude": null,
+    "source_files": "20_Revenue_Colony_Shivajinagar_15_minute_AQI_Data_for_2024-25.csv"
+  },
+  {
+    "station": "site_5766",
+    "station_name": "Katraj Dairy, Pune - MPCB",
+    "name": "Katraj Dairy",
+    "aliases": [
+      "Katraj Dairy"
+    ],
+    "longitude": null,
+    "latitude": null,
+    "source_files": "17_Katraj_Dairy_MPCB_15_minute_AQI_Data_for_2024-25.csv"
+  },
+  {
+    "station": "site_5767",
+    "station_name": "Savitribai Phule Pune University, Pune - MPCB",
+    "name": "Savitribai Phule Pune University",
+    "aliases": [
+      "Savitribai Phule Pune University"
+    ],
+    "longitude": null,
+    "latitude": null,
+    "source_files": "21_Savitribai_Phule_Pune_University_MPCB_15_minute_AQI_Data_for_2024-25.csv"
+  },
+  {
+    "station": "site_5988",
+    "station_name": "Bhumkar Nagar, Pune - IITM",
+    "name": "Bhumkar Nagar",
+    "aliases": [
+      "Bhumkar Nagar"
+    ],
+    "longitude": null,
+    "latitude": null,
+    "source_files": "13_Bhumkar_Nagar_IITM_15_minute_AQI_Data_for_2024-25.csv"
+  },
+  {
+    "station": "site_5996",
+    "station_name": "Panchawati_Pashan, Pune - IITM",
+    "name": "Panchawati Pashan",
+    "aliases": [
+      "Panchawati Pashan"
+    ],
+    "longitude": null,
+    "latitude": null,
+    "source_files": "19_Panchawati_Pashan_IITM_15_minute_AQI_Data_for_2024-25.csv"
+  },
+  {
+    "station": "site_6012",
+    "station_name": "Dhankawadi, Pune - IITM",
+    "name": "Dhankawadi",
+    "aliases": [
+      "Dhankawadi"
+    ],
+    "longitude": null,
+    "latitude": null,
+    "source_files": "14_Dhankawadi_IITM_15_minute_AQI_Data_for_2025.csv"
+  }
+]

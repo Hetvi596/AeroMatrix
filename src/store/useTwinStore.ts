@@ -31,6 +31,10 @@ import { DEMO_WEATHER } from '../data/demo/demoDataProvider';
 import { DEMO_GEOMETRY } from '../data/geojson/puneDemoGeometry';
 import { PUNE_LOCALITIES } from '../data/geojson/puneLocalities';
 import { fetchOsmGeometry, loadOsmSnapshot } from '../services/osmGeometry';
+import { loadIndustryData, type IndustryData } from '../services/industryData';
+import type { PlanOutcome, OperationalLimits, Objective } from '../plan/planEngine';
+import type { LiveAirPoint, LiveWeather } from '../services/openMeteo';
+import { modelApi, modelQuality, type ModelQuality, type ApiAqiHistory, type ApiForecast, type ApiHealth, type ApiMeasured, type ApiStation, type ApiUnavailable } from '../services/aeromatrixApi';
 
 export interface UploadedFile {
   name: string;
@@ -58,6 +62,55 @@ export interface SiteProject {
   category: IndustryCategory;
   intensity: number;
   greenBuffer: boolean;
+}
+
+/** Plan-It form and results; kept in the store so closing the panel keeps the work. */
+export interface PlanItState {
+  budget: number;
+  targetId: string | null;
+  limits: OperationalLimits;
+  objective: Objective;
+  view: 'form' | 'results';
+  outcome: PlanOutcome | null;
+  /** Base state the outcome was computed for; a grid or data change makes it stale. */
+  outcomeBase: BaseState | null;
+  selected: 'A' | 'B' | 'C';
+}
+
+/** Region id for Kothrud: source-reported AQI history only, no concentration station. */
+export const KOTHRUD_ID = 'kothrud';
+
+export interface ModelServiceState {
+  status: 'idle' | 'checking' | 'online' | 'offline';
+  health: ApiHealth | null;
+  error?: string;
+}
+
+/** Forecast for one station in one mode (current / historical), cached by forecastKey(). */
+export interface StationForecastState {
+  stationId: string;
+  allowHistorical: boolean;
+  loading: boolean;
+  data: ApiForecast | ApiUnavailable | null;
+  error?: string;
+}
+
+/** Cache key: results are stored per station and mode, so a late response can only land on its own entry. */
+export function forecastKey(stationId: string, allowHistorical: boolean): string {
+  return `${stationId}|${allowHistorical ? 'historical' : 'current'}`;
+}
+
+/** Open-Meteo air-quality model data and weather (see services/liveData.ts). */
+export interface LiveDataState {
+  status: 'idle' | 'loading' | 'ready' | 'error';
+  error: string | null;
+  /** Points by id: zone:<cellId>, place:<verified place id>, loc:<locality id>. */
+  points: Record<string, LiveAirPoint>;
+  /** Grid cells the zone points were requested for; zone points from another grid are never shown. */
+  zoneCells: BaseState['cells'] | null;
+  updatedAt: number | null;
+  weather: LiveWeather | null;
+  weatherError: string | null;
 }
 
 export interface FlyToRequest {
@@ -92,6 +145,58 @@ interface TwinState {
   candidates: CandidateLocation[];
   selectedCandidateId: string | null;
   siteProject: SiteProject;
+
+  // Trained model backend (monitoring stations)
+  modelService: ModelServiceState;
+  stations: ApiStation[];
+  stationMeasured: Record<string, ApiMeasured | ApiUnavailable>;
+  stationAqiHistory: Record<string, ApiAqiHistory | ApiUnavailable>;
+  selectedStationId: string | null;
+  /** Station forecasts by forecastKey(). */
+  forecasts: Record<string, StationForecastState>;
+  /** Region (monitoring station) chosen in the What-If simulator. */
+  whatIfRegionId: string | null;
+  setWhatIfRegion(id: string | null): void;
+  /** Re-run the scenario automatically while What-If parameters change. */
+  liveScenario: boolean;
+  setLiveScenario(v: boolean): void;
+  /** Which point of the forecast chart is inspected. */
+  forecastTime: 'reference' | 'forecast';
+  setForecastTime(t: 'reference' | 'forecast'): void;
+  /** Each trained model's test-period result against the persistence baseline. */
+  modelQuality: Record<string, ModelQuality>;
+  /** Trained PM2.5 model's empirical interval (validation residual P90), µg/m³. */
+  pm25Interval: { radius: number; testCoverage: number; method: string } | null;
+  allowHistoricalForecast: boolean;
+  connectModelService(): Promise<void>;
+  selectStation(id: string | null): void;
+  setAllowHistoricalForecast(v: boolean): void;
+
+  // Open-Meteo model data and live weather
+  live: LiveDataState;
+  setLive(p: Partial<LiveDataState>): void;
+  /** Use a weather record as the scenario engine's baseline weather. */
+  applyWeatherObservation(obs: WeatherObservation, message?: string): void;
+
+  // Plan-It (budget-constrained intervention planning)
+  planItOpen: boolean;
+  setPlanItOpen(v: boolean): void;
+  planIt: PlanItState;
+  setPlanIt(p: Partial<PlanItState>): void;
+  /** Temporary map preview of a scenario; never changes the active scenario. */
+  previewResult: ScenarioResult | null;
+  setPreviewResult(r: ScenarioResult | null): void;
+  /** Make a fully computed scenario the active one (draft + result together). Returns an error message or null. */
+  applyScenario(r: ScenarioResult): string | null;
+
+  // Industrial geography (MIDC estates, mapped OSM sites, emission factors)
+  industry: IndustryData | null;
+  industryStatus: 'idle' | 'loading' | 'ready' | 'error';
+  selectedIndustrialArea: number | null;
+  selectedIndustrySite: string | null;
+  loadIndustry(): Promise<void>;
+  selectIndustrialArea(code: number | null): void;
+  selectIndustrySite(id: string | null): void;
   section: Section;
   mapStatus: MapStatus;
   flyTo: FlyToRequest | null;
@@ -154,6 +259,7 @@ interface TwinState {
   toggleAreaCell(id: string): void;
   addCandidate(p: LonLat): void;
   clearCandidates(): void;
+  removeCandidate(id: string): void;
   selectCandidate(id: string | null): void;
   setSiteProject(p: Partial<SiteProject>): void;
   setSection(s: Section): void;
@@ -251,6 +357,8 @@ export const useTwin = create<TwinState>((set, get) => ({
     shadows: true,
     photoreal: true, // only takes effect when a token / key is configured
     places: true,
+    midcAreas: false, // off by default so the base map matches the Sep 29 view; Industries turns them on
+    industrySites: false,
   },
   terrainExaggeration: 1.5,
 
@@ -261,6 +369,165 @@ export const useTwin = create<TwinState>((set, get) => ({
   candidates: [],
   selectedCandidateId: null,
   siteProject: { category: 'Manufacturing', intensity: 70, greenBuffer: false },
+
+  modelService: { status: 'idle', health: null },
+  stations: [],
+  stationMeasured: {},
+  stationAqiHistory: {},
+  selectedStationId: null,
+  forecasts: {},
+  whatIfRegionId: null,
+  liveScenario: true,
+  forecastTime: 'forecast',
+  setWhatIfRegion(id) {
+    set({ whatIfRegionId: id });
+    if (id) ensureForecast(id);
+  },
+  setLiveScenario(v) {
+    set({ liveScenario: v });
+  },
+  setForecastTime(t) {
+    set({ forecastTime: t });
+  },
+  pm25Interval: null,
+  modelQuality: {},
+  allowHistoricalForecast: false,
+
+  live: { status: 'idle', error: null, points: {}, zoneCells: null, updatedAt: null, weather: null, weatherError: null },
+  setLive(p) {
+    set({ live: { ...get().live, ...p } });
+  },
+  applyWeatherObservation(obs, message) {
+    const { base, draft, saved, displayMode } = get();
+    if (!base) return;
+    const nextBase = { ...base, weather: { ...obs.weather } };
+    set({
+      weatherObs: obs,
+      base: nextBase,
+      baseline: scenarioService.baseline(nextBase),
+      draft: draft ? { ...draft, weather: { ...obs.weather } } : draft,
+      activeResult: null,
+      displayMode: displayMode === 'observed' || displayMode === 'current' ? displayMode : 'baseline',
+      saved: saved.map((s) => scenarioService.run(nextBase, s.params)),
+      ...(message ? { importMessages: [{ level: 'info' as const, text: message }] } : {}),
+    });
+  },
+
+  planItOpen: false,
+  setPlanItOpen(v) {
+    // Closing Plan-It always ends a map preview.
+    set(v ? { planItOpen: true } : { planItOpen: false, previewResult: null });
+  },
+  planIt: {
+    budget: 2500000,
+    targetId: null,
+    limits: { maxInterventions: null, unavailable: [], plantingCapacity: null },
+    objective: 'pm25',
+    view: 'form',
+    outcome: null,
+    outcomeBase: null,
+    selected: 'A',
+  },
+  setPlanIt(p) {
+    set({ planIt: { ...get().planIt, ...p } });
+  },
+  previewResult: null,
+  setPreviewResult(r) {
+    set({ previewResult: r });
+  },
+  applyScenario(r) {
+    const { base } = get();
+    if (!base) return 'The city data isn’t loaded.';
+    const errors = validateParams(r.params);
+    if (errors.length) return errors.join(' ');
+    if (r.baseline.length !== base.cells.length || r.baseline.some((s, i) => s.cellId !== base.cells[i].id))
+      return 'This plan was made for a different grid. Generate it again.';
+    // One atomic update: draft, active scenario and view change together, or not at all.
+    set({
+      draft: { ...r.params },
+      activeResult: r,
+      displayMode: get().displayMode === 'delta' ? 'delta' : 'scenario',
+      previewResult: null,
+      draftErrors: [],
+    });
+    return null;
+  },
+
+  industry: null,
+  industryStatus: 'idle',
+  selectedIndustrialArea: null,
+  selectedIndustrySite: null,
+  async loadIndustry() {
+    if (get().industryStatus === 'loading' || get().industryStatus === 'ready') return;
+    set({ industryStatus: 'loading' });
+    try {
+      set({ industry: await loadIndustryData(), industryStatus: 'ready' });
+    } catch {
+      set({ industryStatus: 'error' });
+    }
+  },
+  selectIndustrialArea(code) {
+    set({
+      selectedIndustrialArea: code,
+      ...(code !== null ? { ...NO_SELECTION, selectedIndustrialArea: code, rightOpen: true } : {}),
+    });
+  },
+  selectIndustrySite(id) {
+    set({
+      selectedIndustrySite: id,
+      ...(id !== null ? { ...NO_SELECTION, selectedIndustrySite: id, rightOpen: true } : {}),
+    });
+  },
+
+  async connectModelService() {
+    if (get().modelService.status === 'checking') return;
+    set({ modelService: { status: 'checking', health: get().modelService.health } });
+    try {
+      const health = await modelApi.health();
+      const regions = await modelApi.regions();
+      const stations = regions.station_locations;
+      // Measured snapshots are small static files on the backend; fetch them all for the station list.
+      const measured = await Promise.all(stations.map((st) => modelApi.pollution(st.station).catch(() => null)));
+      const stationMeasured: Record<string, ApiMeasured | ApiUnavailable> = {};
+      stations.forEach((st, i) => {
+        if (measured[i]) stationMeasured[st.station] = measured[i]!;
+      });
+      const metrics = await modelApi.metrics('pm25').catch(() => null);
+      const iv = metrics?.pm25?.interval;
+      const all = await modelApi.allMetrics().catch(() => null);
+      set({
+        modelService: { status: 'online', health },
+        stations,
+        stationMeasured,
+        pm25Interval: iv ? { radius: iv.radius, testCoverage: iv.test_coverage, method: iv.method } : null,
+        modelQuality: all ? modelQuality(all) : {},
+      });
+      const sel = get().selectedStationId;
+      if (sel) loadStationDetails(sel);
+      const region = get().whatIfRegionId;
+      if (region) ensureForecast(region);
+    } catch (e) {
+      set({ modelService: { status: 'offline', health: null, error: e instanceof Error ? e.message : String(e) } });
+    }
+  },
+  selectStation(id) {
+    set({
+      selectedStationId: id,
+      selectedCellId: id ? null : get().selectedCellId,
+      selectedIndustryId: id ? null : get().selectedIndustryId,
+      selectedCandidateId: id ? null : get().selectedCandidateId,
+      ...(id ? { selectedIndustrialArea: null, selectedIndustrySite: null } : {}),
+      rightOpen: id ? true : get().rightOpen,
+    });
+    if (id) loadStationDetails(id);
+  },
+  setAllowHistoricalForecast(v) {
+    set({ allowHistoricalForecast: v });
+    const sel = get().selectedStationId;
+    if (sel && sel !== KOTHRUD_ID) ensureForecast(sel);
+    const region = get().whatIfRegionId;
+    if (region) ensureForecast(region);
+  },
   section: 'overview',
   mapStatus: { viewer: 'loading', terrain: '—', imagery: '—', buildings: '—' },
   flyTo: null,
@@ -446,19 +713,11 @@ export const useTwin = create<TwinState>((set, get) => ({
   },
 
   importWeatherFile(file) {
-    const { base, draft, saved } = get();
-    if (!base) return;
+    if (!get().base) return;
     try {
       const { obs, warnings } = parseWeatherCsv(file.text, file.name);
-      const nextBase = { ...base, weather: { ...obs.weather } };
+      get().applyWeatherObservation(obs);
       set({
-        weatherObs: obs,
-        base: nextBase,
-        baseline: scenarioService.baseline(nextBase),
-        draft: draft ? { ...draft, weather: { ...obs.weather } } : draft,
-        activeResult: null,
-        displayMode: get().displayMode === 'observed' ? 'observed' : 'baseline',
-        saved: saved.map((s) => scenarioService.run(nextBase, s.params)),
         importMessages: [
           { level: 'info', text: `${file.name}: weather set from ${obs.records} record(s), ${obs.period}.` },
           ...warnings.map((text) => ({ level: 'warn' as const, text })),
@@ -479,7 +738,7 @@ export const useTwin = create<TwinState>((set, get) => ({
       baseline: scenarioService.baseline(nextBase),
       draft: draft ? { ...draft, weather: { ...DEMO_WEATHER } } : draft,
       activeResult: null,
-      displayMode: get().displayMode === 'observed' ? 'observed' : 'baseline',
+      displayMode: get().displayMode === 'observed' || get().displayMode === 'current' ? get().displayMode : 'baseline',
       saved: saved.map((s) => scenarioService.run(nextBase, s.params)),
     });
   },
@@ -512,7 +771,7 @@ export const useTwin = create<TwinState>((set, get) => ({
     }
     const name = draft.name && draft.name !== 'Baseline' ? draft.name : `Scenario ${get().saved.length + 1}`;
     const result = scenarioService.run(base, { ...draft, name });
-    set({ activeResult: result, displayMode: 'scenario', draftErrors: [] });
+    set({ activeResult: result, displayMode: get().displayMode === 'delta' ? 'delta' : 'scenario', draftErrors: [] });
     return true;
   },
 
@@ -520,7 +779,8 @@ export const useTwin = create<TwinState>((set, get) => ({
     set({ activeResult: r, displayMode: 'scenario' });
   },
   clearResult() {
-    set({ activeResult: null, displayMode: 'baseline', compareOn: false });
+    // Back to the current model data when it is loaded, otherwise the baseline.
+    set({ activeResult: null, displayMode: hasCurrentField(get(), get().pollutant) ? 'current' : 'baseline', compareOn: false });
   },
 
   saveActive(name) {
@@ -555,7 +815,10 @@ export const useTwin = create<TwinState>((set, get) => ({
     set({
       pollutant: p,
       ...derived,
-      displayMode: get().displayMode === 'observed' && !derived.observedField ? 'baseline' : get().displayMode,
+      displayMode:
+        (get().displayMode === 'observed' && !derived.observedField) || (get().displayMode === 'current' && !hasCurrentField(get(), p))
+          ? 'baseline'
+          : get().displayMode,
     });
   },
   toggleLayer(id) {
@@ -565,10 +828,23 @@ export const useTwin = create<TwinState>((set, get) => ({
     set({ terrainExaggeration: v });
   },
   selectCell(id) {
-    set({ selectedCellId: id, selectedIndustryId: null, selectedCandidateId: id ? null : get().selectedCandidateId, rightOpen: id ? true : get().rightOpen });
+    set({
+      selectedCellId: id,
+      selectedIndustryId: null,
+      selectedCandidateId: id ? null : get().selectedCandidateId,
+      selectedStationId: id ? null : get().selectedStationId,
+      ...(id ? { selectedIndustrialArea: null, selectedIndustrySite: null } : {}),
+      rightOpen: id ? true : get().rightOpen,
+    });
   },
   selectIndustry(id) {
-    set({ selectedIndustryId: id, selectedCandidateId: id ? null : get().selectedCandidateId, rightOpen: id ? true : get().rightOpen });
+    set({
+      selectedIndustryId: id,
+      selectedCandidateId: id ? null : get().selectedCandidateId,
+      selectedStationId: id ? null : get().selectedStationId,
+      ...(id ? { selectedIndustrialArea: null, selectedIndustrySite: null } : {}),
+      rightOpen: id ? true : get().rightOpen,
+    });
   },
   setInteraction(m) {
     set({ interaction: m });
@@ -583,13 +859,15 @@ export const useTwin = create<TwinState>((set, get) => ({
     set({ draft: { ...d, targetCells: has ? d.targetCells.filter((c) => c !== id) : [...d.targetCells, id] } });
   },
   addCandidate(p) {
-    const c = get().candidates;
-    const letters = 'ABCDE';
-    const next = c.length >= 5 ? [...c.slice(1), { id: '', location: p }] : [...c, { id: '', location: p }];
-    const relabelled = next.map((x, i) => ({ ...x, id: letters[i] }));
-    // Ids are re-lettered when the oldest site rolls off; drop a selection that no longer exists.
+    // At most five sites; the oldest rolls off. Sites keep their letter, a new one takes the first free letter.
+    const kept = get().candidates.length >= 5 ? get().candidates.slice(1) : get().candidates;
+    const id = [...'ABCDE'].find((l) => !kept.some((x) => x.id === l))!;
     const sel = get().selectedCandidateId;
-    set({ candidates: relabelled, selectedCandidateId: sel && relabelled.some((x) => x.id === sel) && c.length < 5 ? sel : null });
+    set({ candidates: [...kept, { id, location: p }], selectedCandidateId: sel && kept.some((x) => x.id === sel) ? sel : null });
+  },
+  removeCandidate(id) {
+    const s = get();
+    set({ candidates: s.candidates.filter((c) => c.id !== id), selectedCandidateId: s.selectedCandidateId === id ? null : s.selectedCandidateId });
   },
   clearCandidates() {
     set({ candidates: [], selectedCandidateId: null });
@@ -599,6 +877,8 @@ export const useTwin = create<TwinState>((set, get) => ({
       selectedCandidateId: id,
       selectedCellId: id ? null : get().selectedCellId,
       selectedIndustryId: id ? null : get().selectedIndustryId,
+      selectedStationId: id ? null : get().selectedStationId,
+      ...(id ? { selectedIndustrialArea: null, selectedIndustrySite: null } : {}),
       rightOpen: id ? true : get().rightOpen,
     });
   },
@@ -650,6 +930,56 @@ export const useTwin = create<TwinState>((set, get) => ({
     set({ comparePos: Math.max(0.04, Math.min(0.96, p)) });
   },
 }));
+
+/** Clears every map / list selection (used when a new kind of item is selected). */
+const NO_SELECTION = {
+  selectedCellId: null,
+  selectedIndustryId: null,
+  selectedCandidateId: null,
+  selectedStationId: null,
+  selectedIndustrialArea: null,
+  selectedIndustrySite: null,
+} as const;
+
+// Station forecast / AQI history loading, outside the store so a newer selection can
+// cancel an older request before its result lands on the wrong station.
+function loadStationDetails(id: string) {
+  const s = useTwin.getState();
+  if (s.modelService.status !== 'online') return;
+  if (!s.stationAqiHistory[id]) {
+    modelApi
+      .aqiHistory(id === KOTHRUD_ID ? 'Kothrud' : id)
+      .then((h) => useTwin.setState({ stationAqiHistory: { ...useTwin.getState().stationAqiHistory, [id]: h } }))
+      .catch(() => undefined);
+  }
+  if (id !== KOTHRUD_ID) ensureForecast(id);
+}
+
+/**
+ * Fetches a station forecast once per (station, mode). Results are written to their own
+ * cache entry, so switching stations quickly can never show one station's numbers on another.
+ */
+function ensureForecast(id: string) {
+  const s = useTwin.getState();
+  if (s.modelService.status !== 'online') return;
+  const allowHistorical = s.allowHistoricalForecast;
+  const key = forecastKey(id, allowHistorical);
+  const existing = s.forecasts[key];
+  if (existing && (existing.loading || !existing.error)) return;
+  const put = (entry: StationForecastState) => useTwin.setState({ forecasts: { ...useTwin.getState().forecasts, [key]: entry } });
+  put({ stationId: id, allowHistorical, loading: true, data: null });
+  modelApi
+    .forecast(id, allowHistorical)
+    .then((data) => put({ stationId: id, allowHistorical, loading: false, data }))
+    .catch((e) => put({ stationId: id, allowHistorical, loading: false, data: null, error: e instanceof Error ? e.message : String(e) }));
+}
+
+/** True when Open-Meteo model data covers every zone of the current grid for this pollutant. */
+export function hasCurrentField(s: Pick<TwinState, 'live' | 'base'>, p: Pollutant): boolean {
+  const cells = s.base?.cells;
+  if (!cells || s.live.zoneCells !== cells) return false;
+  return cells.every((c) => s.live.points[`zone:${c.id}`]?.values[p] != null);
+}
 
 export function isScenarioMode(m: DisplayMode): boolean {
   return m === 'scenario' || m === 'delta';

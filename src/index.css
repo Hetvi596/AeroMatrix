@@ -217,15 +217,39 @@ body,
 /* Map stage insets: floating map controls step aside for open sheets. ------- */
 .map-stage {
   --left-inset: 0px;
-  --right-inset: 0px;
+  /* Right column: an open details drawer / Plan-It card (--dock-right) plus a docked AeroSage panel (--assist-inset). */
+  --dock-right: 0px;
+  --assist-w: 420px;
+  --assist-inset: 0px;
+  --right-inset: calc(var(--dock-right) + var(--assist-inset));
 }
 @media (min-width: 768px) {
   .map-stage[data-left="1"] { --left-inset: 344px; }
-  .map-stage[data-right="1"] { --right-inset: 356px; }
+  .map-stage[data-right="1"] { --dock-right: 356px; }
+}
+@media (min-width: 1024px) {
+  .map-stage[data-assistant="1"] { --assist-inset: calc(var(--assist-w) + 12px); }
 }
 @media (min-width: 1280px) {
   .map-stage[data-left="1"] { --left-inset: 392px; }
-  .map-stage[data-right="1"] { --right-inset: 404px; }
+  .map-stage[data-right="1"] { --dock-right: 404px; }
+}
+@media (min-width: 1600px) {
+  .map-stage { --assist-w: 440px; }
+}
+/* AeroSage docked beside another right-hand panel leaves a narrow map strip: the
+   legend moves up under the search box (its phone position) instead of sliding under a panel. */
+@media (min-width: 1024px) and (max-width: 1919px) {
+  .map-stage[data-assistant="1"][data-right="1"] .map-legend,
+  .map-stage[data-assistant="1"][data-plan="1"] .map-legend {
+    top: 56px;
+    bottom: auto;
+    left: calc(var(--left-inset) + 12px);
+  }
+}
+/* With AeroSage docked the map strip is narrower: the cursor hint would sit on the legend. */
+@media (max-width: 1599px) {
+  .map-stage[data-assistant="1"] .cursor-readout { display: none; }
 }
 .inset-left {
   left: calc(var(--left-inset) + 12px);
@@ -292,10 +316,19 @@ body,
   transform: var(--tip-from);
   transition: opacity 0.14s ease, transform 0.14s ease;
 }
+/* The hovered / focused icon (and its label) paints above its neighbours. */
+.orbit-item:hover,
+.orbit-item:focus-visible {
+  z-index: 5;
+}
 .orbit-item:hover .orbit-tip,
 .orbit-item:focus-visible .orbit-tip {
   opacity: 1;
   transform: none;
+}
+/* While the pointer is over the ring, only the hovered icon shows its label. */
+#orbit-menu:hover .orbit-item:not(:hover) .orbit-tip {
+  opacity: 0;
 }
 .orbit-launcher-mark {
   transition: transform 0.4s var(--ease-out-soft), opacity 0.2s ease;
@@ -415,6 +448,15 @@ select {
     transition-duration: 0.001ms !important;
     transition-delay: 0ms !important;
   }
+}
+
+/* Plan-It card covers the right of the map; right-side controls step aside. */
+@media (min-width: 768px) {
+  .map-stage[data-plan="1"] { --dock-right: 532px; }
+}
+/* On phones the Plan-It sheet takes the screen; the orbit button would sit on top of it. */
+@media (max-width: 767px) {
+  .map-stage[data-plan="1"] .orbit-dock { display: none; }
 }
 
 /* Mobile: sheets rise from the bottom; floating controls lift above them. */
