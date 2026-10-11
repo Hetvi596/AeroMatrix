@@ -18,12 +18,14 @@ from __future__ import annotations
 
 import json
 import math
+import os
 from functools import lru_cache
 from typing import Literal, Optional
 
 import numpy as np
 import pandas as pd
 from fastapi import HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, ConfigDict, Field
 
 from demos import payload_for
@@ -489,9 +491,18 @@ def task2_plan(req: PlanRequest):
     return {'replay': {k: replay[k] for k in ('cutoff', 'target_time', 'prediction', 'model_artifact')}, 'analysis': result, 'causal_effects_estimated': False}
 
 
-if __name__ == '__main__':
-    import os
+# ------------------------------------------------------------------ deployment settings
+# Cross-origin access only for the origins listed (e.g. the deployed web app); none by default.
+_ORIGINS = [o.strip() for o in os.getenv('TASK2_CORS_ORIGINS', '').split(',') if o.strip()]
+if _ORIGINS:
+    app.add_middleware(CORSMiddleware, allow_origins=_ORIGINS, allow_methods=['GET', 'POST'], allow_headers=['Content-Type'])
+# On a public host, keep the package's raw /task2/predict (which accepts caller-supplied readings)
+# switched off; the replay endpoints build inputs from the service's own data only.
+if os.getenv('TASK2_DISABLE_RAW_PREDICT') == '1':
+    app.router.routes = [r for r in app.router.routes if getattr(r, 'path', '') != '/task2/predict']
 
+
+if __name__ == '__main__':
     import uvicorn
 
-    uvicorn.run(app, host='127.0.0.1', port=int(os.getenv('TASK2_PORT', '8030')))
+    uvicorn.run(app, host=os.getenv('TASK2_HOST', '127.0.0.1'), port=int(os.getenv('TASK2_PORT', '8030')))
