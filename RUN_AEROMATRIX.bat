@@ -37,6 +37,10 @@ if not defined PY312 (
   exit /b 1
 )
 echo [AeroMatrix] Using Python: %PY312%
+echo [AeroMatrix] The first run downloads about 1 GB and can take 15-30 minutes. Keep every window open;
+echo             the browser opens by itself at the end. Later runs start in about a minute.
+echo.
+echo [AeroMatrix] Step 1 of 5: model API (its own window installs packages on the first run)
 
 rem --- Model API: bootstrap.py creates backend\trained_model\.venv once, then serves ---
 netstat -ano | findstr /r /c:":%AEROMATRIX_PORT% .*LISTENING" >nul
@@ -55,7 +59,7 @@ if exist "%CHAT_DIR%\START_CHATBOT.bat" (
     echo [AeroMatrix] Port %CHATBOT_PORT% is already in use; assuming AeroSage is running there.
   ) else (
     if not exist "%CHAT_DIR%\.venv\Scripts\python.exe" (
-      echo [AeroMatrix] Setting up the AeroSage assistant ^(first run only^)...
+      echo [AeroMatrix] Step 2 of 5: setting up the AeroSage assistant ^(first run only^)...
       call "%CHAT_DIR%\SETUP_CHATBOT.bat"
     )
     if exist "%CHAT_DIR%\.venv\Scripts\python.exe" (
@@ -78,9 +82,9 @@ if exist "%T2_DIR%\aeromatrix_service.py" (
     set "T2_READY="
     if exist "%T2_PY%" "%T2_PY%" -c "import sklearn, pandas, fastapi, uvicorn" >nul 2>nul && set "T2_READY=1"
     if not defined T2_READY (
-      echo [AeroMatrix] Setting up the Task 2 model service ^(first run only^)...
+      echo [AeroMatrix] Step 3 of 5: setting up Sensor Intelligence ^(first run only, about 400 MB, 5-15 minutes^)...
       if not exist "%T2_PY%" "%PY312%" -m venv "%T2_DIR%\.venv"
-      if exist "%T2_PY%" "%T2_PY%" -m pip install --disable-pip-version-check -q -r "%T2_DIR%\requirements.txt"
+      if exist "%T2_PY%" "%T2_PY%" -m pip install --disable-pip-version-check -r "%T2_DIR%\requirements.txt"
       if exist "%T2_PY%" "%T2_PY%" -c "import sklearn, pandas, fastapi, uvicorn" >nul 2>nul && set "T2_READY=1"
     )
     if defined T2_READY (
@@ -99,7 +103,7 @@ if errorlevel 1 (
   exit /b 1
 )
 if not exist "%ROOT%\node_modules" (
-  echo [AeroMatrix] Installing web app packages ^(first run only^)...
+  echo [AeroMatrix] Step 4 of 5: installing web app packages ^(first run only, several minutes^)...
   call npm install
   if errorlevel 1 ( echo [AeroMatrix] npm install failed. & pause & exit /b 1 )
 )
@@ -113,7 +117,7 @@ rem --- Landing page ---
 set "OPEN_URL=http://localhost:5173/"
 if exist "%ROOT%\landing\package.json" (
   if not exist "%ROOT%\landing\node_modules" (
-    echo [AeroMatrix] Installing landing page packages ^(first run only^)...
+    echo [AeroMatrix] Step 5 of 5: installing landing page packages ^(first run only^)...
     pushd "%ROOT%\landing"
     call npm install
     popd
@@ -124,7 +128,8 @@ if exist "%ROOT%\landing\package.json" (
 )
 
 rem --- Open the browser once the app has had a moment to start ---
-echo [AeroMatrix] Starting... the browser opens in a few seconds.
+echo [AeroMatrix] All set up. Starting... the browser opens in a few seconds.
+echo             If a page is blank, wait for the web app window to show "ready", then refresh.
 timeout /t 10 /nobreak >nul
 start "" "%OPEN_URL%"
 echo [AeroMatrix] Running. Close the AeroMatrix windows to stop.
