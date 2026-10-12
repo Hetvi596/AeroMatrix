@@ -229,6 +229,8 @@ export interface T2Plan {
 
 export class Task2Error extends Error {}
 
+const NOT_CONNECTED = 'Sensor Intelligence isn’t connected: its model service can’t be reached. On a local copy, start it with RUN_AEROMATRIX.bat.';
+
 async function call<T>(path: string, body?: unknown, timeoutMs = 30000): Promise<T> {
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), timeoutMs);
@@ -239,6 +241,8 @@ async function call<T>(path: string, body?: unknown, timeoutMs = 30000): Promise
       body: body === undefined ? undefined : JSON.stringify(body),
       signal: ctrl.signal,
     });
+    // A web host without the service answers with its own page, not the service's JSON.
+    if (!(r.headers.get('content-type') ?? '').includes('application/json')) throw new Task2Error(NOT_CONNECTED);
     if (!r.ok) {
       let detail = `Task 2 service returned HTTP ${r.status}`;
       try {
@@ -252,7 +256,7 @@ async function call<T>(path: string, body?: unknown, timeoutMs = 30000): Promise
     return (await r.json()) as T;
   } catch (e) {
     if (e instanceof Task2Error) throw e;
-    throw new Task2Error('The Task 2 model service isn’t running. Start it with RUN_AEROMATRIX.bat.');
+    throw new Task2Error(NOT_CONNECTED);
   } finally {
     clearTimeout(timer);
   }

@@ -1,0 +1,9 @@
+# Vercel builds only the web app (see vercel.json). The Python services run elsewhere
+# (deploy/huggingface) and the landing page is a separate project.
+backend/
+landing/
+deploy/
+data/
+*.zip
+public/cesium/
+RUN_AEROMATRIX.bat
