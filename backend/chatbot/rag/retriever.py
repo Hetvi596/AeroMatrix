@@ -19,7 +19,7 @@ class Retriever:
             for item in manifest['documents']:
                 path=(self.root/'knowledge_base'/item['file']).resolve()
                 if not path.is_relative_to((self.root/'knowledge_base').resolve()) or not path.is_file(): continue
-                data=path.read_bytes()
+                data=path.read_bytes().replace(b'\r\n',b'\n')  # line endings differ between Windows and Linux checkouts
                 if hashlib.sha256(data).hexdigest()!=item['sha256']: continue
                 text=data.decode('utf-8')
                 for index, block in enumerate(re.split(r'\n(?=## )', text)):

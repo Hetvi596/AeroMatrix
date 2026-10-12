@@ -5,7 +5,7 @@
     {
       "file": "overview.md",
       "title": "AeroMatrix purpose and verified implementation",
-      "sha256": "983c0b63e37700e7591187a76f7c6c37be09f864220fec5b7a4057c538f35105",
+      "sha256": "3302bb26a7e5da37413dda3913572cc1f5f7bc325a16f3285c0ba3257329f4bd",
       "evidence": [
         {
           "origin": "project",
@@ -37,7 +37,7 @@
     {
       "file": "datasets.md",
       "title": "Verified datasets and data lineage",
-      "sha256": "41217a449b674f838a091780cf93a5b6214dba9e8ef1aaa03c70dfbe63862741",
+      "sha256": "44620a461e1f8223b7597bdecf9aba10f1847e28cbac5761c6aa23dd8b2e1cc8",
       "evidence": [
         {
           "origin": "backend",
@@ -54,7 +54,7 @@
     {
       "file": "coverage.md",
       "title": "Monitoring stations and unsupported localities",
-      "sha256": "d0696e66dba1c6a4887017ccede30f6d21c30550a3e2d54be7d5c3da2d64a4cc",
+      "sha256": "6d72c2f921696249a7bf404908cf9fa1b65a33cb0105b82558b1a5969a970b96",
       "evidence": [
         {
           "origin": "backend",
@@ -71,7 +71,7 @@
     {
       "file": "models.md",
       "title": "Pollution models training evaluation and reliability",
-      "sha256": "6a83a057419d8fd353b5374a4ede0c5da48b28558eda65024d2195e88c305002",
+      "sha256": "2ba46e558ff39168f22c561fdca913514e707be29efc66e38b969be2039d4b36",
       "evidence": [
         {
           "origin": "backend",
@@ -88,7 +88,7 @@
     {
       "file": "simulator.md",
       "title": "Environmental what-if simulator and causal limitations",
-      "sha256": "91219a4a4fd499a2c9d68071b674347d1bb1c0a30535143b7f0294564f998243",
+      "sha256": "4e21e6b31d20e7b31c6653aa6b2af1d0ab22c8083627a90697fede1e6532fe72",
       "evidence": [
         {
           "origin": "project",
@@ -110,7 +110,7 @@
     {
       "file": "api.md",
       "title": "Exported ML API behavior and data status",
-      "sha256": "ada58f1d001dada94f6a16404abde46b076cb117882511533b9bcb2f091badd1",
+      "sha256": "b2f8b29042100e8e36d95e73a3bc59ae9ba07a6ed3af81000f9a9885eed40418",
       "evidence": [
         {
           "origin": "backend",
@@ -132,7 +132,7 @@
     {
       "file": "pollutants.md",
       "title": "Environmental concepts and pollutant definitions",
-      "sha256": "cf13203a73d41eb04c30d7d9edc7fbdfee897fceb74932b26723494196bfbc97",
+      "sha256": "63df6bef74909101cfe0064e772cedd8ad4df44c168567d326c9ed3dc1dd8686",
       "evidence": [
         {
           "origin": "backend",
@@ -144,7 +144,7 @@
     {
       "file": "app_features_2026_10.md",
       "title": "Features added in October 2026",
-      "sha256": "63c883716455608190ed212dad40e06832e5580e6b7acb0c7d559f6c6d23346f",
+      "sha256": "bb313749cfb9c6760769f2efcb540f4ad2ad7d8fd9cc2fc003ebee26df449133",
       "evidence": [
         {
           "origin": "project",
