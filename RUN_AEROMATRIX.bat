@@ -102,10 +102,10 @@ if errorlevel 1 (
   pause
   exit /b 1
 )
-if not exist "%ROOT%\node_modules" (
+if not exist "%ROOT%\node_modules\.package-lock.json" (
   echo [AeroMatrix] Step 4 of 5: installing web app packages ^(first run only, several minutes^)...
   call npm install
-  if errorlevel 1 ( echo [AeroMatrix] npm install failed. & pause & exit /b 1 )
+  if errorlevel 1 ( echo [AeroMatrix] npm install failed. Check the internet connection and run this again. & pause & exit /b 1 )
 )
 set "VITE_AEROMATRIX_API_URL=http://127.0.0.1:%AEROMATRIX_PORT%"
 set "VITE_LANDING_URL=http://localhost:3000/"
@@ -116,15 +116,20 @@ start "AeroMatrix web app" /d "%ROOT%" cmd /k "npm run dev -- --port 5173"
 rem --- Landing page ---
 set "OPEN_URL=http://localhost:5173/"
 if exist "%ROOT%\landing\package.json" (
-  if not exist "%ROOT%\landing\node_modules" (
-    echo [AeroMatrix] Step 5 of 5: installing landing page packages ^(first run only^)...
+  if not exist "%ROOT%\landing\node_modules\.package-lock.json" (
+    echo [AeroMatrix] Step 5 of 5: installing landing page packages ^(first run only, several minutes^)...
     pushd "%ROOT%\landing"
     call npm install
     popd
   )
-  set "VITE_MAIN_APP_URL=http://localhost:5173/"
-  start "AeroMatrix landing page" /d "%ROOT%\landing" cmd /k "npm run dev -- --port 3000"
-  set "OPEN_URL=http://localhost:3000/"
+  if exist "%ROOT%\landing\node_modules\.package-lock.json" (
+    set "VITE_MAIN_APP_URL=http://localhost:5173/"
+    start "AeroMatrix landing page" /d "%ROOT%\landing" cmd /k "npm run dev -- --port 3000"
+    set "OPEN_URL=http://localhost:3000/"
+  ) else (
+    echo [AeroMatrix] The landing page packages did not finish installing, so the app opens directly.
+    echo             Run RUN_AEROMATRIX.bat again later to retry the landing page.
+  )
 )
 
 rem --- Open the browser once the app has had a moment to start ---
